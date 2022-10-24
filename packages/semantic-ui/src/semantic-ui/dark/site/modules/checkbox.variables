@@ -1,0 +1,13 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+
+@checkboxActiveCheckColor: @pageBackground;
+@checkboxFocusCheckColor: @pageBackground;
+@checkboxActiveFocusCheckColor: @pageBackground;
+@checkboxIndeterminateCheckColor: @pageBackground;
+
+/* Disabled */
+@disabledCheckboxLabelColor: rgba(255, 255, 255, 1);
+
+@toggleLaneBackground: lighten(@pageBackground, 10);

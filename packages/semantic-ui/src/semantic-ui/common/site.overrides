@@ -1,0 +1,12 @@
+/*******************************
+         Site Overrides
+*******************************/
+
+/** Use a different background color for modals */
+&.widgetModal body {
+  background: @pageBackgroundModal;
+}
+
+// The placeholders doesn't support UI overrides by
+// default, so we import it here instead.
+& { @import "./placeholder.overrides"; }

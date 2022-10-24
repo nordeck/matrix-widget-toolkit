@@ -1,0 +1,10 @@
+/*******************************
+         Site Overrides
+*******************************/
+
+.ui.piled.segments:after,
+.ui.piled.segments:before,
+.ui.piled.segment:after,
+.ui.piled.segment:before {
+  background-color: @background;
+}

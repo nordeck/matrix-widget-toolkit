@@ -1,0 +1,13 @@
+/*******************************
+     User Global Variables
+*******************************/
+
+// We want to use the default Element background during loading
+@pageBackground: inherit;
+
+// We don't want a min-width, as we display the widget inside very narrow iframes.
+@pageMinWidth: auto;
+
+// We don't want to load fonts from the Google CDN for privacy reasons and do it
+// manually instead
+@importGoogleFonts: false;

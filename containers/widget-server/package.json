@@ -1,0 +1,24 @@
+{
+  "name": "@matrix-widget-toolkit/widget-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A webserver to host a Matrix widget in a container",
+  "author": "Nordeck IT + Consulting GmbH",
+  "license": "Apache-2.0",
+  "scripts": {
+    "docker:build": "DOCKER_BUILDKIT=1 docker build -t matrix-widget-toolkit/widget-server .",
+    "lint": "echo \"Nothing to lint\"",
+    "tsc": "echo \"Nothing to build\"",
+    "build": "echo \"Nothing to build\"",
+    "test": "echo \"Nothing to test\"",
+    "depcheck": "depcheck --ignore-dirs=lib",
+    "translate": "echo \"Nothing to translate\"",
+    "check-api-report": "echo \"Nothing to report\"",
+    "generate-api-report": "echo \"Nothing to report\"",
+    "e2e": "playwright test --headed --project=chromium --workers=1 --reporter=dot",
+    "e2e:all": "yarn playwright test --reporter=dot"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.27.1"
+  }
+}

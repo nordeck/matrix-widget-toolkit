@@ -1,0 +1,11 @@
+/*******************************
+         Site Overrides
+*******************************/
+
+@background: #20252b;
+@headerBackground: transparent;
+@contentBackground: transparent;
+@actionBackground: transparent;
+@headerBorder: none;
+@contentPadding: 0px 1.5rem;
+@actionBorder: none;

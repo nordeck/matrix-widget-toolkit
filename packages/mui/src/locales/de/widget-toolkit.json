@@ -1,0 +1,40 @@
+{
+  "code": {
+    "copy-to-clipboard": "In die Zwischenablage kopieren"
+  },
+  "error": {
+    "instructions": "Im Widget ist ein Fehler aufgetreten. Der Fehler kann eventuell durch erneutes Öffnen des Widgets behoben werden.",
+    "title": "Ohh nein!"
+  },
+  "loading": {
+    "message": "Lädt…"
+  },
+  "missing-capabilities": {
+    "instructions": "Die minimal erforderlichen Rechte für dieses Widget fehlen. Es müssen alle angefragen Rechte erteilt werden.",
+    "request-capabilities": "Rechte erteilen",
+    "title": "Fehlende Rechte"
+  },
+  "missing-parameters": {
+    "completed": {
+      "instructions": "Widget Konfiguration abgeschlossen, das Widget muss erneut geöffnet werden.",
+      "title": "Widget Konfiguration abgeschlossen"
+    },
+    "instructions": "Das Widget ist nicht korrekt registriert. Es muss sichergestellt werden, das alle Parameter in der URL enthalten sind:",
+    "permissions-error": {
+      "close": "Schließen",
+      "instructions": "Fehlende Berechtigungen, das Widget konnte nicht konfiguriert werden. Die Korrektur muss durch einen Raum-Administrator durchgeführt werden.",
+      "title": "Fehler"
+    },
+    "repair": "Registrierung korrigieren",
+    "repair-instructions": "Die Widget Registrierung kann entweder manuell oder automatisch korrigiert werden:",
+    "title": "Fehlerhafte Widget Registrierung"
+  },
+  "mobile-client": {
+    "instructions": "Aufgrund von technischen Limitationen funktioniert das Widget nicht in den mobilen Apps. Das Widget muss in einer Desktop oder Web App geöffnet werden.",
+    "title": "Mobile Apps werden nicht unterstützt"
+  },
+  "outside-client": {
+    "instructions": "Diese URL muss als Widget registiert werden und kann nicht direkt aufgerufen werden. Mit dem folgenden Kommando kann das Widget in einem Raum eingerichtet werden:",
+    "title": "Nur als Widget ausführbar"
+  }
+}

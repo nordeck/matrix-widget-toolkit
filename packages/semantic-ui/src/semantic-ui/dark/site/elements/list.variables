@@ -1,0 +1,6 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+
+@itemDescriptionColor: @mutedTextColor;
+@selectionListActiveBackground: rgba(0, 0, 0, 0.2);

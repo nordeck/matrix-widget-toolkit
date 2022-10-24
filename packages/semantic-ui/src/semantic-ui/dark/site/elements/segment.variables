@@ -1,0 +1,8 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+
+@background: lighten(@pageBackground, 5);
+@placeholderBackground: lighten(@pageBackground, 5);
+
+@invertedTextColor: rgba(255, 255, 255, 0.9);

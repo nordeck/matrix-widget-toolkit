@@ -1,0 +1,201 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: '0'
+          # don't persist the credentials so the changesets action doesn't use the
+          # github actions token but the git token provided via environment variable
+          persist-credentials: false
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'yarn'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: yarn install
+        run: yarn install --frozen-lockfile
+
+      - name: prettier:check
+        run: yarn prettier:check
+
+      - name: depcheck
+        run: yarn depcheck
+
+      - name: lint
+        run: yarn lint
+
+      - name: type checking and declarations
+        run: yarn tsc
+
+      - name: check translations
+        run: yarn translate --fail-on-update
+
+      - name: test
+        run: yarn test:all
+
+      - name: build
+        run: yarn build
+
+      - name: check API report and generate typings
+        run: yarn check-api-report
+
+      - name: Generate GitHub token
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        id: generate_token
+        uses: tibdex/github-app-token@f717b5ecd4534d3c4df4ce9b5c1c2214f0f7cd06
+        with:
+          app_id: ${{ secrets.GH_APP_OS_APP_ID }}
+          private_key: ${{ secrets.GH_APP_OS_PRIVATE_KEY }}
+
+      - name: Create Release Pull Request or Publish Packages
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        uses: changesets/action@2a025e8ab1cfa4312c2868cb6aa3cd3b473b84bf
+        with:
+          publish: yarn release
+        env:
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+
+  buildContainers:
+    name: Build Container
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      DOCKER_PLATFORMS: linux/amd64,linux/arm64,linux/s390x
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'yarn'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: yarn install
+        run: yarn install --frozen-lockfile
+
+      - name: Login to ghcr.io
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Generate docker tag
+        uses: actions/github-script@v6
+        id: vars
+        with:
+          script: |
+            const fs = require('fs');
+
+            const packageJson = fs.readFileSync('./containers/widget-server/package.json');
+            const { version } = JSON.parse(packageJson);
+
+            core.setOutput('version', version);
+
+      - name: Generate Docker metadata
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ghcr.io/nordeck/matrix-widget-toolkit/widget-server
+          labels: |
+            org.opencontainers.image.title=Matrix Widget Server
+            org.opencontainers.image.description=A webserver to host a matrix widget in a container
+            org.opencontainers.image.vendor=Nordeck IT + Consulting GmbH
+          flavor: |
+            latest=false
+          tags: |
+            type=semver,pattern={{version}},value=${{ steps.vars.outputs.version }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ steps.vars.outputs.version }}
+            type=semver,pattern={{major}},value=${{ steps.vars.outputs.version }}
+
+      - name: Build
+        uses: docker/build-push-action@v3
+        with:
+          context: containers/widget-server
+          platforms: ${{ env.DOCKER_PLATFORMS }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Load
+        uses: docker/build-push-action@v3
+        id: dockerLoad
+        with:
+          load: true
+          context: containers/widget-server
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Restore Cached Browsers
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-browsers
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Playwright tests
+        working-directory: containers/widget-server
+        env:
+          IMAGE_ID: ${{ steps.dockerLoad.outputs.imageid }}
+        run: yarn playwright test
+
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: containers/widget-server/playwright-report/
+          retention-days: 7
+
+      - name: Check if container should be pushed
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        id: tag-exists
+        env:
+          SEARCH_TAG: '${{ steps.meta.outputs.version }}'
+          DOCKER_IMAGE: ghcr.io/nordeck/matrix-widget-toolkit/widget-server
+        run: |
+          # don't fail the action if the 'docker manifest' call exits with 1.
+          # We handle the error manually.
+          set +e
+
+          # try to fetch the manifest. exits with status 0 if the
+          # tag exists and with status 1 if not.
+          OUTPUT=$(docker manifest inspect $DOCKER_IMAGE:$SEARCH_TAG 2>&1)
+          RESULT=$([[ "$?" == 0 ]] && echo "true" || echo "false")
+
+          echo $OUTPUT
+
+          # throw an error if the output is unexpected, e.g. due to a network problem.
+          if [[ $RESULT == "false" ]] && [[ $OUTPUT != "manifest unknown" ]]; then
+            echo "Unexpected error"
+            exit 1
+          fi
+
+          echo "result=$RESULT" >> $GITHUB_OUTPUT
+
+      - name: Build and push
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.tag-exists.outputs.result == 'false' }}
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          context: containers/widget-server
+          platforms: ${{ env.DOCKER_PLATFORMS }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}

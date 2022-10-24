@@ -1,0 +1,443 @@
+/*
+ * Copyright 2022 Nordeck IT + Consulting GmbH
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import {
+  compareOriginServerTS,
+  isValidEventWithRelatesTo,
+  RedactionRoomEvent,
+  RoomEvent,
+  ROOM_EVENT_REDACTION,
+  StateEvent,
+  WidgetApi,
+} from '@matrix-widget-toolkit/api';
+import { cloneDeep, isEqual, uniqueId } from 'lodash';
+import { Symbols } from 'matrix-widget-api';
+import { concat, filter, from, map, NEVER, Subject, takeUntil } from 'rxjs';
+
+/**
+ * A mock of `WidgetApi` with some additional methods.
+ */
+export type MockedWidgetApi = {
+  /**
+   * Shutdown the WidgetApi and cancel all subscriptions.
+   */
+  stop: () => void;
+
+  /**
+   * Add a room event that can be returned by the widget API.
+   * This will also be delivered to subscriptions to the
+   * `observeRoomEvents` endpoint.
+   *
+   * @param event - the event to store
+   * @returns a copy of the event for convenient assertions or manipulations.
+   * @remarks Events added using this method are ignored when verifing calls to
+   *          `sendRoomEvent`.
+   */
+  mockSendRoomEvent<T = unknown>(event: RoomEvent<T>): RoomEvent<T>;
+
+  /**
+   * Add a state event that can be returned by the widget API.
+   * This will also be delivered to subscriptions to the
+   * `observeStateEvents` endpoint.
+   *
+   * @param event - the event to store
+   * @returns a copy of the event for convenient assertions or manipulations.
+   * @remarks Events added using this method are ignored when verifing calls to
+   *          `sendStateEvent`.
+   */
+  mockSendStateEvent<T = unknown>(event: StateEvent<T>): StateEvent<T>;
+
+  /**
+   * Removes all room events from the mock. Future reads of room events will be
+   * empty.
+   */
+  clearRoomEvents(): void;
+
+  /**
+   * Removes all state events from the mock. Future reads of state events will be
+   * empty.
+   *
+   * @param opts - Options for deleting.
+   *               Use `type` to restrict which events are deleted.
+   *
+   */
+  clearStateEvents(opts?: { type?: string }): void;
+} & jest.Mocked<WidgetApi>;
+
+/**
+ * Create a `WidgetApi` mock.
+ *
+ * The mock behaves similar to running the widget
+ * inside a host application. You can send state and room events using
+ * `sendStateEvent()` and `sendRoomEvent()`, as well as receive them using
+ * `receiveSingleStateEvent()`, `receiveStateEvents()`, `observeStateEvents()`,
+ * `receiveRoomEvents()`, and `observeRoomEvents()`.
+ * Methods like `sendStateEvent()` or `sendRoomEvent()` are jest mock functions
+ * which you can verify.
+ * You can prepopulate state and room events using `mockSendRoomEvent()` and
+ * `mockSendStateEvent()`.
+ * You can reset the state of the mock using `clearRoomEvents()` and
+ * `clearStateEvents()`, but is still advised not to share the mock instance
+ * between tests.
+ *
+ * Other methods are jest mock functions that either have sensible default, can
+ * be verified, or mocked with custom behavior.
+ *
+ * Always `stop()` the mock once you are done using it.
+ *
+ * @remarks Only use for tests
+ */
+export function mockWidgetApi({
+  userId = '@user-id',
+  roomId = '!room-id',
+  widgetId = 'widget-id',
+}: {
+  userId?: string;
+  roomId?: string;
+  widgetId?: string;
+} = {}): MockedWidgetApi {
+  const roomEventSubject = new Subject<RoomEvent>();
+  const roomEvents: RoomEvent[] = [];
+  let stateEvents: StateEvent[] = [];
+  const stateEventSubject = new Subject<StateEvent>();
+  const stopSubject = new Subject<void>();
+
+  const stop = () => {
+    stopSubject.next();
+  };
+
+  const mockSendRoomEvent = <T>(event: RoomEvent<T>) => {
+    const ev = cloneDeep(event);
+
+    roomEvents.push(ev);
+    roomEventSubject.next(ev);
+    return event;
+  };
+
+  const mockSendStateEvent = <T>(event: StateEvent<T>) => {
+    const ev = cloneDeep(event);
+
+    stateEvents = stateEvents
+      .filter(
+        (ev) =>
+          ev.room_id !== event.room_id ||
+          ev.type !== event.type ||
+          ev.state_key !== event.state_key
+      )
+      .concat(ev);
+
+    stateEventSubject.next(ev);
+
+    return event;
+  };
+
+  const clearRoomEvents = () => {
+    roomEvents.length = 0;
+  };
+
+  const clearStateEvents = (opts?: { type?: string }) => {
+    if (typeof opts?.type === 'string') {
+      stateEvents = stateEvents.filter((ev) => ev.type !== opts.type);
+    } else {
+      stateEvents.length = 0;
+    }
+  };
+
+  const widgetApi: jest.Mocked<WidgetApi> = {
+    widgetId,
+    widgetParameters: {
+      roomId,
+      userId,
+      isOpenedByClient: true,
+    },
+    openModal: jest.fn().mockResolvedValue(undefined),
+    receiveRoomEvents: jest.fn(),
+    receiveStateEvents: jest.fn(),
+    receiveSingleStateEvent: jest.fn(),
+    observeStateEvents: jest.fn(),
+    observeRoomEvents: jest.fn(),
+    sendStateEvent: jest.fn(),
+    sendRoomEvent: jest.fn(),
+    closeModal: jest.fn().mockResolvedValue(undefined),
+    getWidgetConfig: jest.fn(),
+    hasInitialCapabilities: jest.fn().mockReturnValue(true),
+    hasCapabilities: jest.fn().mockReturnValue(true),
+    navigateTo: jest.fn().mockResolvedValue(undefined),
+    observeModalButtons: jest.fn().mockReturnValue(NEVER),
+    rerequestInitialCapabilities: jest.fn().mockResolvedValue(undefined),
+    requestCapabilities: jest.fn().mockResolvedValue(undefined),
+    requestOpenIDConnectToken: jest.fn().mockResolvedValue({}),
+    setModalButtonEnabled: jest.fn().mockResolvedValue(undefined),
+    readEventRelations: jest.fn(),
+  };
+
+  widgetApi.receiveRoomEvents.mockImplementation(async (type, options) => {
+    const { messageType, roomIds } = options ?? {};
+
+    return roomEvents
+      .filter((ev) => {
+        if (ev.type !== type) {
+          return false;
+        }
+
+        if (messageType) {
+          const contentWithMsgType = ev.content as Partial<{ msgtype: string }>;
+
+          if (contentWithMsgType.msgtype !== messageType) {
+            return false;
+          }
+        }
+
+        if (!roomIds) {
+          return ev.room_id === roomId;
+        } else if (roomIds === Symbols.AnyRoom) {
+          return true;
+        } else {
+          return roomIds.includes(ev.room_id);
+        }
+      })
+      .sort(compareOriginServerTS)
+      .map(cloneDeep);
+  });
+
+  widgetApi.receiveStateEvents.mockImplementation(async (type, options) => {
+    const { stateKey, roomIds } = options ?? {};
+
+    return stateEvents
+      .filter((ev) => {
+        if (ev.type !== type) {
+          return false;
+        }
+
+        if (stateKey !== undefined && ev.state_key !== stateKey) {
+          return false;
+        }
+
+        if (!roomIds) {
+          return ev.room_id === roomId;
+        } else if (roomIds === Symbols.AnyRoom) {
+          return true;
+        } else {
+          return roomIds.includes(ev.room_id);
+        }
+      })
+      .map(cloneDeep);
+  });
+
+  widgetApi.receiveSingleStateEvent.mockImplementation(
+    async (type, stateKey) => {
+      return cloneDeep(
+        stateEvents.find((ev) => {
+          if (ev.type !== type) {
+            return false;
+          }
+
+          if (stateKey !== undefined && ev.state_key !== stateKey) {
+            return false;
+          }
+
+          return true;
+        })
+      );
+    }
+  );
+
+  widgetApi.observeRoomEvents.mockImplementation((type, options) => {
+    const { messageType, roomIds } = options ?? {};
+
+    return concat(
+      from(roomEvents.sort(compareOriginServerTS)),
+      roomEventSubject
+    ).pipe(
+      filter((ev) => {
+        if (ev.type !== type) {
+          return false;
+        }
+
+        if (messageType) {
+          const contentWithMsgType = ev.content as Partial<{ msgtype: string }>;
+
+          if (contentWithMsgType.msgtype !== messageType) {
+            return false;
+          }
+        }
+
+        if (!roomIds) {
+          return ev.room_id === roomId;
+        } else if (roomIds === Symbols.AnyRoom) {
+          return true;
+        } else {
+          return roomIds.includes(ev.room_id);
+        }
+      }),
+      map(cloneDeep),
+      takeUntil(stopSubject)
+    );
+  });
+
+  widgetApi.observeStateEvents.mockImplementation((type, options) => {
+    const { stateKey, roomIds } = options ?? {};
+
+    const filterEvents = (ev: StateEvent) => {
+      if (ev.type !== type) {
+        return false;
+      }
+
+      if (stateKey !== undefined && ev.state_key !== stateKey) {
+        return false;
+      }
+
+      if (!roomIds) {
+        return ev.room_id === roomId;
+      } else if (roomIds === Symbols.AnyRoom) {
+        return true;
+      } else {
+        return roomIds.includes(ev.room_id);
+      }
+    };
+
+    return concat(from(stateEvents), stateEventSubject).pipe(
+      filter(filterEvents),
+      map(cloneDeep),
+      takeUntil(stopSubject)
+    );
+  });
+
+  widgetApi.sendRoomEvent.mockImplementation(async (type, content, options) => {
+    const ev: RoomEvent = {
+      type,
+      content,
+      event_id: generateEventId(),
+      origin_server_ts: Date.now(),
+      sender: userId,
+      room_id: options?.roomId ?? roomId,
+    };
+
+    if (ev.type === ROOM_EVENT_REDACTION) {
+      let redactionEv = ev as RedactionRoomEvent;
+      redactionEv.redacts = redactionEv.content['redacts'];
+      ev.content = {};
+
+      // primitively redact the event. the specification keeps some fields
+      // of selected events, but that could be implemented here in the future
+      // if needed.
+      const redactedEvent = roomEvents
+        .concat(stateEvents)
+        .find((ev) => ev.event_id === redactionEv.redacts);
+
+      if (redactedEvent) {
+        redactedEvent.content = {};
+      }
+    }
+
+    return mockSendRoomEvent(ev);
+  });
+
+  widgetApi.sendStateEvent.mockImplementation(
+    async (type, content, options) => {
+      const ev = {
+        type,
+        content,
+        state_key: options?.stateKey ?? '',
+        event_id: generateEventId(),
+        origin_server_ts: Date.now(),
+        sender: userId,
+        room_id: options?.roomId ?? roomId,
+      };
+
+      // Make sure to "hang", if we send the state event that doesn't update the
+      // existing state event because it already has the expected state.
+      // While this behavior is undesired, it matches how our current widget API
+      // implementation works. This allows to catch such problems in tests
+      // early.
+      // Instead, implementations should make sure that they don't send state
+      // events that are equal to the current state.
+      if (
+        stateEvents.find(
+          (e) =>
+            ev.room_id === e.room_id &&
+            ev.type === e.type &&
+            ev.state_key === e.state_key &&
+            isEqual(ev.content, e.content)
+        )
+      ) {
+        return new Promise((resolve, reject) => {
+          // Never resolves
+        });
+      }
+
+      return mockSendStateEvent(ev);
+    }
+  );
+
+  widgetApi.readEventRelations.mockImplementation(
+    async (eventId, opts = {}) => {
+      const events = roomEvents
+        .concat(stateEvents)
+        .filter((ev: RoomEvent) => {
+          if (opts.roomId === undefined) {
+            return ev.room_id === roomId;
+          }
+
+          return ev.room_id === opts.roomId;
+        })
+        .sort(compareOriginServerTS);
+
+      const originalEvent = events.find((ev) => {
+        return ev.event_id === eventId;
+      });
+
+      const relatedEvents = events
+        .filter(isValidEventWithRelatesTo)
+        .filter((ev) => {
+          if (
+            opts.relationType &&
+            ev.content['m.relates_to'].rel_type !== opts.relationType
+          ) {
+            return false;
+          }
+
+          if (opts.eventType && ev.type !== opts.eventType) {
+            return false;
+          }
+
+          return ev.content['m.relates_to'].event_id === eventId;
+        });
+
+      const skip = Math.max(parseInt(opts.from ?? '0'), 0);
+      const end = skip + (opts.limit ?? 50);
+
+      return {
+        originalEvent: cloneDeep(originalEvent),
+        chunk: relatedEvents.slice(skip, end).map(cloneDeep),
+        nextToken: end < relatedEvents.length ? end.toString() : undefined,
+      };
+    }
+  );
+
+  return {
+    ...widgetApi,
+    mockSendRoomEvent,
+    mockSendStateEvent,
+    clearRoomEvents,
+    clearStateEvents,
+    stop,
+  };
+}
+
+function generateEventId(): string {
+  return uniqueId('$event-');
+}

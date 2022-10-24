@@ -1,0 +1,12 @@
+/*******************************
+         Site Overrides
+*******************************/
+
+.ui.placeholder,
+.ui.placeholder > :before,
+.ui.placeholder .image.header:after,
+.ui.placeholder .line,
+.ui.placeholder .line:after {
+  background-color: @pageBackground !important;
+  --webkit--modal: 'asdf';
+}

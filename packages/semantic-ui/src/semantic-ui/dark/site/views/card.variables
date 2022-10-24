@@ -1,0 +1,7 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+
+@background: darken(@pageBackground, 6);
+@descriptionColor: @textColor;
+@extraDivider: 1px solid lighten(@background, 6);

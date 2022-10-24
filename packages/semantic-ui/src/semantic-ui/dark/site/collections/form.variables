@@ -1,0 +1,7 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+
+@negativeBackgroundColor : darken(@red, 36);
+@negativeBorderColor : darken(@red, 30);
+@negativeTextColor: lighten(@red, 40);

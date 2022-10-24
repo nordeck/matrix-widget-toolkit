@@ -1,0 +1,6 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+
+@background: rgb(32, 37, 43);
+@borderColor: rgba(0, 0, 0, 0.15);
