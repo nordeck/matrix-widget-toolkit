@@ -11,14 +11,14 @@ updates:
     rebase-strategy: 'disabled'
     schedule:
       interval: 'weekly'
-  - package-ecosystem: 'github-actions'
-    directory: '/'
+  - package-ecosystem: 'docker'
+    directory: '/containers/widget-server'
     open-pull-requests-limit: 15
     rebase-strategy: 'disabled'
     schedule:
       interval: 'weekly'
-  - package-ecosystem: 'docker'
-    directory: '/containers/widget-server'
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     open-pull-requests-limit: 15
     rebase-strategy: 'disabled'
     schedule:
