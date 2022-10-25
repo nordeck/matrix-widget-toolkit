@@ -1,5 +1,7 @@
 # `@matrix-widget-toolkit/mui`
 
+[![@matrix-widget-toolkit/mui](https://img.shields.io/npm/v/@matrix-widget-toolkit/mui)](https://www.npmjs.com/package/@matrix-widget-toolkit/mui)
+
 This package provides a [Mui](https://mui.com/) theme that fits to the default Element theme.
 It provides:
 

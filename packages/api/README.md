@@ -1,5 +1,7 @@
 # `@matrix-widget-toolkit/api`
 
+[![@matrix-widget-toolkit/api](https://img.shields.io/npm/v/@matrix-widget-toolkit/api)](https://www.npmjs.com/package/@matrix-widget-toolkit/api)
+
 This is package that wraps `matrix-widget-api` to provide a more convenient API.
 For now, the API includes:
 

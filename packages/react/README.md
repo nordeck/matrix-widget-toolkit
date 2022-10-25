@@ -1,5 +1,7 @@
 # `@matrix-widget-toolkit/react`
 
+[![@matrix-widget-toolkit/react](https://img.shields.io/npm/v/@matrix-widget-toolkit/react)](https://www.npmjs.com/package/@matrix-widget-toolkit/react)
+
 This is package that provides a Widget API intergration for React apps.
 
 ## Usage
