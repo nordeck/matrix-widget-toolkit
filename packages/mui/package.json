@@ -46,12 +46,12 @@
     "@mui/utils": "^5.10.6",
     "@matrix-widget-toolkit/api": "^1.0.1",
     "@matrix-widget-toolkit/react": "^1.0.1",
-    "i18next": "^21.10.0",
+    "i18next": "^22.0.2",
     "i18next-browser-languagedetector": "^6.1.8",
     "i18next-resources-to-backend": "^1.0.0",
     "matrix-widget-api": "^1.1.1",
     "react": "^17.0.2",
-    "react-i18next": "^11.18.6",
+    "react-i18next": "^12.0.0",
     "react-use": "^17.3.2"
   },
   "repository": {
