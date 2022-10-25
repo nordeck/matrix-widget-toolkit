@@ -1,5 +1,7 @@
 # `@matrix-widget-toolkit/testing`
 
+[![@matrix-widget-toolkit/testing](https://img.shields.io/npm/v/@matrix-widget-toolkit/testing)](https://www.npmjs.com/package/@matrix-widget-toolkit/testing)
+
 Testing support for `@matrix-widget-toolkit/api`.
 
 ## Usage
