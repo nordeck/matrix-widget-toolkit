@@ -1,5 +1,7 @@
 # `@matrix-widget-toolkit/semantic-ui`
 
+[![@matrix-widget-toolkit/semantic-ui](https://img.shields.io/npm/v/@matrix-widget-toolkit/semantic-ui)](https://www.npmjs.com/package/@matrix-widget-toolkit/semantic-ui)
+
 This package provides a Semantic UI theme that fits to the default Element theme.
 See [`matrix-example-widget-semantic-ui`](../../matrix-example-widget-semantic-ui/) for some examples.
 
