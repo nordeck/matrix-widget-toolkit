@@ -30,7 +30,8 @@
     "web-vitals": "^3.0.3"
   },
   "scripts": {
-    "start": "cross-env BROWSER=none WDS_SOCKET_PORT=0 craco start",
+    "dev": "cross-env BROWSER=none WDS_SOCKET_PORT=0 craco start",
+    "start": "cross-env BROWSER=none WDS_SOCKET_PORT=0 HTTPS=true craco start",
     "lint": "eslint .",
     "tsc": "tsc",
     "build": "craco build",
