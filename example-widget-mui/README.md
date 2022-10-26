@@ -15,13 +15,16 @@ The widget demonstrates:
 - How to use the UI components so the widget match the style of Element ([`Theme`](./src/ThemePage/ThemePage.tsx)).
 - And other examples…
 
-## Getting started
+## Running the Widget Locally
 
-Run `HTTPS=true yarn start` to start the example app.
+The widget is embedded into the widget host as an iframe.
+This can cause mixed-content errors if your local widget is served _without_ HTTPS but the Element hosting it is running _with_ HTTPS.
+You have multiple options to solve them:
 
-To test the widget locally visit `http://localhost:3000` and follow the instructions on the page.
-This will only work in a Chrome instance that is started with `--allow-insecure-localhost --disable-site-isolation-trials --disable-web-security` flags.
+- Run an own copy of [`element-web`](https://github.com/vector-im/element-web) locally (e.g. via Docker or by building `element-web` from source), _without_ HTTPS and start the widget via `yarn dev`.
+- Run your Chrome instance with `--allow-insecure-localhost --disable-site-isolation-trials --disable-web-security` to disable mixed-content errors, use any Element, and start the widget via `yarn start` (_with_ HTTPS).
+  > **Warning** Do not use this Chrome instance to browse the web!
+- Use a tunneling service such as [`localtunnel`](https://github.com/localtunnel/localtunnel) or [`ngrok`](https://ngrok.com/) to run the widget with a valid HTTPS certificate, use any Element, and start the widget via `yarn dev`.
+  This way Chrome behaves closest to how it would behave in production.
 
-> **Warning** Do not use this Chrome instance to browse the web!
-
-Alternatively, you can start a local element version that runs without `https://` or use tunneling services such as [`localtunnel`](https://github.com/localtunnel/localtunnel) to avoid mixed-content errors.
+Then visit `http(s)://localhost:3000` and follow the instructions on the page to setup the widget.

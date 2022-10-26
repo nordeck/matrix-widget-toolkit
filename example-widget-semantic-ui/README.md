@@ -14,13 +14,6 @@ The widget demonstrates:
 - How to use the UI components so the widget match the style of Element ([`Theme`](./src/ThemePage/ThemePage.tsx)).
 - And other examples…
 
-## Getting started
+## Running the Widget Locally
 
-Run `HTTPS=true yarn start` to start the example app.
-
-To test the widget locally visit `http://localhost:3000` and follow the instructions on the page.
-This will only work in a Chrome instance that is started with `--allow-insecure-localhost --disable-site-isolation-trials --disable-web-security` flags.
-
-> **Warning** Do not use this Chrome instance to browse the web!
-
-Alternatively, you can start a local element version that runs without `https://` or use tunneling services such as [`localtunnel`](https://github.com/localtunnel/localtunnel) to avoid mixed-content errors.
+See the [`example-widget-mui` README](../example-widget-mui/) for instructions.

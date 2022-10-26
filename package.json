@@ -8,6 +8,8 @@
     "packages/*"
   ],
   "scripts": {
+    "dev:example": "yarn workspace @matrix-widget-toolkit/example-widget-mui dev",
+    "dev:example:semantic-ui": "yarn workspace @matrix-widget-toolkit/example-widget-semantic-ui dev",
     "start:example": "yarn workspace @matrix-widget-toolkit/example-widget-mui start",
     "start:example:semantic-ui": "yarn workspace @matrix-widget-toolkit/example-widget-semantic-ui start",
     "build": "yarn workspaces run build",
@@ -23,8 +25,7 @@
     "release": "node ./scripts/publishAllPackages.js",
     "translate": "yarn workspaces run translate",
     "generate-api-report": "yarn workspaces run generate-api-report",
-    "check-api-report": "yarn workspaces run check-api-report",
-    "tunnel": "lt --port 3000"
+    "check-api-report": "yarn workspaces run check-api-report"
   },
   "devDependencies": {
     "@changesets/cli": "^2.25.0",
@@ -38,7 +39,6 @@
     "eslint-plugin-promise": "^6.1.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
-    "localtunnel": "^2.0.2",
     "prettier": "^2.7.1",
     "prettier-plugin-organize-imports": "^3.1.1",
     "rollup": "^3.2.3",
