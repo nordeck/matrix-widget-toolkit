@@ -28,7 +28,7 @@
     "check-api-report": "yarn workspaces run check-api-report"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.25.0",
+    "@changesets/cli": "^2.25.1",
     "@microsoft/api-extractor": "^7.33.4",
     "@rollup/plugin-commonjs": "^23.0.2",
     "cross-env": "^7.0.3",
