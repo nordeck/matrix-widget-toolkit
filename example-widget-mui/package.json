@@ -13,9 +13,9 @@
     "@matrix-widget-toolkit/mui": "1.0.1",
     "@matrix-widget-toolkit/react": "1.0.1",
     "@reduxjs/toolkit": "^1.8.6",
-    "i18next": "^22.0.2",
+    "i18next": "^22.0.4",
     "i18next-chained-backend": "^4.0.0",
-    "i18next-http-backend": "^2.0.0",
+    "i18next-http-backend": "^2.0.1",
     "joi": "^17.6.4",
     "lodash": "^4.17.21",
     "matrix-widget-api": "^1.1.1",
@@ -25,9 +25,8 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
-    "react-use": "^17.3.2",
-    "rxjs": "^7.5.7",
-    "web-vitals": "^3.0.3"
+    "react-use": "^17.4.0",
+    "rxjs": "^7.5.7"
   },
   "scripts": {
     "dev": "cross-env BROWSER=none WDS_SOCKET_PORT=0 craco start",
@@ -65,7 +64,7 @@
     "@types/react": "^17.0.45",
     "@types/react-dom": "^17.0.16",
     "i18next-parser": "^6.6.0",
-    "jest-axe": "^6.0.0",
+    "jest-axe": "^7.0.0",
     "msw": "^0.47.4",
     "typescript": "^4.8.4"
   }

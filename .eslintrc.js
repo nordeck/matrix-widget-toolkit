@@ -39,6 +39,8 @@ module.exports = {
       {
         templateFile: path.resolve(__dirname, './scripts/license-header.txt'),
         onNonMatchingHeader: 'replace',
+        templateVars: { NAME: 'Nordeck IT + Consulting GmbH' },
+        varRegexps: { NAME: /.+/ },
       },
     ],
     '@typescript-eslint/no-unused-vars': 'error',
