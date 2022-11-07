@@ -37,7 +37,7 @@
     "generate-api-report": "tsc && api-extractor run --verbose --local"
   },
   "dependencies": {
-    "@emotion/cache": "^11.10.3",
+    "@emotion/cache": "^11.10.5",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.5",
     "@fontsource/inter": "^4.5.14",
