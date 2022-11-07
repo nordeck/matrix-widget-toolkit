@@ -5319,10 +5319,10 @@ eslint-plugin-notice@^0.9.10:
     lodash "^4.17.15"
     metric-lcs "^0.1.2"
 
-eslint-plugin-promise@^6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-promise/-/eslint-plugin-promise-6.1.0.tgz#99e54d07272df5a6440209cb36d0d692be0610dd"
-  integrity sha512-NYCfDZF/KHt27p06nFAttgWuFyIDSUMnNaJBIY1FY9GpBFhdT2vMG64HlFguSgcJeyM5by6Yr5csSOuJm60eXQ==
+eslint-plugin-promise@^6.1.1:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-promise/-/eslint-plugin-promise-6.1.1.tgz#269a3e2772f62875661220631bd4dafcb4083816"
+  integrity sha512-tjqWDwVZQo7UIPMeDReOpUgHCmCiH+ePnVT+5zVapL0uuHnegBUs2smM13CzOs2Xb5+MHMRFTs9v24yjba4Oig==
 
 eslint-plugin-react-hooks@^4.3.0:
   version "4.3.0"
@@ -6430,10 +6430,10 @@ i18next-chained-backend@^4.0.0:
   dependencies:
     "@babel/runtime" "^7.19.4"
 
-i18next-http-backend@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/i18next-http-backend/-/i18next-http-backend-2.0.0.tgz#7be736eb4c592e110b9ee54a985b737248d1c43f"
-  integrity sha512-6aFT5LcDOSxFyaoezruIxZDzpp6nu92j1iZc444nrz/OOaF7rsxQFNi1es19la53MQQFzG7uD2Koxi7Jav8khg==
+i18next-http-backend@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/i18next-http-backend/-/i18next-http-backend-2.0.1.tgz#ef744dd76f36399b9bc169c4e4221db9bbaf6fe5"
+  integrity sha512-kzvSkOT3yhVijumDlp8/TgD1v07lYdFXsf5YYbB7Yu+K2S6PO0lKgZ4c/fyFcAKWiAiTjt9uVecBAbnJjKzhOw==
   dependencies:
     cross-fetch "3.1.5"
 
