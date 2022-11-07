@@ -27,7 +27,7 @@
     "react-scripts": "5.0.1",
     "react-use": "^17.3.2",
     "rxjs": "^7.5.7",
-    "web-vitals": "^3.0.3"
+    "web-vitals": "^3.0.4"
   },
   "scripts": {
     "dev": "cross-env BROWSER=none WDS_SOCKET_PORT=0 craco start",
