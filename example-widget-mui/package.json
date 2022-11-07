@@ -15,7 +15,7 @@
     "@reduxjs/toolkit": "^1.8.6",
     "i18next": "^22.0.2",
     "i18next-chained-backend": "^4.0.0",
-    "i18next-http-backend": "^2.0.0",
+    "i18next-http-backend": "^2.0.1",
     "joi": "^17.6.4",
     "lodash": "^4.17.21",
     "matrix-widget-api": "^1.1.1",
@@ -64,7 +64,7 @@
     "@types/react": "^17.0.45",
     "@types/react-dom": "^17.0.16",
     "i18next-parser": "^6.6.0",
-    "jest-axe": "^6.0.0",
+    "jest-axe": "^7.0.0",
     "msw": "^0.47.4",
     "typescript": "^4.8.4"
   }
