@@ -41,7 +41,7 @@
     "@matrix-widget-toolkit/api": "^1.0.1",
     "@matrix-widget-toolkit/react": "^1.0.1",
     "i18next": "^22.0.2",
-    "i18next-browser-languagedetector": "^6.1.8",
+    "i18next-browser-languagedetector": "^7.0.1",
     "i18next-resources-to-backend": "^1.0.0",
     "matrix-widget-api": "^1.1.1",
     "react": "^17.0.2",
