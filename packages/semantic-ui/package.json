@@ -1,6 +1,6 @@
 {
   "name": "@matrix-widget-toolkit/semantic-ui",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A customized semantic-ui theme that matches the style of the Element Matrix client",
   "deprecated": true,
   "author": "Nordeck IT + Consulting GmbH",
@@ -39,7 +39,7 @@
   "dependencies": {
     "@fontsource/lato": "^4.5.10",
     "@matrix-widget-toolkit/api": "^1.0.1",
-    "@matrix-widget-toolkit/react": "^1.0.1",
+    "@matrix-widget-toolkit/react": "^1.0.2",
     "i18next": "^22.0.4",
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-resources-to-backend": "^1.0.0",
