@@ -214,8 +214,9 @@ export const baseTheme: ThemeOptions = {
       styleOverrides: {
         root: ({ theme }) => ({
           backgroundColor:
-            theme.palette.mode === 'dark' ? '#000' : 'rgba(46,48,51,.38)',
-          opacity: 0.8,
+            theme.palette.mode === 'dark'
+              ? 'rgba(0,0,0,.8)'
+              : 'rgba(46,48,51,.304)',
         }),
         invisible: {
           backgroundColor: 'unset',
