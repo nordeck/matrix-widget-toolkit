@@ -22,6 +22,7 @@ import {
 import { ReactElement, Suspense } from 'react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { AllRoomsPage } from '../AllRoomsPage';
+import { DeviceMessagePage } from '../DeviceMessagePage';
 import { DicePage } from '../DicePage';
 import { IdentityPage } from '../IdentityPage';
 import { ModalDialog, ModalPage } from '../ModalPage';
@@ -61,6 +62,7 @@ export function App({
               <Route path="/modal/dialog" element={<ModalDialog />} />
               <Route path="/powerlevels" element={<PowerLevelsPage />} />
               <Route path="/relations" element={<RelationsPage />} />
+              <Route path="/deviceMessage" element={<DeviceMessagePage />} />
               <Route path="/theme" element={<ThemePage />} />
             </Routes>
           </MuiWidgetApiProvider>

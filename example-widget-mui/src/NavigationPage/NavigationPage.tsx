@@ -99,6 +99,12 @@ export const NavigationPage = (): ReactElement => {
         />
 
         <NavigationItem
+          to="/deviceMessage"
+          title="Device Message"
+          description="Example on using to device messages for peer to peer like communication"
+        />
+
+        <NavigationItem
           to="/theme"
           title="Theme"
           description="Example on how to build UIs using Mui that match the
