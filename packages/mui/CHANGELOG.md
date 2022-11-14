@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/mui`
 
+## 1.0.3
+
+### Patch Changes
+
+- 120709f: Fix backdrop color in dark mode.
+
 ## 1.0.2
 
 ### Patch Changes
