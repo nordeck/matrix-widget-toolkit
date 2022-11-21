@@ -8,7 +8,7 @@
   "dependencies": {
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.12",
-    "@mui/utils": "^5.10.9",
+    "@mui/utils": "^5.10.14",
     "@matrix-widget-toolkit/api": "1.0.1",
     "@matrix-widget-toolkit/mui": "1.0.3",
     "@matrix-widget-toolkit/react": "1.0.2",
