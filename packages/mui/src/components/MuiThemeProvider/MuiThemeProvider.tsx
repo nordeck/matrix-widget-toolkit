@@ -98,7 +98,8 @@ function ElementMuiThemeProvider({ children }: PropsWithChildren<{}>) {
 
   const muiTheme = useMemo(() => {
     const themeOptions = chooseTheme(theme);
-    const localeOptions = locale === 'de' ? deDE : enUS;
+    const localeOptions =
+      new Intl.Locale(locale).language === 'de' ? deDE : enUS;
 
     return createTheme(deepmerge(baseTheme, themeOptions), localeOptions);
   }, [locale, theme]);
