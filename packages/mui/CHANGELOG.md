@@ -1,5 +1,12 @@
 # `@matrix-widget-toolkit/mui`
 
+## 1.0.4
+
+### Patch Changes
+
+- 60d11a8: Improve styling of dialogs in the scroll mode "body".
+- ce7037f: Check base language instead of the full string.
+
 ## 1.0.3
 
 ### Patch Changes
