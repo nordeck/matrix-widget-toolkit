@@ -193,6 +193,12 @@ export const baseTheme: ThemeOptions = {
     // Dialogs have a different padding and font style
     MuiDialog: {
       styleOverrides: {
+        root: {
+          // Make margin smaller for scroll=body
+          '&& .MuiDialog-paperScrollBody': {
+            maxWidth: 600,
+          },
+        },
         paper: ({ theme }) => ({
           margin: theme.breakpoints.down('xs') ? '8px' : undefined,
         }),
