@@ -86,10 +86,10 @@ export function chooseTheme(theme: string): ThemeOptions {
 
 function ElementMuiThemeProvider({ children }: PropsWithChildren<{}>) {
   const { theme } = useThemeSelection();
-  const [locale, setLocale] = useState(i18n.languages?.[0]);
+  const [locale, setLocale] = useState<string | undefined>(i18n.languages?.[0]);
 
   useEffect(() => {
-    const callback = () => setLocale(i18n.languages[0]);
+    const callback = () => setLocale(i18n.languages?.[0]);
 
     i18n.on('languageChanged', callback);
 
@@ -99,7 +99,7 @@ function ElementMuiThemeProvider({ children }: PropsWithChildren<{}>) {
   const muiTheme = useMemo(() => {
     const themeOptions = chooseTheme(theme);
     const localeOptions =
-      new Intl.Locale(locale).language === 'de' ? deDE : enUS;
+      locale && new Intl.Locale(locale).language === 'de' ? deDE : enUS;
 
     return createTheme(deepmerge(baseTheme, themeOptions), localeOptions);
   }, [locale, theme]);
