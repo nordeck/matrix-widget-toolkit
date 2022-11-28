@@ -42,7 +42,7 @@
     "@emotion/styled": "^11.10.5",
     "@fontsource/inter": "^4.5.14",
     "@mui/icons-material": "^5.10.9",
-    "@mui/material": "^5.10.12",
+    "@mui/material": "^5.10.15",
     "@mui/utils": "^5.10.9",
     "@matrix-widget-toolkit/api": "^1.0.1",
     "@matrix-widget-toolkit/react": "^1.0.2",
