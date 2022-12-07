@@ -566,7 +566,7 @@ export class WidgetApiImpl implements WidgetApi {
     return {
       originalEvent: original_event,
       chunk,
-      nextToken: next_batch,
+      nextToken: next_batch ?? undefined,
     };
   }
 
