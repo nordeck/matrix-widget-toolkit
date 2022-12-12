@@ -2132,10 +2132,10 @@
     colors "~1.2.1"
     string-argv "~0.3.1"
 
-"@semantic-ui-react/craco-less@^2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@semantic-ui-react/craco-less/-/craco-less-2.0.2.tgz#39cdf3dc69125c5e8c6f840318bc62a7a2bb9f79"
-  integrity sha512-nxDXRiq5PtM3RttzGgiMj8aSUDbu6ErK09UsQ0zvsGo3YQd6TSRGHinWxjD8eKrh25o4eFQXsi80W2nyy0PNDg==
+"@semantic-ui-react/craco-less@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@semantic-ui-react/craco-less/-/craco-less-3.0.0.tgz#3da879b6e7da96fa7813e1b45f87a0be501c08d4"
+  integrity sha512-RsyF2AS8LjG4gs4Yp6oekeZ1nPnkCggrxCIzGcd7Shzm6XjyUXZCxNF0GygkP1p7az7tR+Tpdr6pNxn4xOZHHA==
   dependencies:
     craco-less "^2.0.0"
 
