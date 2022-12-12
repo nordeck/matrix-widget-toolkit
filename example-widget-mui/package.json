@@ -7,7 +7,7 @@
   "private": true,
   "dependencies": {
     "@mui/icons-material": "^5.10.9",
-    "@mui/material": "^5.10.12",
+    "@mui/material": "^5.10.17",
     "@mui/utils": "^5.10.9",
     "@matrix-widget-toolkit/api": "1.0.2",
     "@matrix-widget-toolkit/mui": "1.0.4",
