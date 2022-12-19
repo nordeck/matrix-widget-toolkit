@@ -43,7 +43,7 @@
     "@fontsource/inter": "^4.5.14",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.12",
-    "@mui/utils": "^5.10.9",
+    "@mui/utils": "^5.11.0",
     "@matrix-widget-toolkit/api": "^1.0.1",
     "@matrix-widget-toolkit/react": "^1.0.2",
     "i18next": "^22.0.4",
