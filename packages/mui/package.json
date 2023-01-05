@@ -17,7 +17,7 @@
     "@types/node": "^16.18.8",
     "@types/react": "^17.0.45",
     "copyfiles": "^2.4.1",
-    "i18next-parser": "^6.6.0",
+    "i18next-parser": "^7.1.0",
     "jest-axe": "^7.0.0",
     "react": "^17.0.2",
     "react-scripts": "5.0.1",
