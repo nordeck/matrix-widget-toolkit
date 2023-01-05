@@ -82,7 +82,7 @@ Specify the impact as `patch`.
 
 ### Architecture Decision Records
 
-We use [Architecture Decision Records (ADR)s](./docs/adr/adr001-use-adrs-to-document-decisions.md) to document decisions for our software.
+We use [Architecture Decision Records (ADR)s](./docs/adrs/adr001-use-adrs-to-document-decisions.md) to document decisions for our software.
 You can find them at [`/docs/adrs`](./docs/adrs/).
 
 ## License
