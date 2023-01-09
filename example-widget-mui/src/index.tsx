@@ -19,6 +19,7 @@ import { EventDirection, WidgetEventCapability } from 'matrix-widget-api';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from './App';
+import { ROOM_EVENT_DOC } from './CollaborationPage/types';
 import { STATE_EVENT_ROOM_NAME } from './events';
 import './i18n';
 
@@ -32,6 +33,14 @@ const widgetApiPromise = WidgetApiImpl.create({
     WidgetEventCapability.forStateEvent(
       EventDirection.Receive,
       STATE_EVENT_ROOM_NAME
+    ),
+    WidgetEventCapability.forRoomEvent(
+      EventDirection.Receive,
+      ROOM_EVENT_DOC
+    ),
+    WidgetEventCapability.forRoomEvent(
+      EventDirection.Send,
+      ROOM_EVENT_DOC
     ),
   ],
 });

@@ -23,6 +23,19 @@
     jsonpointer "^5.0.0"
     leven "^3.1.0"
 
+"@automerge/automerge-wasm@0.1.19":
+  version "0.1.19"
+  resolved "https://registry.yarnpkg.com/@automerge/automerge-wasm/-/automerge-wasm-0.1.19.tgz#b7712c2d4643e1761b6d8d763432649e2cae138b"
+  integrity sha512-G7nBxy5AdewqFRzGw/MyuGSPGElGKWn92CwxzV168RKpteo3Y+kGiDdtYdRi3Q4e6zIFNNhlAeQAizoug4ctHg==
+
+"@automerge/automerge@^2.0.1-alpha.2":
+  version "2.0.1-alpha.2"
+  resolved "https://registry.yarnpkg.com/@automerge/automerge/-/automerge-2.0.1-alpha.2.tgz#555c40840b73c7b650ba7f6a18289f5ed0c47ca7"
+  integrity sha512-nh+OcrZZHzB5nmxxXHHpAvzSMXy3y5w0QATUP3VgIwGy24riD7COm4/GAJrJKdZ+hnKrV98577NYZy7EFqWWZA==
+  dependencies:
+    "@automerge/automerge-wasm" "0.1.19"
+    uuid "^8.3"
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.16.0", "@babel/code-frame@^7.16.7", "@babel/code-frame@^7.8.3":
   version "7.16.7"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.16.7.tgz#44416b6bd7624b998f5b1af5d470856c40138789"
@@ -4480,6 +4493,11 @@ craco-less@^2.0.0:
   dependencies:
     less "^4.1.1"
     less-loader "^7.3.0"
+
+craco-wasm@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/craco-wasm/-/craco-wasm-0.0.1.tgz#a7edbf7ff64e7569909b15684c00de13209985c6"
+  integrity sha512-0vwZLtkQocS7UlPg9IF4TsG/6gKXcd9O0ISomjRoBMvR2XvtZN4yxvU8/WlY0Vf42PtOcWvhSx9i4oVNxLVE6w==
 
 create-require@^1.1.0:
   version "1.1.1"
@@ -11787,7 +11805,7 @@ utils-merge@1.0.1:
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==
 
-uuid@^8.3.2:
+uuid@^8.3, uuid@^8.3.2:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==

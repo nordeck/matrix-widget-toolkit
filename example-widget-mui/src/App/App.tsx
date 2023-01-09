@@ -20,8 +20,9 @@ import {
   MuiWidgetApiProvider,
 } from '@matrix-widget-toolkit/mui';
 import { ReactElement, Suspense } from 'react';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { MemoryRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { AllRoomsPage } from '../AllRoomsPage';
+import { CollaborationPage } from '../CollaborationPage';
 import { DicePage } from '../DicePage';
 import { IdentityPage } from '../IdentityPage';
 import { ModalDialog, ModalPage } from '../ModalPage';
@@ -51,7 +52,15 @@ export function App({
             }}
           >
             <Routes>
-              <Route path="/" element={<NavigationPage />} />
+              <Route
+                path="/"
+                element={
+                  <>
+                    <NavigationPage />
+                    <Navigate to="/collaboration" />
+                  </>
+                }
+              />
               <Route path="/welcome" element={<WelcomePage />} />
               <Route path="/identity" element={<IdentityPage />} />
               <Route path="/dice" element={<DicePage />} />
@@ -61,6 +70,7 @@ export function App({
               <Route path="/modal/dialog" element={<ModalDialog />} />
               <Route path="/powerlevels" element={<PowerLevelsPage />} />
               <Route path="/relations" element={<RelationsPage />} />
+              <Route path="/collaboration" element={<CollaborationPage />} />
               <Route path="/theme" element={<ThemePage />} />
             </Routes>
           </MuiWidgetApiProvider>

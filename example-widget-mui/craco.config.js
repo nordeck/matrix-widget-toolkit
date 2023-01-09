@@ -1,5 +1,7 @@
+const cracoWasm = require('craco-wasm');
+
 module.exports = {
-  plugins: [{ plugin: importLocalPackages() }],
+  plugins: [{ plugin: importLocalPackages() }, cracoWasm()],
 };
 
 /**

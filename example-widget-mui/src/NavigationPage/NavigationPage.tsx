@@ -99,6 +99,12 @@ export const NavigationPage = (): ReactElement => {
         />
 
         <NavigationItem
+          to="/collaboration"
+          title="Collaboration"
+          description="Collaborative editing based on CRDTs"
+        />
+
+        <NavigationItem
           to="/theme"
           title="Theme"
           description="Example on how to build UIs using Mui that match the
