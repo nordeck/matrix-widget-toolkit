@@ -1,6 +1,6 @@
 {
   "name": "@matrix-widget-toolkit/mui",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A customized material-ui theme that matches the style of the Element Matrix client",
   "author": "Nordeck IT + Consulting GmbH",
   "license": "Apache-2.0",
