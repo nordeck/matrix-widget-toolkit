@@ -6,9 +6,9 @@
   "license": "Apache-2.0",
   "private": true,
   "dependencies": {
-    "@mui/icons-material": "^5.10.9",
-    "@mui/material": "^5.10.12",
-    "@mui/utils": "^5.10.9",
+    "@mui/icons-material": "^5.11.0",
+    "@mui/material": "^5.11.3",
+    "@mui/utils": "^5.11.2",
     "@matrix-widget-toolkit/api": "1.0.2",
     "@matrix-widget-toolkit/mui": "1.0.4",
     "@matrix-widget-toolkit/react": "1.0.2",
@@ -26,7 +26,7 @@
     "react-router-dom": "^6.4.4",
     "react-scripts": "5.0.1",
     "react-use": "^17.4.0",
-    "rxjs": "^7.5.7"
+    "rxjs": "^7.8.0"
   },
   "scripts": {
     "dev": "cross-env BROWSER=none WDS_SOCKET_PORT=0 craco start",
