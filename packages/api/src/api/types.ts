@@ -358,6 +358,8 @@ export type WidgetApi = {
    *                  no further page exists.
    *                  Use `relationType` to only return events with that `rel_type`.
    *                  Use `eventType` to only return events with that `type`.
+   *                  Use `direction` to change time-order of the chunks
+   *                  (default: 'b').
    *
    * @throws if the capability to receive the type of event is missing.
    */
@@ -369,6 +371,7 @@ export type WidgetApi = {
       from?: string;
       relationType?: string;
       eventType?: string;
+      direction?: 'f' | 'b';
     }
   ): Promise<{
     originalEvent?: RoomEvent | StateEvent;

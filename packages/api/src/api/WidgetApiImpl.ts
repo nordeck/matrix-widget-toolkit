@@ -547,6 +547,7 @@ export class WidgetApiImpl implements WidgetApi {
       from?: string;
       relationType?: string;
       eventType?: string;
+      direction?: 'f' | 'b';
     }
   ): Promise<{
     originalEvent?: RoomEvent | StateEvent;
@@ -560,7 +561,9 @@ export class WidgetApiImpl implements WidgetApi {
         options?.relationType,
         options?.eventType,
         options?.limit,
-        options?.from
+        options?.from,
+        undefined,
+        options?.direction
       );
 
     return {

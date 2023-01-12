@@ -750,8 +750,8 @@ describe('readEventRelations', () => {
         event_id: 'event-1',
       }),
       chunk: [
-        expect.objectContaining({ event_id: 'event-3' }),
         expect.objectContaining({ event_id: 'event-2' }),
+        expect.objectContaining({ event_id: 'event-3' }),
       ],
       nextToken: undefined,
     });
@@ -792,10 +792,11 @@ describe('readEventRelations', () => {
     });
   });
 
-  it('should paginate the related events', async () => {
+  it('should paginate the related events forwards', async () => {
     await expect(
       widgetApi.readEventRelations('event-1', {
         limit: 1,
+        direction: 'f',
       })
     ).resolves.toEqual({
       originalEvent: expect.objectContaining({ event_id: 'event-1' }),
@@ -807,6 +808,7 @@ describe('readEventRelations', () => {
       widgetApi.readEventRelations('event-1', {
         limit: 1,
         from: '1',
+        direction: 'f',
       })
     ).resolves.toEqual({
       originalEvent: expect.objectContaining({ event_id: 'event-1' }),

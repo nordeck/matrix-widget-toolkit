@@ -222,6 +222,7 @@ export type WidgetApi = {
         from?: string;
         relationType?: string;
         eventType?: string;
+        direction?: 'f' | 'b';
     }): Promise<{
         originalEvent?: RoomEvent | StateEvent;
         chunk: Array<RoomEvent | StateEvent>;
@@ -271,6 +272,7 @@ export class WidgetApiImpl implements WidgetApi {
         from?: string;
         relationType?: string;
         eventType?: string;
+        direction?: 'f' | 'b';
     }): Promise<{
         originalEvent?: RoomEvent | StateEvent;
         chunk: Array<RoomEvent | StateEvent>;

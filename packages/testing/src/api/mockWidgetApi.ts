@@ -394,7 +394,10 @@ export function mockWidgetApi({
 
           return ev.room_id === opts.roomId;
         })
-        .sort(compareOriginServerTS);
+        .sort((a, b) => {
+          const compare = compareOriginServerTS(a, b);
+          return opts.direction === 'f' ? compare : -compare;
+        });
 
       const originalEvent = events.find((ev) => {
         return ev.event_id === eventId;
