@@ -547,24 +547,24 @@ export class WidgetApiImpl implements WidgetApi {
       from?: string;
       relationType?: string;
       eventType?: string;
+      direction?: 'f' | 'b';
     }
   ): Promise<{
-    originalEvent?: RoomEvent | StateEvent;
     chunk: Array<RoomEvent | StateEvent>;
     nextToken?: string;
   }> {
-    const { original_event, chunk, next_batch } =
-      await this.matrixWidgetApi.readEventRelations(
-        eventId,
-        options?.roomId,
-        options?.relationType,
-        options?.eventType,
-        options?.limit,
-        options?.from
-      );
+    const { chunk, next_batch } = await this.matrixWidgetApi.readEventRelations(
+      eventId,
+      options?.roomId,
+      options?.relationType,
+      options?.eventType,
+      options?.limit,
+      options?.from,
+      undefined,
+      options?.direction
+    );
 
     return {
-      originalEvent: original_event,
       chunk,
       nextToken: next_batch ?? undefined,
     };

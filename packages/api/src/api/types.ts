@@ -339,15 +339,14 @@ export type WidgetApi = {
   ): Promise<RoomEvent<T>>;
 
   /**
-   * Receive an event with a given `eventId` and all events that relate to it by
-   * means of MSC2674. Both `originalEvent` and `chunk` can include state events
-   * or room events.
+   * Receive all events that relate to a given `eventId` by means of MSC2674.
+   * `chunk` can include state events or room events.
    *
    * @remarks You can only receive events where the capability to receive it was
-   *          approved. If `originalEvent` is not approved, an exception is thrown.
-   *          If an event in `chunk` is not approve, it is silently skipped. Note
-   *          that the call might return less than `limit` events due to various
-   *          reasons, including missing capabilities or encrypted events.
+   *          approved. If an event in `chunk` is not approved, it is silently
+   *          skipped. Note that the call might return less than `limit` events
+   *          due to various reasons, including missing capabilities or encrypted
+   *          events.
    *
    * @param eventId - The id of the event to receive
    * @param options - Options for receiving the related events.
@@ -358,6 +357,8 @@ export type WidgetApi = {
    *                  no further page exists.
    *                  Use `relationType` to only return events with that `rel_type`.
    *                  Use `eventType` to only return events with that `type`.
+   *                  Use `direction` to change time-order of the chunks
+   *                  (default: 'b').
    *
    * @throws if the capability to receive the type of event is missing.
    */
@@ -369,9 +370,9 @@ export type WidgetApi = {
       from?: string;
       relationType?: string;
       eventType?: string;
+      direction?: 'f' | 'b';
     }
   ): Promise<{
-    originalEvent?: RoomEvent | StateEvent;
     chunk: Array<RoomEvent | StateEvent>;
     nextToken?: string;
   }>;

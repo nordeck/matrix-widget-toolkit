@@ -385,6 +385,11 @@ export function mockWidgetApi({
 
   widgetApi.readEventRelations.mockImplementation(
     async (eventId, opts = {}) => {
+      // relation targets must exist
+      if (!roomEvents.some((ev) => ev.event_id === eventId)) {
+        throw new Error('Unexpected error while reading relations');
+      }
+
       const events = roomEvents
         .concat(stateEvents)
         .filter((ev: RoomEvent) => {
@@ -394,11 +399,10 @@ export function mockWidgetApi({
 
           return ev.room_id === opts.roomId;
         })
-        .sort(compareOriginServerTS);
-
-      const originalEvent = events.find((ev) => {
-        return ev.event_id === eventId;
-      });
+        .sort((a, b) => {
+          const compare = compareOriginServerTS(a, b);
+          return opts.direction === 'f' ? compare : -compare;
+        });
 
       const relatedEvents = events
         .filter(isValidEventWithRelatesTo)
@@ -421,7 +425,6 @@ export function mockWidgetApi({
       const end = skip + (opts.limit ?? 50);
 
       return {
-        originalEvent: cloneDeep(originalEvent),
         chunk: relatedEvents.slice(skip, end).map(cloneDeep),
         nextToken: end < relatedEvents.length ? end.toString() : undefined,
       };

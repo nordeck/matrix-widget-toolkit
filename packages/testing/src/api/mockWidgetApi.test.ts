@@ -745,13 +745,9 @@ describe('readEventRelations', () => {
 
   it('should receive only events from the current room', async () => {
     await expect(widgetApi.readEventRelations('event-1')).resolves.toEqual({
-      originalEvent: expect.objectContaining({
-        type: 'com.example.test1',
-        event_id: 'event-1',
-      }),
       chunk: [
-        expect.objectContaining({ event_id: 'event-3' }),
         expect.objectContaining({ event_id: 'event-2' }),
+        expect.objectContaining({ event_id: 'event-3' }),
       ],
       nextToken: undefined,
     });
@@ -761,10 +757,6 @@ describe('readEventRelations', () => {
     await expect(
       widgetApi.readEventRelations('event-1', { roomId: '!other-room-id' })
     ).resolves.toEqual({
-      originalEvent: expect.objectContaining({
-        type: 'com.example.test5',
-        event_id: 'event-1',
-      }),
       chunk: [expect.objectContaining({ event_id: 'event-4' })],
       nextToken: undefined,
     });
@@ -774,7 +766,6 @@ describe('readEventRelations', () => {
     await expect(
       widgetApi.readEventRelations('event-1', { relationType: 'm.replace' })
     ).resolves.toEqual({
-      originalEvent: expect.objectContaining({ event_id: 'event-1' }),
       chunk: [expect.objectContaining({ event_id: 'event-3' })],
       nextToken: undefined,
     });
@@ -786,19 +777,18 @@ describe('readEventRelations', () => {
         eventType: 'com.example.test2',
       })
     ).resolves.toEqual({
-      originalEvent: expect.objectContaining({ event_id: 'event-1' }),
       chunk: [expect.objectContaining({ event_id: 'event-2' })],
       nextToken: undefined,
     });
   });
 
-  it('should paginate the related events', async () => {
+  it('should paginate the related events forwards', async () => {
     await expect(
       widgetApi.readEventRelations('event-1', {
         limit: 1,
+        direction: 'f',
       })
     ).resolves.toEqual({
-      originalEvent: expect.objectContaining({ event_id: 'event-1' }),
       chunk: [expect.objectContaining({ event_id: 'event-3' })],
       nextToken: '1',
     });
@@ -807,11 +797,17 @@ describe('readEventRelations', () => {
       widgetApi.readEventRelations('event-1', {
         limit: 1,
         from: '1',
+        direction: 'f',
       })
     ).resolves.toEqual({
-      originalEvent: expect.objectContaining({ event_id: 'event-1' }),
       chunk: [expect.objectContaining({ event_id: 'event-2' })],
       nextToken: undefined,
     });
+  });
+
+  it('should reject if the referenced event does not exist', async () => {
+    await expect(
+      widgetApi.readEventRelations('not-existent-event')
+    ).rejects.toThrow('Unexpected error while reading relations');
   });
 });
