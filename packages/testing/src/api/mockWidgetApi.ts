@@ -385,6 +385,11 @@ export function mockWidgetApi({
 
   widgetApi.readEventRelations.mockImplementation(
     async (eventId, opts = {}) => {
+      // relation targets must exist
+      if (!roomEvents.some((ev) => ev.event_id === eventId)) {
+        throw new Error('Unexpected error while reading relations');
+      }
+
       const events = roomEvents
         .concat(stateEvents)
         .filter((ev: RoomEvent) => {

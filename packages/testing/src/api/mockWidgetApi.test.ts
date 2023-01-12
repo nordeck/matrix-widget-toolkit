@@ -804,4 +804,10 @@ describe('readEventRelations', () => {
       nextToken: undefined,
     });
   });
+
+  it('should reject if the referenced event does not exist', async () => {
+    await expect(
+      widgetApi.readEventRelations('not-existent-event')
+    ).rejects.toThrow('Unexpected error while reading relations');
+  });
 });
