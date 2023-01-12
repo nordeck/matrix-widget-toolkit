@@ -154,23 +154,6 @@ describe('getMessage', () => {
     });
   });
 
-  it('should return error if event is missing', async () => {
-    const store = createStore({ widgetApi });
-
-    await expect(
-      store
-        .dispatch(
-          roomMessagesApi.endpoints.getMessage.initiate({
-            eventId: '$an-event-id',
-          })
-        )
-        .unwrap()
-    ).rejects.toEqual({
-      name: 'NotFound',
-      message: 'The event was not found',
-    });
-  });
-
   it('should return error if read fails', async () => {
     widgetApi.readEventRelations.mockRejectedValue(
       new Error('Unexpected error')

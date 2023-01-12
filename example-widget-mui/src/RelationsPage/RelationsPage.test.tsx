@@ -16,7 +16,7 @@
 
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { render, screen, waitFor, within } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { ComponentType, PropsWithChildren } from 'react';
@@ -141,12 +141,6 @@ describe('<RelationsPage />', () => {
         pressed: false,
       })
     ).toBeInTheDocument();
-    expect(
-      within(listbox).getByRole('button', {
-        name: 'Redact this message',
-        description: 'Hey, how are you? @user-id',
-      })
-    ).toBeInTheDocument();
   });
 
   it('Should add a reaction', async () => {
@@ -185,32 +179,6 @@ describe('<RelationsPage />', () => {
     });
   });
 
-  it('Should delete an event', async () => {
-    render(<RelationsPage />, { wrapper });
-
-    await userEvent.click(
-      await screen.findByRole('button', {
-        name: 'Redact this message',
-        description: 'My message @user-id',
-      })
-    );
-
-    const listitem = await screen.findByRole('listitem', {
-      name: 'Error loading event $message-event-id',
-    });
-
-    await userEvent.click(
-      screen.getByRole('button', {
-        name: 'Remove from collection',
-        description: 'Error loading event $message-event-id',
-      })
-    );
-
-    await waitFor(() => {
-      expect(listitem).not.toBeInTheDocument();
-    });
-  });
-
   it('should not be able to send a message if the permission for the state event is missing', async () => {
     widgetApi.mockSendStateEvent({
       type: 'm.room.power_levels',
@@ -227,59 +195,6 @@ describe('<RelationsPage />', () => {
     await expect(
       screen.findByText("You don't have the permission to send new messages.")
     ).resolves.toBeInTheDocument();
-  });
-
-  it('should not be able to redact a message if the permission for the redaction is missing', async () => {
-    render(<RelationsPage />, { wrapper });
-
-    const redactionButton = await screen.findByRole('button', {
-      name: 'Redact this message',
-      description: 'My message @user-id',
-    });
-
-    act(() => {
-      widgetApi.mockSendStateEvent({
-        type: 'm.room.power_levels',
-        sender: '@user-id',
-        state_key: '',
-        content: { users_default: 50, redact: 100 },
-        origin_server_ts: 0,
-        event_id: '$event-id',
-        room_id: '!room-id',
-      });
-    });
-
-    expect(redactionButton).not.toBeInTheDocument();
-  });
-
-  it('should not be able to delete a message from the collection of the if the permission for the state event is missing', async () => {
-    render(<RelationsPage />, { wrapper });
-
-    await userEvent.click(
-      await screen.findByRole('button', {
-        name: 'Redact this message',
-        description: 'My message @user-id',
-      })
-    );
-
-    const removalButton = await screen.findByRole('button', {
-      name: 'Remove from collection',
-      description: 'Error loading event $message-event-id',
-    });
-
-    act(() => {
-      widgetApi.mockSendStateEvent({
-        type: 'm.room.power_levels',
-        sender: '@user-id',
-        state_key: '',
-        content: { users_default: 0 },
-        origin_server_ts: 0,
-        event_id: '$event-id',
-        room_id: '!room-id',
-      });
-    });
-
-    expect(removalButton).not.toBeInTheDocument();
   });
 
   it('should not be able to react if the permissions is missing', async () => {

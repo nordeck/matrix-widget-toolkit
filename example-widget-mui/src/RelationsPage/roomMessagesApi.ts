@@ -100,7 +100,7 @@ export const roomMessagesApi = baseApi.injectEndpoints({
     /** Receive details about the room message with a specific id */
     getMessage: builder.query<
       {
-        event: RoomEvent<RoomMessageEvent>;
+        event?: RoomEvent<RoomMessageEvent>;
         reactions: RoomEvent<ReactionEvent>[];
       },
       { eventId: string }
@@ -110,7 +110,6 @@ export const roomMessagesApi = baseApi.injectEndpoints({
         const { widgetApi } = extra as ThunkExtraArgument;
 
         let from: string | undefined = undefined;
-        let event: RoomEvent<RoomMessageEvent> | undefined = undefined;
         const reactions: RoomEvent<ReactionEvent>[] = [];
 
         try {
@@ -122,34 +121,13 @@ export const roomMessagesApi = baseApi.injectEndpoints({
               eventType: 'm.reaction',
             });
 
-            if (
-              result.originalEvent &&
-              isValidRoomMessageEvent(result.originalEvent)
-            ) {
-              event = result.originalEvent;
-            }
-
             reactions.push(...result.chunk.filter(isValidReactionEvent));
 
             // typescript doesn't like circular types
             from = result.nextToken as string | undefined;
           } while (from !== undefined);
 
-          if (!event) {
-            return {
-              error: {
-                name: 'NotFound',
-                message: 'The event was not found',
-              },
-            };
-          }
-
-          return {
-            data: {
-              event,
-              reactions,
-            },
-          };
+          return { data: { reactions } };
         } catch (e) {
           return {
             error: {
@@ -201,11 +179,23 @@ export const roomMessagesApi = baseApi.injectEndpoints({
           }
         );
 
+        const messageSubscription = widgetApi
+          .observeRoomEvents(ROOM_EVENT_ROOM_MESSAGE)
+          .pipe(filter(isValidRoomMessageEvent))
+          .subscribe(async (event) => {
+            if (eventId === event.event_id) {
+              updateCachedData((data) => {
+                data.event = event;
+              });
+            }
+          });
+
         // wait until subscription is cancelled
         await cacheEntryRemoved;
 
         subscription.unsubscribe();
         redactSubscription.unsubscribe();
+        messageSubscription.unsubscribe();
       },
     }),
 

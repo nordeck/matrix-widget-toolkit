@@ -57,6 +57,7 @@ describe('WidgetApiImpl', () => {
       closeModalWidget: jest.fn(),
       navigateTo: jest.fn(),
       requestOpenIDConnectToken: jest.fn(),
+      readEventRelations: jest.fn(),
       transport: {
         reply: jest.fn(),
       },
@@ -2048,6 +2049,60 @@ describe('WidgetApiImpl', () => {
 
       await expect(widgetApi.requestOpenIDConnectToken()).resolves.toEqual(
         tokenNew
+      );
+    });
+  });
+
+  describe('readEventRelations', () => {
+    it('should read event relations', async () => {
+      matrixWidgetApi.readEventRelations.mockResolvedValue({
+        chunk: [],
+        original_event: mockRoomEvent(),
+        next_batch: 'batch',
+      });
+
+      await expect(
+        widgetApi.readEventRelations('$event-id', {
+          roomId: '!room-id',
+          limit: 5,
+          from: 'from-token',
+          relationType: 'm.reference',
+          eventType: 'm.room.message',
+          direction: 'f',
+        })
+      ).resolves.toEqual({
+        chunk: [],
+        nextToken: 'batch',
+      });
+      expect(matrixWidgetApi.readEventRelations).toBeCalledWith(
+        '$event-id',
+        '!room-id',
+        'm.reference',
+        'm.room.message',
+        5,
+        'from-token',
+        undefined,
+        'f'
+      );
+    });
+
+    it('should reject if reading the relations room event fails', async () => {
+      matrixWidgetApi.readEventRelations.mockRejectedValue(
+        new Error('Power to low')
+      );
+
+      await expect(
+        widgetApi.readEventRelations('$event-id')
+      ).rejects.toThrowError('Power to low');
+      expect(matrixWidgetApi.readEventRelations).toBeCalledWith(
+        '$event-id',
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        undefined
       );
     });
   });

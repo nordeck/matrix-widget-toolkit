@@ -399,10 +399,6 @@ export function mockWidgetApi({
           return opts.direction === 'f' ? compare : -compare;
         });
 
-      const originalEvent = events.find((ev) => {
-        return ev.event_id === eventId;
-      });
-
       const relatedEvents = events
         .filter(isValidEventWithRelatesTo)
         .filter((ev) => {
@@ -424,7 +420,6 @@ export function mockWidgetApi({
       const end = skip + (opts.limit ?? 50);
 
       return {
-        originalEvent: cloneDeep(originalEvent),
         chunk: relatedEvents.slice(skip, end).map(cloneDeep),
         nextToken: end < relatedEvents.length ? end.toString() : undefined,
       };

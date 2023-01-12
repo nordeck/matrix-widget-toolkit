@@ -27,7 +27,6 @@ import { useWidgetApi } from '@matrix-widget-toolkit/react';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
-import DeleteIcon from '@mui/icons-material/Delete';
 import ErrorIcon from '@mui/icons-material/Error';
 import {
   Alert,
@@ -204,9 +203,7 @@ const MessageEntry = ({
   canReact: boolean;
   canRedact: boolean;
 }) => {
-  const { data, error, isLoading, refetch } = useGetMessageQuery({ eventId });
-  const [sendRedaction, { isLoading: isLoadingRedaction }] =
-    useSendRedactionMutation();
+  const { data, error, isLoading } = useGetMessageQuery({ eventId });
   const [dropMessage, { isLoading: isLoadingDropMessage }] =
     useDropMessageFromCollectionMutation();
 
@@ -262,27 +259,13 @@ const MessageEntry = ({
     <ListItem
       sx={{ flexDirection: 'row-reverse' }}
       aria-labelledby={`${messageId} ${authorId}`}
-      secondaryAction={
-        canEdit && (
-          <Tooltip title="Redact this message">
-            <IconButton
-              onClick={async () => {
-                await sendRedaction({ eventId });
-                refetch();
-              }}
-              disabled={isLoadingRedaction}
-              aria-describedby={`${messageId} ${authorId}`}
-            >
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
-        )
-      }
     >
       <ListItemText
-        primary={data?.event.content.body}
+        primary={
+          data?.event?.content.body ?? `Unknown Message (ID: ${eventId})`
+        }
         primaryTypographyProps={{ id: messageId }}
-        secondary={data?.event.sender}
+        secondary={data?.event?.sender ?? 'Unknown Author'}
         secondaryTypographyProps={{ id: authorId }}
       />
       <ListItemIcon>
