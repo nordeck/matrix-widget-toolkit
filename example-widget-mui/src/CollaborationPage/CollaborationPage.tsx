@@ -88,6 +88,7 @@ function useEditor(): [state: CollaborativeDoc, action: DispatchWithoutAction] {
   const docRef = useRef<Automerge.Doc<CollaborativeDoc>>(initialDoc);
   const [doc, setDoc] = useState<CollaborativeDoc>(docRef.current);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const boardcastDoc = useCallback(
     throttle(() => {
       const doc = docRef.current;
@@ -163,7 +164,6 @@ function useEditor(): [state: CollaborativeDoc, action: DispatchWithoutAction] {
     const changedDoc = Automerge.change(doc, (doc) => {
       (doc.count as unknown as { increment: () => void }).increment();
       doc.text.insertAt(0, ...doc.count.toString().split(''), ' ');
-      doc.binary = new Uint8Array([1, 3, 3, 7]);
     });
     const changes = Automerge.getLastLocalChange(changedDoc);
 
