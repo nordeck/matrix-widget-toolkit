@@ -65,7 +65,7 @@
     "@types/react-dom": "^17.0.16",
     "i18next-parser": "^7.2.0",
     "jest-axe": "^7.0.0",
-    "msw": "^0.49.1",
+    "msw": "^0.49.2",
     "typescript": "^4.8.4"
   }
 }
