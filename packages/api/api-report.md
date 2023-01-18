@@ -164,8 +164,8 @@ export type RoomEventOrNewContent<T = unknown> = RoomEvent<T | NewContentRelates
 // @public
 export type RoomMemberStateEventContent = {
     membership: MembershipState;
-    displayname?: string;
-    avatar_url?: string;
+    displayname?: string | null;
+    avatar_url?: string | null;
 };
 
 // @public

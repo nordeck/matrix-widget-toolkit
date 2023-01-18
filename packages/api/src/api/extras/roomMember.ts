@@ -40,16 +40,16 @@ export type RoomMemberStateEventContent = {
   /**
    * The display name for this user, if any.
    */
-  displayname?: string;
+  displayname?: string | null;
 
   /**
    * The avatar URL for this user, if any.
    */
-  avatar_url?: string;
+  avatar_url?: string | null;
 };
 
-function isStringOrUndefined(value: unknown): boolean {
-  return value === undefined || typeof value === 'string';
+function isStringUndefinedOrNull(value: unknown): boolean {
+  return value === undefined || value === null || typeof value === 'string';
 }
 
 /**
@@ -74,11 +74,13 @@ export function isValidRoomMemberStateEvent(
     return false;
   }
 
-  if (!isStringOrUndefined(content.displayname)) {
+  if (!isStringUndefinedOrNull(content.displayname)) {
     return false;
   }
 
-  if (!isStringOrUndefined(content.avatar_url)) {
+  // the avatar_url shouldn't be null, but some implementations
+  // set it as a valid value
+  if (!isStringUndefinedOrNull(content.avatar_url)) {
     return false;
   }
 
