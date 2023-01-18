@@ -15,7 +15,9 @@ export type MockedWidgetApi = {
     stop: () => void;
     mockSendRoomEvent<T = unknown>(event: RoomEvent<T>): RoomEvent<T>;
     mockSendStateEvent<T = unknown>(event: StateEvent<T>): StateEvent<T>;
-    clearRoomEvents(): void;
+    clearRoomEvents(opts?: {
+        type?: string;
+    }): void;
     clearStateEvents(opts?: {
         type?: string;
     }): void;

@@ -63,8 +63,11 @@ export type MockedWidgetApi = {
   /**
    * Removes all room events from the mock. Future reads of room events will be
    * empty.
+   *
+   * @param opts - Options for deleting.
+   *               Use `type` to restrict which events are deleted.
    */
-  clearRoomEvents(): void;
+  clearRoomEvents(opts?: { type?: string }): void;
 
   /**
    * Removes all state events from the mock. Future reads of state events will be
@@ -110,7 +113,7 @@ export function mockWidgetApi({
   widgetId?: string;
 } = {}): MockedWidgetApi {
   const roomEventSubject = new Subject<RoomEvent>();
-  const roomEvents: RoomEvent[] = [];
+  let roomEvents: RoomEvent[] = [];
   let stateEvents: StateEvent[] = [];
   const stateEventSubject = new Subject<StateEvent>();
   const stopSubject = new Subject<void>();
@@ -144,8 +147,12 @@ export function mockWidgetApi({
     return event;
   };
 
-  const clearRoomEvents = () => {
-    roomEvents.length = 0;
+  const clearRoomEvents = (opts?: { type?: string }) => {
+    if (typeof opts?.type === 'string') {
+      roomEvents = roomEvents.filter((ev) => ev.type !== opts.type);
+    } else {
+      roomEvents.length = 0;
+    }
   };
 
   const clearStateEvents = (opts?: { type?: string }) => {
