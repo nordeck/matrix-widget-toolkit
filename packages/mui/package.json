@@ -1,6 +1,6 @@
 {
   "name": "@matrix-widget-toolkit/mui",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A customized material-ui theme that matches the style of the Element Matrix client",
   "author": "Nordeck IT + Consulting GmbH",
   "license": "Apache-2.0",
@@ -44,8 +44,8 @@
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.3",
     "@mui/utils": "^5.11.2",
-    "@matrix-widget-toolkit/api": "^2.0.0",
-    "@matrix-widget-toolkit/react": "^1.0.3",
+    "@matrix-widget-toolkit/api": "^3.0.0",
+    "@matrix-widget-toolkit/react": "^1.0.4",
     "i18next": "^22.0.4",
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-resources-to-backend": "^1.0.0",
