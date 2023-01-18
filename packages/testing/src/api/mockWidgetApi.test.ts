@@ -222,6 +222,17 @@ describe('receiveRoomEvents', () => {
       widgetApi.receiveRoomEvents('com.example.test1')
     ).resolves.toEqual([]);
   });
+
+  it('should not receive events after clearing a selected type', async () => {
+    widgetApi.clearRoomEvents({ type: 'com.example.test1' });
+
+    await expect(
+      widgetApi.receiveRoomEvents('com.example.test1')
+    ).resolves.toEqual([]);
+    await expect(
+      widgetApi.receiveRoomEvents('com.example.test2')
+    ).resolves.toEqual([expect.objectContaining({ event_id: 'event-2' })]);
+  });
 });
 
 describe('observeRoomEvents', () => {

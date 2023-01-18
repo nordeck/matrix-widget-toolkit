@@ -36,6 +36,24 @@ describe('isValidRoomMemberStateEvent', () => {
     expect(isValidRoomMemberStateEvent(event)).toEqual(true);
   });
 
+  it('should permit null values', () => {
+    const event: StateEvent = {
+      content: {
+        membership: 'join',
+        displayname: null,
+        avatar_url: null,
+      },
+      event_id: 'event-id',
+      origin_server_ts: 0,
+      room_id: 'room-id',
+      sender: 'user-id',
+      state_key: '',
+      type: 'm.room.member',
+    };
+
+    expect(isValidRoomMemberStateEvent(event)).toEqual(true);
+  });
+
   it('should permit additional properties', () => {
     const event: StateEvent = {
       content: {
