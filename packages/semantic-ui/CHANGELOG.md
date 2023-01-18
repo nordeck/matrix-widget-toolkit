@@ -1,5 +1,13 @@
 # `@matrix-widget-toolkit/semantic-ui`
 
+## 1.0.4
+
+### Patch Changes
+
+- Updated dependencies [df0fef9]
+  - @matrix-widget-toolkit/api@3.0.0
+  - @matrix-widget-toolkit/react@1.0.4
+
 ## 1.0.3
 
 ### Patch Changes

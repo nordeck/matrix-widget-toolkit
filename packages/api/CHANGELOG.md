@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/api`
 
+## 3.0.0
+
+### Major Changes
+
+- df0fef9: Permit `null` values for the `displayname` and `avatar_url` fields in the `m.room.member` event.
+
 ## 2.0.0
 
 ### Major Changes

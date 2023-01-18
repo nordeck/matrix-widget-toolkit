@@ -1,5 +1,16 @@
 # `@matrix-widget-toolkit/testing`
 
+## 2.1.0
+
+### Minor Changes
+
+- 7759822: Support a type filter for `clearRoomEvents()`.
+
+### Patch Changes
+
+- Updated dependencies [df0fef9]
+  - @matrix-widget-toolkit/api@3.0.0
+
 ## 2.0.0
 
 ### Major Changes
