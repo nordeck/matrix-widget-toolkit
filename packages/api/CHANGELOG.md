@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/api`
 
+## 3.0.1
+
+### Patch Changes
+
+- 2dfbc7d: Fix a rare issue where `sendStateEvent` and `sendRoomEvent` return the wrong event.
+
 ## 3.0.0
 
 ### Major Changes
