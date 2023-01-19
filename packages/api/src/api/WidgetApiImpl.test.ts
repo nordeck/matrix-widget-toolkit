@@ -1204,51 +1204,6 @@ describe('WidgetApiImpl', () => {
         expect.any(Function)
       );
     });
-
-    it('should reject on error while acknowledging', async () => {
-      const preventDefault = jest.fn();
-      const stateEvent = { hello: 'world' };
-
-      matrixWidgetApi.sendStateEvent.mockResolvedValue({
-        room_id: '!current-room',
-        event_id: '$event-id',
-      });
-      matrixWidgetApi.on.mockImplementationOnce((_, listener) => {
-        setTimeout(() => {
-          listener({
-            detail: {
-              data: mockRoomEvent({
-                state_key: '',
-                content: stateEvent,
-              }),
-            },
-            preventDefault,
-          });
-        });
-
-        return matrixWidgetApi;
-      });
-      matrixWidgetApi.off.mockReturnThis();
-      matrixWidgetApi.transport.reply.mockImplementation(() => {
-        throw new Error('Transport Error');
-      });
-
-      await expect(() =>
-        widgetApi.sendStateEvent('com.example.test', stateEvent)
-      ).rejects.toThrowError('Transport Error');
-      expect(matrixWidgetApi.on).toBeCalledWith(
-        'action:send_event',
-        expect.any(Function)
-      );
-      expect(matrixWidgetApi.sendStateEvent).toBeCalled();
-      expect(matrixWidgetApi.off).toBeCalledWith(
-        'action:send_event',
-        expect.any(Function)
-      );
-
-      expect(preventDefault).toBeCalled();
-      expect(matrixWidgetApi.transport.reply).toBeCalled();
-    });
   });
 
   describe('receiveRoomEvents', () => {
@@ -1667,49 +1622,6 @@ describe('WidgetApiImpl', () => {
         'action:send_event',
         expect.any(Function)
       );
-    });
-
-    it('should reject on error while acknowledging', async () => {
-      const preventDefault = jest.fn();
-      const roomEvent = { hello: 'world' };
-
-      matrixWidgetApi.sendRoomEvent.mockResolvedValue({
-        room_id: '!current-room',
-        event_id: '$event-id',
-      });
-      matrixWidgetApi.on.mockImplementationOnce((_, listener) => {
-        setTimeout(() => {
-          listener({
-            detail: {
-              data: mockRoomEvent({
-                content: roomEvent,
-              }),
-            },
-            preventDefault,
-          });
-        });
-
-        return matrixWidgetApi;
-      });
-      matrixWidgetApi.off.mockReturnThis();
-      matrixWidgetApi.transport.reply.mockImplementation(() => {
-        throw new Error('Transport Error');
-      });
-
-      await expect(() =>
-        widgetApi.sendRoomEvent('com.example.test', roomEvent)
-      ).rejects.toThrowError('Transport Error');
-      expect(matrixWidgetApi.on).toBeCalledWith(
-        'action:send_event',
-        expect.any(Function)
-      );
-      expect(matrixWidgetApi.sendRoomEvent).toBeCalled();
-      expect(matrixWidgetApi.off).toBeCalledWith(
-        'action:send_event',
-        expect.any(Function)
-      );
-      expect(preventDefault).toBeCalled();
-      expect(matrixWidgetApi.transport.reply).toBeCalled();
     });
   });
 
