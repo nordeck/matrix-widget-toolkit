@@ -41,6 +41,7 @@ import {
   map,
   mergeAll,
   Observable,
+  ReplaySubject,
   share,
   throwError,
 } from 'rxjs';
@@ -154,6 +155,11 @@ export class WidgetApiImpl implements WidgetApi {
       eventName,
       (event: CustomEvent<IWidgetApiRequest>) => {
         event.preventDefault();
+        try {
+          this.matrixWidgetApi.transport.reply(event.detail, {});
+        } catch (_) {
+          // Ignore errors while replying
+        }
         return event;
       }
     ).pipe(share());
@@ -379,8 +385,6 @@ export class WidgetApiImpl implements WidgetApi {
           (stateKey === undefined || matrixEvent.state_key === stateKey) &&
           isInRoom(matrixEvent, currentRoomId, roomIds)
         ) {
-          this.matrixWidgetApi.transport.reply(event.detail, {});
-
           return event.detail.data as StateEvent<T>;
         }
 
@@ -398,44 +402,35 @@ export class WidgetApiImpl implements WidgetApi {
     content: T,
     { roomId, stateKey = '' }: { roomId?: string; stateKey?: string } = {}
   ): Promise<StateEvent<T>> {
-    const firstEvent$ = this.events$.pipe(
-      map((event) => {
-        const matrixEvent = event.detail.data as unknown as IRoomEvent;
-        if (
-          matrixEvent.sender === this.widgetParameters.userId &&
-          matrixEvent.state_key !== undefined &&
-          matrixEvent.type === eventType &&
-          (!roomId || matrixEvent.room_id === roomId)
-        ) {
-          this.matrixWidgetApi.transport.reply(event.detail, {});
+    const subject = new ReplaySubject<CustomEvent<IWidgetApiRequest>>();
+    const subscription = this.events$.subscribe((e) => subject.next(e));
 
-          return event.detail.data as StateEvent<T>;
-        }
+    try {
+      const { event_id, room_id } = await this.matrixWidgetApi.sendStateEvent(
+        eventType,
+        stateKey,
+        content,
+        roomId
+      );
+      // TODO: Why do we even return the event, not just the event id, we never
+      // need it.
+      const event = await firstValueFrom(
+        subject.pipe(
+          filter((event) => {
+            const matrixEvent = event.detail.data as unknown as IRoomEvent;
 
-        return undefined;
-      }),
-      filter(isDefined),
-      first()
-    );
-
-    return new Promise(async (resolve, reject) => {
-      const subscription = firstEvent$.subscribe({
-        next: (event) => resolve(event),
-        error: (err) => reject(err),
-      });
-
-      try {
-        await this.matrixWidgetApi.sendStateEvent(
-          eventType,
-          stateKey,
-          content,
-          roomId
-        );
-      } catch (err) {
-        subscription.unsubscribe();
-        reject(err);
-      }
-    });
+            return (
+              matrixEvent.event_id === event_id &&
+              matrixEvent.room_id === room_id
+            );
+          }),
+          map((event) => event.detail.data as StateEvent<T>)
+        )
+      );
+      return event;
+    } finally {
+      subscription.unsubscribe();
+    }
   }
 
   /** {@inheritDoc WidgetApi.receiveRoomEvents} */
@@ -484,8 +479,6 @@ export class WidgetApiImpl implements WidgetApi {
           (!messageType || matrixEvent.content.msgtype === messageType) &&
           isInRoom(matrixEvent, currentRoomId, roomIds)
         ) {
-          this.matrixWidgetApi.transport.reply(event.detail, {});
-
           return event.detail.data as RoomEvent<T>;
         }
 
@@ -503,39 +496,34 @@ export class WidgetApiImpl implements WidgetApi {
     content: T,
     { roomId }: { roomId?: string } = {}
   ): Promise<RoomEvent<T>> {
-    const firstEvents$ = this.events$.pipe(
-      map((event) => {
-        const matrixEvent = event.detail.data as unknown as IRoomEvent;
-        if (
-          matrixEvent.sender === this.widgetParameters.userId &&
-          matrixEvent.state_key === undefined &&
-          matrixEvent.type === eventType &&
-          (!roomId || matrixEvent.room_id === roomId)
-        ) {
-          this.matrixWidgetApi.transport.reply(event.detail, {});
+    const subject = new ReplaySubject<CustomEvent<IWidgetApiRequest>>();
+    const subscription = this.events$.subscribe((e) => subject.next(e));
 
-          return event.detail.data as RoomEvent<T>;
-        }
+    try {
+      const { event_id, room_id } = await this.matrixWidgetApi.sendRoomEvent(
+        eventType,
+        content,
+        roomId
+      );
+      // TODO: Why do we even return the event, not just the event id, we never
+      // need it.
+      const event = await firstValueFrom(
+        subject.pipe(
+          filter((event) => {
+            const matrixEvent = event.detail.data as unknown as IRoomEvent;
 
-        return undefined;
-      }),
-      filter(isDefined),
-      first()
-    );
-
-    return new Promise(async (resolve, reject) => {
-      const subscription = firstEvents$.subscribe({
-        next: (event) => resolve(event),
-        error: (err) => reject(err),
-      });
-
-      try {
-        await this.matrixWidgetApi.sendRoomEvent(eventType, content, roomId);
-      } catch (err) {
-        subscription.unsubscribe();
-        reject(err);
-      }
-    });
+            return (
+              matrixEvent.event_id === event_id &&
+              matrixEvent.room_id === room_id
+            );
+          }),
+          map((event) => event.detail.data as RoomEvent<T>)
+        )
+      );
+      return event;
+    } finally {
+      subscription.unsubscribe();
+    }
   }
 
   /** {@inheritDoc WidgetApi.readEventRelations} */
