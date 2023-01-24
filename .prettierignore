@@ -3,3 +3,6 @@ coverage/
 lib/
 node_modules/
 api-report.md
+
+# Ignore the helm chart
+charts/
