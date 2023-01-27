@@ -1,0 +1,7 @@
+apiVersion: v2
+name: example-widget-mui
+description: An example that showcases the features of the Matrix Widget Toolkit
+type: application
+version: 0.1.0
+appVersion: "0.0.0"
+home: https://github.com/nordeck/matrix-widget-toolkit
