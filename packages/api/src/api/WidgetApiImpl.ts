@@ -54,6 +54,7 @@ import { generateWidgetRegistrationUrl } from './registration';
 import {
   RoomEvent,
   StateEvent,
+  ToDeviceMessageEvent,
   TurnServer,
   WidgetApi,
   WidgetConfig,
@@ -130,6 +131,9 @@ export class WidgetApiImpl implements WidgetApi {
     | { openIdToken: IOpenIDCredentials; expiresAt: number }
     | undefined;
   private readonly events$: Observable<CustomEvent<IWidgetApiRequest>>;
+  private readonly toDeviceMessages$: Observable<
+    CustomEvent<IWidgetApiRequest>
+  >;
   private readonly initialCapabilities: Array<
     WidgetEventCapability | Capability
   >;
@@ -149,11 +153,9 @@ export class WidgetApiImpl implements WidgetApi {
     public readonly widgetParameters: WidgetParameters,
     { capabilities = [], supportStandalone = false }: WidgetApiOptions = {}
   ) {
-    const eventName = `action:${WidgetApiToWidgetAction.SendEvent}`;
-
     this.events$ = fromEvent(
       this.matrixWidgetApi,
-      eventName,
+      `action:${WidgetApiToWidgetAction.SendEvent}`,
       (event: CustomEvent<IWidgetApiRequest>) => {
         event.preventDefault();
         try {
@@ -164,6 +166,21 @@ export class WidgetApiImpl implements WidgetApi {
         return event;
       }
     ).pipe(share());
+
+    this.toDeviceMessages$ = fromEvent(
+      this.matrixWidgetApi,
+      'action:send_to_device',
+      (event: CustomEvent<IWidgetApiRequest>) => {
+        event.preventDefault();
+        try {
+          matrixWidgetApi.transport.reply(event.detail, {});
+        } catch (_) {
+          // Ignore errors while replying
+        }
+        return event;
+      }
+    ).pipe(share());
+
     this.initialCapabilities = [
       ...capabilities,
 
@@ -557,6 +574,29 @@ export class WidgetApiImpl implements WidgetApi {
       chunk,
       nextToken: next_batch ?? undefined,
     };
+  }
+
+  /** {@inheritDoc WidgetApi.sendToDeviceMessage} */
+  async sendToDeviceMessage<T>(
+    eventType: string,
+    encrypted: boolean,
+    content: { [userId: string]: { [deviceId: string | '*']: T } }
+  ): Promise<void> {
+    await this.matrixWidgetApi.sendToDevice(
+      eventType,
+      encrypted,
+      content as { [userId: string]: { [deviceId: string]: object } }
+    );
+  }
+
+  /** {@inheritDoc WidgetApi.observeToDeviceMessages} */
+  observeToDeviceMessages<T>(
+    eventType: string
+  ): Observable<ToDeviceMessageEvent<T>> {
+    return this.toDeviceMessages$.pipe(
+      map((e) => e.detail.data as ToDeviceMessageEvent<T>),
+      filter((e) => e.type === eventType)
+    );
   }
 
   /** {@inheritDoc WidgetApi.openModal} */

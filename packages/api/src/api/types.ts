@@ -101,6 +101,16 @@ export type RoomEvent<T = unknown> = Omit<
 };
 
 /**
+ * Generic type for to device message events.
+ */
+export type ToDeviceMessageEvent<T = unknown> = {
+  type: string;
+  sender: string;
+  encrypted: boolean;
+  content: T;
+};
+
+/**
  * Configuration of a widget, including data passed to it.
  */
 export type WidgetConfig<T extends IWidgetApiRequestData> = Omit<
@@ -389,6 +399,31 @@ export type WidgetApi = {
     chunk: Array<RoomEvent | StateEvent>;
     nextToken?: string;
   }>;
+
+  /**
+   * Send a message to a device of a user (or multiple users / devices).
+   *
+   * @param eventType - The type of the event.
+   * @param encrypted - Whether the event should be encrypted.
+   * @param content - The content to send. This is a map of user ids, to device
+   *                  ids, to the content that should be send. It is possible to
+   *                  specify a `'*'` device, to send the content to all devices
+   *                  of a user.
+   */
+  sendToDeviceMessage<T>(
+    eventType: string,
+    encrypted: boolean,
+    content: { [userId: string]: { [deviceId: string | '*']: T } }
+  ): Promise<void>;
+
+  /**
+   * Observes all to device messages send to the current device.
+   *
+   * @param eventType - The type of the event.
+   */
+  observeToDeviceMessages<T>(
+    eventType: string
+  ): Observable<ToDeviceMessageEvent<T>>;
 
   /**
    * Open a new modal, wait until the modal closes, and return the result.
