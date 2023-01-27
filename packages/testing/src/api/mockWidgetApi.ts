@@ -25,7 +25,7 @@ import {
 } from '@matrix-widget-toolkit/api';
 import { cloneDeep, isEqual, uniqueId } from 'lodash';
 import { Symbols } from 'matrix-widget-api';
-import { concat, filter, from, map, NEVER, Subject, takeUntil } from 'rxjs';
+import { concat, filter, from, map, NEVER, of, Subject, takeUntil } from 'rxjs';
 
 /**
  * A mock of `WidgetApi` with some additional methods.
@@ -189,6 +189,16 @@ export function mockWidgetApi({
     requestOpenIDConnectToken: jest.fn().mockResolvedValue({}),
     setModalButtonEnabled: jest.fn().mockResolvedValue(undefined),
     readEventRelations: jest.fn(),
+    observeTurnServers: jest.fn().mockReturnValue(
+      concat(
+        of({
+          urls: ['turn:turn.matrix.org'],
+          username: 'user',
+          credential: 'credential',
+        }),
+        NEVER
+      )
+    ),
   };
 
   widgetApi.receiveRoomEvents.mockImplementation(async (type, options) => {

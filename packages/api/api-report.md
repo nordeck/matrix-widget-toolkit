@@ -181,6 +181,13 @@ export type StateEvent<T = unknown> = Omit<IRoomEvent, 'content' | 'unsigned' | 
 };
 
 // @public
+export type TurnServer = {
+    urls: string[];
+    username: string;
+    credential: string;
+};
+
+// @public
 export const WIDGET_CAPABILITY_NAVIGATE = "org.matrix.msc2931.navigate";
 
 // @public
@@ -236,6 +243,7 @@ export type WidgetApi = {
     closeModal<T extends IModalWidgetReturnData>(data?: T): Promise<void>;
     navigateTo(uri: string): Promise<void>;
     requestOpenIDConnectToken(): Promise<IOpenIDCredentials>;
+    observeTurnServers(): Observable<TurnServer>;
 };
 
 // @public
@@ -261,6 +269,7 @@ export class WidgetApiImpl implements WidgetApi {
         stateKey?: string;
         roomIds?: string[] | Symbols.AnyRoom;
     }): Observable<StateEvent<T>>;
+    observeTurnServers(): Observable<TurnServer>;
     openModal<T extends Record<string, unknown> = Record<string, unknown>, U extends IModalWidgetCreateData = IModalWidgetCreateData>(pathName: string, name: string, options?: {
         buttons?: IModalWidgetOpenRequestDataButton[];
         data?: U;

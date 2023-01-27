@@ -54,6 +54,7 @@ import { generateWidgetRegistrationUrl } from './registration';
 import {
   RoomEvent,
   StateEvent,
+  TurnServer,
   WidgetApi,
   WidgetConfig,
   WidgetParameters,
@@ -704,5 +705,18 @@ export class WidgetApiImpl implements WidgetApi {
       this.cachedOpenIdToken = undefined;
       throw err;
     }
+  }
+
+  /** {@inheritdoc WidgetApi.observeTurnServers} */
+  observeTurnServers(): Observable<TurnServer> {
+    return from(this.matrixWidgetApi.getTurnServers()).pipe(
+      // For some reason a different naming was chosen for the API, but
+      // we already convert them to the right type for WebRTC consumers.
+      map(({ uris, username, password }) => ({
+        urls: uris,
+        username,
+        credential: password,
+      }))
+    );
   }
 }
