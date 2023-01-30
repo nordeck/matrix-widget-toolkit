@@ -57,6 +57,7 @@ describe('WidgetApiImpl', () => {
       closeModalWidget: jest.fn(),
       navigateTo: jest.fn(),
       requestOpenIDConnectToken: jest.fn(),
+      getTurnServers: jest.fn(),
       readEventRelations: jest.fn(),
       transport: {
         reply: jest.fn(),
@@ -1962,6 +1963,43 @@ describe('WidgetApiImpl', () => {
       await expect(widgetApi.requestOpenIDConnectToken()).resolves.toEqual(
         tokenNew
       );
+    });
+  });
+
+  describe('observeTurnServers', () => {
+    it('should return turn servers', async () => {
+      matrixWidgetApi.getTurnServers.mockImplementation(async function* () {
+        yield {
+          uris: ['turn:turn1.example.com'],
+          username: 'user1',
+          password: 'secret1',
+        };
+        yield {
+          uris: ['turn:turn2.example.com'],
+          username: 'user2',
+          password: 'secret2',
+        };
+        await new Promise(() => {
+          /* never resolves */
+        });
+      });
+
+      const turnServersPromise = firstValueFrom(
+        widgetApi.observeTurnServers().pipe(take(2), toArray())
+      );
+
+      await expect(turnServersPromise).resolves.toEqual([
+        {
+          urls: ['turn:turn1.example.com'],
+          username: 'user1',
+          credential: 'secret1',
+        },
+        {
+          urls: ['turn:turn2.example.com'],
+          username: 'user2',
+          credential: 'secret2',
+        },
+      ]);
     });
   });
 

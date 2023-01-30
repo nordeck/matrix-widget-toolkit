@@ -16,7 +16,7 @@
 
 import { redactEvent, StateEvent } from '@matrix-widget-toolkit/api';
 import { Symbols } from 'matrix-widget-api';
-import { bufferTime, firstValueFrom, Observable } from 'rxjs';
+import { bufferTime, firstValueFrom, Observable, take } from 'rxjs';
 import { MockedWidgetApi, mockWidgetApi } from './mockWidgetApi';
 
 let widgetApi: MockedWidgetApi;
@@ -820,5 +820,19 @@ describe('readEventRelations', () => {
     await expect(
       widgetApi.readEventRelations('not-existent-event')
     ).rejects.toThrow('Unexpected error while reading relations');
+  });
+});
+
+describe('observeTurnServers', () => {
+  it('should return mocked turn servers', async () => {
+    const turnServer = await firstValueFrom(
+      widgetApi.observeTurnServers().pipe(take(1))
+    );
+
+    expect(turnServer).toEqual({
+      urls: ['turn:turn.matrix.org'],
+      username: 'user',
+      credential: 'credential',
+    });
   });
 });

@@ -109,6 +109,19 @@ export type WidgetConfig<T extends IWidgetApiRequestData> = Omit<
 > & { data: T };
 
 /**
+ * WebRTC Ice server credentials like turn servers, type is compatible to
+ * `RTCIceServer` from WebRTC.
+ */
+export type TurnServer = {
+  /** One or more URLs for this turn server. */
+  urls: string[];
+  /** Username for this turn server. */
+  username: string;
+  /** Credentials for this turn server. */
+  credential: string;
+};
+
+/**
  * Configuration of the widget in the room.
  */
 export type WidgetRegistration = {
@@ -167,14 +180,14 @@ export type WidgetApi = {
   >;
 
   /**
-   * Rerequests the initialy in the constructor passed capabilities.
+   * Rerequests capabilities initially passed in the constructor.
    *
    * This is useful in case the user denied one or all of them.
    */
   rerequestInitialCapabilities(): Promise<void>;
 
   /**
-   * True, if the initial capabilties passed via the constructor were granted.
+   * True, if the initial capabilities passed via the constructor were granted.
    */
   hasInitialCapabilities(): boolean;
 
@@ -289,7 +302,7 @@ export type WidgetApi = {
    *
    * @param eventType - The type of the event to receive.
    * @param options - Options for receiving the room event.
-   *                  Use `messageType` to receive events with a specifc
+   *                  Use `messageType` to receive events with a specific
    *                  message type.
    *                  Use `roomIds` to receive the state events from other
    *                  rooms.
@@ -312,7 +325,7 @@ export type WidgetApi = {
    *
    * @param eventType - The type of the event to receive.
    * @param options - Options for receiving the room event.
-   *                  Use `messageType` to receive events with a specifc
+   *                  Use `messageType` to receive events with a specific
    *                  message type.
    *                  Use `roomIds` to receive the state events from other
    *                  rooms.
@@ -465,6 +478,12 @@ export type WidgetApi = {
    *          old one expired.
    */
   requestOpenIDConnectToken(): Promise<IOpenIDCredentials>;
+
+  /**
+   * Returns an observable containing WebRTC Ice server credentials, like turn
+   * servers, if available.
+   */
+  observeTurnServers(): Observable<TurnServer>;
 
   // TODO: sendSticker, setAlwaysOnScreen
 };
