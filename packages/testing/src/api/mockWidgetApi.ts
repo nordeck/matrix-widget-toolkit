@@ -110,17 +110,26 @@ export type MockedWidgetApi = {
  *
  * Always `stop()` the mock once you are done using it.
  *
+ * @param opts - Options for creating the widget api.
+ *               Use `userId` to specify who uses the widget
+ *               (default: '\@user-id').
+ *               Use `roomId` to specify the room where the widget is installed
+ *               (default: '!room-id').
+ *               Use `widgetId` to specify the ID of the widget
+ *               (default: 'widget-id').
+ *
  * @remarks Only use for tests
  */
-export function mockWidgetApi({
-  userId = '@user-id',
-  roomId = '!room-id',
-  widgetId = 'widget-id',
-}: {
+export function mockWidgetApi(opts?: {
   userId?: string;
   roomId?: string;
   widgetId?: string;
-} = {}): MockedWidgetApi {
+}): MockedWidgetApi {
+  const {
+    userId = '@user-id',
+    roomId = '!room-id',
+    widgetId = 'widget-id',
+  } = opts ?? {};
   const roomEventSubject = new Subject<RoomEvent>();
   let roomEvents: RoomEvent[] = [];
   let stateEvents: StateEvent[] = [];
