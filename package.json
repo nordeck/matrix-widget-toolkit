@@ -37,7 +37,7 @@
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-notice": "^0.9.10",
     "eslint-plugin-promise": "^6.1.1",
-    "husky": "^8.0.2",
+    "husky": "^8.0.3",
     "lint-staged": "^13.1.0",
     "prettier": "^2.8.3",
     "prettier-plugin-organize-imports": "^3.2.2",
@@ -57,5 +57,6 @@
     "*.{yaml,yml,json,md}": [
       "prettier --write"
     ]
-  }
+  },
+  "dependencies": {}
 }

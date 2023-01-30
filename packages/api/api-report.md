@@ -181,6 +181,21 @@ export type StateEvent<T = unknown> = Omit<IRoomEvent, 'content' | 'unsigned' | 
 };
 
 // @public
+export type ToDeviceMessageEvent<T = unknown> = {
+    type: string;
+    sender: string;
+    encrypted: boolean;
+    content: T;
+};
+
+// @public
+export type TurnServer = {
+    urls: string[];
+    username: string;
+    credential: string;
+};
+
+// @public
 export const WIDGET_CAPABILITY_NAVIGATE = "org.matrix.msc2931.navigate";
 
 // @public
@@ -227,6 +242,12 @@ export type WidgetApi = {
         chunk: Array<RoomEvent | StateEvent>;
         nextToken?: string;
     }>;
+    sendToDeviceMessage<T>(eventType: string, encrypted: boolean, content: {
+        [userId: string]: {
+            [deviceId: string | '*']: T;
+        };
+    }): Promise<void>;
+    observeToDeviceMessages<T>(eventType: string): Observable<ToDeviceMessageEvent<T>>;
     openModal<T extends Record<string, unknown> = Record<string, unknown>, U extends IModalWidgetCreateData = IModalWidgetCreateData>(pathName: string, name: string, options?: {
         buttons?: IModalWidgetOpenRequestDataButton[];
         data?: U;
@@ -236,6 +257,7 @@ export type WidgetApi = {
     closeModal<T extends IModalWidgetReturnData>(data?: T): Promise<void>;
     navigateTo(uri: string): Promise<void>;
     requestOpenIDConnectToken(): Promise<IOpenIDCredentials>;
+    observeTurnServers(): Observable<TurnServer>;
 };
 
 // @public
@@ -261,6 +283,8 @@ export class WidgetApiImpl implements WidgetApi {
         stateKey?: string;
         roomIds?: string[] | Symbols.AnyRoom;
     }): Observable<StateEvent<T>>;
+    observeToDeviceMessages<T>(eventType: string): Observable<ToDeviceMessageEvent<T>>;
+    observeTurnServers(): Observable<TurnServer>;
     openModal<T extends Record<string, unknown> = Record<string, unknown>, U extends IModalWidgetCreateData = IModalWidgetCreateData>(pathName: string, name: string, options?: {
         buttons?: IModalWidgetOpenRequestDataButton[];
         data?: U;
@@ -295,6 +319,11 @@ export class WidgetApiImpl implements WidgetApi {
         roomId?: string;
         stateKey?: string;
     }): Promise<StateEvent<T>>;
+    sendToDeviceMessage<T>(eventType: string, encrypted: boolean, content: {
+        [userId: string]: {
+            [deviceId: string | '*']: T;
+        };
+    }): Promise<void>;
     setModalButtonEnabled(buttonId: ModalButtonID, isEnabled: boolean): Promise<void>;
     readonly widgetId: string;
     readonly widgetParameters: WidgetParameters;

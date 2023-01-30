@@ -21,11 +21,12 @@ import {
   RoomEvent,
   ROOM_EVENT_REDACTION,
   StateEvent,
+  ToDeviceMessageEvent,
   WidgetApi,
 } from '@matrix-widget-toolkit/api';
 import { cloneDeep, isEqual, uniqueId } from 'lodash';
 import { Symbols } from 'matrix-widget-api';
-import { concat, filter, from, map, NEVER, Subject, takeUntil } from 'rxjs';
+import { concat, filter, from, map, NEVER, of, Subject, takeUntil } from 'rxjs';
 
 /**
  * A mock of `WidgetApi` with some additional methods.
@@ -43,7 +44,7 @@ export type MockedWidgetApi = {
    *
    * @param event - the event to store
    * @returns a copy of the event for convenient assertions or manipulations.
-   * @remarks Events added using this method are ignored when verifing calls to
+   * @remarks Events added using this method are ignored when verifying calls to
    *          `sendRoomEvent`.
    */
   mockSendRoomEvent<T = unknown>(event: RoomEvent<T>): RoomEvent<T>;
@@ -55,10 +56,18 @@ export type MockedWidgetApi = {
    *
    * @param event - the event to store
    * @returns a copy of the event for convenient assertions or manipulations.
-   * @remarks Events added using this method are ignored when verifing calls to
+   * @remarks Events added using this method are ignored when verifying calls to
    *          `sendStateEvent`.
    */
   mockSendStateEvent<T = unknown>(event: StateEvent<T>): StateEvent<T>;
+
+  /**
+   * Add a to device message to be returned by `observeToDeviceMessages`.
+   * @param event - the to device message to send
+   */
+  mockSendToDeviceMessage<T = unknown>(
+    event: ToDeviceMessageEvent<T>
+  ): ToDeviceMessageEvent<T>;
 
   /**
    * Removes all room events from the mock. Future reads of room events will be
@@ -90,7 +99,7 @@ export type MockedWidgetApi = {
  * `receiveRoomEvents()`, and `observeRoomEvents()`.
  * Methods like `sendStateEvent()` or `sendRoomEvent()` are jest mock functions
  * which you can verify.
- * You can prepopulate state and room events using `mockSendRoomEvent()` and
+ * You can pre-populate state and room events using `mockSendRoomEvent()` and
  * `mockSendStateEvent()`.
  * You can reset the state of the mock using `clearRoomEvents()` and
  * `clearStateEvents()`, but is still advised not to share the mock instance
@@ -116,6 +125,7 @@ export function mockWidgetApi({
   let roomEvents: RoomEvent[] = [];
   let stateEvents: StateEvent[] = [];
   const stateEventSubject = new Subject<StateEvent>();
+  const toDeviceMessageSubject = new Subject<ToDeviceMessageEvent>();
   const stopSubject = new Subject<void>();
 
   const stop = () => {
@@ -163,6 +173,16 @@ export function mockWidgetApi({
     }
   };
 
+  const mockSendToDeviceMessage = <T = unknown>(
+    message: ToDeviceMessageEvent<T>
+  ) => {
+    const m = cloneDeep(message);
+
+    toDeviceMessageSubject.next(m);
+
+    return m;
+  };
+
   const widgetApi: jest.Mocked<WidgetApi> = {
     widgetId,
     widgetParameters: {
@@ -189,6 +209,18 @@ export function mockWidgetApi({
     requestOpenIDConnectToken: jest.fn().mockResolvedValue({}),
     setModalButtonEnabled: jest.fn().mockResolvedValue(undefined),
     readEventRelations: jest.fn(),
+    sendToDeviceMessage: jest.fn(),
+    observeToDeviceMessages: jest.fn(),
+    observeTurnServers: jest.fn().mockReturnValue(
+      concat(
+        of({
+          urls: ['turn:turn.matrix.org'],
+          username: 'user',
+          credential: 'credential',
+        }),
+        NEVER
+      )
+    ),
   };
 
   widgetApi.receiveRoomEvents.mockImplementation(async (type, options) => {
@@ -438,10 +470,40 @@ export function mockWidgetApi({
     }
   );
 
+  widgetApi.sendToDeviceMessage.mockImplementation(
+    async (type, encrypted, content) => {
+      const ownContent = content[userId];
+
+      if (ownContent) {
+        // Either use wildcard device, or choose any device as we don't have
+        // the concept of devices in the mock right now.
+        const wildcardContent =
+          ownContent['*'] ?? ownContent[Object.keys(ownContent)[0]];
+
+        if (wildcardContent) {
+          mockSendToDeviceMessage({
+            sender: userId,
+            type,
+            encrypted,
+            content: wildcardContent,
+          });
+        }
+      }
+    }
+  );
+
+  widgetApi.observeToDeviceMessages.mockImplementation((type) => {
+    return toDeviceMessageSubject.pipe(
+      filter((e) => e.type === type),
+      takeUntil(stopSubject)
+    );
+  });
+
   return {
     ...widgetApi,
     mockSendRoomEvent,
     mockSendStateEvent,
+    mockSendToDeviceMessage,
     clearRoomEvents,
     clearStateEvents,
     stop,

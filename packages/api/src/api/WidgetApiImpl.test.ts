@@ -26,6 +26,7 @@ import {
 } from 'matrix-widget-api';
 import { firstValueFrom, ReplaySubject, take, toArray } from 'rxjs';
 import { parseWidgetId as parseWidgetIdMocked } from './parameters';
+import { ToDeviceMessageEvent } from './types';
 import { WidgetApiImpl } from './WidgetApiImpl';
 
 jest.mock('./parameters', () => ({
@@ -52,11 +53,13 @@ describe('WidgetApiImpl', () => {
       sendStateEvent: jest.fn(),
       readStateEvents: jest.fn(),
       readRoomEvents: jest.fn(),
+      sendToDevice: jest.fn(),
       openModalWidget: jest.fn(),
       setModalButtonEnabled: jest.fn(),
       closeModalWidget: jest.fn(),
       navigateTo: jest.fn(),
       requestOpenIDConnectToken: jest.fn(),
+      getTurnServers: jest.fn(),
       readEventRelations: jest.fn(),
       transport: {
         reply: jest.fn(),
@@ -95,7 +98,7 @@ describe('WidgetApiImpl', () => {
   });
 
   describe('initialize', () => {
-    it('should wait till initial capabilities negotation with host is completed', async () => {
+    it('should wait till initial capabilities negotiation with host is completed', async () => {
       matrixWidgetApi.once.mockImplementationOnce((_, listener) => {
         listener();
         return matrixWidgetApi;
@@ -1625,6 +1628,90 @@ describe('WidgetApiImpl', () => {
     });
   });
 
+  describe('sendToDeviceMessage', () => {
+    it('should send to device message', async () => {
+      await widgetApi.sendToDeviceMessage('com.example.message', false, {
+        '@user-id': {
+          '*': {
+            hello: 'world',
+          },
+        },
+      });
+
+      expect(matrixWidgetApi.sendToDevice).toBeCalledWith(
+        'com.example.message',
+        false,
+        { '@user-id': { '*': { hello: 'world' } } }
+      );
+    });
+  });
+
+  describe('observeToDeviceMessages', () => {
+    it('should receive updates about to device messages', async () => {
+      const preventDefault = jest.fn();
+      matrixWidgetApi.on.mockImplementationOnce((_, listener) => {
+        listener({
+          detail: {
+            data: mockToDeviceMessage({
+              content: { 'how are you': 'world' },
+            }),
+          },
+          preventDefault,
+        });
+        listener({
+          detail: {
+            data: mockToDeviceMessage({
+              type: 'com.example.other',
+              content: { not: 'displayed' },
+            }),
+          },
+          preventDefault,
+        });
+        setTimeout(() => {
+          listener({
+            detail: {
+              data: mockToDeviceMessage({
+                content: { bye: 'world' },
+              }),
+            },
+            preventDefault,
+          });
+        });
+
+        return matrixWidgetApi;
+      });
+      matrixWidgetApi.off.mockReturnThis();
+
+      const $events = widgetApi.observeToDeviceMessages('com.example.message');
+      const events = await firstValueFrom($events.pipe(take(2), toArray()));
+
+      expect(events).toEqual([
+        {
+          type: 'com.example.message',
+          content: { 'how are you': 'world' },
+          sender: '@my-user-id',
+          encrypted: false,
+        },
+        {
+          type: 'com.example.message',
+          content: { bye: 'world' },
+          sender: '@my-user-id',
+          encrypted: false,
+        },
+      ]);
+      expect(matrixWidgetApi.on).toBeCalledWith(
+        'action:send_to_device',
+        expect.any(Function)
+      );
+      expect(matrixWidgetApi.off).toBeCalledWith(
+        'action:send_to_device',
+        expect.any(Function)
+      );
+      expect(preventDefault).toBeCalledTimes(3);
+      expect(matrixWidgetApi.transport.reply).toBeCalledTimes(3);
+    });
+  });
+
   describe('openModal', () => {
     it('should open modal', async () => {
       parseWidgetId.mockReturnValueOnce({
@@ -1965,6 +2052,43 @@ describe('WidgetApiImpl', () => {
     });
   });
 
+  describe('observeTurnServers', () => {
+    it('should return turn servers', async () => {
+      matrixWidgetApi.getTurnServers.mockImplementation(async function* () {
+        yield {
+          uris: ['turn:turn1.example.com'],
+          username: 'user1',
+          password: 'secret1',
+        };
+        yield {
+          uris: ['turn:turn2.example.com'],
+          username: 'user2',
+          password: 'secret2',
+        };
+        await new Promise(() => {
+          /* never resolves */
+        });
+      });
+
+      const turnServersPromise = firstValueFrom(
+        widgetApi.observeTurnServers().pipe(take(2), toArray())
+      );
+
+      await expect(turnServersPromise).resolves.toEqual([
+        {
+          urls: ['turn:turn1.example.com'],
+          username: 'user1',
+          credential: 'secret1',
+        },
+        {
+          urls: ['turn:turn2.example.com'],
+          username: 'user2',
+          credential: 'secret2',
+        },
+      ]);
+    });
+  });
+
   describe('readEventRelations', () => {
     it('should read event relations', async () => {
       matrixWidgetApi.readEventRelations.mockResolvedValue({
@@ -2040,5 +2164,22 @@ function mockRoomEvent<T>({
     origin_server_ts: 0,
     sender: '@my-user-id',
     unsigned: {},
+  };
+}
+
+function mockToDeviceMessage<T>({
+  content,
+  type = 'com.example.message',
+  encrypted = false,
+}: {
+  content?: T;
+  type?: string;
+  encrypted?: boolean;
+} = {}): ToDeviceMessageEvent {
+  return {
+    content: content ?? {},
+    type,
+    sender: '@my-user-id',
+    encrypted,
   };
 }

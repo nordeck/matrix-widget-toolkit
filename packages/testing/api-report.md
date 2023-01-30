@@ -8,6 +8,7 @@
 
 import { RoomEvent } from '@matrix-widget-toolkit/api';
 import { StateEvent } from '@matrix-widget-toolkit/api';
+import { ToDeviceMessageEvent } from '@matrix-widget-toolkit/api';
 import { WidgetApi } from '@matrix-widget-toolkit/api';
 
 // @public
@@ -15,6 +16,7 @@ export type MockedWidgetApi = {
     stop: () => void;
     mockSendRoomEvent<T = unknown>(event: RoomEvent<T>): RoomEvent<T>;
     mockSendStateEvent<T = unknown>(event: StateEvent<T>): StateEvent<T>;
+    mockSendToDeviceMessage<T = unknown>(event: ToDeviceMessageEvent<T>): ToDeviceMessageEvent<T>;
     clearRoomEvents(opts?: {
         type?: string;
     }): void;

@@ -1,5 +1,12 @@
 # `@matrix-widget-toolkit/api`
 
+## 3.1.0
+
+### Minor Changes
+
+- 704e6aa: Implement sending and receiving of _to device_ messages.
+- 84f4e88: Expose turn servers in the widget API.
+
 ## 3.0.1
 
 ### Patch Changes
