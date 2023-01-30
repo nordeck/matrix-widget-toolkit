@@ -823,6 +823,119 @@ describe('readEventRelations', () => {
   });
 });
 
+describe('sendToDeviceMessage', () => {
+  it('should send to device message to all devices of the current user', async () => {
+    const messagePromise = firstValueFrom(
+      widgetApi.observeToDeviceMessages('com.example.message')
+    );
+
+    await widgetApi.sendToDeviceMessage('com.example.message', true, {
+      '@user-id': {
+        '*': { my: 'content' },
+      },
+    });
+
+    await expect(messagePromise).resolves.toEqual({
+      content: { my: 'content' },
+      encrypted: true,
+      sender: '@user-id',
+      type: 'com.example.message',
+    });
+  });
+
+  it('should send to device message to a specific device of the current user', async () => {
+    const messagePromise = firstValueFrom(
+      widgetApi.observeToDeviceMessages('com.example.message')
+    );
+
+    await widgetApi.sendToDeviceMessage('com.example.message', false, {
+      '@user-id': {
+        'device-id': { my: 'content' },
+      },
+    });
+
+    await expect(messagePromise).resolves.toEqual({
+      content: {
+        my: 'content',
+      },
+      encrypted: false,
+      sender: '@user-id',
+      type: 'com.example.message',
+    });
+  });
+
+  it('should send to device message to another user', async () => {
+    const messagesPromise = firstValueFrom(
+      widgetApi
+        .observeToDeviceMessages('com.example.message')
+        .pipe(bufferTime(100))
+    );
+
+    await widgetApi.sendToDeviceMessage('com.example.message', false, {
+      '@other-user-id': {
+        '*': { other: 'content' },
+      },
+    });
+
+    await expect(messagesPromise).resolves.toEqual([]);
+  });
+
+  it('should send to device message to multiple users', async () => {
+    const messagesPromise = firstValueFrom(
+      widgetApi
+        .observeToDeviceMessages('com.example.message')
+        .pipe(bufferTime(100))
+    );
+
+    await widgetApi.sendToDeviceMessage('com.example.message', false, {
+      '@other-user-id': {
+        '*': { other: 'content' },
+      },
+      '@user-id': {
+        '*': { my: 'content' },
+      },
+    });
+
+    await expect(messagesPromise).resolves.toEqual([
+      {
+        content: { my: 'content' },
+        sender: '@user-id',
+        encrypted: false,
+        type: 'com.example.message',
+      },
+    ]);
+  });
+});
+
+describe('observeToDeviceMessages', () => {
+  it('should receive only to device messages for the correct type', async () => {
+    const messagePromise = firstValueFrom(
+      widgetApi.observeToDeviceMessages('com.example.message')
+    );
+
+    widgetApi.mockSendToDeviceMessage({
+      content: { other: 'content' },
+      encrypted: false,
+      sender: '@user-id',
+      type: 'com.example.other',
+    });
+
+    widgetApi.mockSendToDeviceMessage({
+      content: { my: 'content' },
+      encrypted: false,
+      sender: '@user-id',
+      type: 'com.example.message',
+    });
+
+    await expect(messagePromise).resolves.toEqual({
+      content: { my: 'content' },
+      encrypted: false,
+      sender: '@user-id',
+      type: 'com.example.message',
+    });
+  });
+});
+
 describe('observeTurnServers', () => {
   it('should return mocked turn servers', async () => {
     const turnServer = await firstValueFrom(

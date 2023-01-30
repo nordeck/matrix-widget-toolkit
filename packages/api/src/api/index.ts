@@ -30,6 +30,7 @@ export {
 export type {
   RoomEvent,
   StateEvent,
+  ToDeviceMessageEvent,
   TurnServer,
   WidgetApi,
   WidgetConfig,
