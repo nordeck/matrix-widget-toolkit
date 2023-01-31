@@ -26,7 +26,7 @@ export type MockedWidgetApi = {
 } & jest.Mocked<WidgetApi>;
 
 // @public
-export function mockWidgetApi({ userId, roomId, widgetId, }?: {
+export function mockWidgetApi(opts?: {
     userId?: string;
     roomId?: string;
     widgetId?: string;

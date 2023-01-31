@@ -48,6 +48,10 @@ import {
   RadioGroup,
   Stack,
   Switch,
+  Table,
+  TableCell,
+  TableHead,
+  TableRow,
   TextField,
   ToggleButton,
   Tooltip,
@@ -86,6 +90,7 @@ export const ThemePage = (): ReactElement => {
         <TypographyDemo />
         <RadioDemo />
         <ListsDemo />
+        <TablesDemo />
       </Stack>
     </>
   );
@@ -769,10 +774,46 @@ export function WidgetListItem({
   );
 }
 
+export function TablesDemo() {
+  return (
+    <>
+      <Box m={1}>
+        <Typography variant="h2">Tables</Typography>
+
+        <p>
+          We sometimes use tables our UIs. This is how a table looks in our
+          theme:
+        </p>
+      </Box>
+
+      <Table size="small" aria-label="Widgets">
+        <TableHead>
+          <TableCell>Widget</TableCell>
+          <TableCell>Description</TableCell>
+        </TableHead>
+        <TableRow>
+          <TableCell>Poll Widget</TableCell>
+          <TableCell>A widget to collect votes</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Meetings Widget</TableCell>
+          <TableCell>Organize meetings in Matrix rooms</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Whiteboard Widget</TableCell>
+          <TableCell>Collaborative draw or present</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>BarCamp Widget</TableCell>
+          <TableCell>Host BarCamps using Matrix</TableCell>
+        </TableRow>
+      </Table>
+    </>
+  );
+}
+
 // TODO: Checkbox
 
 // TODO: Spinner
 
 // TODO: Menus
-
-// TODO: Tables

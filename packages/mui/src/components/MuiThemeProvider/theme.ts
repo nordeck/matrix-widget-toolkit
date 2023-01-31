@@ -318,6 +318,17 @@ export const baseTheme: ThemeOptions = {
         },
       },
     },
+
+    MuiTableCell: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          // the default theme lightens and darkens the divider color further
+          // which makes it too light in the light theme and too dark in the
+          // dark theme.
+          borderBottomColor: theme.palette.divider,
+        }),
+      },
+    },
   },
 };
 
