@@ -43,11 +43,17 @@ import {
   Skeleton,
   Stack,
   Tooltip,
-  unstable_useId as useId,
 } from '@mui/material';
 import { isError } from 'lodash';
 import { EventDirection, WidgetEventCapability } from 'matrix-widget-api';
-import { FormEvent, ReactElement, ReactNode, useMemo, useState } from 'react';
+import {
+  FormEvent,
+  ReactElement,
+  ReactNode,
+  useId,
+  useMemo,
+  useState,
+} from 'react';
 import { useObservable } from 'react-use';
 import { filter, map } from 'rxjs';
 import {
@@ -246,7 +252,10 @@ const MessageEntry = ({
   if (isLoading) {
     return (
       <ListItem sx={{ flexDirection: 'row-reverse' }}>
-        <ListItemText primary={<Skeleton />} secondary={<Skeleton />} />
+        <ListItemText
+          primary={<Skeleton data-testid="loading-skeleton" />}
+          secondary={<Skeleton />}
+        />
         <ListItemIcon>
           <Skeleton variant="circular" height={24} width={24} sx={{ m: 1 }} />
           <Skeleton variant="circular" height={24} width={24} sx={{ m: 1 }} />

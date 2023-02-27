@@ -49,6 +49,7 @@ import {
   Stack,
   Switch,
   Table,
+  TableBody,
   TableCell,
   TableHead,
   TableRow,
@@ -57,11 +58,11 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
 import {
   MouseEventHandler,
   PropsWithChildren,
   ReactElement,
+  useId,
   useState,
 } from 'react';
 import { NavigationBar } from '../NavigationPage';
@@ -788,25 +789,29 @@ export function TablesDemo() {
 
       <Table size="small" aria-label="Widgets">
         <TableHead>
-          <TableCell>Widget</TableCell>
-          <TableCell>Description</TableCell>
+          <TableRow>
+            <TableCell>Widget</TableCell>
+            <TableCell>Description</TableCell>
+          </TableRow>
         </TableHead>
-        <TableRow>
-          <TableCell>Poll Widget</TableCell>
-          <TableCell>A widget to collect votes</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Meetings Widget</TableCell>
-          <TableCell>Organize meetings in Matrix rooms</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Whiteboard Widget</TableCell>
-          <TableCell>Collaborative draw or present</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>BarCamp Widget</TableCell>
-          <TableCell>Host BarCamps using Matrix</TableCell>
-        </TableRow>
+        <TableBody>
+          <TableRow>
+            <TableCell>Poll Widget</TableCell>
+            <TableCell>A widget to collect votes</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Meetings Widget</TableCell>
+            <TableCell>Organize meetings in Matrix rooms</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Whiteboard Widget</TableCell>
+            <TableCell>Collaborative draw or present</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>BarCamp Widget</TableCell>
+            <TableCell>Host BarCamps using Matrix</TableCell>
+          </TableRow>
+        </TableBody>
       </Table>
     </>
   );

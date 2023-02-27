@@ -17,7 +17,7 @@
 import { WidgetApiImpl } from '@matrix-widget-toolkit/api';
 import { EventDirection, WidgetEventCapability } from 'matrix-widget-api';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { App } from './App';
 import { STATE_EVENT_ROOM_NAME } from './events';
 import './i18n';
@@ -36,9 +36,10 @@ const widgetApiPromise = WidgetApiImpl.create({
   ],
 });
 
-ReactDOM.render(
+const container = document.getElementById('root');
+const root = createRoot(container!);
+root.render(
   <React.StrictMode>
     <App widgetApiPromise={widgetApiPromise} />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 );

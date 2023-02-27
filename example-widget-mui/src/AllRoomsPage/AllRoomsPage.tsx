@@ -35,13 +35,12 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
 import {
   EventDirection,
   Symbols,
   WidgetEventCapability,
 } from 'matrix-widget-api';
-import { ReactElement } from 'react';
+import { ReactElement, useId } from 'react';
 import { useAsyncRetry } from 'react-use';
 import {
   isValidRoomNameEvent,

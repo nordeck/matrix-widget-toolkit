@@ -19,8 +19,7 @@ import {
   extractWidgetParameters as extractWidgetParametersMocked,
   parseWidgetId as parseWidgetIdMocked,
 } from '@matrix-widget-toolkit/api';
-import { render, screen } from '@testing-library/react';
-import { act, renderHook } from '@testing-library/react-hooks';
+import { act, render, renderHook, screen } from '@testing-library/react';
 import {
   ThemeSelectionProvider,
   useThemeSelection,

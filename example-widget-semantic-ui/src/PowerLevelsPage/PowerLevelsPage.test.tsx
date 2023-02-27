@@ -258,7 +258,9 @@ describe('<PowerLevelsPage />', () => {
     });
     const demoteButton = screen.getByRole('button', { name: /demote/i });
 
-    expect(promoteButton).toBeDisabled();
+    await waitFor(() => {
+      expect(promoteButton).toBeDisabled();
+    });
     expect(demoteButton).not.toBeDisabled();
 
     await userEvent.click(demoteButton);

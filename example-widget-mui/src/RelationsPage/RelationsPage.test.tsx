@@ -16,7 +16,7 @@
 
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { ComponentType, PropsWithChildren } from 'react';
@@ -109,6 +109,10 @@ describe('<RelationsPage />', () => {
     await expect(
       screen.findByRole('heading', { name: 'Event Relations' })
     ).resolves.toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(screen.queryByTestId('loading-skeleton')).not.toBeInTheDocument();
+    });
 
     expect(await axe(container)).toHaveNoViolations();
   });

@@ -15,8 +15,7 @@
  */
 
 import { Box, List, ListItemButton, ListItemText } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
-import { ReactElement } from 'react';
+import { ReactElement, useId } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 

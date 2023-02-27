@@ -114,6 +114,9 @@ describe('<PowerLevelsPage />', () => {
     await expect(
       screen.findByRole('heading', { name: /room power levels/i })
     ).resolves.toBeInTheDocument();
+
+    await screen.findByRole('button', { name: 'Username' });
+
     expect(await axe(container)).toHaveNoViolations();
   });
 

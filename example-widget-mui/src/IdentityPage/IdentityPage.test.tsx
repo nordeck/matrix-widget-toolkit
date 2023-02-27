@@ -55,7 +55,7 @@ describe('<IdentityPage />', () => {
     await expect(
       screen.findByRole('heading', { name: /Identity/i })
     ).resolves.toBeInTheDocument();
-    expect(screen.getByText('Error')).toBeInTheDocument();
+    expect(await screen.findByText('Error')).toBeInTheDocument();
     expect(screen.getByText(/error: .+/i)).toBeInTheDocument();
   });
 

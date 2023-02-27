@@ -17,7 +17,7 @@
 import { StateEvent } from '@matrix-widget-toolkit/api';
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { EventDirection, WidgetEventCapability } from 'matrix-widget-api';
@@ -82,6 +82,13 @@ describe('<AllRoomsPage />', () => {
     await expect(
       screen.findByRole('heading', { name: /all rooms/i })
     ).resolves.toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(
+        screen.getByRole('button', { name: 'Refresh the Room Information' })
+      ).toBeEnabled();
+    });
+
     expect(await axe(container)).toHaveNoViolations();
   });
 
