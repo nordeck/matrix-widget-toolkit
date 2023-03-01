@@ -759,4 +759,29 @@ export class WidgetApiImpl implements WidgetApi {
       }))
     );
   }
+
+  /** {@inheritdoc WidgetApi.searchUserDirectory}  */
+  async searchUserDirectory(
+    searchTerm: string,
+    options?: { limit?: number | undefined } | undefined
+  ): Promise<{
+    results: Array<{
+      userId: string;
+      displayName?: string;
+      avatarUrl?: string;
+    }>;
+  }> {
+    const { results } = await this.matrixWidgetApi.searchUserDirectory(
+      searchTerm,
+      options?.limit
+    );
+
+    return {
+      results: results.map(({ user_id, display_name, avatar_url }) => ({
+        userId: user_id,
+        displayName: display_name,
+        avatarUrl: avatar_url,
+      })),
+    };
+  }
 }

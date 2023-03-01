@@ -258,6 +258,15 @@ export type WidgetApi = {
     navigateTo(uri: string): Promise<void>;
     requestOpenIDConnectToken(): Promise<IOpenIDCredentials>;
     observeTurnServers(): Observable<TurnServer>;
+    searchUserDirectory(searchTerm: string, options?: {
+        limit?: number;
+    }): Promise<{
+        results: Array<{
+            userId: string;
+            displayName?: string;
+            avatarUrl?: string;
+        }>;
+    }>;
 };
 
 // @public
@@ -312,6 +321,15 @@ export class WidgetApiImpl implements WidgetApi {
     requestCapabilities(capabilities: Array<WidgetEventCapability | Capability>): Promise<void>;
     requestOpenIDConnectToken(): Promise<IOpenIDCredentials>;
     rerequestInitialCapabilities(): Promise<void>;
+    searchUserDirectory(searchTerm: string, options?: {
+        limit?: number | undefined;
+    } | undefined): Promise<{
+        results: Array<{
+            userId: string;
+            displayName?: string;
+            avatarUrl?: string;
+        }>;
+    }>;
     sendRoomEvent<T>(eventType: string, content: T, { roomId }?: {
         roomId?: string;
     }): Promise<RoomEvent<T>>;

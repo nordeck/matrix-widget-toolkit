@@ -24,6 +24,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AllRoomsPage } from '../AllRoomsPage';
 import { DicePage } from '../DicePage';
 import { IdentityPage } from '../IdentityPage';
+import { InvitationsPage } from '../InvitationsPage';
 import { ModalDialog, ModalPage } from '../ModalPage';
 import { NavigationPage } from '../NavigationPage';
 import { PowerLevelsPage } from '../PowerLevelsPage';
@@ -61,6 +62,7 @@ export function App({
               <Route path="/modal/dialog" element={<ModalDialog />} />
               <Route path="/powerlevels" element={<PowerLevelsPage />} />
               <Route path="/relations" element={<RelationsPage />} />
+              <Route path="/invitations" element={<InvitationsPage />} />
               <Route path="/theme" element={<ThemePage />} />
             </Routes>
           </MuiWidgetApiProvider>

@@ -520,5 +520,24 @@ export type WidgetApi = {
    */
   observeTurnServers(): Observable<TurnServer>;
 
+  /**
+   * Search for users in the user directory.
+   *
+   * @param searchTerm - The term to search for.
+   * @param options - Options for searching.
+   *                  Use `limit` to limit the number of results to return.
+   * @returns The search results.
+   */
+  searchUserDirectory(
+    searchTerm: string,
+    options?: { limit?: number }
+  ): Promise<{
+    results: Array<{
+      userId: string;
+      displayName?: string;
+      avatarUrl?: string;
+    }>;
+  }>;
+
   // TODO: sendSticker, setAlwaysOnScreen
 };

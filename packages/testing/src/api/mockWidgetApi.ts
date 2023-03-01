@@ -230,6 +230,7 @@ export function mockWidgetApi(opts?: {
         NEVER
       )
     ),
+    searchUserDirectory: jest.fn().mockResolvedValue({ results: [] }),
   };
 
   widgetApi.receiveRoomEvents.mockImplementation(async (type, options) => {

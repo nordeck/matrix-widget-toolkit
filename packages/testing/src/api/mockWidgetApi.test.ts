@@ -949,3 +949,11 @@ describe('observeTurnServers', () => {
     });
   });
 });
+
+describe('searchUserDirectory', () => {
+  it('should return empty response', async () => {
+    await expect(widgetApi.searchUserDirectory('search')).resolves.toEqual({
+      results: [],
+    });
+  });
+});
