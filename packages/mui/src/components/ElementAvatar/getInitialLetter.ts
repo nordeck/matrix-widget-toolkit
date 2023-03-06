@@ -14,7 +14,20 @@
  * limitations under the License.
  */
 
-export * from './ElementAvatar';
-export * from './MuiCapabilitiesGuard';
-export * from './MuiThemeProvider';
-export * from './MuiWidgetApiProvider';
+import { split } from 'lodash';
+
+// Based on the way Element selects the initial letter
+// https://github.com/matrix-org/matrix-react-sdk/blob/667ec166d736dfb0ac49f67398a8b7a13db7d5ef/src/Avatar.ts#L121
+export function getInitialLetter(name: string): string | undefined {
+  if (name.length < 1) {
+    return undefined;
+  }
+
+  const initial = name[0];
+  if ((initial === '@' || initial === '#' || initial === '+') && name[1]) {
+    name = name.substring(1);
+  }
+
+  // rely on the grapheme cluster splitter in lodash so that we don't break apart compound emojis
+  return split(name, '', 1)[0].toUpperCase();
+}
