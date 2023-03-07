@@ -782,47 +782,47 @@ export function AvatarsDemo() {
     <Box m={1}>
       <Typography variant="h2">Avatars</Typography>
       <p>Avatars can be used together with users or rooms.</p>
-      <p>
+      <Stack direction="row" gap={1} my={1}>
         <ElementAvatar userId="@user:matrix.org" /> Avatar without image and
         name
-      </p>
-      <p>
+      </Stack>
+      <Stack direction="row" gap={1} my={1}>
         <ElementAvatar userId="@user:matrix.org" displayName="Display Name" />
         Avatar without image
-      </p>
-      <p>
+      </Stack>
+      <Stack direction="row" gap={1} my={1}>
         <ElementAvatar
           userId="@user:matrix.org"
           displayName="Display Name"
           avatarUrl="https://example.com/test.png"
         />
         Avatar with broken image URL
-      </p>
-      <p>
+      </Stack>
+      <Stack direction="row" gap={1} my={1}>
         <ElementAvatar
           userId="@user:matrix.org"
           displayName="Display Name"
           avatarUrl="https://example.com/test.png"
         />
         Avatar with broken image URL
-      </p>
-      <p>
+      </Stack>
+      <Stack direction="row" gap={1} my={1}>
         <ElementAvatar
           userId="@oliver.sand:matrix.org"
           displayName="Oliver Sand"
           avatarUrl="mxc://matrix.org/KbhRFOIJekHQpMVIZGpuNxBG"
         />
         Avatar with mxc: URL (might not resolve)
-      </p>
-      <p>
+      </Stack>
+      <Stack direction="row" gap={1} my={1}>
         <ElementAvatar
           userId="@oliver.sand:matrix.org"
           displayName="Oliver Sand"
           avatarUrl="https://matrix-client.matrix.org/_matrix/media/r0/download/matrix.org/KbhRFOIJekHQpMVIZGpuNxBG"
         />
         Avatar
-      </p>
-      <p>
+      </Stack>
+      <Stack direction="row" gap={1} my={1}>
         <ElementAvatar
           userId="@oliver.sand:matrix.org"
           displayName="Oliver Sand"
@@ -833,8 +833,8 @@ export function AvatarsDemo() {
           })}
         />
         Avatar with outline
-      </p>
-      <p>
+      </Stack>
+      <Stack direction="row" gap={1} my={1}>
         <ElementAvatar
           userId="@oliver.sand:matrix.org"
           displayName="Oliver Sand"
@@ -848,8 +848,8 @@ export function AvatarsDemo() {
           })}
         />
         Avatar with outline without image
-      </p>
-      <p>
+      </Stack>
+      <Stack direction="row" gap={1} my={1}>
         <ElementAvatar
           userId="@oliver.sand:matrix.org"
           displayName="Oliver Sand"
@@ -857,8 +857,8 @@ export function AvatarsDemo() {
           sx={{ opacity: 0.5 }}
         />
         Avatar with transparency
-      </p>
-      <p>
+      </Stack>
+      <Stack direction="row" gap={1} my={1}>
         <ElementAvatar
           userId="@oliver.sand:matrix.org"
           displayName="Oliver Sand"
@@ -872,19 +872,33 @@ export function AvatarsDemo() {
           }}
         />
         Big avatar
-      </p>
-      <p>
+      </Stack>
+      <Stack direction="row" gap={1} my={1}>
+        <Tooltip title="Hello World">
+          <ElementAvatar
+            userId="@oliver.sand:matrix.org"
+            displayName="Oliver Sand"
+          />
+        </Tooltip>
+        With tooltip
+      </Stack>
+      <Stack direction="row" gap={1} my={1}>
         <Chip
           size="small"
           avatar={
             <ElementAvatar
               userId="@oliver.sand:matrix.org"
               displayName="Oliver Sand"
+              sx={{
+                '&, &&.MuiChip-avatar': {
+                  fontSize: 15,
+                },
+              }}
             />
           }
           label="Inside a Chip"
         />
-      </p>
+      </Stack>
     </Box>
   );
 }

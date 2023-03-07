@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { Avatar, styled, SxProps, Theme } from '@mui/material';
+import { Avatar, AvatarProps, styled } from '@mui/material';
+import { forwardRef } from 'react';
 import { createAvatarUrl } from './createAvatarUrl';
 import { getColor } from './getColor';
 import { getInitialLetter } from './getInitialLetter';
@@ -41,10 +42,7 @@ export type ElementAvatarProps = {
    * If not provided, the initial letter based on the display name or userId is used instead.
    */
   avatarUrl?: string;
-
-  /** Additional styling for the avatar */
-  sx?: SxProps<Theme>;
-};
+} & AvatarProps;
 
 const StyledAvatar = styled(Avatar, {
   shouldForwardProp: (p) => p !== 'color',
@@ -65,18 +63,22 @@ const StyledAvatar = styled(Avatar, {
  * A component to display user and room avatars in the style of Element.
  * @param param0 - {@link ElementAvatarProps}
  */
-export function ElementAvatar({
-  avatarUrl,
-  userId,
-  displayName,
-  sx,
-}: ElementAvatarProps) {
-  const src = avatarUrl ? createAvatarUrl(avatarUrl) : undefined;
-  const name = displayName ?? userId;
+export const ElementAvatar = forwardRef<HTMLDivElement, ElementAvatarProps>(
+  function ElementAvatar({ avatarUrl, userId, displayName, ...props }, ref) {
+    const src = avatarUrl ? createAvatarUrl(avatarUrl) : undefined;
+    const name = displayName ?? userId;
 
-  return (
-    <StyledAvatar alt="" aria-hidden src={src} color={getColor(userId)} sx={sx}>
-      {getInitialLetter(name)}
-    </StyledAvatar>
-  );
-}
+    return (
+      <StyledAvatar
+        ref={ref}
+        alt=""
+        aria-hidden
+        src={src}
+        color={getColor(userId)}
+        {...props}
+      >
+        {getInitialLetter(name)}
+      </StyledAvatar>
+    );
+  }
+);
