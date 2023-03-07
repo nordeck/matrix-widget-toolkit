@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Nordeck IT + Consulting GmbH
+ * Copyright 2023 Nordeck IT + Consulting GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,5 @@
  * limitations under the License.
  */
 
-export * from './ElementAvatar';
-export * from './MuiCapabilitiesGuard';
-export * from './MuiThemeProvider';
-export * from './MuiWidgetApiProvider';
+export { ElementAvatar } from './ElementAvatar';
+export type { ElementAvatarProps } from './ElementAvatar';

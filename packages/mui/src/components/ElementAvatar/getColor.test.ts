@@ -14,7 +14,12 @@
  * limitations under the License.
  */
 
-export * from './ElementAvatar';
-export * from './MuiCapabilitiesGuard';
-export * from './MuiThemeProvider';
-export * from './MuiWidgetApiProvider';
+import { getColor } from './getColor';
+
+describe('getColor', () => {
+  it('should generate stable colors from ids', () => {
+    expect(getColor('@oliver.sand:matrix.org')).toBe('#ac3ba8');
+    expect(getColor('!OFRzoSUQYSjIXMEZDS:datanauten.de')).toBe('#368bd6');
+    expect(getColor('!vbSFpwCIcbnazhtFTT:matrix.org')).toBe('#0DBD8B');
+  });
+});

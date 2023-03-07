@@ -4,14 +4,29 @@
 
 ```ts
 
+/// <reference types="react" />
+
 import { BackendModule } from 'i18next';
 import { Capability } from 'matrix-widget-api';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { PropsWithChildren } from 'react';
 import { ReactElement } from 'react';
+import { SxProps } from '@mui/material';
+import { Theme } from '@mui/material';
 import { WidgetApi } from '@matrix-widget-toolkit/api';
 import { WidgetEventCapability } from 'matrix-widget-api';
 import { WidgetRegistration } from '@matrix-widget-toolkit/api';
+
+// @public
+export function ElementAvatar({ avatarUrl, userId, displayName, sx, }: ElementAvatarProps): JSX.Element;
+
+// @public
+export type ElementAvatarProps = {
+    userId: string;
+    displayName?: string;
+    avatarUrl?: string;
+    sx?: SxProps<Theme>;
+};
 
 // @public
 export function getEnvironment(name: string): string | undefined;
