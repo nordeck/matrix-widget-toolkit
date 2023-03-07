@@ -20,11 +20,13 @@ export function createAvatarUrl(
   url: string,
   { size = 60 }: { size?: number } = {}
 ): string {
-  const mxcUrl = new URL(url);
+  const mxcPrefix = 'mxc://';
 
-  if (mxcUrl.protocol.toLowerCase() !== 'mxc:') {
+  if (url.indexOf(mxcPrefix) !== 0) {
     return url;
   }
+
+  const mxcUrl = url.slice(mxcPrefix.length);
 
   // TODO: Instead of retrieving the home server from an env variable, it would
   // be good to get this passed by the widget host, e.g. as an URL parameter.
@@ -38,7 +40,7 @@ export function createAvatarUrl(
     'https://matrix-client.matrix.org'
   );
   const imageUrl = new URL(
-    `/_matrix/media/r0/thumbnail/${mxcUrl.hostname}${mxcUrl.pathname}?width=${size}&height=${size}&method=crop`,
+    `/_matrix/media/r0/thumbnail/${mxcUrl}?width=${size}&height=${size}&method=crop`,
     homeServer
   );
   return imageUrl.toString();
