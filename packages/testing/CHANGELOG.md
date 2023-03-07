@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/testing`
 
+## 2.2.1
+
+### Patch Changes
+
+- 5534372: Explain the default values of the parameters of `mockWidgetApi` in the docs.
+
 ## 2.2.0
 
 ### Minor Changes
