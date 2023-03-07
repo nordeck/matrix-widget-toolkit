@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/mui`
 
+## 1.1.1
+
+### Patch Changes
+
+- 7d9c65b: Forward `ref` in `<ElementAvatar>`.
+
 ## 1.1.0
 
 ### Minor Changes
