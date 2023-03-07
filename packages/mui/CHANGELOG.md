@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/mui`
 
+## 1.1.2
+
+### Patch Changes
+
+- b69a2d5: Fix issue with generated avatar URLs.
+
 ## 1.1.1
 
 ### Patch Changes
