@@ -106,5 +106,5 @@ Note that the `$__STYLE_CSP_NONCE__` will be used to add the unique nonce to eac
 
 It is also possible to extend the existing CSP with additional values:
 The values of the `CSP_FONT_SRC`, `CSP_STYLE_SRC`, `CSP_SCRIPT_SRC`, `CSP_IMG_SRC`, `CSP_CONNECT_SRC` environment variables will be appended to the respecting policy.
-Environment variable references can be added as string, e.g. `export CSP_STYLE_SRC='${REACT_APP_HOME_SERVER_URL}'`.
+Environment variable references can be added as string, e.g. `export CSP_IMG_SRC='${REACT_APP_HOME_SERVER_URL}'`.
 Note that it is not possible to remove existing entries without replacing the `content-security-policy.conf` file.

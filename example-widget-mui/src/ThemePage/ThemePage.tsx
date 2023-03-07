@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { ElementAvatar } from '@matrix-widget-toolkit/mui';
 import BrushIcon from '@mui/icons-material/Brush';
 import CheckIcon from '@mui/icons-material/Check';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -90,6 +91,7 @@ export const ThemePage = (): ReactElement => {
         <TypographyDemo />
         <RadioDemo />
         <ListsDemo />
+        <AvatarsDemo />
         <TablesDemo />
       </Stack>
     </>
@@ -774,6 +776,118 @@ export function WidgetListItem({
   );
 }
 
+export function AvatarsDemo() {
+  return (
+    <Box m={1}>
+      <Typography variant="h2">Avatars</Typography>
+      <p>Avatars can be used together with users or rooms.</p>
+      <p>
+        <ElementAvatar userId="@user:matrix.org" /> Avatar without image and
+        name
+      </p>
+      <p>
+        <ElementAvatar userId="@user:matrix.org" displayName="Display Name" />
+        Avatar without image
+      </p>
+      <p>
+        <ElementAvatar
+          userId="@user:matrix.org"
+          displayName="Display Name"
+          avatarUrl="https://example.com/test.png"
+        />
+        Avatar with broken image URL
+      </p>
+      <p>
+        <ElementAvatar
+          userId="@user:matrix.org"
+          displayName="Display Name"
+          avatarUrl="https://example.com/test.png"
+        />
+        Avatar with broken image URL
+      </p>
+      <p>
+        <ElementAvatar
+          userId="@oliver.sand:matrix.org"
+          displayName="Oliver Sand"
+          avatarUrl="mxc://matrix.org/KbhRFOIJekHQpMVIZGpuNxBG"
+        />
+        Avatar with mxc: URL (might not resolve)
+      </p>
+      <p>
+        <ElementAvatar
+          userId="@oliver.sand:matrix.org"
+          displayName="Oliver Sand"
+          avatarUrl="https://matrix-client.matrix.org/_matrix/media/r0/download/matrix.org/KbhRFOIJekHQpMVIZGpuNxBG"
+        />
+        Avatar
+      </p>
+      <p>
+        <ElementAvatar
+          userId="@oliver.sand:matrix.org"
+          displayName="Oliver Sand"
+          avatarUrl="https://matrix-client.matrix.org/_matrix/media/r0/download/matrix.org/KbhRFOIJekHQpMVIZGpuNxBG"
+          sx={(theme) => ({
+            outline: `${theme.palette.primary.main} solid 2px`,
+            border: `2px solid ${theme.palette.background.default}`,
+          })}
+        />
+        Avatar with outline
+      </p>
+      <p>
+        <ElementAvatar
+          userId="@oliver.sand:matrix.org"
+          displayName="Oliver Sand"
+          sx={(theme) => ({
+            outline: `${theme.palette.primary.main} solid 2px`,
+            border: `2px solid ${theme.palette.background.default}`,
+
+            '&, &&.MuiChip-avatar': {
+              fontSize: 16,
+            },
+          })}
+        />
+        Avatar with outline without image
+      </p>
+      <p>
+        <ElementAvatar
+          userId="@oliver.sand:matrix.org"
+          displayName="Oliver Sand"
+          avatarUrl="https://matrix-client.matrix.org/_matrix/media/r0/download/matrix.org/KbhRFOIJekHQpMVIZGpuNxBG"
+          sx={{ opacity: 0.5 }}
+        />
+        Avatar with transparency
+      </p>
+      <p>
+        <ElementAvatar
+          userId="@oliver.sand:matrix.org"
+          displayName="Oliver Sand"
+          sx={{
+            width: 32,
+            height: 32,
+
+            '&, &&.MuiChip-avatar': {
+              fontSize: 25,
+            },
+          }}
+        />
+        Big avatar
+      </p>
+      <p>
+        <Chip
+          size="small"
+          avatar={
+            <ElementAvatar
+              userId="@oliver.sand:matrix.org"
+              displayName="Oliver Sand"
+            />
+          }
+          label="Inside a Chip"
+        />
+      </p>
+    </Box>
+  );
+}
+
 export function TablesDemo() {
   return (
     <>
@@ -785,7 +899,6 @@ export function TablesDemo() {
           theme:
         </p>
       </Box>
-
       <Table size="small" aria-label="Widgets">
         <TableHead>
           <TableCell>Widget</TableCell>

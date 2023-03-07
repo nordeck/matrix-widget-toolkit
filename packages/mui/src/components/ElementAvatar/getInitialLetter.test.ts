@@ -14,7 +14,18 @@
  * limitations under the License.
  */
 
-export * from './ElementAvatar';
-export * from './MuiCapabilitiesGuard';
-export * from './MuiThemeProvider';
-export * from './MuiWidgetApiProvider';
+import { getInitialLetter } from './getInitialLetter';
+
+describe('getInitialLetter', () => {
+  it.each`
+    value         | letter
+    ${'@user-id'} | ${'U'}
+    ${'Alice'}    | ${'A'}
+    ${'#room-id'} | ${'R'}
+  `(
+    'should detect %letter as the initial letter of %value',
+    ({ letter, value }) => {
+      expect(getInitialLetter(value)).toBe(letter);
+    }
+  );
+});

@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
+import { ElementAvatar } from '@matrix-widget-toolkit/mui';
 import { useWidgetApi } from '@matrix-widget-toolkit/react';
-import { Avatar, Box, Card, CardHeader } from '@mui/material';
+import { Box, Card, CardHeader } from '@mui/material';
 import { ReactElement } from 'react';
 import { NavigationBar } from '../NavigationPage';
 
@@ -35,9 +36,10 @@ export const WelcomePage = (): ReactElement => {
         <Card elevation={0}>
           <CardHeader
             avatar={
-              <Avatar
-                alt={userDisplayName}
-                src={widgetApi.widgetParameters.avatarUrl}
+              <ElementAvatar
+                userId={widgetApi.widgetParameters.userId ?? '?'}
+                displayName={widgetApi.widgetParameters.displayName}
+                avatarUrl={widgetApi.widgetParameters.avatarUrl}
               />
             }
             title={`Welcome ${userDisplayName}`}
