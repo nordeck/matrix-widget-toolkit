@@ -33,7 +33,7 @@ export type MuiCapabilitiesGuardProps = PropsWithChildren<{
 /**
  * A guard that ask the user for capabilities and only shows the `children`
  * if all capabilities were accepted.
- * If capabilities are denined, a message and a button to retry is displayed
+ * If capabilities are denied, a message and a button to retry is displayed
  * instead.
  * @param param0 - {@link MuiCapabilitiesGuardProps}
  */

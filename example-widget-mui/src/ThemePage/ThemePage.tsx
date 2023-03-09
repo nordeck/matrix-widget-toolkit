@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { ElementAvatar } from '@matrix-widget-toolkit/mui';
 import BrushIcon from '@mui/icons-material/Brush';
 import CheckIcon from '@mui/icons-material/Check';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -49,6 +50,7 @@ import {
   Stack,
   Switch,
   Table,
+  TableBody,
   TableCell,
   TableHead,
   TableRow,
@@ -90,6 +92,7 @@ export const ThemePage = (): ReactElement => {
         <TypographyDemo />
         <RadioDemo />
         <ListsDemo />
+        <AvatarsDemo />
         <TablesDemo />
       </Stack>
     </>
@@ -774,6 +777,132 @@ export function WidgetListItem({
   );
 }
 
+export function AvatarsDemo() {
+  return (
+    <Box m={1}>
+      <Typography variant="h2">Avatars</Typography>
+      <p>Avatars can be used together with users or rooms.</p>
+      <Stack direction="row" gap={1} my={1}>
+        <ElementAvatar userId="@user:matrix.org" /> Avatar without image and
+        name
+      </Stack>
+      <Stack direction="row" gap={1} my={1}>
+        <ElementAvatar userId="@user:matrix.org" displayName="Display Name" />
+        Avatar without image
+      </Stack>
+      <Stack direction="row" gap={1} my={1}>
+        <ElementAvatar
+          userId="@user:matrix.org"
+          displayName="Display Name"
+          avatarUrl="https://example.com/test.png"
+        />
+        Avatar with broken image URL
+      </Stack>
+      <Stack direction="row" gap={1} my={1}>
+        <ElementAvatar
+          userId="@user:matrix.org"
+          displayName="Display Name"
+          avatarUrl="https://example.com/test.png"
+        />
+        Avatar with broken image URL
+      </Stack>
+      <Stack direction="row" gap={1} my={1}>
+        <ElementAvatar
+          userId="@oliver.sand:matrix.org"
+          displayName="Oliver Sand"
+          avatarUrl="mxc://matrix.org/KbhRFOIJekHQpMVIZGpuNxBG"
+        />
+        Avatar with mxc: URL (might not resolve)
+      </Stack>
+      <Stack direction="row" gap={1} my={1}>
+        <ElementAvatar
+          userId="@oliver.sand:matrix.org"
+          displayName="Oliver Sand"
+          avatarUrl="https://matrix-client.matrix.org/_matrix/media/r0/download/matrix.org/KbhRFOIJekHQpMVIZGpuNxBG"
+        />
+        Avatar
+      </Stack>
+      <Stack direction="row" gap={1} my={1}>
+        <ElementAvatar
+          userId="@oliver.sand:matrix.org"
+          displayName="Oliver Sand"
+          avatarUrl="https://matrix-client.matrix.org/_matrix/media/r0/download/matrix.org/KbhRFOIJekHQpMVIZGpuNxBG"
+          sx={(theme) => ({
+            outline: `${theme.palette.primary.main} solid 2px`,
+            border: `2px solid ${theme.palette.background.default}`,
+          })}
+        />
+        Avatar with outline
+      </Stack>
+      <Stack direction="row" gap={1} my={1}>
+        <ElementAvatar
+          userId="@oliver.sand:matrix.org"
+          displayName="Oliver Sand"
+          sx={(theme) => ({
+            outline: `${theme.palette.primary.main} solid 2px`,
+            border: `2px solid ${theme.palette.background.default}`,
+
+            '&, &&.MuiChip-avatar': {
+              fontSize: 16,
+            },
+          })}
+        />
+        Avatar with outline without image
+      </Stack>
+      <Stack direction="row" gap={1} my={1}>
+        <ElementAvatar
+          userId="@oliver.sand:matrix.org"
+          displayName="Oliver Sand"
+          avatarUrl="https://matrix-client.matrix.org/_matrix/media/r0/download/matrix.org/KbhRFOIJekHQpMVIZGpuNxBG"
+          sx={{ opacity: 0.5 }}
+        />
+        Avatar with transparency
+      </Stack>
+      <Stack direction="row" gap={1} my={1}>
+        <ElementAvatar
+          userId="@oliver.sand:matrix.org"
+          displayName="Oliver Sand"
+          sx={{
+            width: 32,
+            height: 32,
+
+            '&, &&.MuiChip-avatar': {
+              fontSize: 25,
+            },
+          }}
+        />
+        Big avatar
+      </Stack>
+      <Stack direction="row" gap={1} my={1}>
+        <Tooltip title="Hello World">
+          <ElementAvatar
+            userId="@oliver.sand:matrix.org"
+            displayName="Oliver Sand"
+          />
+        </Tooltip>
+        With tooltip
+      </Stack>
+      <Stack direction="row" gap={1} my={1}>
+        <Chip
+          size="small"
+          avatar={
+            <ElementAvatar
+              userId="@oliver.sand:matrix.org"
+              displayName="Oliver Sand"
+              sx={{
+                '&, &&.MuiChip-avatar': {
+                  fontSize: 15,
+                },
+              }}
+            />
+          }
+          label="Inside a Chip"
+        />
+      </Stack>
+    </Box>
+  );
+}
+
 export function TablesDemo() {
   return (
     <>
@@ -785,28 +914,31 @@ export function TablesDemo() {
           theme:
         </p>
       </Box>
-
       <Table size="small" aria-label="Widgets">
         <TableHead>
-          <TableCell>Widget</TableCell>
-          <TableCell>Description</TableCell>
+          <TableRow>
+            <TableCell>Widget</TableCell>
+            <TableCell>Description</TableCell>
+          </TableRow>
         </TableHead>
-        <TableRow>
-          <TableCell>Poll Widget</TableCell>
-          <TableCell>A widget to collect votes</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Meetings Widget</TableCell>
-          <TableCell>Organize meetings in Matrix rooms</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Whiteboard Widget</TableCell>
-          <TableCell>Collaborative draw or present</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>BarCamp Widget</TableCell>
-          <TableCell>Host BarCamps using Matrix</TableCell>
-        </TableRow>
+        <TableBody>
+          <TableRow>
+            <TableCell>Poll Widget</TableCell>
+            <TableCell>A widget to collect votes</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Meetings Widget</TableCell>
+            <TableCell>Organize meetings in Matrix rooms</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Whiteboard Widget</TableCell>
+            <TableCell>Collaborative draw or present</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>BarCamp Widget</TableCell>
+            <TableCell>Host BarCamps using Matrix</TableCell>
+          </TableRow>
+        </TableBody>
       </Table>
     </>
   );

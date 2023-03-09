@@ -1,5 +1,28 @@
 # `@matrix-widget-toolkit/mui`
 
+## 1.1.2
+
+### Patch Changes
+
+- b69a2d5: Fix issue with generated avatar URLs.
+
+## 1.1.1
+
+### Patch Changes
+
+- 7d9c65b: Forward `ref` in `<ElementAvatar>`.
+
+## 1.1.0
+
+### Minor Changes
+
+- d9a69d4: Add a new `<ElementAvatar>` component for displaying user and room avatars in
+  the style of Element.
+
+### Patch Changes
+
+- bd1bab6: Set a custom border color for tables.
+
 ## 1.0.7
 
 ### Patch Changes
