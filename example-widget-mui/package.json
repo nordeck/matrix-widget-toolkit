@@ -13,7 +13,7 @@
     "@matrix-widget-toolkit/mui": "1.1.2",
     "@matrix-widget-toolkit/react": "1.0.4",
     "@reduxjs/toolkit": "^1.9.3",
-    "i18next": "^22.0.4",
+    "i18next": "^22.4.11",
     "i18next-chained-backend": "^4.0.0",
     "i18next-http-backend": "^2.1.1",
     "joi": "^17.8.3",
