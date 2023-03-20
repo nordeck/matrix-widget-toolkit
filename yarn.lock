@@ -6580,10 +6580,10 @@ i18next-browser-languagedetector@^7.0.1:
   dependencies:
     "@babel/runtime" "^7.19.4"
 
-i18next-chained-backend@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/i18next-chained-backend/-/i18next-chained-backend-4.0.0.tgz#97679ee4b6e04e1ad96e49b3c4ab755ff62238eb"
-  integrity sha512-gOfkl2tvRDSMKQ2vaYbP+n5fsHeYM/836/Co8/NVP8LplRE8Ck7IrKWswp4vKw4D5Ji7cEdzA4drrG4ssgsXIg==
+i18next-chained-backend@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/i18next-chained-backend/-/i18next-chained-backend-4.2.0.tgz#8d2ccba6f2faca14d2bc5023ba61c759215b99a9"
+  integrity sha512-p3qhv6GMouhpcFPnOBqSDsQyVrwZu+PKr+kXaEAGE+w9O39t4pbpBsFYjxh4Nvhn8MUEXstaDx4ZuQvsNlI5fg==
   dependencies:
     "@babel/runtime" "^7.19.4"
 
