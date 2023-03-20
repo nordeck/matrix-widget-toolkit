@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "@emotion/cache": "^11.10.5",
-    "@emotion/react": "^11.10.5",
+    "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.5",
     "@fontsource/inter": "^4.5.14",
     "@mui/icons-material": "^5.11.0",
