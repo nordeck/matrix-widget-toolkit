@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "matrix-widget-api": "^1.1.1",
-    "qs": "^6.11.0",
+    "qs": "^6.11.1",
     "rxjs": "^7.8.0"
   },
   "repository": {
