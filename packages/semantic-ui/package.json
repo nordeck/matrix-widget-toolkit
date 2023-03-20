@@ -40,7 +40,7 @@
     "@fontsource/lato": "^4.5.10",
     "@matrix-widget-toolkit/api": "^3.0.0",
     "@matrix-widget-toolkit/react": "^1.0.4",
-    "i18next": "^22.0.4",
+    "i18next": "^22.4.12",
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-resources-to-backend": "^1.0.0",
     "matrix-widget-api": "^1.1.1",
