@@ -26,6 +26,8 @@ export function CopyableCode({ code }: { code: string }): ReactElement {
   const [hasCopied, setHasCopied] = useState(false);
   const [, copyToClipboard] = useCopyToClipboard();
 
+  const copyLabel = t('code.copy-to-clipboard', 'Copy to clipboard');
+
   return (
     <Paper sx={{ position: 'relative' }}>
       <Box sx={{ overflowY: 'auto' }}>
@@ -46,7 +48,7 @@ export function CopyableCode({ code }: { code: string }): ReactElement {
             setHasCopied(true);
           }}
           onBlur={() => setHasCopied(false)}
-          aria-label={t('code.copy-to-clipboard', 'Copy to clipboard')}
+          aria-label={copyLabel}
         >
           {hasCopied ? <CheckOutlinedIcon /> : <ContentCopyOutlinedIcon />}
         </IconButton>

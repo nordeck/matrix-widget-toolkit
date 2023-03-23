@@ -20,7 +20,7 @@ import {
   MuiWidgetApiProvider,
 } from '@matrix-widget-toolkit/mui';
 import { ReactElement, Suspense } from 'react';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AllRoomsPage } from '../AllRoomsPage';
 import { DicePage } from '../DicePage';
 import { IdentityPage } from '../IdentityPage';
@@ -38,7 +38,7 @@ export function App({
   widgetApiPromise: Promise<WidgetApi>;
 }): ReactElement {
   return (
-    <MemoryRouter>
+    <BrowserRouter>
       <MuiThemeProvider>
         {/* Fallback suspense if no higher one is registered (used for i18n) */}
         <Suspense fallback={<></>}>
@@ -66,6 +66,6 @@ export function App({
           </MuiWidgetApiProvider>
         </Suspense>
       </MuiThemeProvider>
-    </MemoryRouter>
+    </BrowserRouter>
   );
 }
