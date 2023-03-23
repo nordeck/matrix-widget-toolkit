@@ -47,7 +47,7 @@
     "@mui/utils": "^5.11.2",
     "@matrix-widget-toolkit/api": "^3.0.0",
     "@matrix-widget-toolkit/react": "^1.0.4",
-    "i18next": "^22.0.4",
+    "i18next": "^22.4.13",
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-resources-to-backend": "^1.0.0",
     "lodash": "^4.17.21",
