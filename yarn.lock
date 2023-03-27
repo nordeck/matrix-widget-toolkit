@@ -7199,10 +7199,10 @@ jake@^10.8.5:
     filelist "^1.0.1"
     minimatch "^3.0.4"
 
-jest-axe@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/jest-axe/-/jest-axe-7.0.0.tgz#0658629bdff87d50d35cb9eca66a9b462fb0092b"
-  integrity sha512-y+TH+GGH7zOYABWv5IrtGx4ove1dYcVg9Nv9pJZcqKQ+2goJCkAYoHAqergPaV/y9hh1Q9vZykjSXC/2U0Mjyg==
+jest-axe@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/jest-axe/-/jest-axe-7.0.1.tgz#ddc81ac979a39d081872cbd2cd32c111c7365031"
+  integrity sha512-1JoEla6gL4rcsTxEWm+VBcWMwOhP3f9w4dH7/YW3H41nU08Dds3gUFqxgdAq/pzBNPpauC3QPr/BuO+0W8eamg==
   dependencies:
     axe-core "4.5.1"
     chalk "4.1.2"
@@ -10386,10 +10386,10 @@ rollup@^2.43.1:
   optionalDependencies:
     fsevents "~2.3.2"
 
-rollup@^3.18.0:
-  version "3.18.0"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-3.18.0.tgz#2354ba63ba66d6a09c652c3ea0dbcd9dad72bbde"
-  integrity sha512-J8C6VfEBjkvYPESMQYxKHxNOh4A5a3FlP+0BETGo34HEcE4eTlgCrO2+eWzlu2a/sHs2QUkZco+wscH7jhhgWg==
+rollup@^3.20.2:
+  version "3.20.2"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-3.20.2.tgz#f798c600317f216de2e4ad9f4d9ab30a89b690ff"
+  integrity sha512-3zwkBQl7Ai7MFYQE0y1MeQ15+9jsi7XxfrqwTb/9EK8D9C9+//EBR4M+CuA1KODRaNbFez/lWxA5vhEGZp4MUg==
   optionalDependencies:
     fsevents "~2.3.2"
 
