@@ -35,7 +35,7 @@
     "@matrix-widget-toolkit/api": "^3.0.0",
     "matrix-widget-api": "^1.1.1",
     "react": "^17.0.2",
-    "react-error-boundary": "^3.1.4",
+    "react-error-boundary": "^4.0.2",
     "react-use": "^17.4.0"
   },
   "repository": {
