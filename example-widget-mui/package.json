@@ -66,6 +66,6 @@
     "i18next-parser": "^7.7.0",
     "jest-axe": "^7.0.1",
     "msw": "^1.0.0",
-    "typescript": "^4.8.4"
+    "typescript": "^5.0.3"
   }
 }
