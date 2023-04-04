@@ -35,7 +35,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/nordeck/matrix-widget-toolkit.git",
-    "directory": "packages/api"
+    "directory": "packages/testing"
   },
   "publishConfig": {
     "main": "./build/cjs/index.js",
