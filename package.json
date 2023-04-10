@@ -38,7 +38,7 @@
     "eslint-plugin-notice": "^0.9.10",
     "eslint-plugin-promise": "^6.1.1",
     "husky": "^8.0.3",
-    "lint-staged": "^13.2.0",
+    "lint-staged": "^13.2.1",
     "prettier": "^2.8.7",
     "prettier-plugin-organize-imports": "^3.2.2",
     "rollup": "^3.20.2",
