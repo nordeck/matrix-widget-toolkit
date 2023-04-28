@@ -126,7 +126,7 @@ export const InvitationsView = (): ReactElement => {
           )}
           disablePortal
           multiple
-          loading={loading || true}
+          loading={loading}
           renderTags={(value, getTagProps) =>
             value.map((option, index) => (
               <Chip
