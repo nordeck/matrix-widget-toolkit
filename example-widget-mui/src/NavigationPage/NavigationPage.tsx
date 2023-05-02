@@ -99,6 +99,12 @@ export const NavigationPage = (): ReactElement => {
         />
 
         <NavigationItem
+          to="/invitations"
+          title="User Directory and Invitations"
+          description="Example on how to search the user directory"
+        />
+
+        <NavigationItem
           to="/theme"
           title="Theme"
           description="Example on how to build UIs using Mui that match the

@@ -61,6 +61,7 @@ describe('WidgetApiImpl', () => {
       requestOpenIDConnectToken: jest.fn(),
       getTurnServers: jest.fn(),
       readEventRelations: jest.fn(),
+      searchUserDirectory: jest.fn(),
       transport: {
         reply: jest.fn(),
       },
@@ -2138,6 +2139,44 @@ describe('WidgetApiImpl', () => {
         undefined,
         undefined,
         undefined,
+        undefined
+      );
+    });
+  });
+
+  describe('searchUserDirectory', () => {
+    it('should search the user directory', async () => {
+      matrixWidgetApi.searchUserDirectory.mockResolvedValue({
+        limited: true,
+        results: [
+          {
+            user_id: '@user-id',
+            display_name: 'User',
+            avatar_url: 'mxc://...',
+          },
+        ],
+      });
+
+      await expect(
+        widgetApi.searchUserDirectory('user', { limit: 5 })
+      ).resolves.toEqual({
+        results: [
+          { userId: '@user-id', displayName: 'User', avatarUrl: 'mxc://...' },
+        ],
+      });
+      expect(matrixWidgetApi.searchUserDirectory).toBeCalledWith('user', 5);
+    });
+
+    it('should reject if reading the relations room event fails', async () => {
+      matrixWidgetApi.searchUserDirectory.mockRejectedValue(
+        new Error('Power to low')
+      );
+
+      await expect(widgetApi.searchUserDirectory('user')).rejects.toThrowError(
+        'Power to low'
+      );
+      expect(matrixWidgetApi.searchUserDirectory).toBeCalledWith(
+        'user',
         undefined
       );
     });
