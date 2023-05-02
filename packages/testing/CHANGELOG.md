@@ -1,5 +1,18 @@
 # `@matrix-widget-toolkit/testing`
 
+## 2.3.0
+
+### Minor Changes
+
+- a021ec7: Implement searching the user directory.
+
+### Patch Changes
+
+- a021ec7: Bump `matrix-widget-api` from 1.1.1 to 1.3.1.
+- Updated dependencies [a021ec7]
+- Updated dependencies [a021ec7]
+  - @matrix-widget-toolkit/api@3.2.0
+
 ## 2.2.1
 
 ### Patch Changes

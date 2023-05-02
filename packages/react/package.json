@@ -1,6 +1,6 @@
 {
   "name": "@matrix-widget-toolkit/react",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A simplified layer on top of @matrix-widget-toolkit/api to use it in a React based widget.",
   "author": "Nordeck IT + Consulting GmbH",
   "license": "Apache-2.0",
@@ -32,7 +32,7 @@
     "generate-api-report": "tsc && api-extractor run --verbose --local"
   },
   "dependencies": {
-    "@matrix-widget-toolkit/api": "^3.0.0",
+    "@matrix-widget-toolkit/api": "^3.2.0",
     "matrix-widget-api": "^1.3.1",
     "react": "^17.0.2",
     "react-error-boundary": "^3.1.4",

@@ -1,5 +1,18 @@
 # `@matrix-widget-toolkit/semantic-ui`
 
+## 1.0.5
+
+### Patch Changes
+
+- 6ab8ca1: Bump `react-i18next` from 12.0.0 to 12.2.0.
+- 6ab8ca1: Bump `i18next-resources-to-backend` from 1.0.0 to 1.1.3.
+- a021ec7: Bump `matrix-widget-api` from 1.1.1 to 1.3.1.
+- 6ab8ca1: Bump `i18next` from 22.0.4 to 22.4.14.
+- Updated dependencies [a021ec7]
+- Updated dependencies [a021ec7]
+  - @matrix-widget-toolkit/api@3.2.0
+  - @matrix-widget-toolkit/react@1.0.5
+
 ## 1.0.4
 
 ### Patch Changes
