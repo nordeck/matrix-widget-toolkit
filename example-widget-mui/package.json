@@ -60,7 +60,7 @@
     "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^27.5.2",
     "@types/jest-axe": "^3.5.5",
-    "@types/node": "^16.18.23",
+    "@types/node": "^20.1.4",
     "@types/react": "^17.0.45",
     "@types/react-dom": "^17.0.16",
     "i18next-parser": "^7.7.0",
