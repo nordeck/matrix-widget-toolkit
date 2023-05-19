@@ -1,5 +1,24 @@
 # `@matrix-widget-toolkit/mui`
 
+## 1.1.3
+
+### Patch Changes
+
+- dc4b321: Bump `@mui/icons-material` from 5.11.0 to 5.11.16.
+- 6ab8ca1: Bump `react-i18next` from 12.0.0 to 12.2.0.
+- cf34f21: Bump `@emotion/styled` from 11.10.5 to 11.10.6.
+- c66f556: Bump `@fontsource/inter` from 4.5.14 to 4.5.15
+- 6ab8ca1: Bump `i18next-resources-to-backend` from 1.0.0 to 1.1.3.
+- a021ec7: Bump `matrix-widget-api` from 1.1.1 to 1.3.1.
+- 0019bb6: Bump `@mui/utils` from 5.11.2 to 5.12.0.
+- fb88430: Bump `@mui/material` from 5.11.3 to 5.12.0.
+- 6ab8ca1: Bump `i18next` from 22.0.4 to 22.4.14.
+- 8fef193: Bump `@emotion/react` from 11.10.5 to 11.10.6.
+- Updated dependencies [a021ec7]
+- Updated dependencies [a021ec7]
+  - @matrix-widget-toolkit/api@3.2.0
+  - @matrix-widget-toolkit/react@1.0.5
+
 ## 1.1.2
 
 ### Patch Changes

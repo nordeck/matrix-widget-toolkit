@@ -1,5 +1,14 @@
 # `@matrix-widget-toolkit/react`
 
+## 1.0.5
+
+### Patch Changes
+
+- a021ec7: Bump `matrix-widget-api` from 1.1.1 to 1.3.1.
+- Updated dependencies [a021ec7]
+- Updated dependencies [a021ec7]
+  - @matrix-widget-toolkit/api@3.2.0
+
 ## 1.0.4
 
 ### Patch Changes
