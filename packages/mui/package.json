@@ -38,9 +38,9 @@
     "generate-api-report": "tsc && api-extractor run --verbose --local"
   },
   "dependencies": {
-    "@emotion/cache": "^11.10.7",
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
     "@fontsource/inter": "^4.5.15",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.12.0",
