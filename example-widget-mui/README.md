@@ -15,6 +15,10 @@ The widget demonstrates:
 - How to use the UI components so the widget match the style of Element ([`Theme`](./src/ThemePage/ThemePage.tsx)).
 - And other examples…
 
+## Demo
+
+[Click here](https://example-widget-mui.widgets.demo.nordeck.io) and follow the instructions to see it in action.
+
 ## Running the Widget Locally
 
 The widget is embedded into the widget host as an iframe.

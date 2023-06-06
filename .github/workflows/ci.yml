@@ -233,3 +233,37 @@ jobs:
           platforms: ${{ env.DOCKER_PLATFORMS }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+  deploy:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    name: Deploy to Demo
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: build
+    environment:
+      name: example-widget-mui.widgets.demo.nordeck.io
+      url: https://example-widget-mui.widgets.demo.nordeck.io
+    steps:
+      - name: Generate GitHub token
+        id: generate_token
+        uses: tibdex/github-app-token@b62528385c34dbc9f38e5f4225ac829252d1ea92 # @v1.8.0
+        with:
+          app_id: ${{ secrets.GH_APP_OS_APP_ID }}
+          private_key: ${{ secrets.GH_APP_OS_PRIVATE_KEY }}
+
+      - name: Trigger Workflow
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ steps.generate_token.outputs.token }}
+          script: |
+            github.rest.actions.createWorkflowDispatch({
+              owner: 'nordeck',
+              repo: '${{ secrets.GITOPS_DEPLOY_REPOSITORY }}',
+              workflow_id: 'deployment.yml',
+              ref: 'main',
+              inputs: {
+                environment: '${{ secrets.GITOPS_DEPLOY_ENVIRONMENT}}',
+                application: 'matrix-widget-toolkit',
+                tag: '${{ github.sha }}'
+              }
+            })
