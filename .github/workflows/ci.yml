@@ -211,13 +211,13 @@ jobs:
 
           # try to fetch the manifest. exits with status 0 if the
           # tag exists and with status 1 if not.
-          OUTPUT=$(docker manifest inspect $DOCKER_IMAGE:$SEARCH_TAG 2>&1)
+          OUTPUT=$(docker buildx imagetools inspect $DOCKER_IMAGE:$SEARCH_TAG 2>&1)
           RESULT=$([[ "$?" == 0 ]] && echo "true" || echo "false")
 
           echo $OUTPUT
 
           # throw an error if the output is unexpected, e.g. due to a network problem.
-          if [[ $RESULT == "false" ]] && [[ $OUTPUT != "manifest unknown" ]]; then
+          if [[ $RESULT == "false" ]] && [[ $OUTPUT != "ERROR: $DOCKER_IMAGE:$SEARCH_TAG: not found" ]]; then
             echo "Unexpected error"
             exit 1
           fi
