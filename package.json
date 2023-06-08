@@ -14,7 +14,7 @@
     "start:example:semantic-ui": "yarn workspace @matrix-widget-toolkit/example-widget-semantic-ui start",
     "build": "yarn workspaces run build",
     "test": "jest --watch",
-    "test:all": "jest --coverage",
+    "test:all": "jest --coverage --maxWorkers=50%",
     "tsc": "yarn workspaces run tsc",
     "lint": "yarn workspaces run lint --max-warnings=0",
     "prettier:check": "prettier --check .",
