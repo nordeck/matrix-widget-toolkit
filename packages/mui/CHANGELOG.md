@@ -1,5 +1,23 @@
 # `@matrix-widget-toolkit/mui`
 
+## 1.1.4
+
+### Patch Changes
+
+- b9464f2: Bump `@fontsource/inter` 4.5.15 to 5.0.2.
+- dbcd147: Bump `react-i18next` 12.2.0 to 12.3.1.
+- 05f5772: Bump `i18next-browser-languagedetector` 7.0.1 to 7.0.2.
+- d1d4e55: Sort the emoji font families last.
+- 338ec6c: Bump `@emotion/cache` from 11.10.5 to 11.11.0.
+- 7f767e7: Bump `@emotion/react` from 11.10.5 to 11.11.1.
+- 380109a: Bump `@emotion/styled` from 11.10.5 to 11.11.0.
+- 9e8e0ca: Bump `@mui/material` from 5.12.0 to 5.13.4.
+- 0122c04: Bump `i18next` from 22.4.14 to 22.5.1.
+- c74da76: Bump `@mui/utils` from 5.12.0 to 5.13.1.
+- Updated dependencies [cd3d072]
+- Updated dependencies [f65e688]
+  - @matrix-widget-toolkit/api@3.2.1
+
 ## 1.1.3
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # `@matrix-widget-toolkit/api`
 
+## 3.2.1
+
+### Patch Changes
+
+- cd3d072: Bump `rxjs` 7.8.0 to 7.8.1.
+- f65e688: Bump `qs` 6.11.0 to 6.11.2.
+
 ## 3.2.0
 
 ### Minor Changes

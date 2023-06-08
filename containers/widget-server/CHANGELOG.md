@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/widget-server`
 
+## 1.0.3
+
+### Patch Changes
+
+- aeae7b0: Bump nginx from 1.23.4-alpine-perl to 1.25.0-alpine-perl.
+
 ## 1.0.2
 
 ### Patch Changes
