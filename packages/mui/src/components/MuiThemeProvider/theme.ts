@@ -20,12 +20,12 @@ import { getEnvironment } from './environment';
 
 const fontFamily = [
   'Inter',
-  'Twemoji',
-  '"Apple Color Emoji"',
-  '"Segoe UI Emoji"',
   'Arial',
   'Helvetica',
   'sans-serif',
+  'Twemoji',
+  '"Apple Color Emoji"',
+  '"Segoe UI Emoji"',
   '"Noto Color Emoji"',
 ].join(',');
 
