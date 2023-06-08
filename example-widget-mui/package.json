@@ -15,7 +15,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "i18next": "^22.5.1",
     "i18next-chained-backend": "^4.2.0",
-    "i18next-http-backend": "^2.2.0",
+    "i18next-http-backend": "^2.2.1",
     "joi": "^17.9.1",
     "lodash": "^4.17.21",
     "matrix-widget-api": "^1.3.1",
