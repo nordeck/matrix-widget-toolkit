@@ -1,5 +1,17 @@
 # `@matrix-widget-toolkit/semantic-ui`
 
+## 1.0.6
+
+### Patch Changes
+
+- dbcd147: Bump `react-i18next` 12.2.0 to 12.3.1.
+- 05f5772: Bump `i18next-browser-languagedetector` 7.0.1 to 7.0.2.
+- b73df65: Bump `@fontsource/lato` 4.5.10 to 5.0.2.
+- 0122c04: Bump `i18next` from 22.4.14 to 22.5.1.
+- Updated dependencies [cd3d072]
+- Updated dependencies [f65e688]
+  - @matrix-widget-toolkit/api@3.2.1
+
 ## 1.0.5
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # `@matrix-widget-toolkit/testing`
 
+## 2.3.1
+
+### Patch Changes
+
+- cd3d072: Bump `rxjs` 7.8.0 to 7.8.1.
+- Updated dependencies [cd3d072]
+- Updated dependencies [f65e688]
+  - @matrix-widget-toolkit/api@3.2.1
+
 ## 2.3.0
 
 ### Minor Changes
