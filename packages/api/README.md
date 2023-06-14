@@ -19,7 +19,7 @@ yarn add @matrix-widget-toolkit/api
 
 ### Creating a `WidgetApi` instance
 
-Creating the `WidgetApi` instance should be done as early as possible in your code because otherwise the widget misses the connection estabilshment by the widget host (especially on Safari).
+Creating the `WidgetApi` instance should be done as early as possible in your code because otherwise the widget misses the connection establishment by the widget host (especially on Safari).
 
 ```typescript
 import { WidgetApiImpl } from '@matrix-widget-toolkit/api';
