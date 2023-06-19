@@ -58,7 +58,7 @@
     "@testing-library/react": "^12.1.5",
     "@testing-library/user-event": "^14.4.3",
     "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.34",
+    "@types/node": "^16.18.36",
     "@types/react": "^17.0.45",
     "@types/react-dom": "^17.0.16",
     "i18next-parser": "^8.0.0",
