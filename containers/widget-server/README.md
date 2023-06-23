@@ -14,6 +14,8 @@ The container has the following features:
 - Supports read-only file systems (`docker run --read-only ...` or `readOnlyRootFilesystem: true`).
 - Exposes the application on port `8080`.
 
+> TODO! describe how to register REACT*APP*\* variables
+
 ## Usage
 
 This container works best with widgets that are build in the latest Create React App (CRA) version (we recommend `>=5.0.0`).
