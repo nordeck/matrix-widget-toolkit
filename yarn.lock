@@ -1631,10 +1631,10 @@
     "@babel/runtime" "^7.10.4"
     react-is "^16.6.3"
 
-"@fontsource/inter@^5.0.2":
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/@fontsource/inter/-/inter-5.0.2.tgz#fdaae4af1000601f9321f828d43d0892a818af6d"
-  integrity sha512-pQ1ms5nbprD+7Dnu5h0T9XOSJi5pvOanLCxi6mA9/5wclXFkkzvZo31ddoD8/Urncx11967qTnvGglPeWEOT+Q==
+"@fontsource/inter@^5.0.5":
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/@fontsource/inter/-/inter-5.0.5.tgz#bd3e923660cc4632d09b1882d104b0cb9430dec6"
+  integrity sha512-RE1JmWRB6Kxo+1nXUnORSSH5uKgUZ2QEQE+h/nsNt758C+17G9y26E9QiAsIqsG13NpKhwn22EeECfyC+da5ew==
 
 "@fontsource/lato@^5.0.2":
   version "5.0.2"
