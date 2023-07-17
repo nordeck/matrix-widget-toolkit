@@ -10,7 +10,7 @@
     "@matrix-widget-toolkit/react": "1.0.5",
     "@matrix-widget-toolkit/semantic-ui": "1.0.6",
     "@reduxjs/toolkit": "^1.9.5",
-    "i18next": "^22.5.1",
+    "i18next": "^23.2.11",
     "i18next-chained-backend": "^4.3.0",
     "i18next-http-backend": "^2.2.1",
     "joi": "^17.9.2",
