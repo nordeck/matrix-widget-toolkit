@@ -69,14 +69,14 @@ As the methods of the mock are using `jest.fn()`, you can verify all of them:
 widgetApi.sendStateEvent(
   'm.room.topic',
   { topic: 'A brief description' },
-  { roomId: '!my-room' }
+  { roomId: '!my-room' },
 );
 
 // Verify that the event was send in your test:
 expect(widgetApi.sendStateEvent).toBeCalledWith(
   'm.room.topic',
   { topic: 'A brief description' },
-  { roomId: '!my-room' }
+  { roomId: '!my-room' },
 );
 ```
 

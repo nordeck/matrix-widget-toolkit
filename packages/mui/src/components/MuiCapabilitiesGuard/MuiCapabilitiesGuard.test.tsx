@@ -43,7 +43,7 @@ describe('<MuiCapabilitiesGuard>', () => {
       <MuiCapabilitiesGuard capabilities={['com.example.my-capability']}>
         <div>Child</div>
       </MuiCapabilitiesGuard>,
-      { wrapper }
+      { wrapper },
     );
 
     expect(await screen.findByText('Missing capabilities')).toBeInTheDocument();
@@ -59,7 +59,7 @@ describe('<MuiCapabilitiesGuard>', () => {
       <MuiCapabilitiesGuard capabilities={['com.example.my-capability']}>
         <div>Child</div>
       </MuiCapabilitiesGuard>,
-      { wrapper }
+      { wrapper },
     );
 
     expect(await screen.findByText('Missing capabilities')).toBeInTheDocument();

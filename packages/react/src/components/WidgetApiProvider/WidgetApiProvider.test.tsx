@@ -33,7 +33,7 @@ import { WidgetApiProvider } from './WidgetApiProvider';
 jest.mock('@matrix-widget-toolkit/api');
 
 const hasRequiredWidgetParameters = jest.mocked(
-  hasRequiredWidgetParametersMocked
+  hasRequiredWidgetParametersMocked,
 );
 const extractWidgetParameters = jest.mocked(extractWidgetParametersMocked);
 
@@ -115,7 +115,7 @@ describe('WidgetApiProvider', () => {
     render(
       <WidgetApiProviderWithUi widgetApiPromise={widgetApiPromise}>
         <div>Children</div>
-      </WidgetApiProviderWithUi>
+      </WidgetApiProviderWithUi>,
     );
 
     expect(await screen.findByText('Loading')).toBeInTheDocument();
@@ -128,7 +128,7 @@ describe('WidgetApiProvider', () => {
     render(
       <WidgetApiProviderWithUi widgetApiPromise={widgetApiPromise}>
         <div>Children</div>
-      </WidgetApiProviderWithUi>
+      </WidgetApiProviderWithUi>,
     );
 
     expect(await screen.findByText('Children')).toBeInTheDocument();
@@ -151,7 +151,7 @@ describe('WidgetApiProvider', () => {
     render(
       <WidgetApiProviderWithUi widgetApiPromise={widgetApiPromise}>
         <Child />
-      </WidgetApiProviderWithUi>
+      </WidgetApiProviderWithUi>,
     );
 
     expect(await screen.findByText('Child')).toBeInTheDocument();
@@ -168,14 +168,14 @@ describe('WidgetApiProvider', () => {
     render(
       <WidgetApiProviderWithUi widgetApiPromise={widgetApiPromise}>
         <div>Children</div>
-      </WidgetApiProviderWithUi>
+      </WidgetApiProviderWithUi>,
     );
 
     expect(await screen.findByText('Missing capabilities')).toBeInTheDocument();
     expect(widgetApi.hasInitialCapabilities).toBeCalled();
 
     await userEvent.click(
-      screen.getByRole('button', { name: 'Request capabilities' })
+      screen.getByRole('button', { name: 'Request capabilities' }),
     );
 
     expect(widgetApi.rerequestInitialCapabilities).toBeCalled();
@@ -191,11 +191,11 @@ describe('WidgetApiProvider', () => {
     render(
       <WidgetApiProviderWithUi widgetApiPromise={widgetApiPromise}>
         <div>Children</div>
-      </WidgetApiProviderWithUi>
+      </WidgetApiProviderWithUi>,
     );
 
     expect(
-      await screen.findByText('Only runs as a widget')
+      await screen.findByText('Only runs as a widget'),
     ).toBeInTheDocument();
   });
 
@@ -205,11 +205,11 @@ describe('WidgetApiProvider', () => {
     render(
       <WidgetApiProviderWithUi widgetApiPromise={widgetApiPromise}>
         <div>Children</div>
-      </WidgetApiProviderWithUi>
+      </WidgetApiProviderWithUi>,
     );
 
     expect(
-      await screen.findByText('Mobile clients are not supported')
+      await screen.findByText('Mobile clients are not supported'),
     ).toBeInTheDocument();
   });
 
@@ -220,11 +220,11 @@ describe('WidgetApiProvider', () => {
     render(
       <WidgetApiProviderWithUi widgetApiPromise={widgetApiPromise}>
         <div>Children</div>
-      </WidgetApiProviderWithUi>
+      </WidgetApiProviderWithUi>,
     );
 
     expect(
-      await screen.findByText('Wrong widget registration')
+      await screen.findByText('Wrong widget registration'),
     ).toBeInTheDocument();
   });
 
@@ -239,7 +239,7 @@ describe('WidgetApiProvider', () => {
     render(
       <WidgetApiProviderWithUi widgetApiPromise={widgetApiPromise}>
         <Child />
-      </WidgetApiProviderWithUi>
+      </WidgetApiProviderWithUi>,
     );
 
     expect(await screen.findByText('Child Error')).toBeInTheDocument();

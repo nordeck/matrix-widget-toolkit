@@ -72,7 +72,7 @@ describe('generateWidgetRegistrationUrl', () => {
     const url = generateWidgetRegistrationUrl();
 
     expect(url).toEqual(
-      'https://example.com/#/?theme=$org.matrix.msc2873.client_theme&matrix_user_id=$matrix_user_id&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=$matrix_room_id&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language'
+      'https://example.com/#/?theme=$org.matrix.msc2873.client_theme&matrix_user_id=$matrix_user_id&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=$matrix_room_id&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language',
     );
   });
 
@@ -91,7 +91,7 @@ describe('generateWidgetRegistrationUrl', () => {
     });
 
     expect(url).toEqual(
-      'https://example.com/#/?theme=my-theme&matrix_user_id=my-userId&matrix_display_name=my-displayName&matrix_avatar_url=my-avatarUrl&matrix_room_id=my-roomId&matrix_client_id=my-clientId&matrix_client_language=my-clientLanguage'
+      'https://example.com/#/?theme=my-theme&matrix_user_id=my-userId&matrix_display_name=my-displayName&matrix_avatar_url=my-avatarUrl&matrix_room_id=my-roomId&matrix_client_id=my-clientId&matrix_client_language=my-clientLanguage',
     );
   });
 
@@ -100,7 +100,7 @@ describe('generateWidgetRegistrationUrl', () => {
     const url = generateWidgetRegistrationUrl({ pathName: 'custom' });
 
     expect(url).toEqual(
-      'https://example.com/custom#/?theme=$org.matrix.msc2873.client_theme&matrix_user_id=$matrix_user_id&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=$matrix_room_id&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language'
+      'https://example.com/custom#/?theme=$org.matrix.msc2873.client_theme&matrix_user_id=$matrix_user_id&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=$matrix_room_id&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language',
     );
   });
 
@@ -113,12 +113,12 @@ describe('generateWidgetRegistrationUrl', () => {
 
   it('should forward unknown parameters and reset known parameters', () => {
     mockLocation(
-      'https://example.com/?widgetId=some-id&parentUrl=some-url&some_query_parameter=some-value#/?theme=light&matrix_user_id=some-user&matrix_display_name=some-name&matrix_avatar_url=some-avatar&matrix_room_id=some-room&matrix_client_id=some-id&matrix_client_language=en&some_hash_parameter=some-value'
+      'https://example.com/?widgetId=some-id&parentUrl=some-url&some_query_parameter=some-value#/?theme=light&matrix_user_id=some-user&matrix_display_name=some-name&matrix_avatar_url=some-avatar&matrix_room_id=some-room&matrix_client_id=some-id&matrix_client_language=en&some_hash_parameter=some-value',
     );
     const url = generateWidgetRegistrationUrl();
 
     expect(url).toEqual(
-      'https://example.com/#/?some_query_parameter=some-value&theme=$org.matrix.msc2873.client_theme&matrix_user_id=$matrix_user_id&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=$matrix_room_id&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language&some_hash_parameter=some-value'
+      'https://example.com/#/?some_query_parameter=some-value&theme=$org.matrix.msc2873.client_theme&matrix_user_id=$matrix_user_id&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=$matrix_room_id&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language&some_hash_parameter=some-value',
     );
   });
 });
@@ -167,7 +167,7 @@ describe('repairWidgetRegistration', () => {
     expect(widgetApi.requestCapabilities).toBeCalled();
     expect(widgetApi.receiveSingleStateEvent).toBeCalledWith(
       STATE_EVENT_WIDGETS,
-      'my-widget-id'
+      'my-widget-id',
     );
     expect(widgetApi.sendStateEvent).toBeCalledWith(
       STATE_EVENT_WIDGETS,
@@ -180,7 +180,7 @@ describe('repairWidgetRegistration', () => {
         },
         url: 'https://example.com/#/?theme=$org.matrix.msc2873.client_theme&matrix_user_id=$matrix_user_id&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=$matrix_room_id&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language',
       },
-      { stateKey: 'my-widget-id' }
+      { stateKey: 'my-widget-id' },
     );
   });
 
@@ -214,7 +214,7 @@ describe('repairWidgetRegistration', () => {
     expect(widgetApi.requestCapabilities).toBeCalled();
     expect(widgetApi.receiveSingleStateEvent).toBeCalledWith(
       STATE_EVENT_WIDGETS,
-      'my-widget-id'
+      'my-widget-id',
     );
     expect(widgetApi.sendStateEvent).toBeCalledWith(
       STATE_EVENT_WIDGETS,
@@ -227,7 +227,7 @@ describe('repairWidgetRegistration', () => {
         },
         url: 'https://example.com/#/?theme=$org.matrix.msc2873.client_theme&matrix_user_id=$matrix_user_id&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=$matrix_room_id&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language',
       },
-      { stateKey: 'my-widget-id' }
+      { stateKey: 'my-widget-id' },
     );
   });
 
@@ -262,7 +262,7 @@ describe('repairWidgetRegistration', () => {
     expect(widgetApi.requestCapabilities).toBeCalled();
     expect(widgetApi.receiveSingleStateEvent).toBeCalledWith(
       STATE_EVENT_WIDGETS,
-      'my-widget-id'
+      'my-widget-id',
     );
     expect(widgetApi.sendStateEvent).toBeCalledWith(
       STATE_EVENT_WIDGETS,
@@ -275,7 +275,7 @@ describe('repairWidgetRegistration', () => {
         },
         url: 'https://example.com/path/#/?theme=$org.matrix.msc2873.client_theme&matrix_user_id=$matrix_user_id&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=$matrix_room_id&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language',
       },
-      { stateKey: 'my-widget-id' }
+      { stateKey: 'my-widget-id' },
     );
   });
 
@@ -311,7 +311,7 @@ describe('repairWidgetRegistration', () => {
     expect(widgetApi.requestCapabilities).toBeCalled();
     expect(widgetApi.receiveSingleStateEvent).toBeCalledWith(
       STATE_EVENT_WIDGETS,
-      'my-widget-id'
+      'my-widget-id',
     );
     expect(widgetApi.sendStateEvent).toBeCalledWith(
       STATE_EVENT_WIDGETS,
@@ -325,7 +325,7 @@ describe('repairWidgetRegistration', () => {
         },
         url: 'https://example.com/#/?theme=$org.matrix.msc2873.client_theme&matrix_user_id=$matrix_user_id&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=$matrix_room_id&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language',
       },
-      { stateKey: 'my-widget-id' }
+      { stateKey: 'my-widget-id' },
     );
   });
 });

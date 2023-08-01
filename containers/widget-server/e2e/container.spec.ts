@@ -32,7 +32,7 @@ test.describe('widget-server', () => {
 
   test('should show environment', async ({ page }) => {
     await expect(page.locator('#environment')).toHaveText(
-      '{"REACT_APP_EXAMPLE":"example"}'
+      '{"REACT_APP_EXAMPLE":"example"}',
     );
   });
 

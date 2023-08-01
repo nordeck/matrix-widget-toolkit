@@ -95,7 +95,7 @@ export function getContent<T>(event: RoomEventOrNewContent<T>): T {
  * @returns True, if the event is valid.
  */
 export function isValidEventWithRelatesTo(
-  event: RoomEvent
+  event: RoomEvent,
 ): event is EventWithRelatesTo<string> {
   if (!event.content || typeof event.content !== 'object') {
     return false;

@@ -31,7 +31,7 @@ export const useWidgetApi = (): WidgetApi => {
   const context = useContext(WidgetApiContext);
   if (context === undefined) {
     throw new Error(
-      'useWidgetApi must be used within a WidgetApiProvider (or WidgetApiMockProvider in tests)'
+      'useWidgetApi must be used within a WidgetApiProvider (or WidgetApiMockProvider in tests)',
     );
   }
   return context;

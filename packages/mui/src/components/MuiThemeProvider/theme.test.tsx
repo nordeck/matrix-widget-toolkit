@@ -89,10 +89,10 @@ describe.each`
         expect(
           wcagContrast(
             theme.palette.text[text],
-            theme.palette.background[background]
-          )
+            theme.palette.background[background],
+          ),
         ).toMatchObject({ regularText, largeText });
-      }
+      },
     );
 
     it.each`
@@ -121,10 +121,10 @@ describe.each`
         expect(
           wcagContrast(
             theme.palette[palette].contrastText,
-            theme.palette[palette][background]
-          )
+            theme.palette[palette][background],
+          ),
         ).toMatchObject({ regularText, largeText, uiComponent });
-      }
+      },
     );
 
     it.each`
@@ -153,10 +153,10 @@ describe.each`
         expect(
           wcagContrast(
             theme.palette[palette].main,
-            theme.palette.background[background]
-          )
+            theme.palette.background[background],
+          ),
         ).toMatchObject({ regularText, largeText, uiComponent });
-      }
+      },
     );
 
     it.each`
@@ -188,11 +188,11 @@ describe.each`
             alphaBlend(
               theme.palette[palette].main,
               theme.palette.background[background],
-              theme.palette.action.hoverOpacity
-            )
-          )
+              theme.palette.action.hoverOpacity,
+            ),
+          ),
         ).toMatchObject({ regularText, largeText, uiComponent });
-      }
+      },
     );
 
     it.each`
@@ -224,11 +224,11 @@ describe.each`
             alphaBlend(
               theme.palette[palette].main,
               theme.palette.background[background],
-              theme.palette.action.hoverOpacity
-            )
-          )
+              theme.palette.action.hoverOpacity,
+            ),
+          ),
         ).toMatchObject({ regularText, largeText, uiComponent });
-      }
+      },
     );
 
     it.each`
@@ -265,7 +265,7 @@ describe.each`
         expect(wcagContrast(iconColor, backgroundColor)).toMatchObject({
           uiComponent,
         });
-      }
+      },
     );
 
     it.each`
@@ -299,10 +299,10 @@ describe.each`
         expect(
           wcagContrast(
             getColor(theme.palette[palette].light, 0.6),
-            backgroundColor
-          )
+            backgroundColor,
+          ),
         ).toMatchObject({ regularText, largeText, uiComponent });
-      }
+      },
     );
 
     // TODO: Check switch active and inactive state against background
@@ -321,11 +321,11 @@ describe.each`
             theme.palette.text.primary,
             alphaBlend(
               theme.palette.action.selected,
-              theme.palette.background[background]
-            )
-          )
+              theme.palette.background[background],
+            ),
+          ),
         ).toMatchObject({ regularText, largeText, uiComponent });
-      }
+      },
     );
 
     it.each`
@@ -341,10 +341,10 @@ describe.each`
         expect(
           wcagContrast(
             theme.palette[palette].contrastText,
-            theme.palette[palette].main
-          )
+            theme.palette[palette].main,
+          ),
         ).toMatchObject({ regularText, largeText, uiComponent });
-      }
+      },
     );
 
     it.each`
@@ -357,10 +357,10 @@ describe.each`
         expect(
           wcagContrast(
             theme.palette.text.primary,
-            theme.palette.background[background]
-          )
+            theme.palette.background[background],
+          ),
         ).toMatchObject({ regularText, largeText, uiComponent });
-      }
+      },
     );
 
     it.each`
@@ -387,10 +387,10 @@ describe.each`
         expect(
           wcagContrast(
             theme.palette[palette].main,
-            theme.palette.background[background]
-          )
+            theme.palette.background[background],
+          ),
         ).toMatchObject({ regularText, largeText, uiComponent });
-      }
+      },
     );
 
     // TODO: Check input placeholder against background
@@ -411,10 +411,10 @@ describe.each`
         expect(
           wcagContrast(
             theme.palette.primary.main,
-            theme.palette.background[background]
-          )
+            theme.palette.background[background],
+          ),
         ).toMatchObject({ regularText, largeText, uiComponent });
-      }
+      },
     );
 
     it.each`
@@ -441,11 +441,11 @@ describe.each`
             theme.palette.text[text],
             alphaBlend(
               theme.palette.action.hover,
-              theme.palette.background[background]
-            )
-          )
+              theme.palette.background[background],
+            ),
+          ),
         ).toMatchObject({ regularText, largeText, uiComponent });
-      }
+      },
     );
 
     it.each`
@@ -472,11 +472,11 @@ describe.each`
             theme.palette.text[text],
             alphaBlend(
               theme.palette.action.selected,
-              theme.palette.background[background]
-            )
-          )
+              theme.palette.background[background],
+            ),
+          ),
         ).toMatchObject({ regularText, largeText, uiComponent });
-      }
+      },
     );
 
     it.each`
@@ -505,14 +505,14 @@ describe.each`
               theme.palette.action.hover,
               alphaBlend(
                 theme.palette.action.selected,
-                theme.palette.background[background]
-              )
-            )
-          )
+                theme.palette.background[background],
+              ),
+            ),
+          ),
         ).toMatchObject({ regularText, largeText, uiComponent });
-      }
+      },
     );
-  }
+  },
 );
 
 /**
@@ -523,7 +523,7 @@ describe.each`
 function alphaBlend(
   foregroundColor: string,
   backgroundColor: string,
-  forceAlpha?: number
+  forceAlpha?: number,
 ): string {
   let foreground = decomposeColor(foregroundColor);
   let background = decomposeColor(backgroundColor);
@@ -553,7 +553,7 @@ function alphaBlend(
  */
 function wcagContrast(
   foregroundColor: string,
-  backgroundColor: string
+  backgroundColor: string,
 ): {
   contrastRatio: number;
   regularText: { aa: boolean; aaa: boolean };
@@ -564,7 +564,7 @@ function wcagContrast(
     // The contrast ratio doesn't take alpha values for the foreground into
     // account, we have to resolve them first:
     alphaBlend(foregroundColor, backgroundColor),
-    backgroundColor
+    backgroundColor,
   );
 
   // See https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum

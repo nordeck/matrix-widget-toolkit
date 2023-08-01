@@ -108,7 +108,7 @@ export function WidgetApiProvider({
         setInitialCapabilitiesGranted(false);
       }
     },
-    []
+    [],
   );
 
   const {

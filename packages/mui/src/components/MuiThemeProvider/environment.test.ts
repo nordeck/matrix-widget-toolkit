@@ -36,7 +36,7 @@ describe('getEnvironment', () => {
 
   it('should return variable from window', async () => {
     window.__ENVIRONMENT__ = window.btoa(
-      '{"REACT_APP_EXAMPLE":"example-window"}'
+      '{"REACT_APP_EXAMPLE":"example-window"}',
     );
     const { getEnvironment } = await import('./environment');
     expect(getEnvironment('REACT_APP_EXAMPLE')).toEqual('example-window');

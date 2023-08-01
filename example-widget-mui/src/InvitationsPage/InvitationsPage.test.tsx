@@ -43,11 +43,11 @@ describe('<InvitationsPage />', () => {
     render(<InvitationsPage />, { wrapper });
 
     expect(
-      screen.getByRole('link', { name: /back to navigation/i })
+      screen.getByRole('link', { name: /back to navigation/i }),
     ).toBeInTheDocument();
 
     await expect(
-      screen.findByRole('combobox', { name: 'Users' })
+      screen.findByRole('combobox', { name: 'Users' }),
     ).resolves.toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Invite' })).toBeInTheDocument();
 
@@ -56,7 +56,7 @@ describe('<InvitationsPage />', () => {
     });
 
     expect(within(invitedUsersList).getByRole('listitem')).toHaveTextContent(
-      'Please invite a user'
+      'Please invite a user',
     );
   });
 
@@ -64,7 +64,7 @@ describe('<InvitationsPage />', () => {
     const { container } = render(<InvitationsPage />, { wrapper });
 
     await expect(
-      screen.findByRole('heading', { name: 'Invitations' })
+      screen.findByRole('heading', { name: 'Invitations' }),
     ).resolves.toBeInTheDocument();
 
     await waitFor(() => {
@@ -87,8 +87,8 @@ describe('<InvitationsPage />', () => {
   it('should show an error message when the search failed', async () => {
     widgetApi.searchUserDirectory.mockRejectedValue(
       new Error(
-        'The user_directory_search action is not supported by the client.'
-      )
+        'The user_directory_search action is not supported by the client.',
+      ),
     );
 
     render(<InvitationsPage />, { wrapper });
@@ -96,7 +96,7 @@ describe('<InvitationsPage />', () => {
     const alert = await screen.findByRole('alert');
 
     expect(alert).toHaveTextContent(
-      'The user_directory_search action is not supported by the client.'
+      'The user_directory_search action is not supported by the client.',
     );
   });
 
@@ -117,7 +117,7 @@ describe('<InvitationsPage />', () => {
     await userEvent.type(combobox, 'search');
 
     await userEvent.click(
-      await screen.findByRole('option', { name: 'User 1' })
+      await screen.findByRole('option', { name: 'User 1' }),
     );
 
     const userButton = screen.getByRole('button', { name: 'User 1' });

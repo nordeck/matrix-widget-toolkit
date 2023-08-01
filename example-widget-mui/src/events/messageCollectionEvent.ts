@@ -39,13 +39,13 @@ const messageCollectionEventSchema = Joi.object<MessageCollectionEvent, true>({
  * @returns true, if the event is valid.
  */
 export function isValidMessageCollectionEvent(
-  event: StateEvent<unknown>
+  event: StateEvent<unknown>,
 ): event is StateEvent<MessageCollectionEvent> {
   return (
     isValidEvent(
       event,
       STATE_EVENT_MESSAGE_COLLECTION,
-      messageCollectionEventSchema
+      messageCollectionEventSchema,
     ) && isStateEvent(event)
   );
 }

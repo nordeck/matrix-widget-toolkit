@@ -64,15 +64,15 @@ describe('<AllRoomsPage />', () => {
     render(<AllRoomsPage />, { wrapper });
 
     expect(
-      screen.getByRole('link', { name: /back to navigation/i })
+      screen.getByRole('link', { name: /back to navigation/i }),
     ).toBeInTheDocument();
 
     await expect(
-      screen.findByRole('heading', { name: /all rooms/i })
+      screen.findByRole('heading', { name: /all rooms/i }),
     ).resolves.toBeInTheDocument();
     expect(screen.getByText(/you have no rooms/i)).toBeInTheDocument();
     expect(
-      screen.getByRole('button', { name: /refresh the room information/i })
+      screen.getByRole('button', { name: /refresh the room information/i }),
     ).toBeInTheDocument();
   });
 
@@ -80,7 +80,7 @@ describe('<AllRoomsPage />', () => {
     const { container } = render(<AllRoomsPage />, { wrapper });
 
     await expect(
-      screen.findByRole('heading', { name: /all rooms/i })
+      screen.findByRole('heading', { name: /all rooms/i }),
     ).resolves.toBeInTheDocument();
     expect(await axe(container)).toHaveNoViolations();
   });
@@ -92,7 +92,7 @@ describe('<AllRoomsPage />', () => {
       'org.matrix.msc2762.timeline:*',
       WidgetEventCapability.forStateEvent(
         EventDirection.Receive,
-        'm.room.name'
+        'm.room.name',
       ),
       'org.matrix.msc2931.navigate',
     ]);
@@ -104,31 +104,31 @@ describe('<AllRoomsPage />', () => {
     render(<AllRoomsPage />, { wrapper });
 
     await expect(
-      screen.findByText(/you have no rooms./i)
+      screen.findByText(/you have no rooms./i),
     ).resolves.toBeInTheDocument();
   });
 
   it('should render a list of rooms', async () => {
     widgetApi.mockSendStateEvent(
-      mockRoomNameEvent({ room_id: '!room-id-1', content: { name: 'Room 1' } })
+      mockRoomNameEvent({ room_id: '!room-id-1', content: { name: 'Room 1' } }),
     );
     widgetApi.mockSendStateEvent(
-      mockRoomNameEvent({ room_id: '!room-id-2', content: { name: 'Room 2' } })
+      mockRoomNameEvent({ room_id: '!room-id-2', content: { name: 'Room 2' } }),
     );
     widgetApi.mockSendStateEvent(
-      mockRoomNameEvent({ room_id: '!room-id-3', content: { name: 'Room 3' } })
+      mockRoomNameEvent({ room_id: '!room-id-3', content: { name: 'Room 3' } }),
     );
     widgetApi.mockSendStateEvent(
-      mockRoomNameEvent({ room_id: '!room-id-4', content: { name: 'Room 4' } })
+      mockRoomNameEvent({ room_id: '!room-id-4', content: { name: 'Room 4' } }),
     );
     widgetApi.mockSendStateEvent(
-      mockRoomNameEvent({ room_id: '!room-id-5', content: { name: 'Room 5' } })
+      mockRoomNameEvent({ room_id: '!room-id-5', content: { name: 'Room 5' } }),
     );
 
     render(<AllRoomsPage />, { wrapper });
 
     await expect(
-      screen.findByText(/all your rooms:/i)
+      screen.findByText(/all your rooms:/i),
     ).resolves.toBeInTheDocument();
     expect(screen.getByRole('button', { name: /room 1/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /room 2/i })).toBeInTheDocument();
@@ -140,26 +140,26 @@ describe('<AllRoomsPage />', () => {
     render(<AllRoomsPage />, { wrapper });
 
     await expect(
-      screen.findByText(/you have no rooms/i)
+      screen.findByText(/you have no rooms/i),
     ).resolves.toBeInTheDocument();
 
     widgetApi.mockSendStateEvent(
-      mockRoomNameEvent({ room_id: '!room-id-1', content: { name: 'Room 1' } })
+      mockRoomNameEvent({ room_id: '!room-id-1', content: { name: 'Room 1' } }),
     );
 
     await userEvent.click(
-      screen.getByRole('button', { name: /refresh the room information/i })
+      screen.getByRole('button', { name: /refresh the room information/i }),
     );
 
     await expect(
-      screen.findByText(/all your rooms:/i)
+      screen.findByText(/all your rooms:/i),
     ).resolves.toBeInTheDocument();
     expect(screen.getByRole('button', { name: /room 1/i })).toBeInTheDocument();
   });
 
   it('should navigate to the room', async () => {
     widgetApi.mockSendStateEvent(
-      mockRoomNameEvent({ room_id: '!room-id-1', content: { name: 'Room 1' } })
+      mockRoomNameEvent({ room_id: '!room-id-1', content: { name: 'Room 1' } }),
     );
 
     render(<AllRoomsPage />, { wrapper });
@@ -168,7 +168,7 @@ describe('<AllRoomsPage />', () => {
     await userEvent.click(button);
 
     expect(widgetApi.navigateTo).toBeCalledWith(
-      'https://matrix.to/#/!room-id-1'
+      'https://matrix.to/#/!room-id-1',
     );
   });
 });

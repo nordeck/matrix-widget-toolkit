@@ -44,7 +44,7 @@ describe('getPowerLevels', () => {
     await expect(
       store
         .dispatch(powerLevelsApi.endpoints.getPowerLevels.initiate())
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({ content: { users_default: 50 } });
   });
 
@@ -56,7 +56,7 @@ describe('getPowerLevels', () => {
     await expect(
       store
         .dispatch(powerLevelsApi.endpoints.getPowerLevels.initiate())
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({ content: undefined });
   });
 
@@ -69,8 +69,8 @@ describe('getPowerLevels', () => {
     // wait for the initial load
     await waitFor(() =>
       expect(
-        powerLevelsApi.endpoints.getPowerLevels.select()(store.getState()).data
-      ).toEqual({ content: { users_default: 50 } })
+        powerLevelsApi.endpoints.getPowerLevels.select()(store.getState()).data,
+      ).toEqual({ content: { users_default: 50 } }),
     );
 
     widgetApi.mockSendStateEvent({
@@ -86,8 +86,8 @@ describe('getPowerLevels', () => {
     // wait for the change
     await waitFor(() =>
       expect(
-        powerLevelsApi.endpoints.getPowerLevels.select()(store.getState()).data
-      ).toEqual({ content: { users_default: 0 } })
+        powerLevelsApi.endpoints.getPowerLevels.select()(store.getState()).data,
+      ).toEqual({ content: { users_default: 0 } }),
     );
   });
 });
@@ -101,9 +101,9 @@ describe('updatePowerLevels', () => {
         .dispatch(
           powerLevelsApi.endpoints.updatePowerLevels.initiate({
             users_default: 100,
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).resolves.toMatchObject({
       content: {
         users_default: 100,
@@ -139,13 +139,13 @@ describe('updatePowerLevels', () => {
         .dispatch(
           powerLevelsApi.endpoints.updatePowerLevels.initiate({
             users_default: 100,
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).resolves.toBeDefined();
 
     expect(
-      powerLevelsApi.endpoints.getPowerLevels.select()(store.getState()).data
+      powerLevelsApi.endpoints.getPowerLevels.select()(store.getState()).data,
     ).toEqual({ content: { users_default: 100 } });
   });
 
@@ -165,13 +165,13 @@ describe('updatePowerLevels', () => {
         .dispatch(
           powerLevelsApi.endpoints.updatePowerLevels.initiate({
             users_default: 100,
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).rejects.toBeDefined();
 
     expect(
-      powerLevelsApi.endpoints.getPowerLevels.select()(store.getState()).data
+      powerLevelsApi.endpoints.getPowerLevels.select()(store.getState()).data,
     ).toEqual({ content: { users_default: 50 } });
   });
 });

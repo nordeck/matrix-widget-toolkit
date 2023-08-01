@@ -25,7 +25,7 @@ import { MuiWidgetApiProvider } from './MuiWidgetApiProvider';
 jest.mock('@matrix-widget-toolkit/api');
 
 const hasRequiredWidgetParameters = jest.mocked(
-  hasRequiredWidgetParametersMocked
+  hasRequiredWidgetParametersMocked,
 );
 
 const extractWidgetParameters = jest.mocked(extractWidgetParametersMocked);
@@ -55,7 +55,7 @@ describe('WidgetApiProvider', () => {
     render(
       <MuiWidgetApiProvider widgetApiPromise={widgetApiPromise}>
         <div>Children</div>
-      </MuiWidgetApiProvider>
+      </MuiWidgetApiProvider>,
     );
 
     expect(await screen.findByText('Children')).toBeInTheDocument();

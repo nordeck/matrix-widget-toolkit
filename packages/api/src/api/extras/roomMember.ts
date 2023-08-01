@@ -59,7 +59,7 @@ function isStringUndefinedOrNull(value: unknown): boolean {
  * @returns True, if the event is valid.
  */
 export function isValidRoomMemberStateEvent(
-  event: StateEvent<unknown>
+  event: StateEvent<unknown>,
 ): event is StateEvent<RoomMemberStateEventContent> {
   if (
     event.type !== STATE_EVENT_ROOM_MEMBER ||

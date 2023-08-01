@@ -33,7 +33,7 @@ describe('<MuiThemeProvider/>', () => {
     render(
       <MuiThemeProvider>
         <p>children</p>
-      </MuiThemeProvider>
+      </MuiThemeProvider>,
     );
 
     expect(screen.getByText(/children/)).toBeInTheDocument();
@@ -50,7 +50,7 @@ describe('chooseTheme', () => {
     'should return matching theme for $themeName theme',
     ({ themeName, theme }) => {
       expect(chooseTheme(themeName)).toBe(theme);
-    }
+    },
   );
 
   it('should override light theme with high contrast theme via environment', () => {

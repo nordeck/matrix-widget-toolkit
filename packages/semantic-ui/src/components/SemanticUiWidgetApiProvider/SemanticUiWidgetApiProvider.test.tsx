@@ -25,7 +25,7 @@ import { SemanticUiWidgetApiProvider } from './SemanticUiWidgetApiProvider';
 jest.mock('@matrix-widget-toolkit/api');
 
 const hasRequiredWidgetParameters = jest.mocked(
-  hasRequiredWidgetParametersMocked
+  hasRequiredWidgetParametersMocked,
 );
 const extractWidgetParameters = jest.mocked(extractWidgetParametersMocked);
 
@@ -54,7 +54,7 @@ describe('SemanticUiWidgetApiProvider', () => {
     render(
       <SemanticUiWidgetApiProvider widgetApiPromise={widgetApiPromise}>
         <div>Children</div>
-      </SemanticUiWidgetApiProvider>
+      </SemanticUiWidgetApiProvider>,
     );
 
     expect(await screen.findByText('Children')).toBeInTheDocument();

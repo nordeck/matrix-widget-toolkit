@@ -44,17 +44,17 @@ describe('<DicePage />', () => {
     render(<DicePage />, { wrapper });
 
     expect(
-      screen.getByRole('link', { name: /back to navigation/i })
+      screen.getByRole('link', { name: /back to navigation/i }),
     ).toBeInTheDocument();
 
     await expect(
-      screen.findByRole('heading', { name: /dice/i })
+      screen.findByRole('heading', { name: /dice/i }),
     ).resolves.toBeInTheDocument();
     expect(
-      screen.getByText(/nobody has thrown the dice in this room yet/i)
+      screen.getByText(/nobody has thrown the dice in this room yet/i),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole('button', { name: /throw dice/i })
+      screen.getByRole('button', { name: /throw dice/i }),
     ).toBeInTheDocument();
   });
 
@@ -62,7 +62,7 @@ describe('<DicePage />', () => {
     const { container } = render(<DicePage />, { wrapper });
 
     await expect(
-      screen.findByRole('heading', { name: /dice/i })
+      screen.findByRole('heading', { name: /dice/i }),
     ).resolves.toBeInTheDocument();
     expect(await axe(container)).toHaveNoViolations();
   });
@@ -73,7 +73,7 @@ describe('<DicePage />', () => {
     expect(widgetApi.requestCapabilities).toBeCalledWith([
       WidgetEventCapability.forRoomEvent(
         EventDirection.Receive,
-        'net.nordeck.throw_dice'
+        'net.nordeck.throw_dice',
       ),
     ]);
 
@@ -83,7 +83,7 @@ describe('<DicePage />', () => {
     expect(widgetApi.requestCapabilities).toBeCalledWith([
       WidgetEventCapability.forRoomEvent(
         EventDirection.Send,
-        'net.nordeck.throw_dice'
+        'net.nordeck.throw_dice',
       ),
     ]);
   });
@@ -92,7 +92,7 @@ describe('<DicePage />', () => {
     render(<DicePage />, { wrapper });
 
     await expect(
-      screen.findByText(/nobody has thrown the dice in this room yet/i)
+      screen.findByText(/nobody has thrown the dice in this room yet/i),
     ).resolves.toBeInTheDocument();
   });
 
@@ -126,7 +126,7 @@ describe('<DicePage />', () => {
     await userEvent.click(button);
 
     await expect(
-      screen.findByText(/your last throw: ./i)
+      screen.findByText(/your last throw: ./i),
     ).resolves.toBeInTheDocument();
 
     expect(widgetApi.sendRoomEvent).toBeCalledWith('net.nordeck.throw_dice', {

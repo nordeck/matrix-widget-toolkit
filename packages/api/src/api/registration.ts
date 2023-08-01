@@ -54,7 +54,7 @@ export function generateWidgetRegistrationUrl(
     pathName?: string;
     includeParameters?: boolean;
     widgetParameters?: Partial<WidgetParameters>;
-  } = {}
+  } = {},
 ): string {
   const { pathName, includeParameters = true, widgetParameters } = options;
 
@@ -102,29 +102,29 @@ export const STATE_EVENT_WIDGETS = 'im.vector.modular.widgets';
  */
 export async function repairWidgetRegistration(
   widgetApi: WidgetApi,
-  registration: WidgetRegistration = {}
+  registration: WidgetRegistration = {},
 ): Promise<void> {
   await widgetApi.requestCapabilities([
     WidgetEventCapability.forStateEvent(
       EventDirection.Send,
       STATE_EVENT_WIDGETS,
-      widgetApi.widgetId
+      widgetApi.widgetId,
     ),
     WidgetEventCapability.forStateEvent(
       EventDirection.Receive,
       STATE_EVENT_WIDGETS,
-      widgetApi.widgetId
+      widgetApi.widgetId,
     ),
   ]);
 
   const readResult = await widgetApi.receiveSingleStateEvent<IWidget>(
     STATE_EVENT_WIDGETS,
-    widgetApi.widgetId
+    widgetApi.widgetId,
   );
 
   if (!readResult) {
     throw new Error(
-      "Error while repairing registration, can't find existing registration."
+      "Error while repairing registration, can't find existing registration.",
     );
   }
 
@@ -163,7 +163,7 @@ export async function repairWidgetRegistration(
         // that feature is available.
         // See https://github.com/vector-im/element-web/issues/19435
       },
-      { stateKey: widgetApi.widgetId }
+      { stateKey: widgetApi.widgetId },
     ),
     new Promise((resolve) => setTimeout(resolve, 1000)),
   ]);

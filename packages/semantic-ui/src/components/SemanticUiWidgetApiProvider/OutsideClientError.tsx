@@ -33,7 +33,7 @@ export function OutsideClientError(): ReactElement {
           </Message.Header>
           {t(
             'outside-client.instructions',
-            "You need to register this URL as a widget, it's not possible to use it standalone. Run this command in the matrix room you want to register the widget in:"
+            "You need to register this URL as a widget, it's not possible to use it standalone. Run this command in the matrix room you want to register the widget in:",
           )}
         </Message.Content>
       </Message>

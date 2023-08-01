@@ -72,8 +72,8 @@ export const IdentityView = (): ReactElement => {
         `Error while retrieving identity: ${JSON.stringify(
           value,
           undefined,
-          '  '
-        )}`
+          '  ',
+        )}`,
       );
     }
 

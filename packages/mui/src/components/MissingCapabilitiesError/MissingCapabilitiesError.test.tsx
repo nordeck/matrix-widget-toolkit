@@ -29,7 +29,7 @@ describe('<MissingCapabilitiesError>', () => {
 
   it('should have no accessibility violations', async () => {
     const { container } = render(
-      <MissingCapabilitiesError onRetry={jest.fn()} />
+      <MissingCapabilitiesError onRetry={jest.fn()} />,
     );
 
     expect(await axe(container)).toHaveNoViolations();
@@ -40,7 +40,7 @@ describe('<MissingCapabilitiesError>', () => {
     render(<MissingCapabilitiesError onRetry={onRetry} />);
 
     await userEvent.click(
-      screen.getByRole('button', { name: /request capabilities/i })
+      screen.getByRole('button', { name: /request capabilities/i }),
     );
 
     expect(onRetry).toBeCalled();

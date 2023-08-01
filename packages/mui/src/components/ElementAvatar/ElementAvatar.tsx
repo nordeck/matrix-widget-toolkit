@@ -80,5 +80,5 @@ export const ElementAvatar = forwardRef<HTMLDivElement, ElementAvatarProps>(
         {getInitialLetter(name)}
       </StyledAvatar>
     );
-  }
+  },
 );

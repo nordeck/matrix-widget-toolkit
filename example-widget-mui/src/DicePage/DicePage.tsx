@@ -47,7 +47,7 @@ export const DicePage = (): ReactElement => {
           capabilities={[
             WidgetEventCapability.forRoomEvent(
               EventDirection.Receive,
-              STATE_EVENT_THROW_DICE
+              STATE_EVENT_THROW_DICE,
             ),
           ]}
         >
@@ -70,7 +70,7 @@ export const DiceView = (): ReactElement => {
       .observeRoomEvents(STATE_EVENT_THROW_DICE)
       .pipe(
         filter(isValidThrowDiceEvent),
-        map((r) => r.content.pips)
+        map((r) => r.content.pips),
       )
       .subscribe((d) => {
         setDices((l) => [...l, d]);
@@ -85,14 +85,14 @@ export const DiceView = (): ReactElement => {
     await widgetApi.requestCapabilities([
       WidgetEventCapability.forRoomEvent(
         EventDirection.Send,
-        STATE_EVENT_THROW_DICE
+        STATE_EVENT_THROW_DICE,
       ),
     ]);
 
     const pips = Math.floor(Math.random() * 6) + 1;
     const result = await widgetApi.sendRoomEvent<ThrowDiceEvent>(
       STATE_EVENT_THROW_DICE,
-      { pips }
+      { pips },
     );
     setLastOwnDice(result.content.pips);
   }
