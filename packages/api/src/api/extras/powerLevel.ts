@@ -51,7 +51,7 @@ function isStringToNumberMapOrUndefined(value: unknown) {
     (value !== null &&
       typeof value === 'object' &&
       Object.entries(value).every(
-        ([k, v]) => typeof k === 'string' && typeof v === 'number'
+        ([k, v]) => typeof k === 'string' && typeof v === 'number',
       ))
   );
 }
@@ -63,7 +63,7 @@ function isStringToNumberMapOrUndefined(value: unknown) {
  * @returns True, if the event is valid.
  */
 export function isValidPowerLevelStateEvent(
-  event: StateEvent<unknown>
+  event: StateEvent<unknown>,
 ): event is StateEvent<PowerLevelsStateEvent> {
   if (
     event.type !== STATE_EVENT_POWER_LEVELS ||
@@ -124,7 +124,7 @@ export function isValidPowerLevelStateEvent(
 export function hasRoomEventPower(
   powerLevelStateEvent: PowerLevelsStateEvent | undefined,
   userId: string | undefined,
-  eventType: string
+  eventType: string,
 ): boolean {
   if (!powerLevelStateEvent) {
     // See https://github.com/matrix-org/matrix-spec/blob/203b9756f52adfc2a3b63d664f18cdbf9f8bf126/data/event-schemas/schema/m.room.power_levels.yaml#L36-L43
@@ -134,7 +134,7 @@ export function hasRoomEventPower(
   const userLevel = calculateUserPowerLevel(powerLevelStateEvent, userId);
   const eventLevel = calculateRoomEventPowerLevel(
     powerLevelStateEvent,
-    eventType
+    eventType,
   );
   return userLevel >= eventLevel;
 }
@@ -150,7 +150,7 @@ export function hasRoomEventPower(
 export function hasStateEventPower(
   powerLevelStateEvent: PowerLevelsStateEvent | undefined,
   userId: string | undefined,
-  eventType: string
+  eventType: string,
 ): boolean {
   if (!powerLevelStateEvent) {
     // See https://github.com/matrix-org/matrix-spec/blob/203b9756f52adfc2a3b63d664f18cdbf9f8bf126/data/event-schemas/schema/m.room.power_levels.yaml#L36-L43
@@ -160,7 +160,7 @@ export function hasStateEventPower(
   const userLevel = calculateUserPowerLevel(powerLevelStateEvent, userId);
   const eventLevel = calculateStateEventPowerLevel(
     powerLevelStateEvent,
-    eventType
+    eventType,
   );
   return userLevel >= eventLevel;
 }
@@ -182,7 +182,7 @@ export function hasStateEventPower(
 export function hasActionPower(
   powerLevelStateEvent: PowerLevelsStateEvent | undefined,
   userId: string | undefined,
-  action: PowerLevelsActions
+  action: PowerLevelsActions,
 ): boolean {
   if (!powerLevelStateEvent) {
     // See https://github.com/matrix-org/matrix-spec/blob/203b9756f52adfc2a3b63d664f18cdbf9f8bf126/data/event-schemas/schema/m.room.power_levels.yaml#L36-L43
@@ -203,7 +203,7 @@ export function hasActionPower(
  */
 export function calculateUserPowerLevel(
   powerLevelStateEvent: PowerLevelsStateEvent,
-  userId?: string
+  userId?: string,
 ): number {
   // See https://github.com/matrix-org/matrix-spec/blob/203b9756f52adfc2a3b63d664f18cdbf9f8bf126/data/event-schemas/schema/m.room.power_levels.yaml#L8-L12
   return (
@@ -222,7 +222,7 @@ export function calculateUserPowerLevel(
  */
 export function calculateRoomEventPowerLevel(
   powerLevelStateEvent: PowerLevelsStateEvent,
-  eventType: string
+  eventType: string,
 ): number {
   // See https://github.com/matrix-org/matrix-spec/blob/203b9756f52adfc2a3b63d664f18cdbf9f8bf126/data/event-schemas/schema/m.room.power_levels.yaml#L14-L19
   return (
@@ -241,7 +241,7 @@ export function calculateRoomEventPowerLevel(
  */
 export function calculateStateEventPowerLevel(
   powerLevelStateEvent: PowerLevelsStateEvent,
-  eventType: string
+  eventType: string,
 ): number {
   // See https://github.com/matrix-org/matrix-spec/blob/203b9756f52adfc2a3b63d664f18cdbf9f8bf126/data/event-schemas/schema/m.room.power_levels.yaml#L14-L19
   return (
@@ -266,7 +266,7 @@ export function calculateStateEventPowerLevel(
  */
 export function calculateActionPowerLevel(
   powerLevelStateEvent: PowerLevelsStateEvent,
-  action: PowerLevelsActions
+  action: PowerLevelsActions,
 ): number {
   // See https://github.com/matrix-org/matrix-spec/blob/203b9756f52adfc2a3b63d664f18cdbf9f8bf126/data/event-schemas/schema/m.room.power_levels.yaml#L27-L32
   if (action === 'invite') {

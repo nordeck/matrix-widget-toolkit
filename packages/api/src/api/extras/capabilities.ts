@@ -27,7 +27,7 @@ import { Symbols } from 'matrix-widget-api';
  * @returns the generated capabilities.
  */
 export function generateRoomTimelineCapabilities(
-  roomIds: string[] | Symbols.AnyRoom
+  roomIds: string[] | Symbols.AnyRoom,
 ): string[] {
   if (roomIds === Symbols.AnyRoom) {
     return ['org.matrix.msc2762.timeline:*'];

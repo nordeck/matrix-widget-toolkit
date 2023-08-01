@@ -22,7 +22,7 @@ function createRoomMember(
   state_key: string,
   displayname?: string,
   membership: MembershipState = 'join',
-  room_id = '!roomId'
+  room_id = '!roomId',
 ): StateEvent<RoomMemberStateEventContent> {
   return {
     content: { membership, displayname },
@@ -38,15 +38,15 @@ function createRoomMember(
 describe('getRoomMemberDisplayName', () => {
   it('should use state_key of single user', () => {
     expect(
-      getRoomMemberDisplayName(createRoomMember('@my-user:matrix.to'))
+      getRoomMemberDisplayName(createRoomMember('@my-user:matrix.to')),
     ).toEqual('@my-user:matrix.to');
   });
 
   it('should use displayname of single user', () => {
     expect(
       getRoomMemberDisplayName(
-        createRoomMember('@my-user:matrix.to', 'My User')
-      )
+        createRoomMember('@my-user:matrix.to', 'My User'),
+      ),
     ).toEqual('My User');
   });
 
@@ -57,8 +57,8 @@ describe('getRoomMemberDisplayName', () => {
         [
           createRoomMember('@my-user:matrix.to', 'My User', 'join'),
           createRoomMember('@another-user:matrix.to', 'My User', 'join'),
-        ]
-      )
+        ],
+      ),
     ).toEqual('My User (@my-user:matrix.to)');
   });
 
@@ -69,8 +69,8 @@ describe('getRoomMemberDisplayName', () => {
         [
           createRoomMember('@my-user:matrix.to', 'My User', 'join'),
           createRoomMember('@another-user:matrix.to', 'My User', 'invite'),
-        ]
-      )
+        ],
+      ),
     ).toEqual('My User (@my-user:matrix.to)');
   });
 
@@ -81,8 +81,8 @@ describe('getRoomMemberDisplayName', () => {
         [
           createRoomMember('@my-user:matrix.to', 'My User', 'join'),
           createRoomMember('@another-user:matrix.to', 'My User', 'ban'),
-        ]
-      )
+        ],
+      ),
     ).toEqual('My User');
   });
 
@@ -96,10 +96,10 @@ describe('getRoomMemberDisplayName', () => {
             '@another-user:matrix.to',
             'My User',
             'join',
-            '!anotherRoomId'
+            '!anotherRoomId',
           ),
-        ]
-      )
+        ],
+      ),
     ).toEqual('My User');
   });
 });

@@ -23,7 +23,7 @@ describe('<OutsideClientError/>', () => {
 
     expect(screen.getByText('Only runs as a widget')).toBeInTheDocument();
     expect(
-      screen.getByText(/you need to register this URL as a widget/i)
+      screen.getByText(/you need to register this URL as a widget/i),
     ).toBeInTheDocument();
     expect(screen.getByText(/\/addwidget/)).toBeInTheDocument();
   });

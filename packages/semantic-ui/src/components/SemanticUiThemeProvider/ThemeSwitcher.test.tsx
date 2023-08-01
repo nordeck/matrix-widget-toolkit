@@ -43,15 +43,15 @@ describe('<ThemeSwitcher/>', () => {
 
     expect(window.document.documentElement.classList.toggle).toBeCalledWith(
       'dark',
-      classNames.includes('dark')
+      classNames.includes('dark'),
     );
     expect(window.document.documentElement.classList.toggle).toBeCalledWith(
       'light',
-      classNames.includes('light')
+      classNames.includes('light'),
     );
     expect(window.document.documentElement.classList.toggle).toBeCalledWith(
       'widgetModal',
-      classNames.includes('widgetModal')
+      classNames.includes('widgetModal'),
     );
   });
 });

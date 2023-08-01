@@ -62,7 +62,7 @@ export const ModalPage = (): ReactElement => {
           },
         ],
         data: { title: 'This is a custom title!' },
-      }
+      },
     );
 
     if (!data) {

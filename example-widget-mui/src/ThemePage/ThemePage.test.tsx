@@ -33,11 +33,11 @@ describe('<ThemePage>', () => {
     render(<ThemePage />, { wrapper });
 
     expect(
-      screen.getByRole('link', { name: 'Back to navigation' })
+      screen.getByRole('link', { name: 'Back to navigation' }),
     ).toBeInTheDocument();
 
     await expect(
-      screen.findByRole('heading', { name: /theme/i })
+      screen.findByRole('heading', { name: /theme/i }),
     ).resolves.toBeInTheDocument();
   });
 
@@ -45,7 +45,7 @@ describe('<ThemePage>', () => {
     const { container } = render(<ThemePage />, { wrapper });
 
     await expect(
-      screen.findByRole('heading', { name: /theme/i })
+      screen.findByRole('heading', { name: /theme/i }),
     ).resolves.toBeInTheDocument();
     expect(await axe(container)).toHaveNoViolations();
   }, 15000);

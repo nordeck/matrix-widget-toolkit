@@ -24,6 +24,6 @@ it('should render error message', async () => {
   render(<App widgetApiPromise={widgetApiPromise} />);
 
   await expect(
-    screen.findByText(/only runs as a widget/i)
+    screen.findByText(/only runs as a widget/i),
   ).resolves.toBeInTheDocument();
 });

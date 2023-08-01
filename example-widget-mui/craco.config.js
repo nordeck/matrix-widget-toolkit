@@ -13,7 +13,7 @@ function importLocalPackages() {
   function overrideWebpackConfig({ webpackConfig, context }) {
     const { isFound, match } = getLoader(
       webpackConfig,
-      loaderByName('babel-loader')
+      loaderByName('babel-loader'),
     );
     if (isFound) {
       const include = Array.isArray(match.loader.include)

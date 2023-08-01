@@ -23,7 +23,7 @@ import { RoomEvent, StateEvent } from '../types';
  * @returns True, if the event is a {@link StateEvent}.
  */
 export function isStateEvent(
-  event: RoomEvent | StateEvent
+  event: RoomEvent | StateEvent,
 ): event is StateEvent {
   return 'state_key' in event && typeof event.state_key === 'string';
 }

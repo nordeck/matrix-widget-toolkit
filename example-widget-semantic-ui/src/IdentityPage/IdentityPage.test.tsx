@@ -50,7 +50,7 @@ describe('<IdentityPage />', () => {
     expect(screen.getByText(/loading/i)).toBeInTheDocument();
 
     expect(
-      screen.getByRole('button', { name: /back to navigation/i })
+      screen.getByRole('button', { name: /back to navigation/i }),
     ).toBeInTheDocument();
 
     await expect(screen.findByText(/Identity/i)).resolves.toBeInTheDocument();
@@ -75,8 +75,8 @@ describe('<IdentityPage />', () => {
           }
 
           return res(ctx.json({ sub: '@alice:example.com' }));
-        }
-      )
+        },
+      ),
     );
 
     render(<IdentityPage />, { wrapper });
@@ -85,13 +85,13 @@ describe('<IdentityPage />', () => {
 
     await expect(screen.findByText(/result/i)).resolves.toBeInTheDocument();
     expect(
-      screen.getByText(`{ "sub": "@alice:example.com" }`)
+      screen.getByText(`{ "sub": "@alice:example.com" }`),
     ).toBeInTheDocument();
   });
 
   it('should show an error if the user rejected the token capability', async () => {
     widgetApi.requestOpenIDConnectToken.mockRejectedValue(
-      new Error('The user rejected the request')
+      new Error('The user rejected the request'),
     );
 
     render(<IdentityPage />, { wrapper });
@@ -99,7 +99,7 @@ describe('<IdentityPage />', () => {
     expect(screen.getByText(/loading/i)).toBeInTheDocument();
 
     await expect(
-      screen.findByText(/error: the user rejected the request/i)
+      screen.findByText(/error: the user rejected the request/i),
     ).resolves.toBeInTheDocument();
   });
 
@@ -111,7 +111,7 @@ describe('<IdentityPage />', () => {
     expect(screen.getByText(/loading/i)).toBeInTheDocument();
 
     await expect(
-      screen.findByText(/error: unknown home server/i)
+      screen.findByText(/error: unknown home server/i),
     ).resolves.toBeInTheDocument();
   });
 
@@ -125,7 +125,7 @@ describe('<IdentityPage />', () => {
     expect(screen.getByText(/loading/i)).toBeInTheDocument();
 
     await expect(
-      screen.findByText(/error: unknown token type/i)
+      screen.findByText(/error: unknown token type/i),
     ).resolves.toBeInTheDocument();
   });
 
@@ -142,8 +142,8 @@ describe('<IdentityPage />', () => {
         'https://synapse.local/_matrix/federation/v1/openid/userinfo',
         (req, res, ctx) => {
           return res(ctx.status(500), ctx.json('Internal Server Error'));
-        }
-      )
+        },
+      ),
     );
 
     render(<IdentityPage />, { wrapper });
@@ -152,8 +152,8 @@ describe('<IdentityPage />', () => {
 
     await expect(
       screen.findByText(
-        /error: error while retrieving identity: "Internal Server Error"/i
-      )
+        /error: error while retrieving identity: "Internal Server Error"/i,
+      ),
     ).resolves.toBeInTheDocument();
   });
 });

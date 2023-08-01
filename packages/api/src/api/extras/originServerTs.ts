@@ -26,7 +26,7 @@ import { RoomEvent } from '../types';
  */
 export function compareOriginServerTS<T>(
   a: RoomEvent<T>,
-  b: RoomEvent<T>
+  b: RoomEvent<T>,
 ): number {
   return a.origin_server_ts - b.origin_server_ts;
 }

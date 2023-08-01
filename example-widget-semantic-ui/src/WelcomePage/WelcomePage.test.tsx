@@ -41,7 +41,7 @@ describe('<WelcomePage />', () => {
     render(<WelcomePage />, { wrapper });
 
     expect(
-      screen.getByRole('button', { name: /back to navigation/i })
+      screen.getByRole('button', { name: /back to navigation/i }),
     ).toBeInTheDocument();
 
     expect(screen.getByText(/welcome .+/i)).toBeInTheDocument();

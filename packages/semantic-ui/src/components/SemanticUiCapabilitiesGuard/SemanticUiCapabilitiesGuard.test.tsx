@@ -42,7 +42,7 @@ describe('<CapabilitiesGuard>', () => {
       <SemanticUiCapabilitiesGuard capabilities={['com.example.my-capability']}>
         <div>Child</div>
       </SemanticUiCapabilitiesGuard>,
-      { wrapper }
+      { wrapper },
     );
 
     expect(await screen.findByText('Missing capabilities')).toBeInTheDocument();

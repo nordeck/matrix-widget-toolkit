@@ -51,7 +51,7 @@ export const roomMessagesApi = baseApi.injectEndpoints({
         try {
           const event = await widgetApi.receiveSingleStateEvent(
             STATE_EVENT_MESSAGE_COLLECTION,
-            ''
+            '',
           );
 
           return {
@@ -76,7 +76,7 @@ export const roomMessagesApi = baseApi.injectEndpoints({
       // see also https://redux-toolkit.js.org/rtk-query/usage/streaming-updates#using-the-oncacheentryadded-lifecycle
       async onCacheEntryAdded(
         _,
-        { cacheDataLoaded, cacheEntryRemoved, extra, updateCachedData }
+        { cacheDataLoaded, cacheEntryRemoved, extra, updateCachedData },
       ) {
         const { widgetApi } = extra as ThunkExtraArgument;
 
@@ -144,7 +144,7 @@ export const roomMessagesApi = baseApi.injectEndpoints({
       // see also https://redux-toolkit.js.org/rtk-query/usage/streaming-updates#using-the-oncacheentryadded-lifecycle
       async onCacheEntryAdded(
         { eventId },
-        { cacheDataLoaded, cacheEntryRemoved, extra, updateCachedData }
+        { cacheDataLoaded, cacheEntryRemoved, extra, updateCachedData },
       ) {
         const { widgetApi } = extra as ThunkExtraArgument;
 
@@ -173,10 +173,10 @@ export const roomMessagesApi = baseApi.injectEndpoints({
           (redaction) => {
             updateCachedData((data) => {
               data.reactions = data.reactions.filter(
-                (r) => r.event_id !== redaction.redacts
+                (r) => r.event_id !== redaction.redacts,
               );
             });
-          }
+          },
         );
 
         const messageSubscription = widgetApi
@@ -211,12 +211,12 @@ export const roomMessagesApi = baseApi.injectEndpoints({
             {
               msgtype: 'm.text',
               body: message,
-            }
+            },
           );
 
           const stateEvent = await widgetApi.receiveSingleStateEvent(
             STATE_EVENT_MESSAGE_COLLECTION,
-            ''
+            '',
           );
 
           if (stateEvent && isValidMessageCollectionEvent(stateEvent)) {
@@ -225,16 +225,16 @@ export const roomMessagesApi = baseApi.injectEndpoints({
               {
                 ...stateEvent.content,
                 eventIds: stateEvent.content.eventIds.concat(
-                  messageEvent.event_id
+                  messageEvent.event_id,
                 ),
-              }
+              },
             );
           } else {
             await widgetApi.sendStateEvent<MessageCollectionEvent>(
               STATE_EVENT_MESSAGE_COLLECTION,
               {
                 eventIds: [messageEvent.event_id],
-              }
+              },
             );
           }
 
@@ -312,7 +312,7 @@ export const roomMessagesApi = baseApi.injectEndpoints({
         try {
           const stateEvent = await widgetApi.receiveSingleStateEvent(
             STATE_EVENT_MESSAGE_COLLECTION,
-            ''
+            '',
           );
 
           if (
@@ -325,9 +325,9 @@ export const roomMessagesApi = baseApi.injectEndpoints({
               {
                 ...stateEvent.content,
                 eventIds: stateEvent.content.eventIds.filter(
-                  (id) => id !== eventId
+                  (id) => id !== eventId,
                 ),
-              }
+              },
             );
           }
 

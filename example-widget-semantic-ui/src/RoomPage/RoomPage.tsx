@@ -48,7 +48,7 @@ export const RoomPage = (): ReactElement => {
         capabilities={[
           WidgetEventCapability.forStateEvent(
             EventDirection.Receive,
-            STATE_EVENT_ROOM_NAME
+            STATE_EVENT_ROOM_NAME,
           ),
         ]}
       >
@@ -64,9 +64,9 @@ export const RoomView = (): ReactElement => {
     () =>
       widgetApi.observeStateEvents(STATE_EVENT_ROOM_NAME).pipe(
         filter(isValidRoomNameEvent),
-        map((r) => r?.content.name)
+        map((r) => r?.content.name),
       ),
-    [widgetApi]
+    [widgetApi],
   );
   const roomName = useObservable(roomName$, undefined);
 
@@ -75,12 +75,12 @@ export const RoomView = (): ReactElement => {
       await widgetApi.requestCapabilities([
         WidgetEventCapability.forStateEvent(
           EventDirection.Send,
-          STATE_EVENT_ROOM_NAME
+          STATE_EVENT_ROOM_NAME,
         ),
       ]);
 
       const readResult = await widgetApi.receiveSingleStateEvent(
-        STATE_EVENT_ROOM_NAME
+        STATE_EVENT_ROOM_NAME,
       );
 
       if (readResult && isValidRoomNameEvent(readResult)) {
@@ -89,7 +89,7 @@ export const RoomView = (): ReactElement => {
           STATE_EVENT_ROOM_NAME,
           {
             name: `${oldName}!`,
-          }
+          },
         );
       }
     } catch (err) {

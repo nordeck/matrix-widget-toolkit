@@ -29,7 +29,7 @@ describe('isValidRoomMessageEvent', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'm.room.message',
-      })
+      }),
     ).toBe(true);
   });
 
@@ -46,7 +46,7 @@ describe('isValidRoomMessageEvent', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'm.room.message',
-      })
+      }),
     ).toBe(true);
   });
 
@@ -70,7 +70,7 @@ describe('isValidRoomMessageEvent', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'm.room.message',
-      })
+      }),
     ).toBe(false);
   });
 });

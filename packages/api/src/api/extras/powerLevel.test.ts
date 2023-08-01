@@ -137,8 +137,8 @@ describe('hasRoomEventPower', () => {
       hasRoomEventPower(
         { users: { userId: 30 }, events_default: 30 },
         'userId',
-        'my-event'
-      )
+        'my-event',
+      ),
     ).toEqual(true);
   });
 
@@ -147,8 +147,8 @@ describe('hasRoomEventPower', () => {
       hasRoomEventPower(
         { users: { userId: 10 }, events_default: 20 },
         'userId',
-        'my-event'
-      )
+        'my-event',
+      ),
     ).toEqual(false);
   });
 });
@@ -163,8 +163,8 @@ describe('hasStateEventPower', () => {
       hasStateEventPower(
         { users: { userId: 30 }, state_default: 30 },
         'userId',
-        'my-event'
-      )
+        'my-event',
+      ),
     ).toEqual(true);
   });
 
@@ -173,8 +173,8 @@ describe('hasStateEventPower', () => {
       hasStateEventPower(
         { users: { userId: 10 }, state_default: 20 },
         'userId',
-        'my-event'
-      )
+        'my-event',
+      ),
     ).toEqual(false);
   });
 });
@@ -186,13 +186,13 @@ describe('hasActionPower', () => {
 
   it('should permit if user level is high enough', () => {
     expect(
-      hasActionPower({ users: { userId: 30 }, invite: 30 }, 'userId', 'invite')
+      hasActionPower({ users: { userId: 30 }, invite: 30 }, 'userId', 'invite'),
     ).toEqual(true);
   });
 
   it('should reject if user level is too low', () => {
     expect(
-      hasActionPower({ users: { userId: 10 }, invite: 20 }, 'userId', 'invite')
+      hasActionPower({ users: { userId: 10 }, invite: 20 }, 'userId', 'invite'),
     ).toEqual(false);
   });
 });
@@ -203,7 +203,7 @@ describe('calculateUserLevel', () => {
       calculateUserPowerLevel({
         users: {},
         users_default: 25,
-      })
+      }),
     ).toEqual(25);
   });
 
@@ -214,8 +214,8 @@ describe('calculateUserLevel', () => {
           users: {},
           users_default: 25,
         },
-        'my-user-id'
-      )
+        'my-user-id',
+      ),
     ).toEqual(25);
   });
 
@@ -225,8 +225,8 @@ describe('calculateUserLevel', () => {
         {
           users: { 'my-user-id': 42 },
         },
-        'my-user-id'
-      )
+        'my-user-id',
+      ),
     ).toEqual(42);
   });
 
@@ -243,8 +243,8 @@ describe('calculateRoomEventPowerLevel', () => {
           events: {},
           events_default: 25,
         },
-        'my-event'
-      )
+        'my-event',
+      ),
     ).toEqual(25);
   });
 
@@ -254,8 +254,8 @@ describe('calculateRoomEventPowerLevel', () => {
         {
           events: { 'my-event': 42 },
         },
-        'my-event'
-      )
+        'my-event',
+      ),
     ).toEqual(42);
   });
 
@@ -272,8 +272,8 @@ describe('calculateStateEventPowerLevel', () => {
           events: {},
           state_default: 25,
         },
-        'my-event'
-      )
+        'my-event',
+      ),
     ).toEqual(25);
   });
 
@@ -283,8 +283,8 @@ describe('calculateStateEventPowerLevel', () => {
         {
           events: { 'my-event': 42 },
         },
-        'my-event'
-      )
+        'my-event',
+      ),
     ).toEqual(42);
   });
 
@@ -311,10 +311,10 @@ describe('calculateActionPowerLevel', () => {
             kick: 42,
             redact: 43,
           },
-          action
-        )
+          action,
+        ),
       ).toEqual(level);
-    }
+    },
   );
 
   it.each`
@@ -327,6 +327,6 @@ describe('calculateActionPowerLevel', () => {
     'should return fallback "$action" action level if power levels definition is empty',
     ({ action, level }) => {
       expect(calculateActionPowerLevel({}, action)).toEqual(level);
-    }
+    },
   );
 });

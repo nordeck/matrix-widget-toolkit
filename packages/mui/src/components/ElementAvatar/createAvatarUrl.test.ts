@@ -30,10 +30,10 @@ describe('createAvatarUrl', () => {
 
     expect(
       createAvatarUrl(
-        'https://matrix-client.matrix.org/_matrix/media/r0/thumbnail/matrix.org/KbhRFOIJekHQpMVIZGpuNxBG?width=60&height=60&method=crop'
-      )
+        'https://matrix-client.matrix.org/_matrix/media/r0/thumbnail/matrix.org/KbhRFOIJekHQpMVIZGpuNxBG?width=60&height=60&method=crop',
+      ),
     ).toBe(
-      'https://matrix-client.matrix.org/_matrix/media/r0/thumbnail/matrix.org/KbhRFOIJekHQpMVIZGpuNxBG?width=60&height=60&method=crop'
+      'https://matrix-client.matrix.org/_matrix/media/r0/thumbnail/matrix.org/KbhRFOIJekHQpMVIZGpuNxBG?width=60&height=60&method=crop',
     );
   });
 
@@ -43,7 +43,7 @@ describe('createAvatarUrl', () => {
       .mockImplementation((_name, defaultValue) => defaultValue);
 
     expect(createAvatarUrl('mxc://matrix.org/KbhRFOIJekHQpMVIZGpuNxBG')).toBe(
-      'https://matrix-client.matrix.org/_matrix/media/r0/thumbnail/matrix.org/KbhRFOIJekHQpMVIZGpuNxBG?width=60&height=60&method=crop'
+      'https://matrix-client.matrix.org/_matrix/media/r0/thumbnail/matrix.org/KbhRFOIJekHQpMVIZGpuNxBG?width=60&height=60&method=crop',
     );
   });
 
@@ -53,11 +53,11 @@ describe('createAvatarUrl', () => {
       .mockImplementation((name, defaultValue) =>
         name === 'REACT_APP_HOME_SERVER_URL'
           ? 'https://example.com'
-          : defaultValue
+          : defaultValue,
       );
 
     expect(createAvatarUrl('mxc://matrix.org/KbhRFOIJekHQpMVIZGpuNxBG')).toBe(
-      'https://example.com/_matrix/media/r0/thumbnail/matrix.org/KbhRFOIJekHQpMVIZGpuNxBG?width=60&height=60&method=crop'
+      'https://example.com/_matrix/media/r0/thumbnail/matrix.org/KbhRFOIJekHQpMVIZGpuNxBG?width=60&height=60&method=crop',
     );
   });
 });

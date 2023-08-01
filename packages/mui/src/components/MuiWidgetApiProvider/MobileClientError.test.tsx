@@ -23,10 +23,10 @@ describe('<MobileClientError/>', () => {
     render(<MobileClientError />);
 
     expect(
-      screen.getByText('Mobile clients are not supported')
+      screen.getByText('Mobile clients are not supported'),
     ).toBeInTheDocument();
     expect(
-      screen.getByText(/the widget doesn't work in mobile clients/i)
+      screen.getByText(/the widget doesn't work in mobile clients/i),
     ).toBeInTheDocument();
   });
 

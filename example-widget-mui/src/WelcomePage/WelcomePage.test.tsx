@@ -42,11 +42,11 @@ describe('<WelcomePage />', () => {
     render(<WelcomePage />, { wrapper });
 
     expect(
-      screen.getByRole('link', { name: /back to navigation/i })
+      screen.getByRole('link', { name: /back to navigation/i }),
     ).toBeInTheDocument();
 
     await expect(
-      screen.findByRole('heading', { name: /welcome/i })
+      screen.findByRole('heading', { name: /welcome/i }),
     ).resolves.toBeInTheDocument();
 
     expect(screen.getByText(/welcome .+/i)).toBeInTheDocument();
@@ -56,7 +56,7 @@ describe('<WelcomePage />', () => {
     const { container } = render(<WelcomePage />, { wrapper });
 
     await expect(
-      screen.findByRole('heading', { name: /welcome/i })
+      screen.findByRole('heading', { name: /welcome/i }),
     ).resolves.toBeInTheDocument();
     expect(await axe(container)).toHaveNoViolations();
   });

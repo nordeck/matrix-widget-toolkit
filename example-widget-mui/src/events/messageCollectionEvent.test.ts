@@ -29,7 +29,7 @@ describe('isValidMessageCollectionEvent', () => {
         state_key: '',
         sender: '@user-id',
         type: 'net.nordeck.message_collection',
-      })
+      }),
     ).toBe(true);
   });
 
@@ -46,7 +46,7 @@ describe('isValidMessageCollectionEvent', () => {
         state_key: '',
         sender: '@user-id',
         type: 'net.nordeck.message_collection',
-      })
+      }),
     ).toBe(true);
   });
 
@@ -69,7 +69,7 @@ describe('isValidMessageCollectionEvent', () => {
         state_key: '',
         sender: '@user-id',
         type: 'net.nordeck.message_collection',
-      })
+      }),
     ).toBe(false);
   });
 });

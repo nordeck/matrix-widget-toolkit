@@ -22,7 +22,7 @@ import {
 } from 'matrix-widget-api';
 
 export function convertToRawCapabilities(
-  rawCapabilities: Array<WidgetEventCapability | Capability>
+  rawCapabilities: Array<WidgetEventCapability | Capability>,
 ): string[] {
   return rawCapabilities.map((c) => (typeof c === 'string' ? c : c.raw));
 }
@@ -56,7 +56,7 @@ export function subtractSet<T>(as: Set<T>, bs: Set<T>): Set<T> {
 export function isInRoom(
   matrixEvent: IRoomEvent,
   currentRoomId: string,
-  roomIds?: string[] | Symbols.AnyRoom
+  roomIds?: string[] | Symbols.AnyRoom,
 ): boolean {
   if (!roomIds) {
     return matrixEvent.room_id === currentRoomId;

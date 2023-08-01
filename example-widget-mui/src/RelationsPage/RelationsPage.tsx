@@ -78,39 +78,39 @@ export const RelationsPage = (): ReactElement => {
           capabilities={[
             WidgetEventCapability.forStateEvent(
               EventDirection.Receive,
-              STATE_EVENT_POWER_LEVELS
+              STATE_EVENT_POWER_LEVELS,
             ),
             WidgetEventCapability.forStateEvent(
               EventDirection.Receive,
-              STATE_EVENT_MESSAGE_COLLECTION
+              STATE_EVENT_MESSAGE_COLLECTION,
             ),
             WidgetEventCapability.forStateEvent(
               EventDirection.Send,
-              STATE_EVENT_MESSAGE_COLLECTION
+              STATE_EVENT_MESSAGE_COLLECTION,
             ),
             WidgetEventCapability.forRoomEvent(
               EventDirection.Receive,
-              ROOM_EVENT_ROOM_MESSAGE
+              ROOM_EVENT_ROOM_MESSAGE,
             ),
             WidgetEventCapability.forRoomEvent(
               EventDirection.Send,
-              ROOM_EVENT_ROOM_MESSAGE
+              ROOM_EVENT_ROOM_MESSAGE,
             ),
             WidgetEventCapability.forRoomEvent(
               EventDirection.Receive,
-              ROOM_EVENT_REACTION
+              ROOM_EVENT_REACTION,
             ),
             WidgetEventCapability.forRoomEvent(
               EventDirection.Send,
-              ROOM_EVENT_REACTION
+              ROOM_EVENT_REACTION,
             ),
             WidgetEventCapability.forRoomEvent(
               EventDirection.Receive,
-              ROOM_EVENT_REDACTION
+              ROOM_EVENT_REDACTION,
             ),
             WidgetEventCapability.forRoomEvent(
               EventDirection.Send,
-              ROOM_EVENT_REDACTION
+              ROOM_EVENT_REDACTION,
             ),
           ]}
         >
@@ -321,7 +321,7 @@ const ReactionButton = ({
   const reactionEvent = data?.reactions.find(
     (r) =>
       r.sender === widgetApi.widgetParameters.userId &&
-      r.content['m.relates_to'].key === reaction
+      r.content['m.relates_to'].key === reaction,
   );
 
   const onClick = () => {
@@ -362,31 +362,31 @@ function usePermissions() {
             hasStateEventPower(
               ev.content,
               widgetApi.widgetParameters.userId,
-              STATE_EVENT_MESSAGE_COLLECTION
+              STATE_EVENT_MESSAGE_COLLECTION,
             ) &&
             hasRoomEventPower(
               ev.content,
               widgetApi.widgetParameters.userId,
-              ROOM_EVENT_REDACTION
+              ROOM_EVENT_REDACTION,
             ) &&
             hasActionPower(
               ev.content,
               widgetApi.widgetParameters.userId,
-              'redact'
+              'redact',
             ),
           canSendReaction: hasRoomEventPower(
             ev.content,
             widgetApi.widgetParameters.userId,
-            ROOM_EVENT_REACTION
+            ROOM_EVENT_REACTION,
           ),
           canSendRedaction: hasRoomEventPower(
             ev.content,
             widgetApi.widgetParameters.userId,
-            ROOM_EVENT_REDACTION
+            ROOM_EVENT_REDACTION,
           ),
-        }))
+        })),
       ),
-    [widgetApi]
+    [widgetApi],
   );
 
   return useObservable(observable, {

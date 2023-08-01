@@ -18,7 +18,7 @@ import { getEnvironment } from '../MuiThemeProvider';
 
 export function createAvatarUrl(
   url: string,
-  { size = 60 }: { size?: number } = {}
+  { size = 60 }: { size?: number } = {},
 ): string {
   const mxcPrefix = 'mxc://';
 
@@ -37,11 +37,11 @@ export function createAvatarUrl(
   // endpoint. However, this would also require a broad connect-src in the CSP.
   const homeServer = getEnvironment(
     'REACT_APP_HOME_SERVER_URL',
-    'https://matrix-client.matrix.org'
+    'https://matrix-client.matrix.org',
   );
   const imageUrl = new URL(
     `/_matrix/media/r0/thumbnail/${mxcUrl}?width=${size}&height=${size}&method=crop`,
-    homeServer
+    homeServer,
   );
   return imageUrl.toString();
 }
