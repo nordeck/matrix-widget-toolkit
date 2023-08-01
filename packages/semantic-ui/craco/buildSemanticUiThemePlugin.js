@@ -49,7 +49,7 @@ function overrideWebpackConfig({ webpackConfig, context }) {
   // Get the less-loader that was added by @semantic-ui-react/craco-less
   const { isFound, match: lessLoaderMatch } = getLoader(
     webpackConfig,
-    loaderByName('less-loader')
+    loaderByName('less-loader'),
   );
 
   if (!isFound) {
@@ -88,7 +88,7 @@ ${
   // Find the theme.config relative to this file. It might be located in the node_modules folder
   webpackConfig.resolve.alias['../../theme.config$'] = path.join(
     __dirname,
-    '../src/semantic-ui/theme.config'
+    '../src/semantic-ui/theme.config',
   );
 
   return webpackConfig;

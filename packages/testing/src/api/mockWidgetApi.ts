@@ -66,7 +66,7 @@ export type MockedWidgetApi = {
    * @param event - the to device message to send
    */
   mockSendToDeviceMessage<T = unknown>(
-    event: ToDeviceMessageEvent<T>
+    event: ToDeviceMessageEvent<T>,
   ): ToDeviceMessageEvent<T>;
 
   /**
@@ -157,7 +157,7 @@ export function mockWidgetApi(opts?: {
         (ev) =>
           ev.room_id !== event.room_id ||
           ev.type !== event.type ||
-          ev.state_key !== event.state_key
+          ev.state_key !== event.state_key,
       )
       .concat(ev);
 
@@ -183,7 +183,7 @@ export function mockWidgetApi(opts?: {
   };
 
   const mockSendToDeviceMessage = <T = unknown>(
-    message: ToDeviceMessageEvent<T>
+    message: ToDeviceMessageEvent<T>,
   ) => {
     const m = cloneDeep(message);
 
@@ -227,8 +227,8 @@ export function mockWidgetApi(opts?: {
           username: 'user',
           credential: 'credential',
         }),
-        NEVER
-      )
+        NEVER,
+      ),
     ),
     searchUserDirectory: jest.fn().mockResolvedValue({ results: [] }),
   };
@@ -299,9 +299,9 @@ export function mockWidgetApi(opts?: {
           }
 
           return true;
-        })
+        }),
       );
-    }
+    },
   );
 
   widgetApi.observeRoomEvents.mockImplementation((type, options) => {
@@ -309,7 +309,7 @@ export function mockWidgetApi(opts?: {
 
     return concat(
       from(roomEvents.sort(compareOriginServerTS)),
-      roomEventSubject
+      roomEventSubject,
     ).pipe(
       filter((ev) => {
         if (ev.type !== type) {
@@ -333,7 +333,7 @@ export function mockWidgetApi(opts?: {
         }
       }),
       map(cloneDeep),
-      takeUntil(stopSubject)
+      takeUntil(stopSubject),
     );
   });
 
@@ -361,7 +361,7 @@ export function mockWidgetApi(opts?: {
     return concat(from(stateEvents), stateEventSubject).pipe(
       filter(filterEvents),
       map(cloneDeep),
-      takeUntil(stopSubject)
+      takeUntil(stopSubject),
     );
   });
 
@@ -420,7 +420,7 @@ export function mockWidgetApi(opts?: {
             ev.room_id === e.room_id &&
             ev.type === e.type &&
             ev.state_key === e.state_key &&
-            isEqual(ev.content, e.content)
+            isEqual(ev.content, e.content),
         )
       ) {
         return new Promise((resolve, reject) => {
@@ -429,7 +429,7 @@ export function mockWidgetApi(opts?: {
       }
 
       return mockSendStateEvent(ev);
-    }
+    },
   );
 
   widgetApi.readEventRelations.mockImplementation(
@@ -477,7 +477,7 @@ export function mockWidgetApi(opts?: {
         chunk: relatedEvents.slice(skip, end).map(cloneDeep),
         nextToken: end < relatedEvents.length ? end.toString() : undefined,
       };
-    }
+    },
   );
 
   widgetApi.sendToDeviceMessage.mockImplementation(
@@ -499,13 +499,13 @@ export function mockWidgetApi(opts?: {
           });
         }
       }
-    }
+    },
   );
 
   widgetApi.observeToDeviceMessages.mockImplementation((type) => {
     return toDeviceMessageSubject.pipe(
       filter((e) => e.type === type),
-      takeUntil(stopSubject)
+      takeUntil(stopSubject),
     );
   });
 

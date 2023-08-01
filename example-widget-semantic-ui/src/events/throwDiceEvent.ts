@@ -39,7 +39,7 @@ const throwDiceEventSchema = Joi.object<ThrowDiceEvent, true>({
  * @returns true, if the event is valid.
  */
 export function isValidThrowDiceEvent(
-  event: RoomEvent<unknown>
+  event: RoomEvent<unknown>,
 ): event is RoomEvent<ThrowDiceEvent> {
   return isValidEvent(event, STATE_EVENT_THROW_DICE, throwDiceEventSchema);
 }

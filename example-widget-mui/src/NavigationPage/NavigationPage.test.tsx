@@ -35,7 +35,7 @@ describe('<NavigationPage>', () => {
     const list = screen.getByRole('list', { name: 'Navigation' });
 
     expect(
-      within(list).getByRole('listitem', { name: 'Welcome' })
+      within(list).getByRole('listitem', { name: 'Welcome' }),
     ).toHaveAccessibleDescription('Example on widget parameters');
   });
 

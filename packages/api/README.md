@@ -38,7 +38,7 @@ import { WidgetEventCapability } from 'matrix-widget-api';
 await widgetApi.requestCapabilities([
   WidgetEventCapability.forStateEvent(
     EventDirection.Send,
-    STATE_EVENT_POWER_LEVELS
+    STATE_EVENT_POWER_LEVELS,
   ),
 ]);
 ```

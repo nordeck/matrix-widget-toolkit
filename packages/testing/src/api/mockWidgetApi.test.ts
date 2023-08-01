@@ -121,10 +121,10 @@ describe('sendRoomEvent', () => {
     await expect(
       widgetApi.sendRoomEvent('com.example.test3', {
         key: 'value',
-      })
+      }),
     ).resolves.toEqual(expectedEvent);
     await expect(
-      widgetApi.receiveRoomEvents('com.example.test3')
+      widgetApi.receiveRoomEvents('com.example.test3'),
     ).resolves.toEqual([expectedEvent]);
   });
 
@@ -144,10 +144,10 @@ describe('sendRoomEvent', () => {
     await expect(
       widgetApi.sendRoomEvent('m.room.redaction', {
         redacts: '$event-id',
-      })
+      }),
     ).resolves.toEqual(expectedEvent);
     await expect(
-      widgetApi.receiveRoomEvents('m.room.redaction')
+      widgetApi.receiveRoomEvents('m.room.redaction'),
     ).resolves.toEqual([expectedEvent]);
   });
 
@@ -164,7 +164,7 @@ describe('sendRoomEvent', () => {
     await redactEvent(widgetApi, 'event-1');
 
     await expect(
-      widgetApi.receiveRoomEvents('com.example.test1')
+      widgetApi.receiveRoomEvents('com.example.test1'),
     ).resolves.toEqual([expectedEvent]);
   });
 });
@@ -172,7 +172,7 @@ describe('sendRoomEvent', () => {
 describe('receiveRoomEvents', () => {
   it('should receive only events from the current room', async () => {
     await expect(
-      widgetApi.receiveRoomEvents('com.example.test2')
+      widgetApi.receiveRoomEvents('com.example.test2'),
     ).resolves.toEqual([expect.objectContaining({ event_id: 'event-2' })]);
   });
 
@@ -180,7 +180,7 @@ describe('receiveRoomEvents', () => {
     await expect(
       widgetApi.receiveRoomEvents('com.example.test2', {
         roomIds: Symbols.AnyRoom,
-      })
+      }),
     ).resolves.toEqual([
       expect.objectContaining({ event_id: 'event-2' }),
       expect.objectContaining({ event_id: 'event-3' }),
@@ -191,7 +191,7 @@ describe('receiveRoomEvents', () => {
     await expect(
       widgetApi.receiveRoomEvents('com.example.test2', {
         roomIds: ['!other-room-id'],
-      })
+      }),
     ).resolves.toEqual([expect.objectContaining({ event_id: 'event-3' })]);
   });
 
@@ -211,7 +211,7 @@ describe('receiveRoomEvents', () => {
     await expect(
       widgetApi.receiveRoomEvents('com.example.test1', {
         messageType: 'only',
-      })
+      }),
     ).resolves.toEqual([expect.objectContaining({ event_id: 'event-2' })]);
   });
 
@@ -219,7 +219,7 @@ describe('receiveRoomEvents', () => {
     widgetApi.clearRoomEvents();
 
     await expect(
-      widgetApi.receiveRoomEvents('com.example.test1')
+      widgetApi.receiveRoomEvents('com.example.test1'),
     ).resolves.toEqual([]);
   });
 
@@ -227,10 +227,10 @@ describe('receiveRoomEvents', () => {
     widgetApi.clearRoomEvents({ type: 'com.example.test1' });
 
     await expect(
-      widgetApi.receiveRoomEvents('com.example.test1')
+      widgetApi.receiveRoomEvents('com.example.test1'),
     ).resolves.toEqual([]);
     await expect(
-      widgetApi.receiveRoomEvents('com.example.test2')
+      widgetApi.receiveRoomEvents('com.example.test2'),
     ).resolves.toEqual([expect.objectContaining({ event_id: 'event-2' })]);
   });
 });
@@ -343,10 +343,10 @@ describe('sendStateEvent', () => {
     };
 
     await expect(
-      widgetApi.sendStateEvent('com.example.test6', { key: 'value' })
+      widgetApi.sendStateEvent('com.example.test6', { key: 'value' }),
     ).resolves.toEqual(expectedEvent);
     await expect(
-      widgetApi.receiveSingleStateEvent('com.example.test6')
+      widgetApi.receiveSingleStateEvent('com.example.test6'),
     ).resolves.toEqual(expectedEvent);
   });
 
@@ -365,13 +365,13 @@ describe('sendStateEvent', () => {
 
     await widgetApi.sendStateEvent('com.example.test6', { key: 'value' });
     await expect(
-      widgetApi.sendStateEvent('com.example.test6', { key: 'new' })
+      widgetApi.sendStateEvent('com.example.test6', { key: 'new' }),
     ).resolves.toEqual(expectedEvent);
     await expect(
-      widgetApi.receiveSingleStateEvent('com.example.test6')
+      widgetApi.receiveSingleStateEvent('com.example.test6'),
     ).resolves.toEqual(expectedEvent);
     await expect(
-      widgetApi.receiveStateEvents('com.example.test6')
+      widgetApi.receiveStateEvents('com.example.test6'),
     ).resolves.toEqual([expectedEvent]);
   });
 
@@ -383,9 +383,9 @@ describe('sendStateEvent', () => {
         widgetApi.sendStateEvent('com.example.test6', { key: 'value' }),
         // Timeout after a short moment
         new Promise((resolve, reject) =>
-          setTimeout(() => reject(new Error('Timeout')), 100)
+          setTimeout(() => reject(new Error('Timeout')), 100),
         ),
-      ])
+      ]),
     ).rejects.toThrowError('Timeout');
   });
 });
@@ -393,13 +393,13 @@ describe('sendStateEvent', () => {
 describe('receiveSingleStateEvent', () => {
   it('should receive event from the current room with a default state key', async () => {
     await expect(
-      widgetApi.receiveSingleStateEvent('com.example.test4')
+      widgetApi.receiveSingleStateEvent('com.example.test4'),
     ).resolves.toEqual(expect.objectContaining({ event_id: 'event-1' }));
   });
 
   it('should receive event with a specific state key', async () => {
     await expect(
-      widgetApi.receiveSingleStateEvent('com.example.test4', 'other')
+      widgetApi.receiveSingleStateEvent('com.example.test4', 'other'),
     ).resolves.toEqual(expect.objectContaining({ event_id: 'event-2' }));
   });
 
@@ -407,7 +407,7 @@ describe('receiveSingleStateEvent', () => {
     widgetApi.clearStateEvents();
 
     await expect(
-      widgetApi.receiveSingleStateEvent('com.example.test4')
+      widgetApi.receiveSingleStateEvent('com.example.test4'),
     ).resolves.toBeUndefined();
   });
 
@@ -415,10 +415,10 @@ describe('receiveSingleStateEvent', () => {
     widgetApi.clearStateEvents({ type: 'com.example.test4' });
 
     await expect(
-      widgetApi.receiveSingleStateEvent('com.example.test4')
+      widgetApi.receiveSingleStateEvent('com.example.test4'),
     ).resolves.toBeUndefined();
     await expect(
-      widgetApi.receiveSingleStateEvent('com.example.test5')
+      widgetApi.receiveSingleStateEvent('com.example.test5'),
     ).resolves.toEqual(expect.objectContaining({ event_id: 'event-3' }));
   });
 });
@@ -426,7 +426,7 @@ describe('receiveSingleStateEvent', () => {
 describe('receiveStateEvents', () => {
   it('should receive only events from the current room', async () => {
     await expect(
-      widgetApi.receiveStateEvents('com.example.test4')
+      widgetApi.receiveStateEvents('com.example.test4'),
     ).resolves.toEqual([
       expect.objectContaining({ event_id: 'event-1' }),
       expect.objectContaining({ event_id: 'event-2' }),
@@ -437,7 +437,7 @@ describe('receiveStateEvents', () => {
     await expect(
       widgetApi.receiveStateEvents('com.example.test4', {
         roomIds: Symbols.AnyRoom,
-      })
+      }),
     ).resolves.toEqual([
       expect.objectContaining({ event_id: 'event-1' }),
       expect.objectContaining({ event_id: 'event-2' }),
@@ -449,13 +449,13 @@ describe('receiveStateEvents', () => {
     await expect(
       widgetApi.receiveStateEvents('com.example.test4', {
         roomIds: ['!other-room-id'],
-      })
+      }),
     ).resolves.toEqual([expect.objectContaining({ event_id: 'event-4' })]);
   });
 
   it('should receive events with a specific state key', async () => {
     await expect(
-      widgetApi.receiveStateEvents('com.example.test4', { stateKey: '' })
+      widgetApi.receiveStateEvents('com.example.test4', { stateKey: '' }),
     ).resolves.toEqual([expect.objectContaining({ event_id: 'event-1' })]);
   });
 
@@ -473,7 +473,7 @@ describe('receiveStateEvents', () => {
     });
 
     await expect(
-      widgetApi.receiveStateEvents('com.example.test4', { stateKey: '' })
+      widgetApi.receiveStateEvents('com.example.test4', { stateKey: '' }),
     ).resolves.toEqual([expect.objectContaining({ event_id: 'event-5' })]);
   });
 
@@ -481,7 +481,7 @@ describe('receiveStateEvents', () => {
     widgetApi.clearStateEvents();
 
     await expect(
-      widgetApi.receiveStateEvents('com.example.test4')
+      widgetApi.receiveStateEvents('com.example.test4'),
     ).resolves.toEqual([]);
   });
 
@@ -489,10 +489,10 @@ describe('receiveStateEvents', () => {
     widgetApi.clearStateEvents({ type: 'com.example.test4' });
 
     await expect(
-      widgetApi.receiveStateEvents('com.example.test4')
+      widgetApi.receiveStateEvents('com.example.test4'),
     ).resolves.toEqual([]);
     await expect(
-      widgetApi.receiveStateEvents('com.example.test5')
+      widgetApi.receiveStateEvents('com.example.test5'),
     ).resolves.toEqual([expect.objectContaining({ event_id: 'event-3' })]);
   });
 });
@@ -658,7 +658,7 @@ describe('observeModalButtons', () => {
 describe('rerequestInitialCapabilities', () => {
   it('should resolve', async () => {
     await expect(
-      widgetApi.rerequestInitialCapabilities()
+      widgetApi.rerequestInitialCapabilities(),
     ).resolves.toBeUndefined();
   });
 });
@@ -666,7 +666,7 @@ describe('rerequestInitialCapabilities', () => {
 describe('requestCapabilities', () => {
   it('should resolve', async () => {
     await expect(
-      widgetApi.requestCapabilities(['my.capability'])
+      widgetApi.requestCapabilities(['my.capability']),
     ).resolves.toBeUndefined();
   });
 });
@@ -680,7 +680,7 @@ describe('requestOpenIDConnectToken', () => {
 describe('setModalButtonEnabled', () => {
   it('should resolve', async () => {
     await expect(
-      widgetApi.setModalButtonEnabled('button', false)
+      widgetApi.setModalButtonEnabled('button', false),
     ).resolves.toBeUndefined();
   });
 });
@@ -766,7 +766,7 @@ describe('readEventRelations', () => {
 
   it('should receive events from another room', async () => {
     await expect(
-      widgetApi.readEventRelations('event-1', { roomId: '!other-room-id' })
+      widgetApi.readEventRelations('event-1', { roomId: '!other-room-id' }),
     ).resolves.toEqual({
       chunk: [expect.objectContaining({ event_id: 'event-4' })],
       nextToken: undefined,
@@ -775,7 +775,7 @@ describe('readEventRelations', () => {
 
   it('should only receive events of a specific relation type', async () => {
     await expect(
-      widgetApi.readEventRelations('event-1', { relationType: 'm.replace' })
+      widgetApi.readEventRelations('event-1', { relationType: 'm.replace' }),
     ).resolves.toEqual({
       chunk: [expect.objectContaining({ event_id: 'event-3' })],
       nextToken: undefined,
@@ -786,7 +786,7 @@ describe('readEventRelations', () => {
     await expect(
       widgetApi.readEventRelations('event-1', {
         eventType: 'com.example.test2',
-      })
+      }),
     ).resolves.toEqual({
       chunk: [expect.objectContaining({ event_id: 'event-2' })],
       nextToken: undefined,
@@ -798,7 +798,7 @@ describe('readEventRelations', () => {
       widgetApi.readEventRelations('event-1', {
         limit: 1,
         direction: 'f',
-      })
+      }),
     ).resolves.toEqual({
       chunk: [expect.objectContaining({ event_id: 'event-3' })],
       nextToken: '1',
@@ -809,7 +809,7 @@ describe('readEventRelations', () => {
         limit: 1,
         from: '1',
         direction: 'f',
-      })
+      }),
     ).resolves.toEqual({
       chunk: [expect.objectContaining({ event_id: 'event-2' })],
       nextToken: undefined,
@@ -818,7 +818,7 @@ describe('readEventRelations', () => {
 
   it('should reject if the referenced event does not exist', async () => {
     await expect(
-      widgetApi.readEventRelations('not-existent-event')
+      widgetApi.readEventRelations('not-existent-event'),
     ).rejects.toThrow('Unexpected error while reading relations');
   });
 });
@@ -826,7 +826,7 @@ describe('readEventRelations', () => {
 describe('sendToDeviceMessage', () => {
   it('should send to device message to all devices of the current user', async () => {
     const messagePromise = firstValueFrom(
-      widgetApi.observeToDeviceMessages('com.example.message')
+      widgetApi.observeToDeviceMessages('com.example.message'),
     );
 
     await widgetApi.sendToDeviceMessage('com.example.message', true, {
@@ -845,7 +845,7 @@ describe('sendToDeviceMessage', () => {
 
   it('should send to device message to a specific device of the current user', async () => {
     const messagePromise = firstValueFrom(
-      widgetApi.observeToDeviceMessages('com.example.message')
+      widgetApi.observeToDeviceMessages('com.example.message'),
     );
 
     await widgetApi.sendToDeviceMessage('com.example.message', false, {
@@ -868,7 +868,7 @@ describe('sendToDeviceMessage', () => {
     const messagesPromise = firstValueFrom(
       widgetApi
         .observeToDeviceMessages('com.example.message')
-        .pipe(bufferTime(100))
+        .pipe(bufferTime(100)),
     );
 
     await widgetApi.sendToDeviceMessage('com.example.message', false, {
@@ -884,7 +884,7 @@ describe('sendToDeviceMessage', () => {
     const messagesPromise = firstValueFrom(
       widgetApi
         .observeToDeviceMessages('com.example.message')
-        .pipe(bufferTime(100))
+        .pipe(bufferTime(100)),
     );
 
     await widgetApi.sendToDeviceMessage('com.example.message', false, {
@@ -910,7 +910,7 @@ describe('sendToDeviceMessage', () => {
 describe('observeToDeviceMessages', () => {
   it('should receive only to device messages for the correct type', async () => {
     const messagePromise = firstValueFrom(
-      widgetApi.observeToDeviceMessages('com.example.message')
+      widgetApi.observeToDeviceMessages('com.example.message'),
     );
 
     widgetApi.mockSendToDeviceMessage({
@@ -939,7 +939,7 @@ describe('observeToDeviceMessages', () => {
 describe('observeTurnServers', () => {
   it('should return mocked turn servers', async () => {
     const turnServer = await firstValueFrom(
-      widgetApi.observeTurnServers().pipe(take(1))
+      widgetApi.observeTurnServers().pipe(take(1)),
     );
 
     expect(turnServer).toEqual({

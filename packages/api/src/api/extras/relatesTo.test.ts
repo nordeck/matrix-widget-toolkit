@@ -48,13 +48,13 @@ function relatesToEvent(rel_type: string) {
 describe('getOriginalEventId', () => {
   it('should return the event id of the original event if it contains a "m.replace" relation', () => {
     expect(getOriginalEventId(relatesToEvent('m.replace'))).toEqual(
-      'event-original'
+      'event-original',
     );
   });
 
   it('should return the event id of the event if it contains another relation', () => {
     expect(getOriginalEventId(relatesToEvent('m.reference'))).toEqual(
-      'event-relates-to'
+      'event-relates-to',
     );
   });
 
@@ -90,7 +90,7 @@ describe('isValidEventWithRelatesTo', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'm.room.message',
-      })
+      }),
     ).toBe(true);
   });
 
@@ -110,7 +110,7 @@ describe('isValidEventWithRelatesTo', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'm.room.message',
-      })
+      }),
     ).toBe(true);
   });
 
@@ -133,7 +133,7 @@ describe('isValidEventWithRelatesTo', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'm.room.message',
-      })
+      }),
     ).toBe(false);
   });
 
@@ -159,7 +159,7 @@ describe('isValidEventWithRelatesTo', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'm.room.message',
-      })
+      }),
     ).toBe(false);
   });
 });

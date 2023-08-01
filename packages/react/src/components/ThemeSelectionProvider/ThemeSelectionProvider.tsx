@@ -70,7 +70,7 @@ export const useThemeSelection = (): ThemeSelectionContextType => {
 
   if (context === undefined) {
     throw new Error(
-      'useThemeSelection must be used within a ThemeSelectionProvider'
+      'useThemeSelection must be used within a ThemeSelectionProvider',
     );
   }
 
@@ -127,7 +127,7 @@ export function ThemeSelectionProvider({
       isModal,
       setTheme,
     }),
-    [isModal, setTheme, theme]
+    [isModal, setTheme, theme],
   );
 
   return (

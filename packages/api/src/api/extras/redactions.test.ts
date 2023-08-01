@@ -92,7 +92,7 @@ describe('observeRedactionEvents', () => {
           event_id: 'event-id',
           sender: 'sender-id',
         } as RoomEvent,
-      ])
+      ]),
     );
 
     const result = await lastValueFrom(observeRedactionEvents(widgetApi));

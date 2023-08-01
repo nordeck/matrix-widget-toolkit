@@ -43,14 +43,14 @@ describe('<ModalPage />', () => {
     render(<ModalPage />, { wrapper });
 
     expect(
-      screen.getByRole('button', { name: /back to navigation/i })
+      screen.getByRole('button', { name: /back to navigation/i }),
     ).toBeInTheDocument();
 
     await expect(
-      screen.findByText(/example for modals/i)
+      screen.findByText(/example for modals/i),
     ).resolves.toBeInTheDocument();
     expect(
-      screen.getByRole('button', { name: /open modal/i })
+      screen.getByRole('button', { name: /open modal/i }),
     ).toBeInTheDocument();
   });
 
@@ -60,7 +60,7 @@ describe('<ModalPage />', () => {
     await userEvent.click(screen.getByRole('button', { name: /open modal/i }));
 
     await expect(
-      screen.findByText(/no answer :-\(/i)
+      screen.findByText(/no answer :-\(/i),
     ).resolves.toBeInTheDocument();
 
     expect(widgetApi.openModal).toBeCalledWith(
@@ -90,7 +90,7 @@ describe('<ModalPage />', () => {
         data: {
           title: 'This is a custom title!',
         },
-      }
+      },
     );
   });
 
@@ -104,7 +104,7 @@ describe('<ModalPage />', () => {
     await userEvent.click(screen.getByRole('button', { name: /open modal/i }));
 
     await expect(
-      screen.findByText(/result: yes!!!!!/i)
+      screen.findByText(/result: yes!!!!!/i),
     ).resolves.toBeInTheDocument();
   });
 });

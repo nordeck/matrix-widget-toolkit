@@ -49,11 +49,11 @@ describe('<IdentityPage />', () => {
     render(<IdentityPage />, { wrapper });
 
     expect(
-      screen.getByRole('link', { name: /back to navigation/i })
+      screen.getByRole('link', { name: /back to navigation/i }),
     ).toBeInTheDocument();
 
     await expect(
-      screen.findByRole('heading', { name: /Identity/i })
+      screen.findByRole('heading', { name: /Identity/i }),
     ).resolves.toBeInTheDocument();
     expect(screen.getByText('Error')).toBeInTheDocument();
     expect(screen.getByText(/error: .+/i)).toBeInTheDocument();
@@ -63,7 +63,7 @@ describe('<IdentityPage />', () => {
     const { container } = render(<IdentityPage />, { wrapper });
 
     await expect(
-      screen.findByRole('heading', { name: /Identity/i })
+      screen.findByRole('heading', { name: /Identity/i }),
     ).resolves.toBeInTheDocument();
     expect(await axe(container)).toHaveNoViolations();
   });
@@ -85,29 +85,29 @@ describe('<IdentityPage />', () => {
           }
 
           return res(ctx.json({ sub: '@alice:example.com' }));
-        }
-      )
+        },
+      ),
     );
 
     render(<IdentityPage />, { wrapper });
 
     await expect(
-      screen.findByText(/identity verified/i)
+      screen.findByText(/identity verified/i),
     ).resolves.toBeInTheDocument();
     expect(
-      screen.getByText(`{ "sub": "@alice:example.com" }`)
+      screen.getByText(`{ "sub": "@alice:example.com" }`),
     ).toBeInTheDocument();
   });
 
   it('should show an error if the user rejected the token capability', async () => {
     widgetApi.requestOpenIDConnectToken.mockRejectedValue(
-      new Error('The user rejected the request')
+      new Error('The user rejected the request'),
     );
 
     render(<IdentityPage />, { wrapper });
 
     await expect(
-      screen.findByText(/error: the user rejected the request/i)
+      screen.findByText(/error: the user rejected the request/i),
     ).resolves.toBeInTheDocument();
   });
 
@@ -117,7 +117,7 @@ describe('<IdentityPage />', () => {
     render(<IdentityPage />, { wrapper });
 
     await expect(
-      screen.findByText(/error: unknown home server/i)
+      screen.findByText(/error: unknown home server/i),
     ).resolves.toBeInTheDocument();
   });
 
@@ -129,7 +129,7 @@ describe('<IdentityPage />', () => {
     render(<IdentityPage />, { wrapper });
 
     await expect(
-      screen.findByText(/error: unknown token type/i)
+      screen.findByText(/error: unknown token type/i),
     ).resolves.toBeInTheDocument();
   });
 
@@ -146,16 +146,16 @@ describe('<IdentityPage />', () => {
         'https://synapse.local/_matrix/federation/v1/openid/userinfo',
         (req, res, ctx) => {
           return res(ctx.status(500), ctx.json('Internal Server Error'));
-        }
-      )
+        },
+      ),
     );
 
     render(<IdentityPage />, { wrapper });
 
     await expect(
       screen.findByText(
-        /error: error while retrieving identity: "Internal Server Error"/i
-      )
+        /error: error while retrieving identity: "Internal Server Error"/i,
+      ),
     ).resolves.toBeInTheDocument();
   });
 });

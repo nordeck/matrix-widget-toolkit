@@ -26,6 +26,6 @@ describe('getInitialLetter', () => {
     'should detect %letter as the initial letter of %value',
     ({ letter, value }) => {
       expect(getInitialLetter(value)).toBe(letter);
-    }
+    },
   );
 });

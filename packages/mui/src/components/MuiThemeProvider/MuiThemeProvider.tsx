@@ -71,7 +71,7 @@ export function MuiThemeProvider({
 export function chooseTheme(theme: string): ThemeOptions {
   const isDark = theme === 'dark';
   const isForceHighContrast = !!getEnvironment(
-    'REACT_APP_FORCE_HIGH_CONTRAST_THEME'
+    'REACT_APP_FORCE_HIGH_CONTRAST_THEME',
   );
   const isHighContrast = isForceHighContrast || theme === 'light-high-contrast';
 

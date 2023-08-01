@@ -53,7 +53,7 @@ describe('<ModalDialog />', () => {
     expect(screen.getByText(/some content…/i)).toBeInTheDocument();
     expect(screen.getByText(/Room ID: !room-id/i)).toBeInTheDocument();
     expect(
-      screen.getByRole('button', { name: /i am confident!/i })
+      screen.getByRole('button', { name: /i am confident!/i }),
     ).toBeInTheDocument();
   });
 
@@ -63,7 +63,7 @@ describe('<ModalDialog />', () => {
     render(<ModalDialog />, { wrapper });
 
     await expect(
-      screen.findByText(/this widget was not opened in a modal\./i)
+      screen.findByText(/this widget was not opened in a modal\./i),
     ).resolves.toBeInTheDocument();
   });
 
@@ -73,14 +73,14 @@ describe('<ModalDialog />', () => {
     await waitFor(() => {
       expect(widgetApi.setModalButtonEnabled).toBeCalledWith(
         'net.nordeck.create.poll.yes',
-        true
+        true,
       );
     });
 
     await waitFor(() => {
       expect(widgetApi.setModalButtonEnabled).toBeCalledWith(
         'net.nordeck.create.poll.no',
-        true
+        true,
       );
     });
   });
@@ -89,13 +89,13 @@ describe('<ModalDialog />', () => {
     render(<ModalDialog />, { wrapper });
 
     await userEvent.click(
-      screen.getByRole('button', { name: /i am confident!/i })
+      screen.getByRole('button', { name: /i am confident!/i }),
     );
 
     await waitFor(() => {
       expect(widgetApi.setModalButtonEnabled).toBeCalledWith(
         'net.nordeck.create.poll.yessssss',
-        true
+        true,
       );
     });
   });

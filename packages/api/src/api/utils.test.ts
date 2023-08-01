@@ -35,7 +35,7 @@ describe('convertToRawCapabilities', () => {
       'my.capability',
       WidgetEventCapability.forStateEvent(
         EventDirection.Receive,
-        'm.room.name'
+        'm.room.name',
       ),
     ];
     const rawCapabilities = convertToRawCapabilities(capabilities);
@@ -84,7 +84,7 @@ describe('equalsSet', () => {
 describe('subtractSet', () => {
   it('should subtract one set from the other', () => {
     expect(
-      subtractSet(new Set(['a', 'b', 'c']), new Set(['a', 'b', 'd', 'e']))
+      subtractSet(new Set(['a', 'b', 'c']), new Set(['a', 'b', 'd', 'e'])),
     ).toEqual(new Set(['c']));
   });
 });
@@ -118,7 +118,7 @@ describe('isInRoom', () => {
 
   it('should return true if matches any of room ids', () => {
     expect(isInRoom(event, 'another-room', ['my-room', 'test-room'])).toEqual(
-      true
+      true,
     );
   });
 

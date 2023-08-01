@@ -47,7 +47,7 @@ export type RedactionRoomEvent = RoomEvent<Record<string, never>> & Redaction;
  * @returns True if the event format is valid, otherwise false.
  */
 export function isValidRedactionEvent(
-  event: RoomEvent<unknown>
+  event: RoomEvent<unknown>,
 ): event is RedactionRoomEvent {
   if (
     event.type === ROOM_EVENT_REDACTION &&
@@ -67,11 +67,11 @@ export function isValidRedactionEvent(
  */
 export async function redactEvent(
   widgetApi: WidgetApi,
-  eventId: string
+  eventId: string,
 ): Promise<RedactionRoomEvent> {
   const result = await widgetApi.sendRoomEvent<Redaction>(
     ROOM_EVENT_REDACTION,
-    { redacts: eventId }
+    { redacts: eventId },
   );
   // The redaction event is special and needs to be casted, as the widget
   // toolkit assumes that the content of an event is returned as we send it.
@@ -86,7 +86,7 @@ export async function redactEvent(
  * @returns An observable of validated redaction events.
  */
 export function observeRedactionEvents(
-  widgetApi: WidgetApi
+  widgetApi: WidgetApi,
 ): Observable<RedactionRoomEvent> {
   return widgetApi
     .observeRoomEvents(ROOM_EVENT_REDACTION)

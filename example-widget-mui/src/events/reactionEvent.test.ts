@@ -32,7 +32,7 @@ describe('isValidReactionEvent', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'm.reaction',
-      })
+      }),
     ).toBe(true);
   });
 
@@ -53,7 +53,7 @@ describe('isValidReactionEvent', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'm.reaction',
-      })
+      }),
     ).toBe(true);
   });
 
@@ -77,7 +77,7 @@ describe('isValidReactionEvent', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'm.reaction',
-      })
+      }),
     ).toBe(false);
   });
 
@@ -107,7 +107,7 @@ describe('isValidReactionEvent', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'm.reaction',
-      })
+      }),
     ).toBe(false);
   });
 });

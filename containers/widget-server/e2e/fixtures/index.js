@@ -17,7 +17,7 @@
 const el = document.getElementById('environment');
 try {
   el.innerText = JSON.stringify(
-    JSON.parse(window.atob(window.__ENVIRONMENT__))
+    JSON.parse(window.atob(window.__ENVIRONMENT__)),
   );
 } catch {
   el.innerText = 'Could not find the environment :-(';

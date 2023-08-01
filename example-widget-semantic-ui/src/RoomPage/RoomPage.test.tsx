@@ -55,15 +55,15 @@ describe('<RoomPage />', () => {
     render(<RoomPage />, { wrapper });
 
     expect(
-      screen.getByRole('button', { name: /back to navigation/i })
+      screen.getByRole('button', { name: /back to navigation/i }),
     ).toBeInTheDocument();
 
     await expect(
-      screen.findByText(/room admin tool/i)
+      screen.findByText(/room admin tool/i),
     ).resolves.toBeInTheDocument();
     expect(screen.getByText(/current room name:/i)).toBeInTheDocument();
     expect(
-      screen.getByRole('button', { name: /rename room/i })
+      screen.getByRole('button', { name: /rename room/i }),
     ).toBeInTheDocument();
   });
 
@@ -73,7 +73,7 @@ describe('<RoomPage />', () => {
     expect(widgetApi.requestCapabilities).toBeCalledWith([
       WidgetEventCapability.forStateEvent(
         EventDirection.Receive,
-        'm.room.name'
+        'm.room.name',
       ),
     ]);
 
@@ -91,7 +91,7 @@ describe('<RoomPage />', () => {
     render(<RoomPage />, { wrapper });
 
     await expect(
-      screen.findByText(/current room name: a test room/i)
+      screen.findByText(/current room name: a test room/i),
     ).resolves.toBeInTheDocument();
   });
 
@@ -102,7 +102,7 @@ describe('<RoomPage />', () => {
     await userEvent.click(button);
 
     await expect(
-      screen.findByText(/current room name: a test room!/i)
+      screen.findByText(/current room name: a test room!/i),
     ).resolves.toBeInTheDocument();
 
     expect(widgetApi.sendStateEvent).toBeCalledWith('m.room.name', {

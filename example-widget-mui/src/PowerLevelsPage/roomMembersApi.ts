@@ -51,13 +51,13 @@ export const roomMembersApi = baseApi.injectEndpoints({
 
         try {
           const events = await widgetApi.receiveStateEvents(
-            STATE_EVENT_ROOM_MEMBER
+            STATE_EVENT_ROOM_MEMBER,
           );
 
           return {
             data: roomMembersEntityAdapter.addMany(
               roomMembersEntityAdapter.getInitialState(),
-              events.filter(isValidRoomMemberStateEvent)
+              events.filter(isValidRoomMemberStateEvent),
             ),
           };
         } catch (e) {
@@ -76,7 +76,7 @@ export const roomMembersApi = baseApi.injectEndpoints({
       // see also https://redux-toolkit.js.org/rtk-query/usage/streaming-updates#using-the-oncacheentryadded-lifecycle
       async onCacheEntryAdded(
         _,
-        { cacheDataLoaded, cacheEntryRemoved, extra, updateCachedData }
+        { cacheDataLoaded, cacheEntryRemoved, extra, updateCachedData },
       ) {
         const { widgetApi } = extra as ThunkExtraArgument;
 
@@ -89,11 +89,11 @@ export const roomMembersApi = baseApi.injectEndpoints({
             // update the cached data if the event changes in the room
             if (isValidRoomMemberStateEvent(event)) {
               updateCachedData((state) =>
-                roomMembersEntityAdapter.upsertOne(state, event)
+                roomMembersEntityAdapter.upsertOne(state, event),
               );
             } else {
               updateCachedData((state) =>
-                roomMembersEntityAdapter.removeOne(state, event.state_key)
+                roomMembersEntityAdapter.removeOne(state, event.state_key),
               );
             }
           });

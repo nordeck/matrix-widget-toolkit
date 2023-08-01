@@ -153,8 +153,8 @@ export const InvitationsView = (): ReactElement => {
           onClick={() => {
             setInvitedUsers((old) =>
               old.concat(
-                selected.map((u) => u.userId).filter((u) => !old.includes(u))
-              )
+                selected.map((u) => u.userId).filter((u) => !old.includes(u)),
+              ),
             );
             setSelected([]);
           }}
@@ -196,7 +196,7 @@ type SearchResults = Array<{
 
 function useUserSearchResults(
   input: string,
-  delay: number
+  delay: number,
 ): {
   loading: boolean;
   results: SearchResults;

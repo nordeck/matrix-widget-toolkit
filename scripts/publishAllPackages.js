@@ -18,7 +18,7 @@ for (var package of packages) {
   }
 
   const { name, version } = JSON.parse(
-    fs.readFileSync(path.resolve(packagePath, 'package.json'))
+    fs.readFileSync(path.resolve(packagePath, 'package.json')),
   );
 
   if (!versionNeedsUpload(name, version)) {
@@ -32,7 +32,7 @@ for (var package of packages) {
     'npm publish --registry https://registry.npmjs.org --access public',
     {
       cwd: packagePath,
-    }
+    },
   );
 
   console.log(`✅ Package ${name} published`);
@@ -46,7 +46,7 @@ console.log('Done!');
 function versionNeedsUpload(name, version) {
   try {
     const result = child_process.execSync(
-      `npm view "${name}@${version}" --registry https://registry.npmjs.org --json`
+      `npm view "${name}@${version}" --registry https://registry.npmjs.org --json`,
     );
 
     // this line throws if not exists

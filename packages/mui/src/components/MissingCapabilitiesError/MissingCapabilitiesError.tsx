@@ -36,7 +36,7 @@ export function MissingCapabilitiesError({
         <Typography variant="body2">
           {t(
             'missing-capabilities.instructions',
-            'The minimum capabilities required for this widget are missing. Make sure to grant all requested capabilities.'
+            'The minimum capabilities required for this widget are missing. Make sure to grant all requested capabilities.',
           )}
         </Typography>
 
@@ -44,7 +44,7 @@ export function MissingCapabilitiesError({
           <Button variant="contained" onClick={onRetry}>
             {t(
               'missing-capabilities.request-capabilities',
-              'Request capabilities'
+              'Request capabilities',
             )}
           </Button>
         </Box>

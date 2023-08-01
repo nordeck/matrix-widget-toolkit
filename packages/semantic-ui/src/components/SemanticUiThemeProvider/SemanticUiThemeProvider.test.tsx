@@ -22,7 +22,7 @@ describe('<SemanticUiThemeProvider/>', () => {
     render(
       <SemanticUiThemeProvider>
         <p>children</p>
-      </SemanticUiThemeProvider>
+      </SemanticUiThemeProvider>,
     );
 
     expect(screen.getByText(/children/)).toBeInTheDocument();

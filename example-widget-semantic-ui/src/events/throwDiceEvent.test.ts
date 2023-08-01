@@ -28,7 +28,7 @@ describe('isValidThrowDiceEvent', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'net.nordeck.throw_dice',
-      })
+      }),
     ).toBe(true);
   });
 
@@ -44,7 +44,7 @@ describe('isValidThrowDiceEvent', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'net.nordeck.throw_dice',
-      })
+      }),
     ).toBe(true);
   });
 
@@ -62,8 +62,8 @@ describe('isValidThrowDiceEvent', () => {
           room_id: '!room-id',
           sender: '@user-id',
           type: 'net.nordeck.throw_dice',
-        })
+        }),
       ).toBe(false);
-    }
+    },
   );
 });

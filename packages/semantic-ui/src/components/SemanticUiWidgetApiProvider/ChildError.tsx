@@ -30,7 +30,7 @@ export function ChildError({ error }: { error: Error }): ReactElement {
           <Message.Header>{t('error.title', 'Ohh no!')}</Message.Header>
           {t(
             'error.instructions',
-            'An error occured inside the widget. You can try to reopen the widget.'
+            'An error occured inside the widget. You can try to reopen the widget.',
           )}
         </Message.Content>
       </Message>

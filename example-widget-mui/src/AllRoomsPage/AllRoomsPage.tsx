@@ -65,7 +65,7 @@ export const AllRoomsPage = (): ReactElement => {
             ...generateRoomTimelineCapabilities(Symbols.AnyRoom),
             WidgetEventCapability.forStateEvent(
               EventDirection.Receive,
-              STATE_EVENT_ROOM_NAME
+              STATE_EVENT_ROOM_NAME,
             ),
             WIDGET_CAPABILITY_NAVIGATE,
           ]}

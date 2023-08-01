@@ -78,7 +78,7 @@ export function MissingParametersError({
           </Message.Header>
           {t(
             'missing-parameters.instructions',
-            'The widget is not registered correctly. Make sure to include the correct parameters in the widget URL:'
+            'The widget is not registered correctly. Make sure to include the correct parameters in the widget URL:',
           )}
         </Message.Content>
       </Message>
@@ -87,7 +87,7 @@ export function MissingParametersError({
       <Segment attached>
         {t(
           'missing-parameters.repair-instructions',
-          'You can either modify the widget registration manually or fix it automatically:'
+          'You can either modify the widget registration manually or fix it automatically:',
         )}
       </Segment>
 
@@ -108,7 +108,7 @@ export function MissingParametersError({
             <p>
               {t(
                 'missing-parameters.permissions-error.instructions',
-                'Insufficient permissions, could not configure widget. Only room admins can configure the widget.'
+                'Insufficient permissions, could not configure widget. Only room admins can configure the widget.',
               )}
             </p>
           </Modal.Description>
@@ -124,7 +124,7 @@ export function MissingParametersError({
         <Modal.Header>
           {t(
             'missing-parameters.completed.title',
-            'Widget configuration complete'
+            'Widget configuration complete',
           )}
         </Modal.Header>
         <Modal.Content>
@@ -132,7 +132,7 @@ export function MissingParametersError({
             <p>
               {t(
                 'missing-parameters.completed.instructions',
-                'Configuration completed, reopen the widget to start using it.'
+                'Configuration completed, reopen the widget to start using it.',
               )}
             </p>
           </Modal.Description>

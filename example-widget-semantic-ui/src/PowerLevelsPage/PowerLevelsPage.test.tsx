@@ -76,11 +76,11 @@ describe('<PowerLevelsPage />', () => {
     render(<PowerLevelsPage />, { wrapper });
 
     expect(
-      screen.getByRole('button', { name: /back to navigation/i })
+      screen.getByRole('button', { name: /back to navigation/i }),
     ).toBeInTheDocument();
 
     await expect(
-      screen.findByText(/room power levels/i)
+      screen.findByText(/room power levels/i),
     ).resolves.toBeInTheDocument();
 
     const listbox = screen.getByRole('listbox', { expanded: false });
@@ -90,7 +90,7 @@ describe('<PowerLevelsPage />', () => {
         name: '@another-user',
         selected: true,
         checked: true,
-      })
+      }),
     ).toBeInTheDocument();
 
     expect(screen.getByText(/state events/i)).toBeInTheDocument();
@@ -98,7 +98,7 @@ describe('<PowerLevelsPage />', () => {
     expect(screen.getByText(/actions/i)).toBeInTheDocument();
 
     expect(
-      screen.getByRole('button', { name: /promote/i })
+      screen.getByRole('button', { name: /promote/i }),
     ).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /demote/i })).toBeInTheDocument();
   });
@@ -112,28 +112,28 @@ describe('<PowerLevelsPage />', () => {
       within(listbox).getByRole('option', {
         name: '@another-user',
         selected: true,
-      })
+      }),
     ).toBeInTheDocument();
 
     await userEvent.click(
       within(listbox).getByRole('option', {
         name: '@user-id You',
         selected: false,
-      })
+      }),
     );
 
     expect(
       within(listbox).getByRole('option', {
         name: '@another-user',
         selected: false,
-      })
+      }),
     ).toBeInTheDocument();
 
     expect(
       within(listbox).getByRole('option', {
         name: '@user-id You',
         selected: true,
-      })
+      }),
     ).toBeInTheDocument();
   });
 
@@ -143,11 +143,11 @@ describe('<PowerLevelsPage />', () => {
     expect(widgetApi.requestCapabilities).toBeCalledWith([
       WidgetEventCapability.forStateEvent(
         EventDirection.Receive,
-        'm.room.power_levels'
+        'm.room.power_levels',
       ),
       WidgetEventCapability.forStateEvent(
         EventDirection.Receive,
-        'm.room.member'
+        'm.room.member',
       ),
     ]);
 
@@ -158,7 +158,7 @@ describe('<PowerLevelsPage />', () => {
       expect(widgetApi.requestCapabilities).toBeCalledWith([
         WidgetEventCapability.forStateEvent(
           EventDirection.Send,
-          'm.room.power_levels'
+          'm.room.power_levels',
         ),
       ]);
     });
@@ -173,7 +173,7 @@ describe('<PowerLevelsPage />', () => {
       within(listbox).getByRole('option', {
         name: '@user-id You',
         selected: false,
-      })
+      }),
     );
 
     const promoteButton = screen.getByRole('button', {

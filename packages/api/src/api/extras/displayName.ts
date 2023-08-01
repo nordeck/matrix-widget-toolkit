@@ -28,7 +28,7 @@ import { RoomMemberStateEventContent } from './roomMember';
  */
 export function getRoomMemberDisplayName(
   member: StateEvent<RoomMemberStateEventContent>,
-  allRoomMembers: StateEvent<RoomMemberStateEventContent>[] = []
+  allRoomMembers: StateEvent<RoomMemberStateEventContent>[] = [],
 ): string {
   // If the m.room.member state event has no displayname field, or if that field
   // has a null value, use the raw user id as the display name.
@@ -47,7 +47,7 @@ export function getRoomMemberDisplayName(
       // only join or invite state
       ['join', 'invite'].includes(m.content.membership) &&
       // same displayname
-      m.content.displayname === member.content.displayname
+      m.content.displayname === member.content.displayname,
   );
 
   if (!hasDuplicateDisplayName) {

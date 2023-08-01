@@ -35,7 +35,7 @@ export function MissingCapabilitiesError({
           </Message.Header>
           {t(
             'missing-capabilities.instructions',
-            'The minimum capabilities required for this widget are missing. Make sure to grant all requested capabilities.'
+            'The minimum capabilities required for this widget are missing. Make sure to grant all requested capabilities.',
           )}
         </Message.Content>
       </Message>

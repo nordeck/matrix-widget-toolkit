@@ -114,7 +114,7 @@ export class WidgetApiImpl implements WidgetApi {
       matrixWidgetApi,
       widgetId,
       widgetParameters,
-      { capabilities, supportStandalone }
+      { capabilities, supportStandalone },
     );
 
     await widgetApi.initialize();
@@ -151,7 +151,7 @@ export class WidgetApiImpl implements WidgetApi {
     public readonly widgetId: string,
     /** {@inheritDoc WidgetApi.widgetParameters} */
     public readonly widgetParameters: WidgetParameters,
-    { capabilities = [], supportStandalone = false }: WidgetApiOptions = {}
+    { capabilities = [], supportStandalone = false }: WidgetApiOptions = {},
   ) {
     this.events$ = fromEvent(
       this.matrixWidgetApi,
@@ -164,7 +164,7 @@ export class WidgetApiImpl implements WidgetApi {
           // Ignore errors while replying
         }
         return event;
-      }
+      },
     ).pipe(share());
 
     this.toDeviceMessages$ = fromEvent(
@@ -178,7 +178,7 @@ export class WidgetApiImpl implements WidgetApi {
           // Ignore errors while replying
         }
         return event;
-      }
+      },
     ).pipe(share());
 
     this.initialCapabilities = [
@@ -222,7 +222,7 @@ export class WidgetApiImpl implements WidgetApi {
               ev.preventDefault();
               this.matrixWidgetApi.transport.reply(ev.detail, {});
               return ev.detail.data as WidgetConfig<IWidgetApiRequestData>;
-            }
+            },
           );
 
           this.widgetConfig = await firstValueFrom(widgetConfig$);
@@ -230,7 +230,7 @@ export class WidgetApiImpl implements WidgetApi {
       : undefined;
 
     const rawCapabilities = unique(
-      convertToRawCapabilities(this.initialCapabilities)
+      convertToRawCapabilities(this.initialCapabilities),
     );
     this.matrixWidgetApi.requestCapabilities(rawCapabilities);
     this.matrixWidgetApi.start();
@@ -261,7 +261,7 @@ export class WidgetApiImpl implements WidgetApi {
 
   /** {@inheritDoc WidgetApi.requestCapabilities} */
   async requestCapabilities(
-    capabilities: Array<WidgetEventCapability | Capability>
+    capabilities: Array<WidgetEventCapability | Capability>,
   ): Promise<void> {
     if (this.outstandingCapabilitiesRequest) {
       // Avoid starting two capabilities requests in parallel. This can lead to
@@ -287,7 +287,7 @@ export class WidgetApiImpl implements WidgetApi {
   }
 
   private async requestCapabilitiesInternal(
-    capabilities: Array<WidgetEventCapability | Capability>
+    capabilities: Array<WidgetEventCapability | Capability>,
   ): Promise<void> {
     const rawCapabilities = unique(convertToRawCapabilities(capabilities));
 
@@ -300,7 +300,7 @@ export class WidgetApiImpl implements WidgetApi {
     const capabilities$ = fromEvent(
       this.matrixWidgetApi,
       `action:${WidgetApiToWidgetAction.NotifyCapabilities}`,
-      (ev: CustomEvent<INotifyCapabilitiesActionRequest>) => ev
+      (ev: CustomEvent<INotifyCapabilitiesActionRequest>) => ev,
     ).pipe(
       // TODO: `hasCapability` in the matrix-widget-api isn't consistent when capability
       //       upgrades happened. But `updateRequestedCapabilities` will deduplicate already
@@ -318,11 +318,11 @@ export class WidgetApiImpl implements WidgetApi {
 
         if (missingSet.size > 0) {
           throw new Error(
-            `Capabilities rejected: ${Array.from(missingSet).join(', ')}`
+            `Capabilities rejected: ${Array.from(missingSet).join(', ')}`,
           );
         }
       }),
-      first()
+      first(),
     );
 
     await new Promise(async (resolve, reject) => {
@@ -343,7 +343,7 @@ export class WidgetApiImpl implements WidgetApi {
 
   /** {@inheritDoc WidgetApi.hasCapabilities} */
   hasCapabilities(
-    capabilities: Array<WidgetEventCapability | Capability>
+    capabilities: Array<WidgetEventCapability | Capability>,
   ): boolean {
     const rawCapabilities = convertToRawCapabilities(capabilities);
 
@@ -353,7 +353,7 @@ export class WidgetApiImpl implements WidgetApi {
   /** {@inheritDoc WidgetApi.receiveSingleStateEvent} */
   async receiveSingleStateEvent<T>(
     eventType: string,
-    stateKey = ''
+    stateKey = '',
   ): Promise<StateEvent<T> | undefined> {
     const events = await this.receiveStateEvents<T>(eventType, { stateKey });
     return events && events[0];
@@ -365,13 +365,13 @@ export class WidgetApiImpl implements WidgetApi {
     {
       stateKey,
       roomIds,
-    }: { stateKey?: string; roomIds?: string[] | Symbols.AnyRoom } = {}
+    }: { stateKey?: string; roomIds?: string[] | Symbols.AnyRoom } = {},
   ): Promise<StateEvent<T>[]> {
     return (await this.matrixWidgetApi.readStateEvents(
       eventType,
       Number.MAX_SAFE_INTEGER,
       stateKey,
-      typeof roomIds === 'string' ? [Symbols.AnyRoom] : roomIds
+      typeof roomIds === 'string' ? [Symbols.AnyRoom] : roomIds,
     )) as StateEvent<T>[];
   }
 
@@ -381,7 +381,7 @@ export class WidgetApiImpl implements WidgetApi {
     {
       stateKey,
       roomIds,
-    }: { stateKey?: string; roomIds?: string[] | Symbols.AnyRoom } = {}
+    }: { stateKey?: string; roomIds?: string[] | Symbols.AnyRoom } = {},
   ): Observable<StateEvent<T>> {
     const currentRoomId = this.widgetParameters.roomId;
 
@@ -390,7 +390,7 @@ export class WidgetApiImpl implements WidgetApi {
     }
 
     const historyEvent$ = from(
-      this.receiveStateEvents<T>(eventType, { stateKey, roomIds })
+      this.receiveStateEvents<T>(eventType, { stateKey, roomIds }),
     ).pipe(mergeAll());
 
     const futureEvent$ = this.events$.pipe(
@@ -408,7 +408,7 @@ export class WidgetApiImpl implements WidgetApi {
 
         return undefined;
       }),
-      filter(isDefined)
+      filter(isDefined),
     );
 
     return concat(historyEvent$, futureEvent$);
@@ -418,7 +418,7 @@ export class WidgetApiImpl implements WidgetApi {
   async sendStateEvent<T>(
     eventType: string,
     content: T,
-    { roomId, stateKey = '' }: { roomId?: string; stateKey?: string } = {}
+    { roomId, stateKey = '' }: { roomId?: string; stateKey?: string } = {},
   ): Promise<StateEvent<T>> {
     const subject = new ReplaySubject<CustomEvent<IWidgetApiRequest>>();
     const subscription = this.events$.subscribe((e) => subject.next(e));
@@ -428,7 +428,7 @@ export class WidgetApiImpl implements WidgetApi {
         eventType,
         stateKey,
         content,
-        roomId
+        roomId,
       );
       // TODO: Why do we even return the event, not just the event id, we never
       // need it.
@@ -442,8 +442,8 @@ export class WidgetApiImpl implements WidgetApi {
               matrixEvent.room_id === room_id
             );
           }),
-          map((event) => event.detail.data as StateEvent<T>)
-        )
+          map((event) => event.detail.data as StateEvent<T>),
+        ),
       );
       return event;
     } finally {
@@ -457,13 +457,13 @@ export class WidgetApiImpl implements WidgetApi {
     {
       messageType,
       roomIds,
-    }: { messageType?: string; roomIds?: string[] | Symbols.AnyRoom } = {}
+    }: { messageType?: string; roomIds?: string[] | Symbols.AnyRoom } = {},
   ): Promise<Array<RoomEvent<T>>> {
     return (await this.matrixWidgetApi.readRoomEvents(
       eventType,
       Number.MAX_SAFE_INTEGER,
       messageType,
-      typeof roomIds === 'string' ? [Symbols.AnyRoom] : roomIds
+      typeof roomIds === 'string' ? [Symbols.AnyRoom] : roomIds,
     )) as RoomEvent<T>[];
   }
 
@@ -473,7 +473,7 @@ export class WidgetApiImpl implements WidgetApi {
     {
       messageType,
       roomIds,
-    }: { messageType?: string; roomIds?: string[] | Symbols.AnyRoom } = {}
+    }: { messageType?: string; roomIds?: string[] | Symbols.AnyRoom } = {},
   ): Observable<RoomEvent<T>> {
     const currentRoomId = this.widgetParameters.roomId;
 
@@ -482,7 +482,7 @@ export class WidgetApiImpl implements WidgetApi {
     }
 
     const historyEvent$ = from(
-      this.receiveRoomEvents<T>(eventType, { messageType, roomIds })
+      this.receiveRoomEvents<T>(eventType, { messageType, roomIds }),
     ).pipe(mergeAll());
 
     const futureEvent$ = this.events$.pipe(
@@ -502,7 +502,7 @@ export class WidgetApiImpl implements WidgetApi {
 
         return undefined;
       }),
-      filter(isDefined)
+      filter(isDefined),
     );
 
     return concat(historyEvent$, futureEvent$);
@@ -512,7 +512,7 @@ export class WidgetApiImpl implements WidgetApi {
   async sendRoomEvent<T>(
     eventType: string,
     content: T,
-    { roomId }: { roomId?: string } = {}
+    { roomId }: { roomId?: string } = {},
   ): Promise<RoomEvent<T>> {
     const subject = new ReplaySubject<CustomEvent<IWidgetApiRequest>>();
     const subscription = this.events$.subscribe((e) => subject.next(e));
@@ -521,7 +521,7 @@ export class WidgetApiImpl implements WidgetApi {
       const { event_id, room_id } = await this.matrixWidgetApi.sendRoomEvent(
         eventType,
         content,
-        roomId
+        roomId,
       );
       // TODO: Why do we even return the event, not just the event id, we never
       // need it.
@@ -535,8 +535,8 @@ export class WidgetApiImpl implements WidgetApi {
               matrixEvent.room_id === room_id
             );
           }),
-          map((event) => event.detail.data as RoomEvent<T>)
-        )
+          map((event) => event.detail.data as RoomEvent<T>),
+        ),
       );
       return event;
     } finally {
@@ -554,7 +554,7 @@ export class WidgetApiImpl implements WidgetApi {
       relationType?: string;
       eventType?: string;
       direction?: 'f' | 'b';
-    }
+    },
   ): Promise<{
     chunk: Array<RoomEvent | StateEvent>;
     nextToken?: string;
@@ -567,7 +567,7 @@ export class WidgetApiImpl implements WidgetApi {
       options?.limit,
       options?.from,
       undefined,
-      options?.direction
+      options?.direction,
     );
 
     return {
@@ -580,36 +580,36 @@ export class WidgetApiImpl implements WidgetApi {
   async sendToDeviceMessage<T>(
     eventType: string,
     encrypted: boolean,
-    content: { [userId: string]: { [deviceId: string | '*']: T } }
+    content: { [userId: string]: { [deviceId: string | '*']: T } },
   ): Promise<void> {
     await this.matrixWidgetApi.sendToDevice(
       eventType,
       encrypted,
-      content as { [userId: string]: { [deviceId: string]: object } }
+      content as { [userId: string]: { [deviceId: string]: object } },
     );
   }
 
   /** {@inheritDoc WidgetApi.observeToDeviceMessages} */
   observeToDeviceMessages<T>(
-    eventType: string
+    eventType: string,
   ): Observable<ToDeviceMessageEvent<T>> {
     return this.toDeviceMessages$.pipe(
       map((e) => e.detail.data as ToDeviceMessageEvent<T>),
-      filter((e) => e.type === eventType)
+      filter((e) => e.type === eventType),
     );
   }
 
   /** {@inheritDoc WidgetApi.openModal} */
   async openModal<
     T extends Record<string, unknown> = Record<string, unknown>,
-    U extends IModalWidgetCreateData = IModalWidgetCreateData
+    U extends IModalWidgetCreateData = IModalWidgetCreateData,
   >(
     pathName: string,
     name: string,
     options?: {
       buttons?: IModalWidgetOpenRequestDataButton[];
       data?: U;
-    }
+    },
   ): Promise<T | undefined> {
     const { isModal } = parseWidgetId(this.widgetId);
     if (isModal) {
@@ -624,7 +624,7 @@ export class WidgetApiImpl implements WidgetApi {
       url,
       name,
       options?.buttons,
-      options?.data
+      options?.data,
     );
 
     const closeModalWidget$ = fromEvent(
@@ -639,7 +639,7 @@ export class WidgetApiImpl implements WidgetApi {
         }
 
         return event.detail.data as unknown as T;
-      }
+      },
     );
 
     return firstValueFrom(closeModalWidget$);
@@ -648,7 +648,7 @@ export class WidgetApiImpl implements WidgetApi {
   /** {@inheritDoc WidgetApi.setModalButtonEnabled} */
   async setModalButtonEnabled(
     buttonId: ModalButtonID,
-    isEnabled: boolean
+    isEnabled: boolean,
   ): Promise<void> {
     const { isModal } = parseWidgetId(this.widgetId);
     if (!isModal) {
@@ -673,7 +673,7 @@ export class WidgetApiImpl implements WidgetApi {
         this.matrixWidgetApi.transport.reply(event.detail, {});
 
         return event.detail.data.id as ModalButtonID;
-      }
+      },
     );
   }
 
@@ -685,7 +685,7 @@ export class WidgetApiImpl implements WidgetApi {
     }
 
     await this.matrixWidgetApi.closeModalWidget(
-      data ? data : { 'm.exited': true }
+      data ? data : { 'm.exited': true },
     );
   }
 
@@ -756,14 +756,14 @@ export class WidgetApiImpl implements WidgetApi {
         urls: uris,
         username,
         credential: password,
-      }))
+      })),
     );
   }
 
   /** {@inheritdoc WidgetApi.searchUserDirectory}  */
   async searchUserDirectory(
     searchTerm: string,
-    options?: { limit?: number | undefined } | undefined
+    options?: { limit?: number | undefined } | undefined,
   ): Promise<{
     results: Array<{
       userId: string;
@@ -773,7 +773,7 @@ export class WidgetApiImpl implements WidgetApi {
   }> {
     const { results } = await this.matrixWidgetApi.searchUserDirectory(
       searchTerm,
-      options?.limit
+      options?.limit,
     );
 
     return {

@@ -50,7 +50,7 @@ beforeEach(() => {
 
   widgetApi.mockSendRoomEvent(mockRoomMessageEvent());
   widgetApi.mockSendRoomEvent(
-    mockReactionEvent({ 'm.relates_to': { key: '❄️' } })
+    mockReactionEvent({ 'm.relates_to': { key: '❄️' } }),
   );
   widgetApi.mockSendStateEvent(mockMessageCollectionEvent());
 
@@ -68,15 +68,15 @@ describe('<RelationsPage />', () => {
     render(<RelationsPage />, { wrapper });
 
     expect(
-      screen.getByRole('link', { name: 'Back to navigation' })
+      screen.getByRole('link', { name: 'Back to navigation' }),
     ).toBeInTheDocument();
 
     await expect(
-      screen.findByRole('heading', { name: 'Event Relations' })
+      screen.findByRole('heading', { name: 'Event Relations' }),
     ).resolves.toBeInTheDocument();
 
     expect(
-      screen.getByRole('textbox', { name: 'Send a message' })
+      screen.getByRole('textbox', { name: 'Send a message' }),
     ).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Send' })).toBeInTheDocument();
 
@@ -92,14 +92,14 @@ describe('<RelationsPage />', () => {
         name: 'Remove reaction "Snowflake"',
         description: 'My message @user-id',
         pressed: true,
-      })
+      }),
     ).toBeInTheDocument();
     expect(
       within(listitem).getByRole('button', {
         name: 'Add reaction "Thumbs Up"',
         description: 'My message @user-id',
         pressed: false,
-      })
+      }),
     ).toBeInTheDocument();
   });
 
@@ -107,7 +107,7 @@ describe('<RelationsPage />', () => {
     const { container } = render(<RelationsPage />, { wrapper });
 
     await expect(
-      screen.findByRole('heading', { name: 'Event Relations' })
+      screen.findByRole('heading', { name: 'Event Relations' }),
     ).resolves.toBeInTheDocument();
 
     expect(await axe(container)).toHaveNoViolations();
@@ -132,14 +132,14 @@ describe('<RelationsPage />', () => {
         name: 'Add reaction "Snowflake"',
         description: 'Hey, how are you? @user-id',
         pressed: false,
-      })
+      }),
     ).toBeInTheDocument();
     expect(
       within(listbox).getByRole('button', {
         name: 'Add reaction "Thumbs Up"',
         description: 'Hey, how are you? @user-id',
         pressed: false,
-      })
+      }),
     ).toBeInTheDocument();
   });
 
@@ -151,7 +151,7 @@ describe('<RelationsPage />', () => {
         name: 'Add reaction "Thumbs Up"',
         description: 'My message @user-id',
         pressed: false,
-      })
+      }),
     );
 
     await screen.findByRole('button', {
@@ -169,7 +169,7 @@ describe('<RelationsPage />', () => {
         name: 'Remove reaction "Snowflake"',
         description: 'My message @user-id',
         pressed: true,
-      })
+      }),
     );
 
     await screen.findByRole('button', {
@@ -193,7 +193,7 @@ describe('<RelationsPage />', () => {
     render(<RelationsPage />, { wrapper });
 
     await expect(
-      screen.findByText("You don't have the permission to send new messages.")
+      screen.findByText("You don't have the permission to send new messages."),
     ).resolves.toBeInTheDocument();
   });
 
