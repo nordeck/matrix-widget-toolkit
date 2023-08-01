@@ -33,7 +33,7 @@
     "@rollup/plugin-commonjs": "^25.0.3",
     "cross-env": "^7.0.3",
     "depcheck": "^1.4.3",
-    "eslint": "^8.42.0",
+    "eslint": "^8.46.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-notice": "^0.9.10",
     "eslint-plugin-promise": "^6.1.1",
@@ -41,7 +41,7 @@
     "lint-staged": "^13.2.2",
     "prettier": "^2.8.8",
     "prettier-plugin-organize-imports": "^3.2.2",
-    "rollup": "^3.24.0",
+    "rollup": "^3.27.0",
     "typescript": "^4.8.4",
     "yarn-deduplicate": "^6.0.2"
   },
