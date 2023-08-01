@@ -42,7 +42,7 @@ describe('<CopyableCode/>', () => {
 
     expect(screen.getByText('Hello World')).toBeInTheDocument();
     expect(
-      icon(screen.getByLabelText('Copy to clipboard'), 'copy')
+      icon(screen.getByLabelText('Copy to clipboard'), 'copy'),
     ).toBeInTheDocument();
   });
 

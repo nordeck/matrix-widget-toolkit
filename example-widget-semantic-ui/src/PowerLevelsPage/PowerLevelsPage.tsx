@@ -87,11 +87,11 @@ export const PowerLevelsPage = (): ReactElement => {
         capabilities={[
           WidgetEventCapability.forStateEvent(
             EventDirection.Receive,
-            STATE_EVENT_POWER_LEVELS
+            STATE_EVENT_POWER_LEVELS,
           ),
           WidgetEventCapability.forStateEvent(
             EventDirection.Receive,
-            STATE_EVENT_ROOM_MEMBER
+            STATE_EVENT_ROOM_MEMBER,
           ),
         ]}
       >
@@ -174,14 +174,14 @@ export const PowerLevelsView = (): ReactElement => {
   const canPromoteOrDemote = hasStateEventPower(
     powerLevelsEvent?.content,
     widgetApi.widgetParameters.userId,
-    STATE_EVENT_POWER_LEVELS
+    STATE_EVENT_POWER_LEVELS,
   );
 
   // we assume that users that can change the name can be promoted or demoted
   const userIsModerator = hasStateEventPower(
     powerLevelsEvent?.content,
     selectedMember,
-    STATE_EVENT_ROOM_NAME
+    STATE_EVENT_ROOM_NAME,
   );
 
   return (
@@ -212,7 +212,7 @@ export const PowerLevelsView = (): ReactElement => {
                 permitted={hasStateEventPower(
                   powerLevelsEvent?.content,
                   selectedMember,
-                  type
+                  type,
                 )}
               />
               {type}
@@ -227,7 +227,7 @@ export const PowerLevelsView = (): ReactElement => {
                 permitted={hasRoomEventPower(
                   powerLevelsEvent?.content,
                   selectedMember,
-                  type
+                  type,
                 )}
               />
               {type}
@@ -242,7 +242,7 @@ export const PowerLevelsView = (): ReactElement => {
                 permitted={hasActionPower(
                   powerLevelsEvent?.content,
                   selectedMember,
-                  action
+                  action,
                 )}
               />
               {action}

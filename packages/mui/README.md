@@ -69,7 +69,7 @@ import { EventDirection, WidgetEventCapability } from 'matrix-widget-api';
   capabilities={[
     WidgetEventCapability.forStateEvent(
       EventDirection.Receive,
-      STATE_EVENT_ROOM_NAME
+      STATE_EVENT_ROOM_NAME,
     ),
   ]}
 >

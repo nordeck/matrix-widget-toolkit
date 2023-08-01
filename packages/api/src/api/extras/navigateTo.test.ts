@@ -30,11 +30,11 @@ describe('navigateToRoom', () => {
 
   it('should navigate', async () => {
     await expect(
-      navigateToRoom(widgetApi, '!my-room-id:example.org')
+      navigateToRoom(widgetApi, '!my-room-id:example.org'),
     ).resolves.toBeUndefined();
 
     expect(widgetApi.navigateTo).toBeCalledWith(
-      'https://matrix.to/#/!my-room-id%3Aexample.org'
+      'https://matrix.to/#/!my-room-id%3Aexample.org',
     );
   });
 
@@ -42,11 +42,11 @@ describe('navigateToRoom', () => {
     await expect(
       navigateToRoom(widgetApi, '!my-room-id:example.org', {
         via: ['matrix.com'],
-      })
+      }),
     ).resolves.toBeUndefined();
 
     expect(widgetApi.navigateTo).toBeCalledWith(
-      'https://matrix.to/#/!my-room-id%3Aexample.org?via=matrix.com'
+      'https://matrix.to/#/!my-room-id%3Aexample.org?via=matrix.com',
     );
   });
 
@@ -54,11 +54,11 @@ describe('navigateToRoom', () => {
     await expect(
       navigateToRoom(widgetApi, '!my-room-id:example.org', {
         via: ['matrix.com', 'example.com'],
-      })
+      }),
     ).resolves.toBeUndefined();
 
     expect(widgetApi.navigateTo).toBeCalledWith(
-      'https://matrix.to/#/!my-room-id%3Aexample.org?via=matrix.com&via=example.com'
+      'https://matrix.to/#/!my-room-id%3Aexample.org?via=matrix.com&via=example.com',
     );
   });
 });

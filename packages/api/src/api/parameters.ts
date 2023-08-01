@@ -65,7 +65,7 @@ export function extractWidgetApiParameters(): WidgetApiParameters {
  */
 export function extractRawWidgetParameters(): Record<string, string> {
   const hash = window.location.hash.substring(
-    window.location.hash.indexOf('?') + 1
+    window.location.hash.indexOf('?') + 1,
   );
   const params = {
     // TODO: Information are leaked to the server when transmitted via query parameters?
@@ -78,8 +78,8 @@ export function extractRawWidgetParameters(): Record<string, string> {
     Object.entries(params).filter(
       // For now only use simple values, don't allow them to be specified more
       // than once.
-      (e): e is [string, string] => typeof e[1] === 'string'
-    )
+      (e): e is [string, string] => typeof e[1] === 'string',
+    ),
   );
 }
 

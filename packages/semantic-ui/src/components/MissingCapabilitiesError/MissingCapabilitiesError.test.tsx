@@ -32,7 +32,7 @@ describe('<MissingCapabilitiesError>', () => {
     render(<MissingCapabilitiesError onRetry={onRetry} />);
 
     await userEvent.click(
-      screen.getByRole('button', { name: /request capabilities/i })
+      screen.getByRole('button', { name: /request capabilities/i }),
     );
 
     expect(onRetry).toBeCalled();

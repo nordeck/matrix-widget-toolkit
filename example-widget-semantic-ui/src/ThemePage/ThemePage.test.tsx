@@ -25,7 +25,7 @@ describe('<ThemePage>', () => {
     });
 
     expect(
-      screen.getByRole('button', { name: 'Back to navigation' })
+      screen.getByRole('button', { name: 'Back to navigation' }),
     ).toBeInTheDocument();
   });
 

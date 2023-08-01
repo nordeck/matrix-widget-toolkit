@@ -31,7 +31,7 @@ export function MobileClientError(): ReactElement {
           </Message.Header>
           {t(
             'mobile-client.instructions',
-            "The widget doesn't work in mobile clients due to technical limitations. Open the widget on you Desktop or Web client."
+            "The widget doesn't work in mobile clients due to technical limitations. Open the widget on you Desktop or Web client.",
           )}
         </Message.Content>
       </Message>

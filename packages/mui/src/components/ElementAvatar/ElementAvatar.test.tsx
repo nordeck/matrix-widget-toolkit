@@ -25,11 +25,11 @@ describe('<ElementAvatar>', () => {
         userId="@user-alice"
         displayName="Alice"
         avatarUrl={'mxc://alice'}
-      />
+      />,
     );
 
     await expect(
-      screen.findByRole('img', { hidden: true })
+      screen.findByRole('img', { hidden: true }),
     ).resolves.toBeInTheDocument();
   });
 
@@ -39,11 +39,11 @@ describe('<ElementAvatar>', () => {
         userId="@user-alice"
         displayName="Alice"
         avatarUrl={'mxc://alice'}
-      />
+      />,
     );
 
     await expect(
-      screen.findByRole('img', { hidden: true })
+      screen.findByRole('img', { hidden: true }),
     ).resolves.toBeInTheDocument();
 
     expect(await axe(container)).toHaveNoViolations();
@@ -55,14 +55,14 @@ describe('<ElementAvatar>', () => {
         userId="@user-alice"
         displayName="Alice"
         avatarUrl={'mxc://alice'}
-      />
+      />,
     );
 
     await expect(
-      screen.findByRole('img', { hidden: true })
+      screen.findByRole('img', { hidden: true }),
     ).resolves.toHaveAttribute(
       'src',
-      expect.stringMatching(/\/_matrix\/media\/r0\/thumbnail\/alice/i)
+      expect.stringMatching(/\/_matrix\/media\/r0\/thumbnail\/alice/i),
     );
   });
 

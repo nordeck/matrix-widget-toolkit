@@ -32,7 +32,7 @@ const getWindowEnvironment = () => {
       } catch {
         console.warn(
           'window.__ENVIRONMENT__ has an unexpected format',
-          encoded
+          encoded,
         );
       }
     }
@@ -63,7 +63,7 @@ export function getEnvironment(name: string, defaultValue: string): string;
 
 export function getEnvironment(
   name: string,
-  defaultValue?: string
+  defaultValue?: string,
 ): string | undefined {
   const value = environment[name] || process.env[name];
   return value ?? defaultValue;

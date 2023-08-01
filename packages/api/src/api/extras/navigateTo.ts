@@ -44,12 +44,12 @@ export type NavigateToRoomOptions = {
 export async function navigateToRoom(
   widgetApi: WidgetApi,
   roomId: string,
-  opts: NavigateToRoomOptions = {}
+  opts: NavigateToRoomOptions = {},
 ): Promise<void> {
   const { via = [] } = opts;
   const params = stringify(
     { via },
-    { addQueryPrefix: true, arrayFormat: 'repeat' }
+    { addQueryPrefix: true, arrayFormat: 'repeat' },
   );
   const url = `https://matrix.to/#/${encodeURIComponent(roomId)}${params}`;
   await widgetApi.navigateTo(url);

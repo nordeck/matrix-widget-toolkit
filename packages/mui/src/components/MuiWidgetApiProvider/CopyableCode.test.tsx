@@ -41,7 +41,7 @@ describe('<CopyableCode/>', () => {
 
     expect(screen.getByText('Hello World')).toBeInTheDocument();
     expect(
-      screen.getByRole('button', { name: 'Copy to clipboard' })
+      screen.getByRole('button', { name: 'Copy to clipboard' }),
     ).toBeInTheDocument();
   });
 

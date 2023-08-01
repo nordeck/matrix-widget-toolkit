@@ -29,7 +29,7 @@ import {
 jest.mock('@matrix-widget-toolkit/api');
 
 const extractWidgetApiParameters = jest.mocked(
-  extractWidgetApiParametersMocked
+  extractWidgetApiParametersMocked,
 );
 const extractWidgetParameters = jest.mocked(extractWidgetParametersMocked);
 const parseWidgetId = jest.mocked(parseWidgetIdMocked);
@@ -59,7 +59,7 @@ describe('<ThemeSelectionProvider/>', () => {
     render(
       <ThemeSelectionProvider>
         <p>children</p>
-      </ThemeSelectionProvider>
+      </ThemeSelectionProvider>,
     );
 
     expect(screen.getByText(/children/)).toBeInTheDocument();

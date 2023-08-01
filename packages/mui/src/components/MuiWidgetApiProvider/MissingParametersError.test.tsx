@@ -30,7 +30,7 @@ jest.mock('@matrix-widget-toolkit/api');
 
 const repairWidgetRegistration = jest.mocked(repairWidgetRegistrationMocked);
 const generateWidgetRegistrationUrl = jest.mocked(
-  generateWidgetRegistrationUrlMocked
+  generateWidgetRegistrationUrlMocked,
 );
 
 describe('<MissingParametersError>', () => {
@@ -55,16 +55,16 @@ describe('<MissingParametersError>', () => {
 
     render(
       <MissingParametersError widgetRegistration={{ name: 'New Widget' }} />,
-      { wrapper }
+      { wrapper },
     );
 
     expect(screen.getByText('Wrong widget registration')).toBeInTheDocument();
     expect(
-      screen.getByText(/the widget is not registered correctly/i)
+      screen.getByText(/the widget is not registered correctly/i),
     ).toBeInTheDocument();
     expect(screen.getByText(/\/addwidget/)).toBeInTheDocument();
     expect(
-      await screen.findByText(/you can either modify the widget/i)
+      await screen.findByText(/you can either modify the widget/i),
     ).toBeInTheDocument();
 
     const repairButton = screen.getByRole('button', {
@@ -77,10 +77,10 @@ describe('<MissingParametersError>', () => {
       name: 'New Widget',
     });
     expect(
-      await screen.findByText('Widget configuration complete')
+      await screen.findByText('Widget configuration complete'),
     ).toBeInTheDocument();
     expect(
-      await screen.findByText(/configuration completed/i)
+      await screen.findByText(/configuration completed/i),
     ).toBeInTheDocument();
   });
 
@@ -89,7 +89,7 @@ describe('<MissingParametersError>', () => {
 
     render(
       <MissingParametersError widgetRegistration={{ name: 'New Widget' }} />,
-      { wrapper }
+      { wrapper },
     );
 
     const repairButton = screen.getByRole('button', {
@@ -103,7 +103,7 @@ describe('<MissingParametersError>', () => {
     });
     expect(await screen.findByText('Error')).toBeInTheDocument();
     expect(
-      await screen.findByText(/insufficient permissions/i)
+      await screen.findByText(/insufficient permissions/i),
     ).toBeInTheDocument();
 
     const closeButton = screen.getByRole('button', { name: /close/i });
@@ -116,7 +116,7 @@ describe('<MissingParametersError>', () => {
 
     const { container } = render(
       <MissingParametersError widgetRegistration={{ name: 'New Widget' }} />,
-      { wrapper }
+      { wrapper },
     );
 
     expect(await axe(container)).toHaveNoViolations();

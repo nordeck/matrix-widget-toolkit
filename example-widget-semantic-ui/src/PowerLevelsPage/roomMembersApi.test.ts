@@ -55,13 +55,13 @@ beforeEach(() => {
     mockRoomMemberEvent({
       state_key: '@user-1',
       content: { membership: 'join' },
-    })
+    }),
   );
   user2 = widgetApi.mockSendStateEvent(
     mockRoomMemberEvent({
       state_key: '@user-2',
       content: { membership: 'invite' },
-    })
+    }),
   );
 });
 
@@ -72,7 +72,7 @@ describe('getRoomMembers', () => {
     await expect(
       store
         .dispatch(roomMembersApi.endpoints.getRoomMembers.initiate())
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({
       entities: {
         [user1.state_key]: user1,
@@ -90,7 +90,7 @@ describe('getRoomMembers', () => {
     await expect(
       store
         .dispatch(roomMembersApi.endpoints.getRoomMembers.initiate())
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({ entities: {}, ids: [] });
   });
 
@@ -103,24 +103,24 @@ describe('getRoomMembers', () => {
     // wait for the initial load
     await waitFor(() =>
       expect(
-        roomMembersApi.endpoints.getRoomMembers.select()(store.getState()).data
+        roomMembersApi.endpoints.getRoomMembers.select()(store.getState()).data,
       ).toEqual({
         entities: {
           [user1.state_key]: user1,
           [user2.state_key]: user2,
         },
         ids: [user1.state_key, user2.state_key],
-      })
+      }),
     );
 
     const userNew = widgetApi.mockSendStateEvent(
-      mockRoomMemberEvent({ state_key: '@user-new' })
+      mockRoomMemberEvent({ state_key: '@user-new' }),
     );
 
     // wait for the change
     await waitFor(() =>
       expect(
-        roomMembersApi.endpoints.getRoomMembers.select()(store.getState()).data
+        roomMembersApi.endpoints.getRoomMembers.select()(store.getState()).data,
       ).toEqual({
         entities: {
           [user1.state_key]: user1,
@@ -128,7 +128,7 @@ describe('getRoomMembers', () => {
           [userNew.state_key]: userNew,
         },
         ids: [user1.state_key, user2.state_key, userNew.state_key],
-      })
+      }),
     );
   });
 });

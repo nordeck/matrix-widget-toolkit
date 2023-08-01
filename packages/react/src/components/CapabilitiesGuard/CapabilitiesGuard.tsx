@@ -67,7 +67,7 @@ export function CapabilitiesGuard({
     retry: requestCapabilities,
   } = useAsyncRetry(
     () => widgetApi.requestCapabilities(capabilities),
-    [widgetApi, capabilities]
+    [widgetApi, capabilities],
   );
 
   if (loading) {

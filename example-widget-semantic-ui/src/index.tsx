@@ -32,7 +32,7 @@ const widgetApiPromise = WidgetApiImpl.create({
   capabilities: [
     WidgetEventCapability.forStateEvent(
       EventDirection.Receive,
-      STATE_EVENT_ROOM_NAME
+      STATE_EVENT_ROOM_NAME,
     ),
   ],
 });
@@ -41,5 +41,5 @@ ReactDOM.render(
   <React.StrictMode>
     <App widgetApiPromise={widgetApiPromise} />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

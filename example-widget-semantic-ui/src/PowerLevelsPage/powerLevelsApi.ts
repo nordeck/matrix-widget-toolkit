@@ -43,7 +43,7 @@ export const powerLevelsApi = baseApi.injectEndpoints({
 
         try {
           const events = await widgetApi.receiveStateEvents(
-            STATE_EVENT_POWER_LEVELS
+            STATE_EVENT_POWER_LEVELS,
           );
 
           const event = first(events.filter(isValidPowerLevelStateEvent));
@@ -65,7 +65,7 @@ export const powerLevelsApi = baseApi.injectEndpoints({
       // see also https://redux-toolkit.js.org/rtk-query/usage/streaming-updates#using-the-oncacheentryadded-lifecycle
       async onCacheEntryAdded(
         _,
-        { cacheDataLoaded, cacheEntryRemoved, extra, updateCachedData }
+        { cacheDataLoaded, cacheEntryRemoved, extra, updateCachedData },
       ) {
         const { widgetApi } = extra as ThunkExtraArgument;
 
@@ -106,8 +106,8 @@ export const powerLevelsApi = baseApi.injectEndpoints({
               if (draft.content) {
                 draft.content = content;
               }
-            }
-          )
+            },
+          ),
         );
 
         try {
@@ -124,13 +124,13 @@ export const powerLevelsApi = baseApi.injectEndpoints({
           await widgetApi.requestCapabilities([
             WidgetEventCapability.forStateEvent(
               EventDirection.Send,
-              STATE_EVENT_POWER_LEVELS
+              STATE_EVENT_POWER_LEVELS,
             ),
           ]);
 
           const newEvent = await widgetApi.sendStateEvent(
             STATE_EVENT_POWER_LEVELS,
-            content
+            content,
           );
 
           return { data: newEvent };

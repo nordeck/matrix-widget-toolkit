@@ -40,7 +40,7 @@ describe('getRelevantEvents', () => {
         content: {
           eventIds: ['$event-0', '$event-1'],
         },
-      })
+      }),
     );
 
     const store = createStore({ widgetApi });
@@ -48,7 +48,7 @@ describe('getRelevantEvents', () => {
     await expect(
       store
         .dispatch(roomMessagesApi.endpoints.getRelevantEvents.initiate())
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual(['$event-0', '$event-1']);
   });
 
@@ -59,7 +59,7 @@ describe('getRelevantEvents', () => {
         content: {
           eventIds: ['$event-0', '$event-1'],
         },
-      })
+      }),
     );
 
     const store = createStore({ widgetApi });
@@ -67,7 +67,7 @@ describe('getRelevantEvents', () => {
     await expect(
       store
         .dispatch(roomMessagesApi.endpoints.getRelevantEvents.initiate())
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual([]);
   });
 
@@ -79,13 +79,13 @@ describe('getRelevantEvents', () => {
     await expect(
       store
         .dispatch(roomMessagesApi.endpoints.getRelevantEvents.initiate())
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual([]);
   });
 
   it('should return error if read fails', async () => {
     widgetApi.receiveSingleStateEvent.mockRejectedValue(
-      new Error('Unexpected error')
+      new Error('Unexpected error'),
     );
 
     const store = createStore({ widgetApi });
@@ -93,7 +93,7 @@ describe('getRelevantEvents', () => {
     await expect(
       store
         .dispatch(roomMessagesApi.endpoints.getRelevantEvents.initiate())
-        .unwrap()
+        .unwrap(),
     ).rejects.toEqual({
       name: 'LoadFailed',
       message: 'Could not load events: Unexpected error',
@@ -110,20 +110,20 @@ describe('getRelevantEvents', () => {
     await waitFor(() =>
       expect(
         roomMessagesApi.endpoints.getRelevantEvents.select()(store.getState())
-          .data
-      ).toEqual([])
+          .data,
+      ).toEqual([]),
     );
 
     widgetApi.mockSendStateEvent(
-      mockMessageCollectionEvent({ content: { eventIds: ['$event-id'] } })
+      mockMessageCollectionEvent({ content: { eventIds: ['$event-id'] } }),
     );
 
     // wait for the change
     await waitFor(() =>
       expect(
         roomMessagesApi.endpoints.getRelevantEvents.select()(store.getState())
-          .data
-      ).toEqual(['$event-id'])
+          .data,
+      ).toEqual(['$event-id']),
     );
   });
 });
@@ -135,7 +135,7 @@ describe('getMessage', () => {
     widgetApi.mockSendRoomEvent(
       mockReactionEvent({
         'm.relates_to': { event_id: '$another-id', key: 'O' },
-      })
+      }),
     );
 
     const store = createStore({ widgetApi });
@@ -145,9 +145,9 @@ describe('getMessage', () => {
         .dispatch(
           roomMessagesApi.endpoints.getMessage.initiate({
             eventId: messageEvent.event_id,
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({
       event: messageEvent,
       reactions: [reactionEvent],
@@ -156,7 +156,7 @@ describe('getMessage', () => {
 
   it('should return error if read fails', async () => {
     widgetApi.readEventRelations.mockRejectedValue(
-      new Error('Unexpected error')
+      new Error('Unexpected error'),
     );
 
     const store = createStore({ widgetApi });
@@ -166,9 +166,9 @@ describe('getMessage', () => {
         .dispatch(
           roomMessagesApi.endpoints.getMessage.initiate({
             eventId: '$event-id',
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).rejects.toEqual({
       name: 'LoadFailed',
       message: 'Could not load events: Unexpected error',
@@ -185,7 +185,7 @@ describe('getMessage', () => {
     store.dispatch(
       roomMessagesApi.endpoints.getMessage.initiate({
         eventId: messageEvent.event_id,
-      })
+      }),
     );
 
     // wait for the initial load
@@ -193,15 +193,15 @@ describe('getMessage', () => {
       expect(
         roomMessagesApi.endpoints.getMessage.select({
           eventId: messageEvent.event_id,
-        })(store.getState()).data
+        })(store.getState()).data,
       ).toEqual({
         event: messageEvent,
         reactions: [reactionEvent0],
-      })
+      }),
     );
 
     const reactionEvent1 = widgetApi.mockSendRoomEvent(
-      mockReactionEvent({ event_id: '$event-id-1' })
+      mockReactionEvent({ event_id: '$event-id-1' }),
     );
 
     // wait for the change
@@ -209,11 +209,11 @@ describe('getMessage', () => {
       expect(
         roomMessagesApi.endpoints.getMessage.select({
           eventId: messageEvent.event_id,
-        })(store.getState()).data
+        })(store.getState()).data,
       ).toEqual({
         event: messageEvent,
         reactions: [reactionEvent0, reactionEvent1],
-      })
+      }),
     );
 
     await redactEvent(widgetApi, reactionEvent0.event_id);
@@ -223,11 +223,11 @@ describe('getMessage', () => {
       expect(
         roomMessagesApi.endpoints.getMessage.select({
           eventId: messageEvent.event_id,
-        })(store.getState()).data
+        })(store.getState()).data,
       ).toEqual({
         event: messageEvent,
         reactions: [reactionEvent1],
-      })
+      }),
     );
   });
 });
@@ -235,7 +235,7 @@ describe('getMessage', () => {
 describe('sendMessage', () => {
   it('should send message to the room and update the message collection', async () => {
     widgetApi.mockSendStateEvent(
-      mockMessageCollectionEvent({ content: { eventIds: ['$event-id-0'] } })
+      mockMessageCollectionEvent({ content: { eventIds: ['$event-id-0'] } }),
     );
 
     const store = createStore({ widgetApi });
@@ -245,9 +245,9 @@ describe('sendMessage', () => {
         .dispatch(
           roomMessagesApi.endpoints.sendMessage.initiate({
             message: 'My message',
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({});
 
     expect(widgetApi.sendRoomEvent).toBeCalledWith('m.room.message', {
@@ -257,7 +257,7 @@ describe('sendMessage', () => {
 
     expect(widgetApi.sendStateEvent).toBeCalledWith(
       'net.nordeck.message_collection',
-      { eventIds: ['$event-id-0', expect.stringMatching(/\$event-[\d]+/)] }
+      { eventIds: ['$event-id-0', expect.stringMatching(/\$event-[\d]+/)] },
     );
   });
 
@@ -269,9 +269,9 @@ describe('sendMessage', () => {
         .dispatch(
           roomMessagesApi.endpoints.sendMessage.initiate({
             message: 'My message',
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({});
 
     expect(widgetApi.sendRoomEvent).toBeCalledWith('m.room.message', {
@@ -281,7 +281,7 @@ describe('sendMessage', () => {
 
     expect(widgetApi.sendStateEvent).toBeCalledWith(
       'net.nordeck.message_collection',
-      { eventIds: [expect.stringMatching(/\$event-[\d]+/)] }
+      { eventIds: [expect.stringMatching(/\$event-[\d]+/)] },
     );
   });
 
@@ -295,9 +295,9 @@ describe('sendMessage', () => {
         .dispatch(
           roomMessagesApi.endpoints.sendMessage.initiate({
             message: 'My message',
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).rejects.toEqual({
       name: 'SendFailed',
       message: 'Could not send message: Unexpected error',
@@ -315,9 +315,9 @@ describe('sendReaction', () => {
           roomMessagesApi.endpoints.sendReaction.initiate({
             eventId: '$event-id',
             reaction: 'X',
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({});
 
     expect(widgetApi.sendRoomEvent).toBeCalledWith('m.reaction', {
@@ -340,9 +340,9 @@ describe('sendReaction', () => {
           roomMessagesApi.endpoints.sendReaction.initiate({
             eventId: '$event-id',
             reaction: 'X',
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).rejects.toEqual({
       name: 'SendFailed',
       message: 'Could not send annotation: Unexpected error',
@@ -359,9 +359,9 @@ describe('sendRedaction', () => {
         .dispatch(
           roomMessagesApi.endpoints.sendRedaction.initiate({
             eventId: '$event-id',
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({});
 
     expect(widgetApi.sendRoomEvent).toBeCalledWith('m.room.redaction', {
@@ -379,9 +379,9 @@ describe('sendRedaction', () => {
         .dispatch(
           roomMessagesApi.endpoints.sendRedaction.initiate({
             eventId: '$event-id',
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).rejects.toEqual({
       name: 'SendFailed',
       message: 'Could not redact event: Unexpected error',
@@ -400,14 +400,14 @@ describe('dropMessageFromCollection', () => {
         .dispatch(
           roomMessagesApi.endpoints.dropMessageFromCollection.initiate({
             eventId: '$message-event-id',
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({});
 
     expect(widgetApi.sendStateEvent).toBeCalledWith(
       'net.nordeck.message_collection',
-      { eventIds: [] }
+      { eventIds: [] },
     );
   });
 
@@ -421,9 +421,9 @@ describe('dropMessageFromCollection', () => {
         .dispatch(
           roomMessagesApi.endpoints.dropMessageFromCollection.initiate({
             eventId: '$another-event-id',
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({});
 
     expect(widgetApi.sendStateEvent).not.toBeCalled();
@@ -431,7 +431,7 @@ describe('dropMessageFromCollection', () => {
 
   it('should handle send error', async () => {
     widgetApi.receiveSingleStateEvent.mockRejectedValue(
-      new Error('Unexpected error')
+      new Error('Unexpected error'),
     );
 
     const store = createStore({ widgetApi });
@@ -441,9 +441,9 @@ describe('dropMessageFromCollection', () => {
         .dispatch(
           roomMessagesApi.endpoints.dropMessageFromCollection.initiate({
             eventId: '$event-id',
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).rejects.toEqual({
       name: 'SendFailed',
       message: 'Could not update the collection: Unexpected error',

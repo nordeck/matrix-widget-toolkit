@@ -212,7 +212,7 @@ export type WidgetApi = {
    *         rejected by the user
    */
   requestCapabilities(
-    capabilities: Array<WidgetEventCapability | Capability>
+    capabilities: Array<WidgetEventCapability | Capability>,
   ): Promise<void>;
 
   /**
@@ -222,7 +222,7 @@ export type WidgetApi = {
    * @param capabilities - A list of capabilities that should be checked.
    */
   hasCapabilities(
-    capabilities: Array<WidgetEventCapability | Capability>
+    capabilities: Array<WidgetEventCapability | Capability>,
   ): boolean;
 
   /**
@@ -239,7 +239,7 @@ export type WidgetApi = {
    */
   receiveSingleStateEvent<T>(
     eventType: string,
-    stateKey?: string
+    stateKey?: string,
   ): Promise<StateEvent<T> | undefined>;
 
   /**
@@ -261,7 +261,7 @@ export type WidgetApi = {
    */
   receiveStateEvents<T>(
     eventType: string,
-    options?: { stateKey?: string; roomIds?: string[] | Symbols.AnyRoom }
+    options?: { stateKey?: string; roomIds?: string[] | Symbols.AnyRoom },
   ): Promise<StateEvent<T>[]>;
 
   /**
@@ -284,7 +284,7 @@ export type WidgetApi = {
    */
   observeStateEvents<T>(
     eventType: string,
-    options?: { stateKey?: string; roomIds?: string[] | Symbols.AnyRoom }
+    options?: { stateKey?: string; roomIds?: string[] | Symbols.AnyRoom },
   ): Observable<StateEvent<T>>;
 
   /**
@@ -300,7 +300,7 @@ export type WidgetApi = {
   sendStateEvent<T>(
     eventType: string,
     content: T,
-    options?: { roomId?: string; stateKey?: string }
+    options?: { roomId?: string; stateKey?: string },
   ): Promise<StateEvent<T>>;
 
   /**
@@ -321,7 +321,7 @@ export type WidgetApi = {
    */
   receiveRoomEvents<T>(
     eventType: string,
-    options?: { messageType?: string; roomIds?: string[] | Symbols.AnyRoom }
+    options?: { messageType?: string; roomIds?: string[] | Symbols.AnyRoom },
   ): Promise<Array<RoomEvent<T>>>;
 
   /**
@@ -344,7 +344,7 @@ export type WidgetApi = {
    */
   observeRoomEvents<T>(
     eventType: string,
-    options?: { messageType?: string; roomIds?: string[] | Symbols.AnyRoom }
+    options?: { messageType?: string; roomIds?: string[] | Symbols.AnyRoom },
   ): Observable<RoomEvent<T>>;
 
   /**
@@ -358,7 +358,7 @@ export type WidgetApi = {
   sendRoomEvent<T>(
     eventType: string,
     content: T,
-    options?: { roomId?: string }
+    options?: { roomId?: string },
   ): Promise<RoomEvent<T>>;
 
   /**
@@ -394,7 +394,7 @@ export type WidgetApi = {
       relationType?: string;
       eventType?: string;
       direction?: 'f' | 'b';
-    }
+    },
   ): Promise<{
     chunk: Array<RoomEvent | StateEvent>;
     nextToken?: string;
@@ -413,7 +413,7 @@ export type WidgetApi = {
   sendToDeviceMessage<T>(
     eventType: string,
     encrypted: boolean,
-    content: { [userId: string]: { [deviceId: string | '*']: T } }
+    content: { [userId: string]: { [deviceId: string | '*']: T } },
   ): Promise<void>;
 
   /**
@@ -422,7 +422,7 @@ export type WidgetApi = {
    * @param eventType - The type of the event.
    */
   observeToDeviceMessages<T>(
-    eventType: string
+    eventType: string,
   ): Observable<ToDeviceMessageEvent<T>>;
 
   /**
@@ -441,14 +441,14 @@ export type WidgetApi = {
    */
   openModal<
     T extends Record<string, unknown> = Record<string, unknown>,
-    U extends IModalWidgetCreateData = IModalWidgetCreateData
+    U extends IModalWidgetCreateData = IModalWidgetCreateData,
   >(
     pathName: string,
     name: string,
     options?: {
       buttons?: IModalWidgetOpenRequestDataButton[];
       data?: U;
-    }
+    },
   ): Promise<T | undefined>;
 
   /**
@@ -464,7 +464,7 @@ export type WidgetApi = {
    */
   setModalButtonEnabled(
     buttonId: ModalButtonID,
-    isEnabled: boolean
+    isEnabled: boolean,
   ): Promise<void>;
 
   /**
@@ -530,7 +530,7 @@ export type WidgetApi = {
    */
   searchUserDirectory(
     searchTerm: string,
-    options?: { limit?: number }
+    options?: { limit?: number },
   ): Promise<{
     results: Array<{
       userId: string;

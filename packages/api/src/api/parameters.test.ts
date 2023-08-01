@@ -24,7 +24,7 @@ import {
 describe('extractWidgetApiParameters', () => {
   it('should extract parentUrl and widgetId from location', () => {
     mockLocation(
-      'https://example.com/widget?parentUrl=https://my-parent-url&widgetId=my-widget-id'
+      'https://example.com/widget?parentUrl=https://my-parent-url&widgetId=my-widget-id',
     );
     const { widgetId, clientOrigin } = extractWidgetApiParameters();
 
@@ -36,7 +36,7 @@ describe('extractWidgetApiParameters', () => {
     mockLocation('https://example.com/widget?widgetId=my-widget-id');
 
     expect(() => extractWidgetApiParameters()).toThrowError(
-      'Missing parameter "parentUrl"'
+      'Missing parameter "parentUrl"',
     );
   });
 
@@ -44,7 +44,7 @@ describe('extractWidgetApiParameters', () => {
     mockLocation('https://example.com/widget?parentUrl=https://my-parent-url');
 
     expect(() => extractWidgetApiParameters()).toThrowError(
-      'Missing parameter "widgetId"'
+      'Missing parameter "widgetId"',
     );
   });
 });
@@ -52,7 +52,7 @@ describe('extractWidgetApiParameters', () => {
 describe('extractRawWidgetParameters', () => {
   it('should read parameters from hash', () => {
     mockLocation(
-      'https://example.com/widget?parentUrl=https://my-parent-url#/?matrix_user_id=my-user-id&custom_parameter=custom-value'
+      'https://example.com/widget?parentUrl=https://my-parent-url#/?matrix_user_id=my-user-id&custom_parameter=custom-value',
     );
     const params = extractRawWidgetParameters();
 
@@ -65,7 +65,7 @@ describe('extractRawWidgetParameters', () => {
 
   it('should read parameters from query string for backward compatibility', () => {
     mockLocation(
-      'https://example.com/widget?parentUrl=https://my-parent-url&matrix_user_id=my-user-id&custom_parameter=custom-value'
+      'https://example.com/widget?parentUrl=https://my-parent-url&matrix_user_id=my-user-id&custom_parameter=custom-value',
     );
 
     const params = extractRawWidgetParameters();
@@ -81,7 +81,7 @@ describe('extractRawWidgetParameters', () => {
 describe('extractWidgetParameters', () => {
   it('should read parameters from hash', () => {
     mockLocation(
-      'https://example.com/widget?parentUrl=https://my-parent-url#/?matrix_user_id=my-user-id&matrix_display_name=my-display-name&matrix_avatar_url=my-avatar-url&matrix_room_id=my-room-id&theme=my-theme&matrix_client_id=my-client-id&matrix_client_language=my-client-language'
+      'https://example.com/widget?parentUrl=https://my-parent-url#/?matrix_user_id=my-user-id&matrix_display_name=my-display-name&matrix_avatar_url=my-avatar-url&matrix_room_id=my-room-id&theme=my-theme&matrix_client_id=my-client-id&matrix_client_language=my-client-language',
     );
     const {
       userId,
@@ -104,7 +104,7 @@ describe('extractWidgetParameters', () => {
 
   it('should read parameters from query string for backward compatibility', () => {
     mockLocation(
-      'https://example.com/widget?parentUrl=https://my-parent-url&matrix_user_id=my-user-id'
+      'https://example.com/widget?parentUrl=https://my-parent-url&matrix_user_id=my-user-id',
     );
 
     const { userId } = extractWidgetParameters();
@@ -146,7 +146,7 @@ describe('parseWidgetId', () => {
     expect(creator).toEqual('@oliver.sand.dev:synapse.dev.nordeck.systems');
     expect(roomId).toEqual('!aSudgNJFbTpDfSWxzv:synapse.dev.nordeck.systems');
     expect(mainWidgetId).toEqual(
-      '!aSudgNJFbTpDfSWxzv%3Asynapse.dev.nordeck.systems_%40oliver.sand.dev%3Asynapse.dev.nordeck.systems_1638808226691'
+      '!aSudgNJFbTpDfSWxzv%3Asynapse.dev.nordeck.systems_%40oliver.sand.dev%3Asynapse.dev.nordeck.systems_1638808226691',
     );
     expect(isModal).toEqual(false);
   });
@@ -159,7 +159,7 @@ describe('parseWidgetId', () => {
     expect(creator).toEqual('@oliver.sand.dev:synapse.dev.nordeck.systems');
     expect(roomId).toEqual('!aSudgNJFbTpDfSWxzv:synapse.dev.nordeck.systems');
     expect(mainWidgetId).toEqual(
-      '!aSudgNJFbTpDfSWxzv%3Asynapse.dev.nordeck.systems_%40oliver.sand.dev%3Asynapse.dev.nordeck.systems_1638808226691'
+      '!aSudgNJFbTpDfSWxzv%3Asynapse.dev.nordeck.systems_%40oliver.sand.dev%3Asynapse.dev.nordeck.systems_1638808226691',
     );
     expect(isModal).toEqual(true);
   });

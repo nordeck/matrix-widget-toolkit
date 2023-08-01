@@ -25,7 +25,7 @@ describe('<ChildError/>', () => {
 
     expect(screen.getByText('Ohh no!')).toBeInTheDocument();
     expect(
-      screen.getByText(/an error occured inside the widget/i)
+      screen.getByText(/an error occured inside the widget/i),
     ).toBeInTheDocument();
     expect(screen.getByText(/Hello World/)).toBeInTheDocument();
   });

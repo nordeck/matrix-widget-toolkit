@@ -66,7 +66,7 @@ describe('<CapabilitiesGuard>', () => {
       <CapabilitiesGuardWithUi>
         <div>Child</div>
       </CapabilitiesGuardWithUi>,
-      { wrapper }
+      { wrapper },
     );
 
     expect(await screen.findByText('Child')).toBeInTheDocument();
@@ -79,14 +79,14 @@ describe('<CapabilitiesGuard>', () => {
     widgetApi.requestCapabilities.mockReturnValue(
       new Promise(() => {
         // Never resolves
-      })
+      }),
     );
 
     render(
       <CapabilitiesGuardWithUi>
         <div>Child</div>
       </CapabilitiesGuardWithUi>,
-      { wrapper }
+      { wrapper },
     );
 
     expect(await screen.findByText('Loading')).toBeInTheDocument();
@@ -102,7 +102,7 @@ describe('<CapabilitiesGuard>', () => {
       <CapabilitiesGuardWithUi>
         <div>Child</div>
       </CapabilitiesGuardWithUi>,
-      { wrapper }
+      { wrapper },
     );
 
     expect(await screen.findByText('Missing capabilities')).toBeInTheDocument();
@@ -113,7 +113,7 @@ describe('<CapabilitiesGuard>', () => {
     expect(widgetApi.requestCapabilities).toBeCalledTimes(1);
 
     await userEvent.click(
-      await screen.findByRole('button', { name: 'Request capabilities' })
+      await screen.findByRole('button', { name: 'Request capabilities' }),
     );
 
     expect(widgetApi.requestCapabilities).toBeCalledTimes(2);
