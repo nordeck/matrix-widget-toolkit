@@ -17,23 +17,23 @@
 export { generateRoomTimelineCapabilities } from './capabilities';
 export { getRoomMemberDisplayName } from './displayName';
 export { isRoomEvent, isStateEvent } from './events';
-export { navigateToRoom, WIDGET_CAPABILITY_NAVIGATE } from './navigateTo';
+export { WIDGET_CAPABILITY_NAVIGATE, navigateToRoom } from './navigateTo';
 export type { NavigateToRoomOptions } from './navigateTo';
 export { compareOriginServerTS } from './originServerTs';
 export {
+  STATE_EVENT_POWER_LEVELS,
   calculateUserPowerLevel,
   hasActionPower,
   hasRoomEventPower,
   hasStateEventPower,
   isValidPowerLevelStateEvent,
-  STATE_EVENT_POWER_LEVELS,
 } from './powerLevel';
 export type { PowerLevelsActions, PowerLevelsStateEvent } from './powerLevel';
 export {
+  ROOM_EVENT_REDACTION,
   isValidRedactionEvent,
   observeRedactionEvents,
   redactEvent,
-  ROOM_EVENT_REDACTION,
 } from './redactions';
 export type { Redaction, RedactionRoomEvent } from './redactions';
 export {
@@ -48,8 +48,8 @@ export type {
   RoomEventOrNewContent,
 } from './relatesTo';
 export {
-  isValidRoomMemberStateEvent,
   STATE_EVENT_ROOM_MEMBER,
+  isValidRoomMemberStateEvent,
 } from './roomMember';
 export type {
   MembershipState,

@@ -27,9 +27,9 @@ import {
   isValidRoomMessageEvent,
   MessageCollectionEvent,
   ReactionEvent,
-  RoomMessageEvent,
   ROOM_EVENT_REACTION,
   ROOM_EVENT_ROOM_MESSAGE,
+  RoomMessageEvent,
   STATE_EVENT_MESSAGE_COLLECTION,
 } from '../events';
 import { baseApi, ThunkExtraArgument } from '../store';

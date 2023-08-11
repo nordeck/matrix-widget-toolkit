@@ -29,7 +29,7 @@ import {
   Icon,
   Segment,
 } from 'semantic-ui-react';
-import { isValidRoomNameEvent, STATE_EVENT_ROOM_NAME } from '../events';
+import { STATE_EVENT_ROOM_NAME, isValidRoomNameEvent } from '../events';
 
 /**
  * A component that shows the current room name and can rename it.

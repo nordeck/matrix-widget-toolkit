@@ -21,10 +21,10 @@ import {
   useThemeSelection,
 } from '@matrix-widget-toolkit/react';
 import {
-  createTheme,
   CssBaseline,
   ThemeOptions,
   ThemeProvider,
+  createTheme,
 } from '@mui/material';
 import { deDE, enUS } from '@mui/material/locale';
 import { deepmerge } from '@mui/utils';

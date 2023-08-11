@@ -25,13 +25,15 @@ import {
   IWidgetApiRequest,
   IWidgetApiRequestData,
   MatrixCapabilities,
+  WidgetApi as MatrixWidgetApi,
   ModalButtonID,
   Symbols,
-  WidgetApi as MatrixWidgetApi,
   WidgetApiToWidgetAction,
   WidgetEventCapability,
 } from 'matrix-widget-api';
 import {
+  Observable,
+  ReplaySubject,
   concat,
   filter,
   first,
@@ -40,8 +42,6 @@ import {
   fromEvent,
   map,
   mergeAll,
-  Observable,
-  ReplaySubject,
   share,
   throwError,
 } from 'rxjs';

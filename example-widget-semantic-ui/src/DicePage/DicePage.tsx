@@ -31,9 +31,9 @@ import {
   Statistic,
 } from 'semantic-ui-react';
 import {
-  isValidThrowDiceEvent,
   STATE_EVENT_THROW_DICE,
   ThrowDiceEvent,
+  isValidThrowDiceEvent,
 } from '../events';
 
 /**

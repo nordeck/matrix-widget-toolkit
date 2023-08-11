@@ -20,9 +20,9 @@ import {
   parseWidgetId,
 } from '@matrix-widget-toolkit/api';
 import {
-  createContext,
   PropsWithChildren,
   ReactElement,
+  createContext,
   useCallback,
   useContext,
   useMemo,

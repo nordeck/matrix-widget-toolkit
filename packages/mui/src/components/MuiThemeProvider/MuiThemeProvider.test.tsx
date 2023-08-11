@@ -15,8 +15,8 @@
  */
 
 import { render, screen } from '@testing-library/react';
+import { MuiThemeProvider, chooseTheme } from './MuiThemeProvider';
 import { getEnvironment as getEnvironmentMocked } from './environment';
-import { chooseTheme, MuiThemeProvider } from './MuiThemeProvider';
 import { darkTheme, lightHighContrastTheme, lightTheme } from './theme';
 
 jest.mock('./environment', () => ({

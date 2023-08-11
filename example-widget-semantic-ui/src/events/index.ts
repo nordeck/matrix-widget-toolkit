@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-export { isValidRoomNameEvent, STATE_EVENT_ROOM_NAME } from './roomNameEvent';
+export { STATE_EVENT_ROOM_NAME, isValidRoomNameEvent } from './roomNameEvent';
 export type { RoomNameEvent } from './roomNameEvent';
 export {
-  isValidThrowDiceEvent,
   STATE_EVENT_THROW_DICE,
+  isValidThrowDiceEvent,
 } from './throwDiceEvent';
 export type { ThrowDiceEvent } from './throwDiceEvent';
