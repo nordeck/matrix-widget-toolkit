@@ -11,6 +11,11 @@ updates:
     rebase-strategy: 'disabled'
     schedule:
       interval: 'weekly'
+    groups:
+      material-ui:
+        patterns:
+          - '@emotion/*'
+          - '@mui/*'
   - package-ecosystem: 'docker'
     directory: '/containers/widget-server'
     open-pull-requests-limit: 15
