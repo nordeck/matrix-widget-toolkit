@@ -19,15 +19,15 @@ import {
   IOpenIDCredentials,
   IRoomEvent,
   ITransport,
-  Symbols,
   WidgetApi as MatrixWidgetApi,
+  Symbols,
   WidgetApiToWidgetAction,
   WidgetEventCapability,
 } from 'matrix-widget-api';
-import { firstValueFrom, ReplaySubject, take, toArray } from 'rxjs';
+import { ReplaySubject, firstValueFrom, take, toArray } from 'rxjs';
+import { WidgetApiImpl } from './WidgetApiImpl';
 import { parseWidgetId as parseWidgetIdMocked } from './parameters';
 import { ToDeviceMessageEvent } from './types';
-import { WidgetApiImpl } from './WidgetApiImpl';
 
 jest.mock('./parameters', () => ({
   ...jest.requireActual('./parameters'),

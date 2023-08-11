@@ -27,12 +27,12 @@ import {
 import { EventDirection, WidgetEventCapability } from 'matrix-widget-api';
 import { ReactElement, useEffect, useState } from 'react';
 import { filter, map } from 'rxjs';
+import { NavigationBar } from '../NavigationPage';
 import {
-  isValidThrowDiceEvent,
   STATE_EVENT_THROW_DICE,
   ThrowDiceEvent,
+  isValidThrowDiceEvent,
 } from '../events';
-import { NavigationBar } from '../NavigationPage';
 
 /**
  * A component that reads and writes room events via the widget API.

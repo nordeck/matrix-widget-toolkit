@@ -15,14 +15,14 @@
  */
 
 import {
-  isValidPowerLevelStateEvent,
   PowerLevelsStateEvent,
-  StateEvent,
   STATE_EVENT_POWER_LEVELS,
+  StateEvent,
+  isValidPowerLevelStateEvent,
 } from '@matrix-widget-toolkit/api';
 import { first, isError } from 'lodash';
 import { EventDirection, WidgetEventCapability } from 'matrix-widget-api';
-import { baseApi, ThunkExtraArgument } from '../store';
+import { ThunkExtraArgument, baseApi } from '../store';
 
 /**
  * Endpoints to receive the current room power levels and update it.

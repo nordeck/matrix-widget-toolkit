@@ -17,10 +17,10 @@
 import { from, lastValueFrom } from 'rxjs';
 import { RoomEvent, WidgetApi } from '../types';
 import {
+  RedactionRoomEvent,
   isValidRedactionEvent,
   observeRedactionEvents,
   redactEvent,
-  RedactionRoomEvent,
 } from './redactions';
 
 describe('isValidRedactionEvent', () => {

@@ -15,18 +15,18 @@
  */
 
 import {
-  compareOriginServerTS,
-  isValidEventWithRelatesTo,
+  ROOM_EVENT_REDACTION,
   RedactionRoomEvent,
   RoomEvent,
-  ROOM_EVENT_REDACTION,
   StateEvent,
   ToDeviceMessageEvent,
   WidgetApi,
+  compareOriginServerTS,
+  isValidEventWithRelatesTo,
 } from '@matrix-widget-toolkit/api';
 import { cloneDeep, isEqual, uniqueId } from 'lodash';
 import { Symbols } from 'matrix-widget-api';
-import { concat, filter, from, map, NEVER, of, Subject, takeUntil } from 'rxjs';
+import { NEVER, Subject, concat, filter, from, map, of, takeUntil } from 'rxjs';
 
 /**
  * A mock of `WidgetApi` with some additional methods.

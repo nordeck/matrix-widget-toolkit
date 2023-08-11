@@ -15,11 +15,11 @@
  */
 
 import {
+  StateEvent,
+  WIDGET_CAPABILITY_NAVIGATE,
+  WidgetApi,
   generateRoomTimelineCapabilities,
   navigateToRoom,
-  StateEvent,
-  WidgetApi,
-  WIDGET_CAPABILITY_NAVIGATE,
 } from '@matrix-widget-toolkit/api';
 import { MuiCapabilitiesGuard } from '@matrix-widget-toolkit/mui';
 import { useWidgetApi } from '@matrix-widget-toolkit/react';
@@ -43,12 +43,12 @@ import {
 } from 'matrix-widget-api';
 import { ReactElement } from 'react';
 import { useAsyncRetry } from 'react-use';
+import { NavigationBar } from '../NavigationPage';
 import {
-  isValidRoomNameEvent,
   RoomNameEvent,
   STATE_EVENT_ROOM_NAME,
+  isValidRoomNameEvent,
 } from '../events';
-import { NavigationBar } from '../NavigationPage';
 
 /**
  * A component that shows a list of all rooms that the user has joined and lets

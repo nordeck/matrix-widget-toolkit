@@ -21,8 +21,8 @@ import { EventDirection, WidgetEventCapability } from 'matrix-widget-api';
 import { ReactElement, useMemo } from 'react';
 import { useObservable } from 'react-use';
 import { filter, map } from 'rxjs';
-import { isValidRoomNameEvent, STATE_EVENT_ROOM_NAME } from '../events';
 import { NavigationBar } from '../NavigationPage';
+import { STATE_EVENT_ROOM_NAME, isValidRoomNameEvent } from '../events';
 
 /**
  * A component that shows the current room name and can rename it.

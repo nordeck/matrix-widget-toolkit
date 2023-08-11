@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 
-export { useWidgetApi, WidgetApiMockProvider } from './context';
 export { WidgetApiProvider } from './WidgetApiProvider';
 export type { WidgetApiProviderProps } from './WidgetApiProvider';
+export { WidgetApiMockProvider, useWidgetApi } from './context';
