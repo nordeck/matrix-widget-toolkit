@@ -10,7 +10,7 @@
   "devDependencies": {
     "@craco/craco": "^6.4.5",
     "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.39",
+    "@types/node": "^16.18.41",
     "@types/qs": "^6.9.7",
     "typescript": "^5.1.6"
   },
