@@ -1,5 +1,17 @@
 # `@matrix-widget-toolkit/mui`
 
+## 1.1.5
+
+### Patch Changes
+
+- 27f067b: Bump `i18next-browser-languagedetector` 7.0.2 to 7.1.0.
+- 82f6369: Bump `@fontsource/inter` 5.0.2 to 5.0.8.
+- f0cb7b9: Bump `react-i18next` 12.3.1 to 13.1.2.
+- 1adbbd5: Bump `@mui/material` from 5.13.4 to 5.14.5.
+- 1adbbd5: Bump `@mui/icons-material` from 5.11.16 to 5.14.3.
+- 3a0e972: Bump `i18next` from 22.5.1 to 23.4.4.
+- 53ac3ba: Bump `@mui/utils` from 5.13.1 to 5.14.5.
+
 ## 1.1.4
 
 ### Patch Changes
