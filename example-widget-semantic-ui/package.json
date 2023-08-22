@@ -8,7 +8,7 @@
   "dependencies": {
     "@matrix-widget-toolkit/api": "3.2.1",
     "@matrix-widget-toolkit/react": "1.0.5",
-    "@matrix-widget-toolkit/semantic-ui": "1.0.6",
+    "@matrix-widget-toolkit/semantic-ui": "1.0.7",
     "@reduxjs/toolkit": "^1.9.5",
     "i18next": "^23.4.4",
     "i18next-chained-backend": "^4.4.0",
