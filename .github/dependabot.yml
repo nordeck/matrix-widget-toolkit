@@ -18,6 +18,10 @@ updates:
           - '@mui/*'
       development-dependencies:
         dependency-type: 'development'
+      i18next:
+        patterns:
+          - 'i18next'
+          - 'react-i18next'
   - package-ecosystem: 'docker'
     directory: '/containers/widget-server'
     open-pull-requests-limit: 15
