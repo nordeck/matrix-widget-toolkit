@@ -16,6 +16,8 @@ updates:
         patterns:
           - '@emotion/*'
           - '@mui/*'
+      development-dependencies:
+        dependency-type: 'development'
   - package-ecosystem: 'docker'
     directory: '/containers/widget-server'
     open-pull-requests-limit: 15
