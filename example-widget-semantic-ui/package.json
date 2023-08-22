@@ -33,7 +33,7 @@
     "tsc": "tsc",
     "build": "craco build",
     "test": "jest --watch",
-    "depcheck": "depcheck --ignores=@types/jest,@types/node,i18next-parser --ignore-dirs=build",
+    "depcheck": "depcheck --ignores=@types/node --ignore-dirs=build",
     "translate": "i18next src/**/*.{ts,tsx}",
     "check-api-report": "echo \"Nothing to report\"",
     "generate-api-report": "echo \"Nothing to report\""
