@@ -6,8 +6,8 @@
   "license": "Apache-2.0",
   "private": true,
   "dependencies": {
-    "@mui/icons-material": "^5.14.7",
-    "@mui/material": "^5.14.7",
+    "@mui/icons-material": "^5.14.8",
+    "@mui/material": "^5.14.8",
     "@mui/utils": "^5.14.5",
     "@matrix-widget-toolkit/api": "3.2.1",
     "@matrix-widget-toolkit/mui": "1.1.5",
