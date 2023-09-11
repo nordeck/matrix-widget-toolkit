@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: '0'
           # don't persist the credentials so the changesets action doesn't use the
@@ -110,7 +110,7 @@ jobs:
     env:
       DOCKER_PLATFORMS: linux/amd64,linux/arm64,linux/s390x
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v3
         with:
