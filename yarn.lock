@@ -1667,10 +1667,10 @@
   resolved "https://registry.yarnpkg.com/@fontsource/inter/-/inter-5.0.8.tgz#61b50cb0eb72b14ae1938d47c4a9a91546d2a50c"
   integrity sha512-28knWH1BfOiRalfLs90U4sge5mpQ8ZH6FS0PTT+IZMKrZ7wNHDHRuKa1kQJg+uHcc6axBppnxll+HXM4c7zo/Q==
 
-"@fontsource/lato@^5.0.12":
-  version "5.0.12"
-  resolved "https://registry.yarnpkg.com/@fontsource/lato/-/lato-5.0.12.tgz#2290a23aaf3a25dd9aba4022aa131a689cfbd3fa"
-  integrity sha512-49kN7Ty0mDicmxNdaaDuOFtY5hvAwFN1pXkxaJJVlozh4v/houKwvodM3L7QVJEUC4KfNVEwn5Y409Us+EyFWw==
+"@fontsource/lato@^5.0.13":
+  version "5.0.13"
+  resolved "https://registry.yarnpkg.com/@fontsource/lato/-/lato-5.0.13.tgz#e82b10010150bbf733e5022dd9347aa327af5723"
+  integrity sha512-2S/yMMdwSYQhpxukx3hEoZnjbltJFOD29e/r9lmHcmb3bkkN44sU/8cFlUEV6XJRmi7o0wz1GAkj3m6UacfZVQ==
 
 "@hapi/hoek@^9.0.0":
   version "9.2.1"
