@@ -41,7 +41,7 @@
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@fontsource/inter": "^5.0.8",
+    "@fontsource/inter": "^5.0.13",
     "@mui/icons-material": "^5.14.7",
     "@mui/material": "^5.14.7",
     "@mui/utils": "^5.14.12",
