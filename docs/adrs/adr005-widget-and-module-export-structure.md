@@ -114,12 +114,14 @@ Some additional guidelines:
 
 3. Internal cross-directory imports are allowed from non-index modules to index modules:
 
+   <!--prettier-ignore-->
    ```ts
    // in components/ComponentX/ComponentX.tsx
    import { UtilityX } from '../../lib/UtilityX';
    ```
 
 4. Imports that bypass an index file are _discouraged_, but may sometimes be necessary:
+   <!--prettier-ignore-->
    ```ts
    // in components/ComponentX/ComponentX.tsx
    import { helperFunc } from '../../lib/UtilityX/helper';
