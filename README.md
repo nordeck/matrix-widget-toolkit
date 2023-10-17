@@ -35,7 +35,7 @@ Check the following steps to develop for the packages:
 
 ### Requirements
 
-You need to install Node.js (`>= 16.0.0`, prefer using an LTS version) and run
+You need to install Node.js (`>= 20.0.0`, prefer using an LTS version) and run
 `yarn` to work on this package.
 
 ### Installation
