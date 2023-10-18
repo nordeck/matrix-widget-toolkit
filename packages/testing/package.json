@@ -1,6 +1,6 @@
 {
   "name": "@matrix-widget-toolkit/testing",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "description": "Testing support for @matrix-widget-toolkit/api.",
   "author": "Nordeck IT + Consulting GmbH",
   "license": "Apache-2.0",
@@ -27,7 +27,7 @@
     "generate-api-report": "tsc && api-extractor run --verbose --local"
   },
   "dependencies": {
-    "@matrix-widget-toolkit/api": "^3.2.1",
+    "@matrix-widget-toolkit/api": "^3.2.2",
     "lodash": "^4.17.21",
     "matrix-widget-api": "^1.6.0",
     "rxjs": "^7.8.1"

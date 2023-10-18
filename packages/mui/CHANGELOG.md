@@ -1,5 +1,14 @@
 # `@matrix-widget-toolkit/mui`
 
+## 1.1.6
+
+### Patch Changes
+
+- cabc33d: Switched Node.js version to 20. We encourage all consuming projects to also switch to this version.
+- Updated dependencies [cabc33d]
+  - @matrix-widget-toolkit/react@1.0.6
+  - @matrix-widget-toolkit/api@3.2.2
+
 ## 1.1.5
 
 ### Patch Changes
