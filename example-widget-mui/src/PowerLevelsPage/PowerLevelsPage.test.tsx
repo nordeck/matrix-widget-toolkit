@@ -85,7 +85,7 @@ describe('<PowerLevelsPage />', () => {
     ).resolves.toBeInTheDocument();
 
     await userEvent.click(
-      await screen.findByRole('button', { name: 'Username' }),
+      await screen.findByRole('combobox', { name: 'Username' }),
     );
 
     const listbox = await screen.findByRole('listbox', { name: 'Username' });
@@ -121,7 +121,7 @@ describe('<PowerLevelsPage />', () => {
     render(<PowerLevelsPage />, { wrapper });
 
     await userEvent.click(
-      await screen.findByRole('button', { name: 'Username' }),
+      await screen.findByRole('combobox', { name: 'Username' }),
     );
 
     const listbox = await screen.findByRole('listbox', { name: 'Username' });
@@ -134,7 +134,7 @@ describe('<PowerLevelsPage />', () => {
     );
 
     expect(
-      screen.getByRole('button', {
+      screen.getByRole('combobox', {
         name: 'Username',
       }),
     ).toHaveTextContent('@user-id');
@@ -170,8 +170,12 @@ describe('<PowerLevelsPage />', () => {
   it('should disable actions for the own user', async () => {
     render(<PowerLevelsPage />, { wrapper });
 
+    await expect(
+      screen.findByRole('heading', { name: /room power levels/i }),
+    ).resolves.toBeInTheDocument();
+
     await userEvent.click(
-      await screen.findByRole('button', { name: 'Username' }),
+      await screen.findByRole('combobox', { name: 'Username' }),
     );
 
     const listbox = await screen.findByRole('listbox', { name: 'Username' });
