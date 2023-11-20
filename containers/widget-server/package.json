@@ -19,6 +19,6 @@
     "e2e:all": "yarn playwright test --reporter=dot"
   },
   "devDependencies": {
-    "@playwright/test": "^1.39.0"
+    "@playwright/test": "^1.40.0"
   }
 }
