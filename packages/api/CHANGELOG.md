@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/api`
 
+## 3.2.2
+
+### Patch Changes
+
+- cabc33d: Switched Node.js version to 20. We encourage all consuming projects to also switch to this version.
+
 ## 3.2.1
 
 ### Patch Changes

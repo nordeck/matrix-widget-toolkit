@@ -1,6 +1,6 @@
 {
   "name": "@matrix-widget-toolkit/api",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "description": "A simplified layer on top of matrix-widget-api to use build widgets.",
   "author": "Nordeck IT + Consulting GmbH",
   "license": "Apache-2.0",
@@ -10,9 +10,9 @@
   "devDependencies": {
     "@craco/craco": "^7.1.0",
     "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.42",
-    "@types/qs": "^6.9.7",
-    "typescript": "^5.1.6"
+    "@types/node": "^20.8.6",
+    "@types/qs": "^6.9.8",
+    "typescript": "^5.2.2"
   },
   "scripts": {
     "build": "tsc && rollup --config ../../rollup.config.mjs",

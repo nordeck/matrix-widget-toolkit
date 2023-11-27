@@ -19,9 +19,9 @@ jobs:
           # github actions token but the git token provided via environment variable
           persist-credentials: false
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '20'
           cache: 'yarn'
           registry-url: 'https://registry.npmjs.org'
 
@@ -53,18 +53,18 @@ jobs:
         run: yarn check-api-report
 
       - name: Login to ghcr.io
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
 
       - name: Generate Docker metadata (example-widget-mui)
         id: meta_example-widget-mui
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         env:
           DOCKER_METADATA_PR_HEAD_SHA: true
         with:
@@ -77,7 +77,7 @@ jobs:
             type=sha,prefix=
 
       - name: Build and push (example-widget-mui)
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         id: dockerBuild
         with:
           push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'pull_request' && secrets.GH_APP_OS_APP_ID != '' }}
@@ -89,7 +89,7 @@ jobs:
       - name: Generate GitHub token
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         id: generate_token
-        uses: tibdex/github-app-token@b62528385c34dbc9f38e5f4225ac829252d1ea92 # @v1.8.0
+        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # @v2.1.0
         with:
           app_id: ${{ secrets.GH_APP_OS_APP_ID }}
           private_key: ${{ secrets.GH_APP_OS_PRIVATE_KEY }}
@@ -112,9 +112,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '20'
           cache: 'yarn'
           registry-url: 'https://registry.npmjs.org'
 
@@ -122,17 +122,17 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Login to ghcr.io
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
 
       - name: Generate docker tag
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         id: vars
         with:
           script: |
@@ -145,7 +145,7 @@ jobs:
 
       - name: Generate Docker metadata
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ghcr.io/nordeck/matrix-widget-toolkit/widget-server
           labels: |
@@ -160,7 +160,7 @@ jobs:
             type=semver,pattern={{major}},value=${{ steps.vars.outputs.version }}
 
       - name: Build
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           context: containers/widget-server
           platforms: ${{ env.DOCKER_PLATFORMS }}
@@ -168,7 +168,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Load
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         id: dockerLoad
         with:
           load: true
@@ -226,7 +226,7 @@ jobs:
 
       - name: Build and push
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.tag-exists.outputs.result == 'false' }}
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v5
         with:
           push: true
           context: containers/widget-server
@@ -246,13 +246,13 @@ jobs:
     steps:
       - name: Generate GitHub token
         id: generate_token
-        uses: tibdex/github-app-token@b62528385c34dbc9f38e5f4225ac829252d1ea92 # @v1.8.0
+        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # @v2.1.0
         with:
           app_id: ${{ secrets.GH_APP_OS_APP_ID }}
           private_key: ${{ secrets.GH_APP_OS_PRIVATE_KEY }}
 
       - name: Trigger Workflow
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           github-token: ${{ steps.generate_token.outputs.token }}
           script: |

@@ -1,6 +1,6 @@
 {
   "name": "@matrix-widget-toolkit/react",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A simplified layer on top of @matrix-widget-toolkit/api to use it in a React based widget.",
   "author": "Nordeck IT + Consulting GmbH",
   "license": "Apache-2.0",
@@ -9,15 +9,15 @@
   "types": "./src/index.ts",
   "devDependencies": {
     "@craco/craco": "^7.1.0",
-    "@testing-library/jest-dom": "^6.0.1",
+    "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^12.1.5",
     "@testing-library/react-hooks": "^8.0.1",
-    "@testing-library/user-event": "^14.4.3",
+    "@testing-library/user-event": "^14.5.1",
     "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.42",
+    "@types/node": "^20.8.6",
     "@types/react": "^17.0.45",
     "react-scripts": "5.0.1",
-    "typescript": "^5.1.6"
+    "typescript": "^5.2.2"
   },
   "scripts": {
     "build": "tsc && rollup --config ../../rollup.config.mjs",
@@ -32,7 +32,7 @@
     "generate-api-report": "tsc && api-extractor run --verbose --local"
   },
   "dependencies": {
-    "@matrix-widget-toolkit/api": "^3.2.0",
+    "@matrix-widget-toolkit/api": "^3.2.2",
     "matrix-widget-api": "^1.6.0",
     "react": "^17.0.2",
     "react-error-boundary": "^3.1.4",
