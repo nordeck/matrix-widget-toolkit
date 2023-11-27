@@ -17,7 +17,7 @@
     "@types/node": "^20.8.6",
     "@types/react": "^17.0.45",
     "react-scripts": "5.0.1",
-    "typescript": "^5.2.2"
+    "typescript": "^5.3.2"
   },
   "scripts": {
     "build": "tsc && rollup --config ../../rollup.config.mjs",
