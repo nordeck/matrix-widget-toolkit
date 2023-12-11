@@ -24,7 +24,7 @@
     "react-scripts": "5.0.1",
     "react-use": "^17.4.2",
     "rxjs": "^7.8.1",
-    "semantic-ui-react": "^2.1.4"
+    "semantic-ui-react": "^2.1.5"
   },
   "scripts": {
     "dev": "cross-env BROWSER=none WDS_SOCKET_PORT=0 craco start",
