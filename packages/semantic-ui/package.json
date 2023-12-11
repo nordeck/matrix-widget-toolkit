@@ -48,7 +48,7 @@
     "react-i18next": "^13.5.0",
     "react-use": "^17.4.2",
     "semantic-ui-less": "^2.5.0",
-    "semantic-ui-react": "^2.1.4"
+    "semantic-ui-react": "^2.1.5"
   },
   "peerDependencies": {
     "@craco/craco": "^7.1.0",
