@@ -9,7 +9,7 @@
   "types": "./src/index.ts",
   "devDependencies": {
     "@craco/craco": "^7.1.0",
-    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^12.1.5",
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/user-event": "^14.5.1",
@@ -17,7 +17,7 @@
     "@types/node": "^20.8.6",
     "@types/react": "^17.0.45",
     "react-scripts": "5.0.1",
-    "typescript": "^5.2.2"
+    "typescript": "^5.3.3"
   },
   "scripts": {
     "build": "tsc && rollup --config ../../rollup.config.mjs",
