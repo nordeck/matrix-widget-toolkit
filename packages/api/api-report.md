@@ -267,6 +267,8 @@ export type WidgetApi = {
             avatarUrl?: string;
         }>;
     }>;
+     getMediaConfig(): Promise<IGetMediaConfigActionFromWidgetResponseData>;
+     uploadFile(file: XMLHttpRequestBodyInit): Promise<IUploadFileActionFromWidgetResponseData>;
 };
 
 // @public
