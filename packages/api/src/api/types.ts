@@ -16,11 +16,13 @@
 
 import {
   Capability,
+  IGetMediaConfigActionFromWidgetResponseData,
   IModalWidgetCreateData,
   IModalWidgetOpenRequestDataButton,
   IModalWidgetReturnData,
   IOpenIDCredentials,
   IRoomEvent,
+  IUploadFileActionFromWidgetResponseData,
   IWidget,
   IWidgetApiRequest,
   IWidgetApiRequestData,
@@ -538,6 +540,22 @@ export type WidgetApi = {
       avatarUrl?: string;
     }>;
   }>;
+
+  /**
+   * Get the config for the media repository.
+   * @returns Promise which resolves with an object containing the config.
+   */
+  getMediaConfig(): Promise<IGetMediaConfigActionFromWidgetResponseData>;
+
+  /**
+   * Upload a file to the media repository on the homeserver.
+   * @param file - The object to upload. Something that can be sent to
+   *               XMLHttpRequest.send (typically a File).
+   * @returns Resolves to the location of the uploaded file.
+   */
+  uploadFile(
+    file: XMLHttpRequestBodyInit,
+  ): Promise<IUploadFileActionFromWidgetResponseData>;
 
   // TODO: sendSticker, setAlwaysOnScreen
 };

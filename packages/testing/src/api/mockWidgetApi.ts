@@ -231,6 +231,8 @@ export function mockWidgetApi(opts?: {
       ),
     ),
     searchUserDirectory: jest.fn().mockResolvedValue({ results: [] }),
+    getMediaConfig: jest.fn().mockResolvedValue({}),
+    uploadFile: jest.fn().mockResolvedValue({}),
   };
 
   widgetApi.receiveRoomEvents.mockImplementation(async (type, options) => {
