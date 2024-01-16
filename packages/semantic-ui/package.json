@@ -46,7 +46,7 @@
     "matrix-widget-api": "^1.6.0",
     "react": "^17.0.2",
     "react-i18next": "^14.0.0",
-    "react-use": "^17.4.2",
+    "react-use": "^17.4.3",
     "semantic-ui-less": "^2.5.0",
     "semantic-ui-react": "^2.1.5"
   },
