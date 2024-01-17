@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/api`
 
+## 3.3.0
+
+### Minor Changes
+
+- d4cef99: Implement upload files into media repository.
+
 ## 3.2.2
 
 ### Patch Changes
