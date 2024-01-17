@@ -1,5 +1,16 @@
 # `@matrix-widget-toolkit/testing`
 
+## 2.4.0
+
+### Minor Changes
+
+- d4cef99: Implement upload files into media repository.
+
+### Patch Changes
+
+- Updated dependencies [d4cef99]
+  - @matrix-widget-toolkit/api@3.3.0
+
 ## 2.3.2
 
 ### Patch Changes
