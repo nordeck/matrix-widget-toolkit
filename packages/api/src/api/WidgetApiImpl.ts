@@ -16,12 +16,14 @@
 
 import {
   Capability,
+  IGetMediaConfigActionFromWidgetResponseData,
   IModalWidgetCreateData,
   IModalWidgetOpenRequestDataButton,
   IModalWidgetReturnData,
   INotifyCapabilitiesActionRequest,
   IOpenIDCredentials,
   IRoomEvent,
+  IUploadFileActionFromWidgetResponseData,
   IWidgetApiRequest,
   IWidgetApiRequestData,
   MatrixCapabilities,
@@ -783,5 +785,17 @@ export class WidgetApiImpl implements WidgetApi {
         avatarUrl: avatar_url,
       })),
     };
+  }
+
+  /** {@inheritdoc WidgetApi.getMediaConfig}  */
+  async getMediaConfig(): Promise<IGetMediaConfigActionFromWidgetResponseData> {
+    return await this.matrixWidgetApi.getMediaConfig();
+  }
+
+  /** {@inheritdoc WidgetApi.uploadFile}  */
+  async uploadFile(
+    file: XMLHttpRequestBodyInit,
+  ): Promise<IUploadFileActionFromWidgetResponseData> {
+    return await this.matrixWidgetApi.uploadFile(file);
   }
 }

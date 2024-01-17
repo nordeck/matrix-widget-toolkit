@@ -5,11 +5,13 @@
 ```ts
 
 import { Capability } from 'matrix-widget-api';
+import { IGetMediaConfigActionFromWidgetResponseData } from 'matrix-widget-api';
 import { IModalWidgetCreateData } from 'matrix-widget-api';
 import { IModalWidgetOpenRequestDataButton } from 'matrix-widget-api';
 import { IModalWidgetReturnData } from 'matrix-widget-api';
 import { IOpenIDCredentials } from 'matrix-widget-api';
 import { IRoomEvent } from 'matrix-widget-api';
+import { IUploadFileActionFromWidgetResponseData } from 'matrix-widget-api';
 import { IWidget } from 'matrix-widget-api';
 import { IWidgetApiRequest } from 'matrix-widget-api';
 import { IWidgetApiRequestData } from 'matrix-widget-api';
@@ -267,6 +269,8 @@ export type WidgetApi = {
             avatarUrl?: string;
         }>;
     }>;
+    getMediaConfig(): Promise<IGetMediaConfigActionFromWidgetResponseData>;
+    uploadFile(file: XMLHttpRequestBodyInit): Promise<IUploadFileActionFromWidgetResponseData>;
 };
 
 // @public
@@ -277,6 +281,7 @@ export class WidgetApiImpl implements WidgetApi {
     widgetParameters: WidgetParameters, { capabilities, supportStandalone }?: WidgetApiOptions);
     closeModal<T extends IModalWidgetReturnData>(data?: T): Promise<void>;
     static create({ capabilities, supportStandalone, }?: WidgetApiOptions): Promise<WidgetApi>;
+    getMediaConfig(): Promise<IGetMediaConfigActionFromWidgetResponseData>;
     getWidgetConfig<T extends IWidgetApiRequestData>(): Readonly<WidgetConfig<T> | undefined>;
     hasCapabilities(capabilities: Array<WidgetEventCapability | Capability>): boolean;
     hasInitialCapabilities(): boolean;
@@ -343,6 +348,7 @@ export class WidgetApiImpl implements WidgetApi {
         };
     }): Promise<void>;
     setModalButtonEnabled(buttonId: ModalButtonID, isEnabled: boolean): Promise<void>;
+    uploadFile(file: XMLHttpRequestBodyInit): Promise<IUploadFileActionFromWidgetResponseData>;
     readonly widgetId: string;
     readonly widgetParameters: WidgetParameters;
 }

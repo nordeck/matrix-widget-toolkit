@@ -62,6 +62,8 @@ describe('WidgetApiImpl', () => {
       getTurnServers: jest.fn(),
       readEventRelations: jest.fn(),
       searchUserDirectory: jest.fn(),
+      getMediaConfig: jest.fn(),
+      uploadFile: jest.fn(),
       transport: {
         reply: jest.fn(),
       },
@@ -2179,6 +2181,51 @@ describe('WidgetApiImpl', () => {
         'user',
         undefined,
       );
+    });
+  });
+
+  describe('getMediaConfig', () => {
+    it('should get media config', async () => {
+      matrixWidgetApi.getMediaConfig.mockResolvedValue(
+        Promise.resolve({
+          'm.upload.size': 5444,
+        }),
+      );
+
+      await expect(widgetApi.getMediaConfig()).resolves.toEqual({
+        'm.upload.size': 5444,
+      });
+      expect(matrixWidgetApi.getMediaConfig).toBeCalledWith();
+    });
+  });
+
+  describe('uploadFile', () => {
+    it('should upload a file', async () => {
+      matrixWidgetApi.uploadFile.mockResolvedValue(
+        Promise.resolve({
+          content_uri: 'msx//:example',
+        }),
+      );
+
+      const file = new File(['file content'], 'test-image.png', {
+        type: 'image/png',
+      });
+
+      await expect(widgetApi.uploadFile(file)).resolves.toEqual({
+        content_uri: 'msx//:example',
+      });
+      expect(matrixWidgetApi.uploadFile).toBeCalled();
+    });
+
+    it('should throw error', async () => {
+      matrixWidgetApi.uploadFile.mockRejectedValue(
+        new Error('can not upload the file'),
+      );
+
+      await expect(widgetApi.uploadFile('file')).rejects.toThrowError(
+        'can not upload the file',
+      );
+      expect(matrixWidgetApi.uploadFile).toBeCalledWith('file');
     });
   });
 });

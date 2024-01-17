@@ -957,3 +957,17 @@ describe('searchUserDirectory', () => {
     });
   });
 });
+
+describe('getMediaConfig', () => {
+  it('should return empty media config', async () => {
+    await expect(widgetApi.getMediaConfig()).resolves.toEqual({});
+  });
+});
+
+describe('uploadFile', () => {
+  it('should return empty response', async () => {
+    await expect(widgetApi.uploadFile('data')).resolves.toEqual({
+      content_uri: 'mxc://...',
+    });
+  });
+});
