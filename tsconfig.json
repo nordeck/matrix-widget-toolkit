@@ -16,13 +16,13 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "noEmit": false,
-    "declaration": true
+    "declaration": true,
   },
   "exclude": ["node_modules"],
   // Include all source code for building
   "include": [
     "example-widget-semantic-ui/src",
     "example-widget-mui/src",
-    "packages/*/src"
-  ]
+    "packages/*/src",
+  ],
 }
