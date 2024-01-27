@@ -81,7 +81,7 @@ describe('extractRawWidgetParameters', () => {
 describe('extractWidgetParameters', () => {
   it('should read parameters from hash', () => {
     mockLocation(
-      'https://example.com/widget?parentUrl=https://my-parent-url#/?matrix_user_id=my-user-id&matrix_display_name=my-display-name&matrix_avatar_url=my-avatar-url&matrix_room_id=my-room-id&theme=my-theme&matrix_client_id=my-client-id&matrix_client_language=my-client-language',
+      'https://example.com/widget?parentUrl=https://my-parent-url#/?matrix_user_id=my-user-id&matrix_display_name=my-display-name&matrix_avatar_url=my-avatar-url&matrix_room_id=my-room-id&theme=my-theme&matrix_client_id=my-client-id&matrix_client_language=my-client-language&matrix_base_url=my-base-url',
     );
     const {
       userId,
@@ -91,6 +91,7 @@ describe('extractWidgetParameters', () => {
       theme,
       clientId,
       clientLanguage,
+      baseUrl,
     } = extractWidgetParameters();
 
     expect(userId).toEqual('my-user-id');
@@ -100,6 +101,7 @@ describe('extractWidgetParameters', () => {
     expect(theme).toEqual('my-theme');
     expect(clientId).toEqual('my-client-id');
     expect(clientLanguage).toEqual('my-client-language');
+    expect(baseUrl).toEqual('my-base-url');
   });
 
   it('should read parameters from query string for backward compatibility', () => {

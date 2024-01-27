@@ -1744,7 +1744,7 @@ describe('WidgetApiImpl', () => {
 
       expect(parseWidgetId).toBeCalledWith('widget-id');
       expect(matrixWidgetApi.openModalWidget).toBeCalledWith(
-        'http://localhost/modal#/?theme=$org.matrix.msc2873.client_theme&matrix_user_id=@my-user-id&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=!current-room&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language',
+        'http://localhost/modal#/?theme=$org.matrix.msc2873.client_theme&matrix_user_id=@my-user-id&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=!current-room&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language&matrix_base_url=$org.matrix.msc4039.matrix_base_url',
         'My Modal',
         [],
         { string: 'example' },
@@ -1790,7 +1790,7 @@ describe('WidgetApiImpl', () => {
 
       expect(parseWidgetId).toBeCalledWith('widget-id');
       expect(matrixWidgetApi.openModalWidget).toBeCalledWith(
-        'http://localhost/modal#/?theme=$org.matrix.msc2873.client_theme&matrix_user_id=@my-user-id&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=!current-room&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language',
+        'http://localhost/modal#/?theme=$org.matrix.msc2873.client_theme&matrix_user_id=@my-user-id&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=!current-room&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language&matrix_base_url=$org.matrix.msc4039.matrix_base_url',
         'My Modal',
         [],
         { string: 'example' },

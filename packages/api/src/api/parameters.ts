@@ -106,6 +106,7 @@ export function extractWidgetParameters(): WidgetParameters {
     theme: params['theme'],
     clientId: params['matrix_client_id'],
     clientLanguage: params['matrix_client_language'],
+    baseUrl: params['matrix_base_url'],
     isOpenedByClient,
   };
 }

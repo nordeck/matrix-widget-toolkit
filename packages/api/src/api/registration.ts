@@ -36,7 +36,8 @@ export function hasRequiredWidgetParameters(widgetApi: WidgetApi): boolean {
     typeof widgetApi.widgetParameters.roomId === 'string' &&
     typeof widgetApi.widgetParameters.theme === 'string' &&
     typeof widgetApi.widgetParameters.clientId === 'string' &&
-    typeof widgetApi.widgetParameters.clientLanguage === 'string'
+    typeof widgetApi.widgetParameters.clientLanguage === 'string' &&
+    typeof widgetApi.widgetParameters.baseUrl === 'string'
   );
 }
 
@@ -74,6 +75,8 @@ export function generateWidgetRegistrationUrl(
       widgetParameters?.clientId ?? '$org.matrix.msc2873.client_id',
     matrix_client_language:
       widgetParameters?.clientLanguage ?? '$org.matrix.msc2873.client_language',
+    matrix_base_url:
+      widgetParameters?.baseUrl ?? '$org.matrix.msc4039.matrix_base_url',
   })
     .map(([k, v]) => `${k}=${v}`)
     .join('&');
