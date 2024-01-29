@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/api`
 
+## 3.3.1
+
+### Patch Changes
+
+- efad054: Adds support for the matrix_base_url widget parameter required for translating mxc to http urls for uploaded files"
+
 ## 3.3.0
 
 ### Minor Changes
