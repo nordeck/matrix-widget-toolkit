@@ -72,6 +72,10 @@ export type WidgetParameters = {
    */
   clientLanguage?: string;
   /**
+   * The homeserver base URL.
+   */
+  baseUrl?: string;
+  /**
    * Whether the widget was opened by a client or not.
    *
    * This is independent from whether the widget API is available or not.

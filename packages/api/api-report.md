@@ -387,6 +387,7 @@ export type WidgetParameters = {
     theme?: string;
     clientId?: string;
     clientLanguage?: string;
+    baseUrl?: string;
     isOpenedByClient: boolean;
 };
 
