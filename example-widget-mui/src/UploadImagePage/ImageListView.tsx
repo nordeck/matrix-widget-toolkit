@@ -76,8 +76,10 @@ export const ImageListView = (): ReactElement => {
               imageNames.map((image) => (
                 <ImageListItem key={image.event_id}>
                   <img
-                    srcSet={`${image.content.url}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                    src={`${image.content.url}?w=164&h=164&fit=crop&auto=format`}
+                    src={`${getHttpUriForMxc(
+                      image.content.url,
+                      widgetApi.widgetParameters.baseUrl,
+                    )}?w=164&h=164&fit=crop&auto=format`}
                     alt={image.content.name}
                     loading="lazy"
                   />
@@ -91,13 +93,29 @@ export const ImageListView = (): ReactElement => {
         </>
       )}
 
-      <Box mx={1}>
-        {error && (
+      {error && (
+        <Box mx={1}>
           <Alert severity="error" variant="outlined" sx={{ my: 1 }}>
             {error.message}
           </Alert>
-        )}
-      </Box>
+        </Box>
+      )}
     </>
   );
+};
+
+// This is a stripped down implementation of the code that is available in the `matrix-js-sdk`
+// For the original version, check
+// https://github.com/matrix-org/matrix-js-sdk/blob/1b7695cdca841672d582168a19bfe77f00207fea/src/content-repo.ts#L36
+export const getHttpUriForMxc = (
+  mxcUrl: string,
+  baseUrl: string | undefined,
+): string | null => {
+  if (mxcUrl.indexOf('mxc://') !== 0) {
+    return null;
+  }
+  let serverAndMediaId = mxcUrl.slice(6);
+  let prefix = '/_matrix/media/v3/download/';
+
+  return baseUrl + prefix + serverAndMediaId;
 };

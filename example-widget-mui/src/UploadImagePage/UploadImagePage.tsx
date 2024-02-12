@@ -77,39 +77,44 @@ export const UploadImagePage = (): ReactElement => {
             'Please select a valid image file. You can upload any image format that is supported by the browser.',
           );
           setErrorDialogOpen(true);
+          setSelectedFile(null);
           return;
         }
 
         try {
-          const getConfigMedia = (await widgetApi.getMediaConfig())[
-            'm.upload.size'
-          ];
-          if (getConfigMedia && getConfigMedia < selectedFile.size) {
+          const getConfigMedia = await widgetApi.getMediaConfig();
+          if (!getConfigMedia) {
             setErrorMessage(
-              `the max file size ${selectedFile.size} should not be more then ${getConfigMedia}.`,
+              `Unable to get the media repository configuration.`,
+            );
+            setErrorDialogOpen(true);
+            return;
+          }
+
+          const maxUploadSizeBytes = getConfigMedia['m.upload.size'] ?? 0;
+          if (maxUploadSizeBytes < selectedFile.size) {
+            setErrorMessage(
+              `Your file is ${selectedFile.size} bytes, which exceeds the maximum upload size of ${maxUploadSizeBytes}.`,
             );
             setErrorDialogOpen(true);
             setSelectedFile(null);
             return;
-          } else {
-            setLoading(true);
-            const responseUploadMedia =
-              await widgetApi.uploadFile(selectedFile);
-            const url = getHttpUriForMxc(
-              responseUploadMedia.content_uri,
-              widgetApi.widgetParameters.baseUrl,
-            );
-            if (url) {
-              await widgetApi.sendRoomEvent<UploadedImageEvent>(
-                ROOM_EVENT_UPLOADED_IMAGE,
-                { name: selectedFile.name, size: selectedFile.size, url },
-              );
-              setSelectedFile(null);
-              setLoading(false);
-            }
           }
+
+          const responseUploadMedia = await widgetApi.uploadFile(selectedFile);
+          const url = responseUploadMedia.content_uri;
+
+          setLoading(true);
+          await widgetApi.sendRoomEvent<UploadedImageEvent>(
+            ROOM_EVENT_UPLOADED_IMAGE,
+            { name: selectedFile.name, size: selectedFile.size, url },
+          );
+          setLoading(false);
+          setSelectedFile(null);
+
+          return;
         } catch (error) {
-          setErrorMessage('Error during file upload: ' + error);
+          setErrorMessage('An error occurred during file upload: ' + error);
           setErrorDialogOpen(true);
         }
       }
@@ -226,20 +231,4 @@ export const UploadImagePage = (): ReactElement => {
       </Box>
     </>
   );
-};
-
-// This is a stripped down implementation of the code that is available in the `matrix-js-sdk`
-// For the original version, check
-// https://github.com/matrix-org/matrix-js-sdk/blob/1b7695cdca841672d582168a19bfe77f00207fea/src/content-repo.ts#L36
-export const getHttpUriForMxc = (
-  mxcUrl: string,
-  baseUrl: string | undefined,
-): string | null => {
-  if (mxcUrl.indexOf('mxc://') !== 0) {
-    return null;
-  }
-  let serverAndMediaId = mxcUrl.slice(6);
-  let prefix = '/_matrix/media/v3/download/';
-
-  return baseUrl + prefix + serverAndMediaId;
 };
