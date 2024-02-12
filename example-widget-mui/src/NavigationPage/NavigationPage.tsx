@@ -110,6 +110,11 @@ export const NavigationPage = (): ReactElement => {
           description="Example on how to build UIs using Mui that match the
           design of Element"
         />
+        <NavigationItem
+          to="/uploadImage"
+          title="Upload File"
+          description="Example for uploading an image file"
+        />
       </List>
     </Box>
   );

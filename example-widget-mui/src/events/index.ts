@@ -33,3 +33,8 @@ export {
   isValidThrowDiceEvent,
 } from './throwDiceEvent';
 export type { ThrowDiceEvent } from './throwDiceEvent';
+export {
+  ROOM_EVENT_UPLOADED_IMAGE,
+  isValidUploadedImage,
+} from './uploadedImageEvent';
+export type { UploadedImageEvent } from './uploadedImageEvent';

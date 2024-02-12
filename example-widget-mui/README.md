@@ -13,6 +13,7 @@ The widget demonstrates:
 - How to read data from all rooms ([`AllRoomsPage`](./src/AllRoomsPage/AllRoomsPage.tsx)).
 - How to open widget modals ([`Modal`](./src/ModalPage/ModalPage.tsx)).
 - How to use the UI components so the widget match the style of Element ([`Theme`](./src/ThemePage/ThemePage.tsx)).
+- How to upload files to the media repository ([`Upload File`](./src/UploadImagePage/UploadImagePage.tsx)).
 - And other examples…
 
 ## Demo
