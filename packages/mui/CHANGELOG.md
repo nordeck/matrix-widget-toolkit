@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/mui`
 
+## 1.2.0
+
+### Minor Changes
+
+- edf1d71: Adds an example of how to use the Widget API for file uploads to the media repository
+
 ## 1.1.6
 
 ### Patch Changes
