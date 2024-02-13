@@ -26,7 +26,7 @@ import './i18n';
 // the connection with `capabilities` and we need to make sure
 // that the message doesn't get lost while we are initiating React.
 const widgetApiPromise = WidgetApiImpl.create({
-  // Tell which capabilities should be requested at startup. One
+  // You can specify which capabilities should be requested at startup. One
   // can also request capabilities after the application started.
   capabilities: [
     WidgetEventCapability.forStateEvent(

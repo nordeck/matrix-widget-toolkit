@@ -1,0 +1,119 @@
+/*
+ * Copyright 2024 Nordeck IT + Consulting GmbH
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
+import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
+import { render, screen } from '@testing-library/react';
+import { axe } from 'jest-axe';
+import {
+  EventDirection,
+  WidgetApiFromWidgetAction,
+  WidgetEventCapability,
+} from 'matrix-widget-api';
+import { ComponentType, PropsWithChildren } from 'react';
+import { MemoryRouter } from 'react-router-dom';
+import { ROOM_EVENT_UPLOADED_IMAGE } from '../events';
+import { StoreProvider } from '../store';
+import { UploadImagePage } from './UploadImagePage';
+
+let widgetApi: MockedWidgetApi;
+let wrapper: ComponentType<PropsWithChildren<{}>>;
+
+afterEach(() => widgetApi.stop());
+
+beforeEach(() => {
+  widgetApi = mockWidgetApi();
+
+  wrapper = ({ children }: PropsWithChildren<{}>) => (
+    <WidgetApiMockProvider value={widgetApi}>
+      <StoreProvider>
+        <MemoryRouter>{children}</MemoryRouter>
+      </StoreProvider>
+    </WidgetApiMockProvider>
+  );
+});
+
+describe('<UploadImagePage>', () => {
+  it('should render without exploding', async () => {
+    render(<UploadImagePage />, { wrapper });
+
+    expect(
+      screen.getByRole('link', { name: /back to navigation/i }),
+    ).toBeInTheDocument();
+
+    await expect(
+      screen.findByRole('heading', { name: /upload file/i }),
+    ).resolves.toBeInTheDocument();
+
+    expect(
+      screen.getByRole('button', { name: /select image/i }),
+    ).toBeInTheDocument();
+
+    expect(screen.getByRole('button', { name: /upload/i })).toBeInTheDocument();
+  });
+
+  it('should have no accessibility violations', async () => {
+    const { container } = render(<UploadImagePage />, { wrapper });
+
+    await expect(
+      screen.findByRole('heading', { name: /upload file/i }),
+    ).resolves.toBeInTheDocument();
+    expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('should request the capabilities', async () => {
+    render(<UploadImagePage />, { wrapper });
+
+    expect(widgetApi.requestCapabilities).toBeCalledWith([
+      WidgetEventCapability.forRoomEvent(
+        EventDirection.Receive,
+        ROOM_EVENT_UPLOADED_IMAGE,
+      ),
+      WidgetEventCapability.forRoomEvent(
+        EventDirection.Send,
+        ROOM_EVENT_UPLOADED_IMAGE,
+      ),
+      WidgetApiFromWidgetAction.MSC4039UploadFileAction,
+      WidgetApiFromWidgetAction.MSC4039GetMediaConfigAction,
+    ]);
+
+    await expect(
+      screen.findByRole('heading', { name: /upload file/i }),
+    ).resolves.toBeInTheDocument();
+  });
+
+  it('should say that no images are loaded yet', async () => {
+    render(<UploadImagePage />, { wrapper });
+
+    await expect(
+      screen.findByText(/no images uploaded to this room yet/i),
+    ).resolves.toBeInTheDocument();
+  });
+
+  it('should list the image when there is an event in the room', async () => {
+    widgetApi.sendRoomEvent(ROOM_EVENT_UPLOADED_IMAGE, {
+      name: 'image.png',
+      size: 123,
+      url: 'http://example.com/image.png',
+    });
+
+    render(<UploadImagePage />, { wrapper });
+
+    await expect(
+      screen.findByRole('img', { name: /image.png/i }),
+    ).resolves.toBeInTheDocument();
+  });
+});
