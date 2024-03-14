@@ -3,26 +3,41 @@
 This is an example that shows how you can write a Matrix/Element widget.
 You can use this package as a starting point for writing new widgets.
 
-![](./docs/widget-overview.png)
+![](./docs/widget-overview.png =256x)
 
 The widget demonstrates:
 
-- How to receive and send room events ([`DicePage`](./src/DicePage/DicePage.tsx)).
-- How to receive and send state events ([`RoomPage`](./src/RoomPage/RoomPage.tsx)).
-- How to use Redux for state management ([`PowerLevelsPage`](./src/PowerLevelsPage/PowerLevelsPage.tsx)).
-- How to read data from all rooms ([`AllRoomsPage`](./src/AllRoomsPage/AllRoomsPage.tsx)).
+- How to use the available Widget parameters ([`Welcome`](./src/WelcomePage/WelcomePage.tsx)).
+- How to obtain and verify an OIDC token ([`Identity`](./src/IdentityPage/IdentityPage.tsx)).
+- How to receive and send room events ([`Dice`](./src/DicePage/DicePage.tsx)).
+- How to receive and send state events ([`Room Admin Tool`](./src/RoomPage/RoomPage.tsx)).
+- How to read data from all rooms ([`All Rooms`](./src/AllRoomsPage/AllRoomsPage.tsx)).
 - How to open widget modals ([`Modal`](./src/ModalPage/ModalPage.tsx)).
-- How to use the UI components so the widget match the style of Element ([`Theme`](./src/ThemePage/ThemePage.tsx)).
+- How to use Redux for state management ([`Power Levels`](./src/PowerLevelsPage/PowerLevelsPage.tsx)).
+- How to read related events ([`Event Relations`](./src/RelationsPage/RelationsPage.tsx)).
+- How to search the User Directory ([`User Directory and Invitations`](./src/InvitationsPage/InvitationsPage.tsx)).
+- How to use the UI components to match the style of Element ([`Theme`](./src/ThemePage/ThemePage.tsx)).
 - How to upload files to the media repository ([`Upload File`](./src/UploadImagePage/UploadImagePage.tsx)).
-- And other examples…
 
 ## Demo
 
-[Click here](https://example-widget-mui.widgets.demo.nordeck.io) and follow the instructions to see it in action.
+[Click here](https://matrix-widget-toolkit-demo.netlify.app/) and follow the instructions to see it in action.
 
-## Running the Widget Locally
+## Running the examples locally
 
-The widget is embedded into the widget host as an iframe.
+You should have a local [Node.js LTS](https://nodejs.org) development environment setup with `yarn` available. Then execute the following commands in your terminal:
+
+```bash
+git clone https://github.com/nordeck/matrix-widget-toolkit.git
+cd matrix-widget-toolkit && yarn install
+```
+
+After this, you can run the example widget locally with the following commands:
+
+- `yarn dev:example`: Start the example app.
+- `yarn start:example`: Start the example app with a self-signed HTTPS certificate.
+
+The example widget is embedded into the widget host as an iframe.
 This can cause mixed-content errors if your local widget is served _without_ HTTPS but the Element hosting it is running _with_ HTTPS.
 You have multiple options to solve them:
 
