@@ -3,7 +3,7 @@
 This is an example that shows how you can write a Matrix/Element widget.
 You can use this package as a starting point for writing new widgets.
 
-![](./docs/widget-overview.png =256x)
+<img src='./docs/widget-overview.png' height='512'>
 
 The widget demonstrates:
 
