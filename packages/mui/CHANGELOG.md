@@ -1,5 +1,13 @@
 # `@matrix-widget-toolkit/mui`
 
+## 1.2.1
+
+### Patch Changes
+
+- 6d13ea0: Bump `@mui/icons-material` from 5.15.5 to 5.15.14
+- 6d13ea0: Bump `@mui/utils` from 5.15.5 to 5.15.14
+- 6d13ea0: Bump `@mui/material` from 5.15.5 to 5.15.14
+
 ## 1.2.0
 
 ### Minor Changes
