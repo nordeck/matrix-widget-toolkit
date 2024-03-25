@@ -1725,10 +1725,10 @@
   resolved "https://registry.yarnpkg.com/@fontsource/inter/-/inter-5.0.17.tgz#43fb1bc6bcfbfbfc3a9d19a59a4a7ab99fc1c645"
   integrity sha512-2meBGx1kt7u5LwzGc5Sz5rka6ZDrydg6nT3x6Wkt310vHXUchIywrO8pooWMzZdHYcyFY/cv4lEpJZgMD94bCg==
 
-"@fontsource/lato@^5.0.19":
-  version "5.0.19"
-  resolved "https://registry.yarnpkg.com/@fontsource/lato/-/lato-5.0.19.tgz#9403de626b68057056cd7a669f08ddd1278ce607"
-  integrity sha512-RdZy7fmmazrs6eV0lvA68/ss+IyLufD52jAx0qJ6Uw7kVZbjrUGh9JZdJshf+X5GdI3/3Anmg1sEPfqBrZTiNg==
+"@fontsource/lato@^5.0.20":
+  version "5.0.20"
+  resolved "https://registry.yarnpkg.com/@fontsource/lato/-/lato-5.0.20.tgz#27721d42112da4da288447f8904e36c8ceef98ee"
+  integrity sha512-2ej7KDuTFoea6Q2hWjx3Png1+MdNcW4V6l7sw/vNauuxCv9xBIZCmpXnTz9eVdj/5Ui//jiWWiQk57mGwjCNwA==
 
 "@gulpjs/to-absolute-glob@^4.0.0":
   version "4.0.0"
