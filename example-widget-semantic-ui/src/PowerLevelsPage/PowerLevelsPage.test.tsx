@@ -86,7 +86,7 @@ describe('<PowerLevelsPage />', () => {
     const listbox = screen.getByRole('listbox', { expanded: false });
 
     expect(
-      within(listbox).getByRole('option', {
+      await within(listbox).findByRole('option', {
         name: '@another-user',
         selected: true,
         checked: true,
@@ -109,28 +109,28 @@ describe('<PowerLevelsPage />', () => {
     const listbox = await screen.findByRole('listbox', { expanded: false });
 
     expect(
-      within(listbox).getByRole('option', {
+      await within(listbox).findByRole('option', {
         name: '@another-user',
         selected: true,
       }),
     ).toBeInTheDocument();
 
     await userEvent.click(
-      within(listbox).getByRole('option', {
+      await within(listbox).findByRole('option', {
         name: '@user-id You',
         selected: false,
       }),
     );
 
     expect(
-      within(listbox).getByRole('option', {
+      await within(listbox).findByRole('option', {
         name: '@another-user',
         selected: false,
       }),
     ).toBeInTheDocument();
 
     expect(
-      within(listbox).getByRole('option', {
+      await within(listbox).findByRole('option', {
         name: '@user-id You',
         selected: true,
       }),
@@ -151,6 +151,12 @@ describe('<PowerLevelsPage />', () => {
       ),
     ]);
 
+    const listbox = await screen.findByRole('listbox', { expanded: false });
+    await within(listbox).findByRole('option', {
+      name: '@user-id You',
+      selected: false,
+    });
+
     const button = await screen.findByRole('button', { name: /promote/i });
     await userEvent.click(button);
 
@@ -170,7 +176,7 @@ describe('<PowerLevelsPage />', () => {
     const listbox = await screen.findByRole('listbox', { expanded: false });
 
     await userEvent.click(
-      within(listbox).getByRole('option', {
+      await within(listbox).findByRole('option', {
         name: '@user-id You',
         selected: false,
       }),
@@ -207,8 +213,13 @@ describe('<PowerLevelsPage />', () => {
     });
     const demoteButton = screen.getByRole('button', { name: /demote/i });
 
-    expect(promoteButton).toBeDisabled();
-    expect(demoteButton).toBeDisabled();
+    await waitFor(() => {
+      expect(promoteButton).toBeDisabled();
+    });
+
+    await waitFor(() => {
+      expect(demoteButton).toBeDisabled();
+    });
   });
 
   it('should promote the user', async () => {
@@ -219,13 +230,23 @@ describe('<PowerLevelsPage />', () => {
     });
     const demoteButton = screen.getByRole('button', { name: /demote/i });
 
-    expect(promoteButton).not.toBeDisabled();
-    expect(demoteButton).toBeDisabled();
+    await waitFor(() => {
+      expect(promoteButton).not.toBeDisabled();
+    });
+
+    await waitFor(() => {
+      expect(demoteButton).toBeDisabled();
+    });
 
     await userEvent.click(promoteButton);
 
-    expect(promoteButton).toBeDisabled();
-    expect(demoteButton).not.toBeDisabled();
+    await waitFor(() => {
+      expect(promoteButton).toBeDisabled();
+    });
+
+    await waitFor(() => {
+      expect(demoteButton).not.toBeDisabled();
+    });
 
     expect(widgetApi.sendStateEvent).toBeCalledWith('m.room.power_levels', {
       users: {
@@ -263,8 +284,13 @@ describe('<PowerLevelsPage />', () => {
 
     await userEvent.click(demoteButton);
 
-    expect(promoteButton).not.toBeDisabled();
-    expect(demoteButton).toBeDisabled();
+    await waitFor(() => {
+      expect(promoteButton).not.toBeDisabled();
+    });
+
+    await waitFor(() => {
+      expect(demoteButton).toBeDisabled();
+    });
 
     expect(widgetApi.sendStateEvent).toBeCalledWith('m.room.power_levels', {
       users: {

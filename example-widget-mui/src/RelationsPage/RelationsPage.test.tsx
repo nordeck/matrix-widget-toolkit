@@ -81,7 +81,7 @@ describe('<RelationsPage />', () => {
     expect(screen.getByRole('button', { name: 'Send' })).toBeInTheDocument();
 
     const list = screen.getByRole('list', { name: 'Messages' });
-    const listitem = within(list).getByRole('listitem', {
+    const listitem = await within(list).findByRole('listitem', {
       name: 'My message @user-id',
     });
 

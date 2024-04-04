@@ -26,10 +26,8 @@ import { ThunkExtraArgument, baseApi } from '../store';
 
 // Use an entity adapter to efficiently interact with a collection of events.
 // The adapter provides selectors and reducers to read and manipulate a state.
-const roomMembersEntityAdapter = createEntityAdapter<
-  StateEvent<RoomMemberStateEventContent>
->({
-  selectId: (event) => event.state_key,
+const roomMembersEntityAdapter = createEntityAdapter({
+  selectId: (event: StateEvent<RoomMemberStateEventContent>) => event.state_key,
 });
 
 /**
@@ -42,7 +40,7 @@ export const roomMembersApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     /** Receive the room members of the current room */
     getRoomMembers: builder.query<
-      EntityState<StateEvent<RoomMemberStateEventContent>>,
+      EntityState<StateEvent<RoomMemberStateEventContent>, string>,
       void
     >({
       // do the initial loading
