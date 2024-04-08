@@ -110,7 +110,7 @@ describe('<UploadImagePage>', () => {
       url: 'http://example.com/image.png',
     });
 
-    render(<UploadImagePage />, { wrapper });
+    await render(<UploadImagePage />, { wrapper });
 
     await expect(
       screen.findByRole('img', { name: /image.png/i }),

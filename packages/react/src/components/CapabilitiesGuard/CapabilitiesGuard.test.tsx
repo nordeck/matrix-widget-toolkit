@@ -23,7 +23,7 @@ import { CapabilitiesGuard } from './CapabilitiesGuard';
 
 describe('<CapabilitiesGuard>', () => {
   let widgetApi: jest.Mocked<WidgetApi>;
-  let CapabilitiesGuardWithUi: ComponentType;
+  let CapabilitiesGuardWithUi: ComponentType<{ children: ReactNode }>;
   const wrapper = ({ children }: { children: ReactNode }) => (
     <WidgetApiMockProvider value={widgetApi}>{children}</WidgetApiMockProvider>
   );

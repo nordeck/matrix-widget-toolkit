@@ -104,7 +104,7 @@ describe('<DicePage />', () => {
       content: { pips: 3 },
     });
 
-    render(<DicePage />, { wrapper });
+    await render(<DicePage />, { wrapper });
 
     await expect(screen.findByText('⚂')).resolves.toBeInTheDocument();
   });

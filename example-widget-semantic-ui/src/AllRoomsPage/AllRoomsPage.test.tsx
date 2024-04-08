@@ -115,7 +115,7 @@ describe('<AllRoomsPage />', () => {
       mockRoomNameEvent({ room_id: '!room-id-5', content: { name: 'Room 5' } }),
     );
 
-    render(<AllRoomsPage />, { wrapper });
+    await render(<AllRoomsPage />, { wrapper });
 
     await expect(
       screen.findByText(/all your rooms:/i),
@@ -152,7 +152,7 @@ describe('<AllRoomsPage />', () => {
       mockRoomNameEvent({ room_id: '!room-id-1', content: { name: 'Room 1' } }),
     );
 
-    render(<AllRoomsPage />, { wrapper });
+    await render(<AllRoomsPage />, { wrapper });
 
     const button = await screen.findByRole('button', { name: /room 1/i });
     await userEvent.click(button);

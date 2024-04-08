@@ -16,7 +16,7 @@
 
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { render, screen, waitFor, within } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { ComponentType, PropsWithChildren } from 'react';
@@ -67,9 +67,7 @@ describe('<InvitationsPage />', () => {
       screen.findByRole('heading', { name: 'Invitations' }),
     ).resolves.toBeInTheDocument();
 
-    await waitFor(() => {
-      expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
-    });
+    expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
 
     expect(await axe(container)).toHaveNoViolations();
   });
