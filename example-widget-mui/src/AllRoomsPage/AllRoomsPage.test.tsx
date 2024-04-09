@@ -17,7 +17,7 @@
 import { StateEvent } from '@matrix-widget-toolkit/api';
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { EventDirection, WidgetEventCapability } from 'matrix-widget-api';
@@ -82,7 +82,10 @@ describe('<AllRoomsPage />', () => {
     await expect(
       screen.findByRole('heading', { name: /all rooms/i }),
     ).resolves.toBeInTheDocument();
-    expect(await axe(container)).toHaveNoViolations();
+
+    await act(async () => {
+      expect(await axe(container)).toHaveNoViolations();
+    });
   });
 
   it('should request the capabilities', async () => {
@@ -125,7 +128,7 @@ describe('<AllRoomsPage />', () => {
       mockRoomNameEvent({ room_id: '!room-id-5', content: { name: 'Room 5' } }),
     );
 
-    await render(<AllRoomsPage />, { wrapper });
+    render(<AllRoomsPage />, { wrapper });
 
     await expect(
       screen.findByText(/all your rooms:/i),
@@ -162,7 +165,7 @@ describe('<AllRoomsPage />', () => {
       mockRoomNameEvent({ room_id: '!room-id-1', content: { name: 'Room 1' } }),
     );
 
-    await render(<AllRoomsPage />, { wrapper });
+    render(<AllRoomsPage />, { wrapper });
 
     const button = await screen.findByRole('button', { name: /room 1/i });
     await userEvent.click(button);

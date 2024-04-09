@@ -284,8 +284,13 @@ describe('<PowerLevelsPage />', () => {
 
     await userEvent.click(demoteButton);
 
-    expect(promoteButton).not.toBeDisabled();
-    expect(demoteButton).toBeDisabled();
+    await waitFor(() => {
+      expect(promoteButton).not.toBeDisabled();
+    });
+
+    await waitFor(() => {
+      expect(demoteButton).toBeDisabled();
+    });
 
     expect(widgetApi.sendStateEvent).toBeCalledWith('m.room.power_levels', {
       users: {

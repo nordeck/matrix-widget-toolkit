@@ -110,7 +110,9 @@ describe('<RelationsPage />', () => {
       screen.findByRole('heading', { name: 'Event Relations' }),
     ).resolves.toBeInTheDocument();
 
-    expect(await axe(container)).toHaveNoViolations();
+    await act(async () => {
+      expect(await axe(container)).toHaveNoViolations();
+    });
   });
 
   it('should send a new message', async () => {

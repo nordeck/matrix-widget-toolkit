@@ -16,7 +16,7 @@
 
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { render, screen, waitFor } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
@@ -71,7 +71,10 @@ describe('<IdentityPage />', () => {
     await expect(
       screen.findByRole('heading', { name: /Identity/i }),
     ).resolves.toBeInTheDocument();
-    expect(await axe(container)).toHaveNoViolations();
+
+    await act(async () => {
+      expect(await axe(container)).toHaveNoViolations();
+    });
   });
 
   it('should show the user information', async () => {

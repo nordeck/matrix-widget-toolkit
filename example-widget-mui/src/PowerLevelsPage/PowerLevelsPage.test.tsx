@@ -16,7 +16,7 @@
 
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { render, screen, waitFor, within } from '@testing-library/react';
+import { act, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { EventDirection, WidgetEventCapability } from 'matrix-widget-api';
@@ -114,7 +114,10 @@ describe('<PowerLevelsPage />', () => {
     await expect(
       screen.findByRole('heading', { name: /room power levels/i }),
     ).resolves.toBeInTheDocument();
-    expect(await axe(container)).toHaveNoViolations();
+
+    await act(async () => {
+      expect(await axe(container)).toHaveNoViolations();
+    });
   });
 
   it('should select another user', async () => {
