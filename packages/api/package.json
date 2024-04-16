@@ -11,7 +11,7 @@
     "@craco/craco": "^7.1.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^20.8.6",
-    "@types/qs": "^6.9.12",
+    "@types/qs": "^6.9.15",
     "typescript": "^5.2.2"
   },
   "scripts": {
@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "matrix-widget-api": "^1.6.0",
-    "qs": "^6.12.0",
+    "qs": "^6.12.1",
     "rxjs": "^7.8.1"
   },
   "repository": {
