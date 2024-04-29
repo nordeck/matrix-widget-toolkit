@@ -45,7 +45,7 @@
     "i18next-resources-to-backend": "^1.2.1",
     "matrix-widget-api": "^1.6.0",
     "react": "^17.0.2",
-    "react-i18next": "^14.1.0",
+    "react-i18next": "^14.1.1",
     "react-use": "^17.5.0",
     "semantic-ui-less": "^2.5.0",
     "semantic-ui-react": "^2.1.5"
