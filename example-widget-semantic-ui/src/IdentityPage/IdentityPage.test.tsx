@@ -17,7 +17,7 @@
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { render, screen, waitFor } from '@testing-library/react';
-import { rest } from 'msw';
+import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
 import { ComponentType, PropsWithChildren } from 'react';
 import { MemoryRouter } from 'react-router-dom';
@@ -73,14 +73,16 @@ describe('<IdentityPage />', () => {
     });
 
     server.use(
-      rest.get(
+      http.get(
         'https://synapse.local/_matrix/federation/v1/openid/userinfo',
-        (req, res, ctx) => {
-          if (req.url.searchParams.get('access_token') !== '<access-token>') {
-            return res(ctx.status(500), ctx.json('Unexpected token'));
+        ({ request }) => {
+          const url = new URL(request.url);
+
+          if (url.searchParams.get('access_token') !== '<access-token>') {
+            return HttpResponse.json('Unexpected token', { status: 500 });
           }
 
-          return res(ctx.json({ sub: '@alice:example.com' }));
+          return HttpResponse.json({ sub: '@alice:example.com' });
         },
       ),
     );
@@ -144,10 +146,10 @@ describe('<IdentityPage />', () => {
     });
 
     server.use(
-      rest.get(
+      http.get(
         'https://synapse.local/_matrix/federation/v1/openid/userinfo',
-        (req, res, ctx) => {
-          return res(ctx.status(500), ctx.json('Internal Server Error'));
+        () => {
+          return HttpResponse.json('Internal Server Error', { status: 500 });
         },
       ),
     );

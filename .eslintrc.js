@@ -21,7 +21,6 @@ module.exports = {
     '**/lib/**',
     '**/build/**',
     '**/craco.config.js',
-    '**/jest.config.js',
     'scripts/prepack.js',
     'scripts/postpack.js',
     'scripts/publishAllPackages.js',
