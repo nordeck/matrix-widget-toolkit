@@ -21,6 +21,7 @@
 import '@testing-library/jest-dom';
 import { toHaveNoViolations } from 'jest-axe';
 // Make sure to initialize i18n (see mock below)
+import { TextDecoder, TextEncoder } from 'util';
 import './i18n';
 
 // Use a different configuration for i18next during tests
@@ -41,3 +42,7 @@ jest.mock('./i18n', () => {
 
 // Add support for jest-axe
 expect.extend(toHaveNoViolations);
+
+// Polyfills required for jsdom
+global.TextEncoder = TextEncoder as typeof global.TextEncoder;
+global.TextDecoder = TextDecoder as typeof global.TextDecoder;
