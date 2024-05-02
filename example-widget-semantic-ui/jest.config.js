@@ -17,4 +17,7 @@ module.exports = {
     // Allow imports of 'semantic-ui-less/semantic.less?theme=<light|dark>'.
     'semantic-ui-less/semantic.less(.+)': 'semantic-ui-less/semantic.less',
   },
+  transformIgnorePatterns: [
+    '<rootDir>/node_modules/(?!(@bundled-es-modules)/)/',
+  ],
 };

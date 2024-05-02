@@ -15,4 +15,7 @@ module.exports = {
     // Allow imports from other packages in this repository.
     '@matrix-widget-toolkit/(.*)': '<rootDir>/../packages/$1/src/index.ts',
   },
+  transformIgnorePatterns: [
+    '<rootDir>/node_modules/(?!(@bundled-es-modules)/)/',
+  ],
 };

@@ -20,6 +20,7 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
 // Make sure to initialize i18n (see mock below)
+import { TextDecoder, TextEncoder } from 'util';
 import './i18n';
 
 // Use a different configuration for i18next during tests
@@ -37,3 +38,7 @@ jest.mock('./i18n', () => {
 
   return i18n;
 });
+
+// Polyfills required for jsdom
+global.TextEncoder = TextEncoder as typeof global.TextEncoder;
+global.TextDecoder = TextDecoder as typeof global.TextDecoder;
