@@ -19,7 +19,7 @@
     "@types/react": "^18.2.74",
     "react": "^18.2.0",
     "copyfiles": "^2.4.1",
-    "i18next-parser": "^8.9.0",
+    "i18next-parser": "^8.13.0",
     "react-scripts": "5.0.1",
     "typescript": "^5.2.2"
   },
@@ -37,15 +37,15 @@
     "generate-api-report": "tsc && api-extractor run --verbose --local"
   },
   "dependencies": {
-    "@fontsource/lato": "^5.0.20",
+    "@fontsource/lato": "^5.0.21",
     "@matrix-widget-toolkit/api": "^3.2.2",
     "@matrix-widget-toolkit/react": "^1.0.6",
-    "i18next": "^23.10.1",
+    "i18next": "^23.11.2",
     "i18next-browser-languagedetector": "^7.2.1",
-    "i18next-resources-to-backend": "^1.2.0",
+    "i18next-resources-to-backend": "^1.2.1",
     "matrix-widget-api": "^1.6.0",
     "react": "^18.2.0",
-    "react-i18next": "^14.1.0",
+    "react-i18next": "^14.1.1",
     "react-use": "^17.5.0",
     "semantic-ui-less": "^2.5.0",
     "semantic-ui-react": "^2.1.5"
