@@ -17,13 +17,18 @@
 import { WidgetApi } from '@matrix-widget-toolkit/api';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { ComponentType, DispatchWithoutAction, ReactNode } from 'react';
+import {
+  ComponentType,
+  DispatchWithoutAction,
+  PropsWithChildren,
+  ReactNode,
+} from 'react';
 import { WidgetApiMockProvider } from '../WidgetApiProvider';
 import { CapabilitiesGuard } from './CapabilitiesGuard';
 
 describe('<CapabilitiesGuard>', () => {
   let widgetApi: jest.Mocked<WidgetApi>;
-  let CapabilitiesGuardWithUi: ComponentType<{ children: ReactNode }>;
+  let CapabilitiesGuardWithUi: ComponentType<PropsWithChildren<{}>>;
   const wrapper = ({ children }: { children: ReactNode }) => (
     <WidgetApiMockProvider value={widgetApi}>{children}</WidgetApiMockProvider>
   );

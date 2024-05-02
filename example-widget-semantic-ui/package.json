@@ -35,6 +35,9 @@
     "test": "jest --watch",
     "depcheck": "depcheck --ignores=@types/node --ignore-dirs=build",
     "translate": "i18next src/**/*.{ts,tsx}",
+    "pack": "echo \"Nothing to pack\"",
+    "prepack": "echo \"Nothing to prepack\"",
+    "postpack": "echo \"Nothing to postpack\"",
     "check-api-report": "echo \"Nothing to report\"",
     "generate-api-report": "echo \"Nothing to report\""
   },
