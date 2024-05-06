@@ -16,7 +16,7 @@
 
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { act, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { EventDirection, WidgetEventCapability } from 'matrix-widget-api';
@@ -71,13 +71,13 @@ describe('<RoomPage />', () => {
   it('should have no accessibility violations', async () => {
     const { container } = render(<RoomPage />, { wrapper });
 
-    await expect(
-      screen.findByRole('heading', { name: /room admin tool/i }),
-    ).resolves.toBeInTheDocument();
-
-    await act(async () => {
-      expect(await axe(container)).toHaveNoViolations();
+    await waitFor(() => {
+      expect(
+        screen.getByRole('heading', { name: /room admin tool/i }),
+      ).toBeInTheDocument();
     });
+
+    expect(await axe(container)).toHaveNoViolations();
   });
 
   it('should request the capabilities', async () => {

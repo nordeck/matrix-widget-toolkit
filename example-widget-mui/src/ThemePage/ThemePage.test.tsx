@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { act, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { ComponentType, PropsWithChildren } from 'react';
 import { MemoryRouter } from 'react-router-dom';
@@ -48,9 +48,7 @@ describe('<ThemePage>', () => {
       screen.findByRole('heading', { name: /theme/i }),
     ).resolves.toBeInTheDocument();
 
-    await act(async () => {
-      expect(await axe(container)).toHaveNoViolations();
-    });
+    expect(await axe(container)).toHaveNoViolations();
   }, 15000);
 
   // As this page shows primarily the visual theming, so we skip exhaustive

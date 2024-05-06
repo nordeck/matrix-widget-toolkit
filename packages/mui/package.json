@@ -15,8 +15,6 @@
     "@types/jest": "^27.5.2",
     "@types/jest-axe": "^3.5.9",
     "@types/lodash": "^4.17.0",
-    "@types/jest-axe": "^3.5.9",
-    "@types/lodash": "^4.17.0",
     "@types/node": "^20.8.6",
     "@types/react": "^18.2.74",
     "copyfiles": "^2.4.1",

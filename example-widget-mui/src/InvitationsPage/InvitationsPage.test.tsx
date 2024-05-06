@@ -16,7 +16,7 @@
 
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { act, render, screen, within } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { ComponentType, PropsWithChildren } from 'react';
@@ -63,15 +63,17 @@ describe('<InvitationsPage />', () => {
   it('should have no accessibility violations', async () => {
     const { container } = render(<InvitationsPage />, { wrapper });
 
-    await expect(
-      screen.findByRole('heading', { name: 'Invitations' }),
-    ).resolves.toBeInTheDocument();
+    expect(
+      await screen.findByRole('heading', { name: 'Invitations' }),
+    ).toBeInTheDocument();
 
-    expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
+    expect(await screen.findByRole('progressbar')).toBeInTheDocument();
 
-    await act(async () => {
-      expect(await axe(container)).toHaveNoViolations();
+    await waitFor(() => {
+      expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
     });
+
+    expect(await axe(container)).toHaveNoViolations();
   });
 
   it('should request the capabilities', async () => {

@@ -17,7 +17,7 @@
 import { WidgetConfig } from '@matrix-widget-toolkit/api';
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { act, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { ComponentType, PropsWithChildren } from 'react';
@@ -63,9 +63,7 @@ describe('<ModalDialog />', () => {
 
     await expect(screen.findByText(/a title/i)).resolves.toBeInTheDocument();
 
-    await act(async () => {
-      expect(await axe(container)).toHaveNoViolations();
-    });
+    expect(await axe(container)).toHaveNoViolations();
   });
 
   it('should show a warning if the component was not opened in a modal', async () => {

@@ -233,20 +233,12 @@ describe('<PowerLevelsPage />', () => {
     await waitFor(() => {
       expect(promoteButton).not.toBeDisabled();
     });
-
-    await waitFor(() => {
-      expect(demoteButton).toBeDisabled();
-    });
+    expect(demoteButton).toBeDisabled();
 
     await userEvent.click(promoteButton);
 
-    await waitFor(() => {
-      expect(promoteButton).toBeDisabled();
-    });
-
-    await waitFor(() => {
-      expect(demoteButton).not.toBeDisabled();
-    });
+    expect(promoteButton).toBeDisabled();
+    expect(demoteButton).not.toBeDisabled();
 
     expect(widgetApi.sendStateEvent).toBeCalledWith('m.room.power_levels', {
       users: {
@@ -279,23 +271,13 @@ describe('<PowerLevelsPage />', () => {
     });
     const demoteButton = screen.getByRole('button', { name: /demote/i });
 
-    await waitFor(() => {
-      expect(promoteButton).toBeDisabled();
-    });
-
-    await waitFor(() => {
-      expect(demoteButton).not.toBeDisabled();
-    });
+    expect(promoteButton).toBeDisabled();
+    expect(demoteButton).not.toBeDisabled();
 
     await userEvent.click(demoteButton);
 
-    await waitFor(() => {
-      expect(promoteButton).not.toBeDisabled();
-    });
-
-    await waitFor(() => {
-      expect(demoteButton).toBeDisabled();
-    });
+    expect(promoteButton).not.toBeDisabled();
+    expect(demoteButton).toBeDisabled();
 
     expect(widgetApi.sendStateEvent).toBeCalledWith('m.room.power_levels', {
       users: {

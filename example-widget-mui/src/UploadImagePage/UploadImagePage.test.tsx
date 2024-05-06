@@ -16,14 +16,14 @@
 
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { act, render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import {
   EventDirection,
   WidgetApiFromWidgetAction,
   WidgetEventCapability,
 } from 'matrix-widget-api';
-import { ComponentType, PropsWithChildren } from 'react';
+import { ComponentType, PropsWithChildren, act } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { ROOM_EVENT_UPLOADED_IMAGE } from '../events';
 import { StoreProvider } from '../store';
@@ -68,10 +68,15 @@ describe('<UploadImagePage>', () => {
   it('should have no accessibility violations', async () => {
     const { container } = render(<UploadImagePage />, { wrapper });
 
-    await expect(
-      screen.findByRole('heading', { name: /upload file/i }),
-    ).resolves.toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: /upload file/i }),
+    ).toBeInTheDocument();
 
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: 'Upload' })).toBeEnabled();
+    });
+
+    // TODO: this should not be needed to wrap in act, we should review this later
     await act(async () => {
       expect(await axe(container)).toHaveNoViolations();
     });

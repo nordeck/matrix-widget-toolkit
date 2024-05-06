@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { act, render, screen, within } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { ComponentType, PropsWithChildren } from 'react';
 import { MemoryRouter } from 'react-router-dom';
@@ -42,8 +42,6 @@ describe('<NavigationPage>', () => {
   it('should have no accessibility violations', async () => {
     const { container } = render(<NavigationPage />, { wrapper });
 
-    await act(async () => {
-      expect(await axe(container)).toHaveNoViolations();
-    });
+    expect(await axe(container)).toHaveNoViolations();
   });
 });

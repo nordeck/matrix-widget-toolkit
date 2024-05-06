@@ -16,7 +16,7 @@
 
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { EventDirection, WidgetEventCapability } from 'matrix-widget-api';
 import { ComponentType, PropsWithChildren } from 'react';
@@ -60,26 +60,22 @@ describe('<DicePage />', () => {
   it('should request the capabilities', async () => {
     render(<DicePage />, { wrapper });
 
-    await waitFor(() => {
-      expect(widgetApi.requestCapabilities).toBeCalledWith([
-        WidgetEventCapability.forRoomEvent(
-          EventDirection.Receive,
-          'net.nordeck.throw_dice',
-        ),
-      ]);
-    });
+    expect(widgetApi.requestCapabilities).toBeCalledWith([
+      WidgetEventCapability.forRoomEvent(
+        EventDirection.Receive,
+        'net.nordeck.throw_dice',
+      ),
+    ]);
 
     const button = await screen.findByRole('button', { name: /throw dice/i });
     await userEvent.click(button);
 
-    await waitFor(() => {
-      expect(widgetApi.requestCapabilities).toBeCalledWith([
-        WidgetEventCapability.forRoomEvent(
-          EventDirection.Send,
-          'net.nordeck.throw_dice',
-        ),
-      ]);
-    });
+    expect(widgetApi.requestCapabilities).toBeCalledWith([
+      WidgetEventCapability.forRoomEvent(
+        EventDirection.Send,
+        'net.nordeck.throw_dice',
+      ),
+    ]);
   });
 
   it('should tell that no dice throws are present', async () => {

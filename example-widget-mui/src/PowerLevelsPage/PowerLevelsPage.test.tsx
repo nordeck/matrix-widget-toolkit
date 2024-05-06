@@ -16,11 +16,11 @@
 
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { act, render, screen, waitFor, within } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { EventDirection, WidgetEventCapability } from 'matrix-widget-api';
-import { ComponentType, PropsWithChildren } from 'react';
+import { ComponentType, PropsWithChildren, act } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { StoreProvider } from '../store';
 import { PowerLevelsPage } from './PowerLevelsPage';
@@ -111,10 +111,15 @@ describe('<PowerLevelsPage />', () => {
   it('should have no accessibility violations', async () => {
     const { container } = render(<PowerLevelsPage />, { wrapper });
 
-    await expect(
-      screen.findByRole('heading', { name: /room power levels/i }),
-    ).resolves.toBeInTheDocument();
+    expect(
+      await screen.findByRole('heading', { name: /room power levels/i }),
+    ).toBeInTheDocument();
 
+    expect(
+      await screen.findByRole('combobox', { name: 'Username' }),
+    ).toBeInTheDocument();
+
+    // TODO: this should not be needed to wrap in act, we should review this later
     await act(async () => {
       expect(await axe(container)).toHaveNoViolations();
     });
@@ -282,13 +287,8 @@ describe('<PowerLevelsPage />', () => {
     });
     const demoteButton = screen.getByRole('button', { name: /demote/i });
 
-    await waitFor(() => {
-      expect(promoteButton).toBeDisabled();
-    });
-
-    await waitFor(() => {
-      expect(demoteButton).not.toBeDisabled();
-    });
+    expect(promoteButton).toBeDisabled();
+    expect(demoteButton).not.toBeDisabled();
 
     await userEvent.click(demoteButton);
 
@@ -296,9 +296,7 @@ describe('<PowerLevelsPage />', () => {
       expect(promoteButton).not.toBeDisabled();
     });
 
-    await waitFor(() => {
-      expect(demoteButton).toBeDisabled();
-    });
+    expect(demoteButton).toBeDisabled();
 
     expect(widgetApi.sendStateEvent).toBeCalledWith('m.room.power_levels', {
       users: {

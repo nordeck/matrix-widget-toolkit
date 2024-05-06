@@ -16,7 +16,7 @@
 
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
 import { ComponentType, PropsWithChildren } from 'react';
@@ -55,13 +55,8 @@ describe('<IdentityPage />', () => {
 
     await expect(screen.findByText(/Identity/i)).resolves.toBeInTheDocument();
 
-    await waitFor(() => {
-      expect(screen.getByText('Error')).toBeInTheDocument();
-    });
-
-    await waitFor(() => {
-      expect(screen.getByText(/error: .+/i)).toBeInTheDocument();
-    });
+    expect(await screen.findByText('Error')).toBeInTheDocument();
+    expect(screen.getByText(/error: .+/i)).toBeInTheDocument();
   });
 
   it('should show the user information', async () => {

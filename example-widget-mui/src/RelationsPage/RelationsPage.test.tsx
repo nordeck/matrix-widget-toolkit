@@ -106,10 +106,11 @@ describe('<RelationsPage />', () => {
   it('should have no accessibility violations', async () => {
     const { container } = render(<RelationsPage />, { wrapper });
 
-    await expect(
-      screen.findByRole('heading', { name: 'Event Relations' }),
-    ).resolves.toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: 'Event Relations' }),
+    ).toBeInTheDocument();
 
+    // TODO: this should not be needed to wrap in act, we should review this later
     await act(async () => {
       expect(await axe(container)).toHaveNoViolations();
     });
