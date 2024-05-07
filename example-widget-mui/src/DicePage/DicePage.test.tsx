@@ -64,6 +64,7 @@ describe('<DicePage />', () => {
     await expect(
       screen.findByRole('heading', { name: /dice/i }),
     ).resolves.toBeInTheDocument();
+
     expect(await axe(container)).toHaveNoViolations();
   });
 

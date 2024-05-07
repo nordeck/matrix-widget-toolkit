@@ -34,13 +34,12 @@ import {
   Input,
   Typography,
 } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
 import {
   EventDirection,
   WidgetApiFromWidgetAction,
   WidgetEventCapability,
 } from 'matrix-widget-api';
-import { ChangeEvent, ReactElement, useCallback, useState } from 'react';
+import { ChangeEvent, ReactElement, useCallback, useId, useState } from 'react';
 import { NavigationBar } from '../NavigationPage';
 import { StoreProvider } from '../store';
 import { ImageListView } from './ImageListView';

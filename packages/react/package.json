@@ -10,12 +10,11 @@
   "devDependencies": {
     "@craco/craco": "^7.1.0",
     "@testing-library/jest-dom": "^6.4.2",
-    "@testing-library/react": "^12.1.5",
-    "@testing-library/react-hooks": "^8.0.1",
+    "@testing-library/react": "^14.2.2",
     "@testing-library/user-event": "^14.5.2",
     "@types/jest": "^27.5.2",
     "@types/node": "^20.8.6",
-    "@types/react": "^17.0.45",
+    "@types/react": "^18.2.74",
     "react-scripts": "5.0.1",
     "typescript": "^5.4.5"
   },
@@ -34,7 +33,7 @@
   "dependencies": {
     "@matrix-widget-toolkit/api": "^3.2.2",
     "matrix-widget-api": "^1.6.0",
-    "react": "^17.0.2",
+    "react": "^18.2.0",
     "react-error-boundary": "^3.1.4",
     "react-use": "^17.5.0"
   },

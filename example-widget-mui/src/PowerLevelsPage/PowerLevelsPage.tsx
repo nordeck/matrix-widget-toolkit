@@ -42,10 +42,9 @@ import {
   MenuItem,
   Select,
 } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
 import { first } from 'lodash';
 import { EventDirection, WidgetEventCapability } from 'matrix-widget-api';
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useEffect, useId, useState } from 'react';
 import { STATE_EVENT_ROOM_NAME } from '../events';
 import { NavigationBar } from '../NavigationPage';
 import { StoreProvider } from '../store';

@@ -71,9 +71,12 @@ describe('<RoomPage />', () => {
   it('should have no accessibility violations', async () => {
     const { container } = render(<RoomPage />, { wrapper });
 
-    await expect(
-      screen.findByRole('heading', { name: /room admin tool/i }),
-    ).resolves.toBeInTheDocument();
+    await waitFor(() => {
+      expect(
+        screen.getByRole('heading', { name: /room admin tool/i }),
+      ).toBeInTheDocument();
+    });
+
     expect(await axe(container)).toHaveNoViolations();
   });
 
