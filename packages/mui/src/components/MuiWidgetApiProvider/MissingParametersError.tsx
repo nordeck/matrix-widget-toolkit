@@ -33,8 +33,7 @@ import {
   DialogTitle,
   Typography,
 } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
-import { ReactElement, useCallback, useState } from 'react';
+import { ReactElement, useCallback, useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CopyableCode } from './CopyableCode';
 

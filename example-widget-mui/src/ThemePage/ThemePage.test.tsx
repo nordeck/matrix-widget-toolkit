@@ -47,6 +47,7 @@ describe('<ThemePage>', () => {
     await expect(
       screen.findByRole('heading', { name: /theme/i }),
     ).resolves.toBeInTheDocument();
+
     expect(await axe(container)).toHaveNoViolations();
   }, 15000);
 

@@ -16,7 +16,7 @@
 
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { ComponentType, PropsWithChildren } from 'react';
 import { MemoryRouter } from 'react-router-dom';
@@ -58,7 +58,10 @@ describe('<WelcomePage />', () => {
     await expect(
       screen.findByRole('heading', { name: /welcome/i }),
     ).resolves.toBeInTheDocument();
-    expect(await axe(container)).toHaveNoViolations();
+
+    await act(async () => {
+      expect(await axe(container)).toHaveNoViolations();
+    });
   });
 
   it('should show the greeting', () => {

@@ -62,6 +62,7 @@ describe('<ModalDialog />', () => {
     const { container } = render(<ModalDialog />, { wrapper });
 
     await expect(screen.findByText(/a title/i)).resolves.toBeInTheDocument();
+
     expect(await axe(container)).toHaveNoViolations();
   });
 

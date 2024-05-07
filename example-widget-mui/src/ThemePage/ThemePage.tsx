@@ -59,11 +59,11 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
 import {
   MouseEventHandler,
   PropsWithChildren,
   ReactElement,
+  useId,
   useState,
 } from 'react';
 import { NavigationBar } from '../NavigationPage';

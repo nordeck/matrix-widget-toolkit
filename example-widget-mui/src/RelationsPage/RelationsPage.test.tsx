@@ -81,7 +81,7 @@ describe('<RelationsPage />', () => {
     expect(screen.getByRole('button', { name: 'Send' })).toBeInTheDocument();
 
     const list = screen.getByRole('list', { name: 'Messages' });
-    const listitem = within(list).getByRole('listitem', {
+    const listitem = await within(list).findByRole('listitem', {
       name: 'My message @user-id',
     });
 
@@ -106,11 +106,14 @@ describe('<RelationsPage />', () => {
   it('should have no accessibility violations', async () => {
     const { container } = render(<RelationsPage />, { wrapper });
 
-    await expect(
-      screen.findByRole('heading', { name: 'Event Relations' }),
-    ).resolves.toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: 'Event Relations' }),
+    ).toBeInTheDocument();
 
-    expect(await axe(container)).toHaveNoViolations();
+    // TODO: this should not be needed to wrap in act, we should review this later
+    await act(async () => {
+      expect(await axe(container)).toHaveNoViolations();
+    });
   });
 
   it('should send a new message', async () => {

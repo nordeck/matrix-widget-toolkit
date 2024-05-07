@@ -20,7 +20,7 @@ import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { EventDirection, WidgetEventCapability } from 'matrix-widget-api';
-import { ComponentType, PropsWithChildren } from 'react';
+import { ComponentType, PropsWithChildren, act } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { StoreProvider } from '../store';
 import { PowerLevelsPage } from './PowerLevelsPage';
@@ -91,7 +91,7 @@ describe('<PowerLevelsPage />', () => {
     const listbox = await screen.findByRole('listbox', { name: 'Username' });
 
     await userEvent.click(
-      within(listbox).getByRole('option', {
+      await within(listbox).findByRole('option', {
         name: '@another-user',
         selected: true,
         checked: true,
@@ -111,10 +111,18 @@ describe('<PowerLevelsPage />', () => {
   it('should have no accessibility violations', async () => {
     const { container } = render(<PowerLevelsPage />, { wrapper });
 
-    await expect(
-      screen.findByRole('heading', { name: /room power levels/i }),
-    ).resolves.toBeInTheDocument();
-    expect(await axe(container)).toHaveNoViolations();
+    expect(
+      await screen.findByRole('heading', { name: /room power levels/i }),
+    ).toBeInTheDocument();
+
+    expect(
+      await screen.findByRole('combobox', { name: 'Username' }),
+    ).toBeInTheDocument();
+
+    // TODO: this should not be needed to wrap in act, we should review this later
+    await act(async () => {
+      expect(await axe(container)).toHaveNoViolations();
+    });
   });
 
   it('should select another user', async () => {
@@ -218,8 +226,13 @@ describe('<PowerLevelsPage />', () => {
     });
     const demoteButton = screen.getByRole('button', { name: /demote/i });
 
-    expect(promoteButton).toBeDisabled();
-    expect(demoteButton).toBeDisabled();
+    await waitFor(() => {
+      expect(promoteButton).toBeDisabled();
+    });
+
+    await waitFor(() => {
+      expect(demoteButton).toBeDisabled();
+    });
   });
 
   it('should promote the user', async () => {
@@ -235,8 +248,13 @@ describe('<PowerLevelsPage />', () => {
 
     await userEvent.click(promoteButton);
 
-    expect(promoteButton).toBeDisabled();
-    expect(demoteButton).not.toBeDisabled();
+    await waitFor(() => {
+      expect(promoteButton).toBeDisabled();
+    });
+
+    await waitFor(() => {
+      expect(demoteButton).not.toBeDisabled();
+    });
 
     expect(widgetApi.sendStateEvent).toBeCalledWith('m.room.power_levels', {
       users: {
@@ -274,7 +292,10 @@ describe('<PowerLevelsPage />', () => {
 
     await userEvent.click(demoteButton);
 
-    expect(promoteButton).not.toBeDisabled();
+    await waitFor(() => {
+      expect(promoteButton).not.toBeDisabled();
+    });
+
     expect(demoteButton).toBeDisabled();
 
     expect(widgetApi.sendStateEvent).toBeCalledWith('m.room.power_levels', {

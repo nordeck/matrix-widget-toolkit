@@ -63,9 +63,11 @@ describe('<InvitationsPage />', () => {
   it('should have no accessibility violations', async () => {
     const { container } = render(<InvitationsPage />, { wrapper });
 
-    await expect(
-      screen.findByRole('heading', { name: 'Invitations' }),
-    ).resolves.toBeInTheDocument();
+    expect(
+      await screen.findByRole('heading', { name: 'Invitations' }),
+    ).toBeInTheDocument();
+
+    expect(await screen.findByRole('progressbar')).toBeInTheDocument();
 
     await waitFor(() => {
       expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
