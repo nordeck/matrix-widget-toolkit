@@ -2,16 +2,13 @@
   "name": "root",
   "private": true,
   "workspaces": [
-    "example-widget-semantic-ui",
     "example-widget-mui",
     "containers/*",
     "packages/*"
   ],
   "scripts": {
     "dev:example": "yarn workspace @matrix-widget-toolkit/example-widget-mui dev",
-    "dev:example:semantic-ui": "yarn workspace @matrix-widget-toolkit/example-widget-semantic-ui dev",
     "start:example": "yarn workspace @matrix-widget-toolkit/example-widget-mui start",
-    "start:example:semantic-ui": "yarn workspace @matrix-widget-toolkit/example-widget-semantic-ui start",
     "build": "yarn workspaces run build",
     "test": "jest --watch",
     "test:all": "jest --coverage --maxWorkers=50%",

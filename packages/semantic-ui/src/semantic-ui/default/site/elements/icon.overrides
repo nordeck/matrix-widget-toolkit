@@ -1,5 +1,0 @@
-/*******************************
-             Icon
-*******************************/
-
-& { @import "../../../../../fui-icons/ui/src/themes/default/elements/icon.overrides"; }

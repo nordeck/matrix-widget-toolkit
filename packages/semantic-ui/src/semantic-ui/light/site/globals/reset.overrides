@@ -1,8 +1,0 @@
-/*******************************
-         Site Overrides
-*******************************/
-    *:focus:not(textarea, input[type="text"],[type="search"]),
-     input[type="checkbox"]:focus + label::before {
-      outline: 1px solid #248cf5!important;
-      box-shadow: 0px 0px 5px 1px rgba(36, 140, 245, 0.1)!important;
-    }

@@ -1,9 +1,0 @@
-// Package specific tsconfig that extends the root one.
-{
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "outDir": "lib",
-    "rootDir": "."
-  },
-  "include": ["src"]
-}
