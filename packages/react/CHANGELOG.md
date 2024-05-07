@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/react`
 
+## 2.0.0
+
+### Major Changes
+
+- 71bd53c: Upgrade to React 18
+
 ## 1.0.6
 
 ### Patch Changes

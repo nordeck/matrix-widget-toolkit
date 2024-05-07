@@ -1,5 +1,16 @@
 # `@matrix-widget-toolkit/mui`
 
+## 2.0.0
+
+### Major Changes
+
+- 71bd53c: Upgrade to React 18
+
+### Patch Changes
+
+- Updated dependencies [71bd53c]
+  - @matrix-widget-toolkit/react@2.0.0
+
 ## 1.2.1
 
 ### Patch Changes
