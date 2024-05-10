@@ -1,7 +1,0 @@
-/*******************************
-    User Variable Overrides
-*******************************/
-
-@background: rgb(32, 37, 43);
-@activeBackgroundColor: lighten(@background, 20);
-@headerBackground: lighten(@background, 20);

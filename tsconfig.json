@@ -20,9 +20,5 @@
   },
   "exclude": ["node_modules"],
   // Include all source code for building
-  "include": [
-    "example-widget-semantic-ui/src",
-    "example-widget-mui/src",
-    "packages/*/src"
-  ]
+  "include": ["example-widget-mui/src", "packages/*/src"]
 }

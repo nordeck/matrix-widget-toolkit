@@ -1,8 +1,0 @@
-/*******************************
-    User Variable Overrides
-*******************************/
-
-
-@background: @pageBackground;
-@menuBackground: @pageBackground;
-@dropdownBackground: @pageBackground;

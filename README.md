@@ -8,7 +8,6 @@ This repository contains multiple [packages](./packages) that provide reusable c
 
 - [`@matrix-widget-toolkit/api`](./packages/api): A package that wraps [`matrix-widget-api`](https://github.com/matrix-org/matrix-widget-api) to provide a more convenient API.
 - [`@matrix-widget-toolkit/react`](./packages/react): A package that provides a Widget API integration for React apps.
-- [`@matrix-widget-toolkit/semantic-ui`](./packages/semantic-ui): A package that provides a matching Semantic UI theme for Element.
 - [`@matrix-widget-toolkit/mui`](./packages/mui): A package that provides a matching Mui theme for Element.
 - [`@matrix-widget-toolkit/testing`](./packages/testing): Testing support for `@matrix-widget-toolkit/api`.
 - [`@matrix-widget-toolkit/widget-server`](./containers/widget-server): A container to host a Matrix widget in a production environment.

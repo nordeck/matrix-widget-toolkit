@@ -1,8 +1,0 @@
-/*******************************
-    User Variable Overrides
-*******************************/
-
-@backgroundColor: lighten(@inputBackground, 10);
-@labelHoverBackgroundColor: lighten(@inputBackground, 20);
-@labelActiveBackgroundColor: lighten(@inputBackground, 15);
-@labelActiveHoverBackgroundColor: lighten(@inputBackground, 15);

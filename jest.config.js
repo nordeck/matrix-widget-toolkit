@@ -21,9 +21,5 @@
 module.exports = {
   // Container tests are explicity not included, as they can not be run
   // without manually starting a docker container.
-  projects: [
-    '<rootDir>/example-widget-semantic-ui',
-    '<rootDir>/example-widget-mui',
-    '<rootDir>/packages/*',
-  ],
+  projects: ['<rootDir>/example-widget-mui', '<rootDir>/packages/*'],
 };

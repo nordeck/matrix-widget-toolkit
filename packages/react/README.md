@@ -15,7 +15,7 @@ yarn add @matrix-widget-toolkit/react
 ### Providing the Widget API to React components
 
 While this package contains a `<WidgetApiProvider>` you probably don't want to use this package most of the time.
-Prefer using [`@matrix-widget-toolkit/mui`](../mui/) or [`@matrix-widget-toolkit/semantic-ui`](../semantic-ui/) which internally use this package to share functionality.
+Prefer using [`@matrix-widget-toolkit/mui`](../mui/) which internally uses this package to share functionality.
 
 ### Acessing the Widget API
 
