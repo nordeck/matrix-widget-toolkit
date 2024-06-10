@@ -2,7 +2,7 @@ build/
 coverage/
 lib/
 node_modules/
-api-report.md
+api-report.api.md
 
 # Ignore the helm chart
 charts/
