@@ -55,16 +55,16 @@
     "@craco/craco": "^7.1.0",
     "@matrix-widget-toolkit/testing": "2.4.0",
     "@testing-library/jest-dom": "^6.4.5",
-    "@testing-library/react": "^14.2.2",
+    "@testing-library/react": "^16.0.0",
     "@testing-library/user-event": "^14.5.2",
     "@types/jest": "^27.5.2",
     "@types/jest-axe": "^3.5.9",
     "@types/node": "^20.8.6",
     "@types/react": "^18.2.74",
     "@types/react-dom": "^18.2.24",
-    "i18next-parser": "^8.13.0",
-    "jest-axe": "^8.0.0",
-    "msw": "^2.2.14",
+    "i18next-parser": "^9.0.0",
+    "jest-axe": "^9.0.0",
+    "msw": "^2.3.1",
     "typescript": "^5.4.5"
   }
 }
