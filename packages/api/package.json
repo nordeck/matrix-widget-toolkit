@@ -9,6 +9,7 @@
   "types": "./src/index.ts",
   "devDependencies": {
     "@craco/craco": "^7.1.0",
+    "@rollup/plugin-commonjs": "^26.0.1",
     "@types/jest": "^27.5.2",
     "@types/node": "^20.8.6",
     "@types/qs": "^6.9.15",

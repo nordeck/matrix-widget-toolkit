@@ -23,7 +23,7 @@ const config = {
     {
       file: 'build/cjs/index.js',
       format: 'cjs',
-      interop: 'compat',
+      interop: 'auto',
     },
     {
       file: 'build/esm/index.js',
