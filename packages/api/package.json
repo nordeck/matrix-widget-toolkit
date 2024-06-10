@@ -20,7 +20,7 @@
     "tsc": "tsc",
     "lint": "eslint .",
     "test": "jest --watch",
-    "depcheck": "depcheck --ignores=@types/jest,@types/node --ignore-dirs=lib",
+    "depcheck": "depcheck --ignores=@types/jest,@types/node,@rollup/plugin-commonjs --ignore-dirs=lib",
     "prepack": "node ../../scripts/prepack.js",
     "postpack": "node ../../scripts/postpack.js",
     "translate": "echo \"Nothing to translate\"",
