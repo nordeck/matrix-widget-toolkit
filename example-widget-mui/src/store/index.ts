@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-export { StoreProvider } from './StoreProvider';
 export { baseApi } from './baseApi';
 export { createStore } from './store';
 export type { ThunkExtraArgument } from './store';
+export { StoreProvider } from './StoreProvider';

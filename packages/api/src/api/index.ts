@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-export { WidgetApiImpl } from './WidgetApiImpl';
-export type { WidgetApiOptions } from './WidgetApiImpl';
 export * from './extras';
 export {
   extractRawWidgetParameters,
@@ -39,3 +37,5 @@ export type {
   WidgetParameters,
   WidgetRegistration,
 } from './types';
+export { WidgetApiImpl } from './WidgetApiImpl';
+export type { WidgetApiOptions } from './WidgetApiImpl';

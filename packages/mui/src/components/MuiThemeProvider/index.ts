@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
+export { getEnvironment } from './environment';
 export { MuiThemeProvider } from './MuiThemeProvider';
 export type { MuiThemeProviderProps } from './MuiThemeProvider';
-export { getEnvironment } from './environment';
 export { getNonce } from './nonce';
