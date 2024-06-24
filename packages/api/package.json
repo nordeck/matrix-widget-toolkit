@@ -13,7 +13,7 @@
     "@types/jest": "^27.5.2",
     "@types/node": "^20.8.6",
     "@types/qs": "^6.9.15",
-    "typescript": "^5.4.5"
+    "typescript": "^5.5.2"
   },
   "scripts": {
     "build": "tsc && rollup --config ../../rollup.config.mjs",
