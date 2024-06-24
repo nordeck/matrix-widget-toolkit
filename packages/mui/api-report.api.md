@@ -4,8 +4,6 @@
 
 ```ts
 
-/// <reference types="react" />
-
 import { AvatarProps } from '@mui/material';
 import { BackendModule } from 'i18next';
 import { Capability } from 'matrix-widget-api';
