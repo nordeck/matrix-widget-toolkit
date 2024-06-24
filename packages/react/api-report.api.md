@@ -4,8 +4,6 @@
 
 ```ts
 
-/// <reference types="react" />
-
 import { Capability } from 'matrix-widget-api';
 import { ComponentType } from 'react';
 import { DispatchWithoutAction } from 'react';
