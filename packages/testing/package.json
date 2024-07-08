@@ -10,9 +10,9 @@
   "devDependencies": {
     "@craco/craco": "^7.1.0",
     "@types/jest": "^27.5.2",
-    "@types/lodash": "^4.17.5",
+    "@types/lodash": "^4.17.6",
     "@types/node": "^20.8.6",
-    "typescript": "^5.5.2"
+    "typescript": "^5.5.3"
   },
   "scripts": {
     "build": "tsc && rollup --config ../../rollup.config.mjs",
