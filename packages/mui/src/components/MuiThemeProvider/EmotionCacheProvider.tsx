@@ -19,10 +19,13 @@ import { CacheProvider } from '@emotion/react';
 import { PropsWithChildren } from 'react';
 import { getNonce } from './nonce';
 
+// https://mui.com/material-ui/guides/content-security-policy/
+
 function createEmotionCache() {
   return createCache({
     key: 'widget',
     nonce: getNonce(),
+    prepend: true,
   });
 }
 
