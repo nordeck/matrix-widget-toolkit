@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/widget-server`
 
+## 1.0.5
+
+### Patch Changes
+
+- 2168cd4: Emotion cache is now prepended, so it works with Vite builds
+
 ## 1.0.4
 
 ### Patch Changes
