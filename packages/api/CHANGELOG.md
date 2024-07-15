@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/api`
 
+## 3.3.2
+
+### Patch Changes
+
+- fac0c61: Bump qs from 6.12.2 to 6.12.3
+
 ## 3.3.1
 
 ### Patch Changes
