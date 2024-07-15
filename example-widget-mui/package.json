@@ -12,7 +12,7 @@
     "@mui/icons-material": "^5.16.0",
     "@mui/material": "^5.16.0",
     "@reduxjs/toolkit": "^2.2.5",
-    "i18next": "^23.11.5",
+    "i18next": "^23.12.1",
     "i18next-chained-backend": "^4.6.2",
     "i18next-http-backend": "^2.5.2",
     "joi": "^17.13.3",
