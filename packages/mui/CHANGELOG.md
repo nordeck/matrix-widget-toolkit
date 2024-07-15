@@ -1,5 +1,16 @@
 # `@matrix-widget-toolkit/mui`
 
+## 2.0.1
+
+### Patch Changes
+
+- 793cd5e: Bump @mui/icons-material from 5.16.0 to 5.16.1
+  Bump @mui/material from 5.16.0 to 5.16.1
+  Bump @mui/utils from 5.16.0 to 5.16.1
+- 5568f40: Bump i18next from 23.11.5 to 23.12.1
+- Updated dependencies [fac0c61]
+  - @matrix-widget-toolkit/api@3.3.2
+
 ## 2.0.0
 
 ### Major Changes
