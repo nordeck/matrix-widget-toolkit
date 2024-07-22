@@ -54,7 +54,7 @@
     "matrix-widget-api": "^1.6.0",
     "react": "^18.2.0",
     "react-i18next": "^15.0.0",
-    "react-use": "^17.5.0"
+    "react-use": "^17.5.1"
   },
   "repository": {
     "type": "git",
