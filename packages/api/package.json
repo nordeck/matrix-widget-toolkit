@@ -28,7 +28,7 @@
     "generate-api-report": "tsc && api-extractor run --verbose --local"
   },
   "dependencies": {
-    "matrix-widget-api": "^1.6.0",
+    "matrix-widget-api": "^1.7.0",
     "qs": "^6.12.3",
     "rxjs": "^7.8.1"
   },
