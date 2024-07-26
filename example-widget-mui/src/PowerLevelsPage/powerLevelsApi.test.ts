@@ -110,9 +110,12 @@ describe('updatePowerLevels', () => {
       },
     });
 
-    expect(widgetApi.sendStateEvent).toBeCalledWith('m.room.power_levels', {
-      users_default: 100,
-    });
+    expect(widgetApi.sendStateEvent).toHaveBeenCalledWith(
+      'm.room.power_levels',
+      {
+        users_default: 100,
+      },
+    );
   });
 
   it('should eagerly update the store', async () => {

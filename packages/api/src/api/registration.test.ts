@@ -167,12 +167,12 @@ describe('repairWidgetRegistration', () => {
       },
     });
 
-    expect(widgetApi.requestCapabilities).toBeCalled();
-    expect(widgetApi.receiveSingleStateEvent).toBeCalledWith(
+    expect(widgetApi.requestCapabilities).toHaveBeenCalled();
+    expect(widgetApi.receiveSingleStateEvent).toHaveBeenCalledWith(
       STATE_EVENT_WIDGETS,
       'my-widget-id',
     );
-    expect(widgetApi.sendStateEvent).toBeCalledWith(
+    expect(widgetApi.sendStateEvent).toHaveBeenCalledWith(
       STATE_EVENT_WIDGETS,
       {
         id: 'widget-id',
@@ -214,12 +214,12 @@ describe('repairWidgetRegistration', () => {
       },
     });
 
-    expect(widgetApi.requestCapabilities).toBeCalled();
-    expect(widgetApi.receiveSingleStateEvent).toBeCalledWith(
+    expect(widgetApi.requestCapabilities).toHaveBeenCalled();
+    expect(widgetApi.receiveSingleStateEvent).toHaveBeenCalledWith(
       STATE_EVENT_WIDGETS,
       'my-widget-id',
     );
-    expect(widgetApi.sendStateEvent).toBeCalledWith(
+    expect(widgetApi.sendStateEvent).toHaveBeenCalledWith(
       STATE_EVENT_WIDGETS,
       {
         id: 'widget-id',
@@ -262,12 +262,12 @@ describe('repairWidgetRegistration', () => {
       },
     });
 
-    expect(widgetApi.requestCapabilities).toBeCalled();
-    expect(widgetApi.receiveSingleStateEvent).toBeCalledWith(
+    expect(widgetApi.requestCapabilities).toHaveBeenCalled();
+    expect(widgetApi.receiveSingleStateEvent).toHaveBeenCalledWith(
       STATE_EVENT_WIDGETS,
       'my-widget-id',
     );
-    expect(widgetApi.sendStateEvent).toBeCalledWith(
+    expect(widgetApi.sendStateEvent).toHaveBeenCalledWith(
       STATE_EVENT_WIDGETS,
       {
         id: 'widget-id',
@@ -311,12 +311,12 @@ describe('repairWidgetRegistration', () => {
       },
     });
 
-    expect(widgetApi.requestCapabilities).toBeCalled();
-    expect(widgetApi.receiveSingleStateEvent).toBeCalledWith(
+    expect(widgetApi.requestCapabilities).toHaveBeenCalled();
+    expect(widgetApi.receiveSingleStateEvent).toHaveBeenCalledWith(
       STATE_EVENT_WIDGETS,
       'my-widget-id',
     );
-    expect(widgetApi.sendStateEvent).toBeCalledWith(
+    expect(widgetApi.sendStateEvent).toHaveBeenCalledWith(
       STATE_EVENT_WIDGETS,
       {
         id: 'widget-id',

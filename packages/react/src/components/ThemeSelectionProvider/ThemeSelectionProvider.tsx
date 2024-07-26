@@ -80,8 +80,6 @@ export const useThemeSelection = (): ThemeSelectionContextType => {
 /**
  * Props for the {@link ThemeSelectionProvider} component.
  */
-// {} usage is safe here, see https://github.com/typescript-eslint/typescript-eslint/issues/2063#issuecomment-675156492
-// eslint-disable-next-line @typescript-eslint/ban-types
 export type ThemeSelectionProviderProps = PropsWithChildren<{}>;
 
 /**

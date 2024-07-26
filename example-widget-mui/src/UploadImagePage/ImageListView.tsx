@@ -114,8 +114,8 @@ export const getHttpUriForMxc = (
   if (mxcUrl.indexOf('mxc://') !== 0) {
     return null;
   }
-  let serverAndMediaId = mxcUrl.slice(6);
-  let prefix = '/_matrix/media/v3/download/';
+  const serverAndMediaId = mxcUrl.slice(6);
+  const prefix = '/_matrix/media/v3/download/';
 
   return baseUrl + prefix + serverAndMediaId;
 };

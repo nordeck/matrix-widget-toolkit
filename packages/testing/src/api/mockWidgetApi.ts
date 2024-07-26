@@ -380,7 +380,7 @@ export function mockWidgetApi(opts?: {
     };
 
     if (ev.type === ROOM_EVENT_REDACTION) {
-      let redactionEv = ev as RedactionRoomEvent;
+      const redactionEv = ev as RedactionRoomEvent;
       redactionEv.redacts = redactionEv.content['redacts'];
       ev.content = {};
 
@@ -427,7 +427,7 @@ export function mockWidgetApi(opts?: {
             isEqual(ev.content, e.content),
         )
       ) {
-        return new Promise((resolve, reject) => {
+        return new Promise(() => {
           // Never resolves
         });
       }

@@ -69,7 +69,7 @@ describe('redactEvent', () => {
       event_id: 'event-id',
       sender: 'sender-id',
     });
-    expect(widgetApi.sendRoomEvent).toBeCalledWith('m.room.redaction', {
+    expect(widgetApi.sendRoomEvent).toHaveBeenCalledWith('m.room.redaction', {
       redacts: 'event-1234',
     });
   });
@@ -106,6 +106,8 @@ describe('observeRedactionEvents', () => {
       event_id: 'event-id',
       sender: 'sender-id',
     });
-    expect(widgetApi.observeRoomEvents).toBeCalledWith('m.room.redaction');
+    expect(widgetApi.observeRoomEvents).toHaveBeenCalledWith(
+      'm.room.redaction',
+    );
   });
 });

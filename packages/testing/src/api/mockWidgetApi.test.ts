@@ -386,7 +386,7 @@ describe('sendStateEvent', () => {
           setTimeout(() => reject(new Error('Timeout')), 100),
         ),
       ]),
-    ).rejects.toThrowError('Timeout');
+    ).rejects.toThrow('Timeout');
   });
 });
 

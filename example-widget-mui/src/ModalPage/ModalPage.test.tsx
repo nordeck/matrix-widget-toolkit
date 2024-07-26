@@ -73,7 +73,7 @@ describe('<ModalPage />', () => {
       screen.findByText(/no answer :-\(/i),
     ).resolves.toBeInTheDocument();
 
-    expect(widgetApi.openModal).toBeCalledWith(
+    expect(widgetApi.openModal).toHaveBeenCalledWith(
       '/modal/dialog',
       'How do you feel?',
       {

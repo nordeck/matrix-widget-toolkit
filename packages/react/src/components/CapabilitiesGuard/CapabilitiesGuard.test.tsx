@@ -75,7 +75,7 @@ describe('<CapabilitiesGuard>', () => {
     );
 
     expect(await screen.findByText('Child')).toBeInTheDocument();
-    expect(widgetApi.requestCapabilities).toBeCalledWith([
+    expect(widgetApi.requestCapabilities).toHaveBeenCalledWith([
       'com.example.my-capability',
     ]);
   });
@@ -95,7 +95,7 @@ describe('<CapabilitiesGuard>', () => {
     );
 
     expect(await screen.findByText('Loading')).toBeInTheDocument();
-    expect(widgetApi.requestCapabilities).toBeCalledWith([
+    expect(widgetApi.requestCapabilities).toHaveBeenCalledWith([
       'com.example.my-capability',
     ]);
   });
@@ -111,16 +111,16 @@ describe('<CapabilitiesGuard>', () => {
     );
 
     expect(await screen.findByText('Missing capabilities')).toBeInTheDocument();
-    expect(widgetApi.requestCapabilities).toBeCalledWith([
+    expect(widgetApi.requestCapabilities).toHaveBeenCalledWith([
       'com.example.my-capability',
     ]);
 
-    expect(widgetApi.requestCapabilities).toBeCalledTimes(1);
+    expect(widgetApi.requestCapabilities).toHaveBeenCalledTimes(1);
 
     await userEvent.click(
       await screen.findByRole('button', { name: 'Request capabilities' }),
     );
 
-    expect(widgetApi.requestCapabilities).toBeCalledTimes(2);
+    expect(widgetApi.requestCapabilities).toHaveBeenCalledTimes(2);
   });
 });

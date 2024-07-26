@@ -71,7 +71,7 @@ describe('<DicePage />', () => {
   it('should request the capabilities', async () => {
     render(<DicePage />, { wrapper });
 
-    expect(widgetApi.requestCapabilities).toBeCalledWith([
+    expect(widgetApi.requestCapabilities).toHaveBeenCalledWith([
       WidgetEventCapability.forRoomEvent(
         EventDirection.Receive,
         'net.nordeck.throw_dice',
@@ -81,7 +81,7 @@ describe('<DicePage />', () => {
     const button = await screen.findByRole('button', { name: /throw dice/i });
     await userEvent.click(button);
 
-    expect(widgetApi.requestCapabilities).toBeCalledWith([
+    expect(widgetApi.requestCapabilities).toHaveBeenCalledWith([
       WidgetEventCapability.forRoomEvent(
         EventDirection.Send,
         'net.nordeck.throw_dice',
@@ -130,8 +130,11 @@ describe('<DicePage />', () => {
       screen.findByText(/your last throw: ./i),
     ).resolves.toBeInTheDocument();
 
-    expect(widgetApi.sendRoomEvent).toBeCalledWith('net.nordeck.throw_dice', {
-      pips: expect.any(Number),
-    });
+    expect(widgetApi.sendRoomEvent).toHaveBeenCalledWith(
+      'net.nordeck.throw_dice',
+      {
+        pips: expect.any(Number),
+      },
+    );
   });
 });

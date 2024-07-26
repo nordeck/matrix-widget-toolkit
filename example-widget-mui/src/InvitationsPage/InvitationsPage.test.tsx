@@ -79,7 +79,7 @@ describe('<InvitationsPage />', () => {
   it('should request the capabilities', async () => {
     render(<InvitationsPage />, { wrapper });
 
-    expect(widgetApi.requestCapabilities).toBeCalledWith([
+    expect(widgetApi.requestCapabilities).toHaveBeenCalledWith([
       'org.matrix.msc3973.user_directory_search',
     ]);
 

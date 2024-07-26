@@ -48,9 +48,9 @@ describe('isValidThrowDiceEvent', () => {
     ).toBe(true);
   });
 
-  it.each<Object>([{ pips: undefined }, { pips: null }, { pips: 'text' }])(
+  it.each([{ pips: undefined }, { pips: null }, { pips: 'text' }])(
     'should reject event with patch %j',
-    (patch: Object) => {
+    (patch) => {
       expect(
         isValidThrowDiceEvent({
           content: {
