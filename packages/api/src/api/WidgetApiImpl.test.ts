@@ -108,13 +108,13 @@ describe('WidgetApiImpl', () => {
       });
 
       await expect(widgetApi.initialize()).resolves.toBeUndefined();
-      expect(matrixWidgetApi.start).toBeCalled();
-      expect(matrixWidgetApi.requestCapabilities).toBeCalledWith([
+      expect(matrixWidgetApi.start).toHaveBeenCalled();
+      expect(matrixWidgetApi.requestCapabilities).toHaveBeenCalledWith([
         'my.capability',
         'org.matrix.msc2762.receive.state_event:m.room.name',
         'io.element.requires_client',
       ]);
-      expect(matrixWidgetApi.once).toBeCalledWith(
+      expect(matrixWidgetApi.once).toHaveBeenCalledWith(
         'ready',
         expect.any(Function),
       );
@@ -146,12 +146,12 @@ describe('WidgetApiImpl', () => {
       );
 
       await expect(widgetApi.initialize()).resolves.toBeUndefined();
-      expect(matrixWidgetApi.start).toBeCalled();
-      expect(matrixWidgetApi.requestCapabilities).toBeCalledWith([
+      expect(matrixWidgetApi.start).toHaveBeenCalled();
+      expect(matrixWidgetApi.requestCapabilities).toHaveBeenCalledWith([
         'my.capability',
         'org.matrix.msc2762.receive.state_event:m.room.name',
       ]);
-      expect(matrixWidgetApi.once).toBeCalledWith(
+      expect(matrixWidgetApi.once).toHaveBeenCalledWith(
         'ready',
         expect.any(Function),
       );
@@ -186,26 +186,26 @@ describe('WidgetApiImpl', () => {
       matrixWidgetApi.off.mockReturnThis();
 
       await expect(widgetApi.initialize()).resolves.toBeUndefined();
-      expect(matrixWidgetApi.start).toBeCalled();
-      expect(matrixWidgetApi.requestCapabilities).toBeCalledWith([
+      expect(matrixWidgetApi.start).toHaveBeenCalled();
+      expect(matrixWidgetApi.requestCapabilities).toHaveBeenCalledWith([
         'my.capability',
         'org.matrix.msc2762.receive.state_event:m.room.name',
         'io.element.requires_client',
       ]);
-      expect(matrixWidgetApi.once).toBeCalledWith(
+      expect(matrixWidgetApi.once).toHaveBeenCalledWith(
         'ready',
         expect.any(Function),
       );
-      expect(matrixWidgetApi.on).toBeCalledWith(
+      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
         `action:${WidgetApiToWidgetAction.WidgetConfig}`,
         expect.any(Function),
       );
-      expect(matrixWidgetApi.off).toBeCalledWith(
+      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         `action:${WidgetApiToWidgetAction.WidgetConfig}`,
         expect.any(Function),
       );
-      expect(preventDefault).toBeCalled();
-      expect(matrixWidgetApi.transport.reply).toBeCalled();
+      expect(preventDefault).toHaveBeenCalled();
+      expect(matrixWidgetApi.transport.reply).toHaveBeenCalled();
 
       expect(widgetApi.getWidgetConfig()).toEqual({
         name: 'Widget Title',
@@ -246,25 +246,25 @@ describe('WidgetApiImpl', () => {
       });
       matrixWidgetApi.off.mockReturnThis();
 
-      await expect(() => widgetApi.initialize()).rejects.toThrowError(
+      await expect(() => widgetApi.initialize()).rejects.toThrow(
         'Transport Error',
       );
-      expect(matrixWidgetApi.start).toBeCalled();
-      expect(matrixWidgetApi.requestCapabilities).toBeCalled();
-      expect(matrixWidgetApi.once).toBeCalledWith(
+      expect(matrixWidgetApi.start).toHaveBeenCalled();
+      expect(matrixWidgetApi.requestCapabilities).toHaveBeenCalled();
+      expect(matrixWidgetApi.once).toHaveBeenCalledWith(
         'ready',
         expect.any(Function),
       );
-      expect(matrixWidgetApi.on).toBeCalledWith(
+      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
         `action:${WidgetApiToWidgetAction.WidgetConfig}`,
         expect.any(Function),
       );
-      expect(matrixWidgetApi.off).toBeCalledWith(
+      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         `action:${WidgetApiToWidgetAction.WidgetConfig}`,
         expect.any(Function),
       );
-      expect(preventDefault).toBeCalled();
-      expect(matrixWidgetApi.transport.reply).toBeCalled();
+      expect(preventDefault).toHaveBeenCalled();
+      expect(matrixWidgetApi.transport.reply).toHaveBeenCalled();
     });
   });
 
@@ -303,18 +303,18 @@ describe('WidgetApiImpl', () => {
         widgetApi.rerequestInitialCapabilities(),
       ).resolves.toBeUndefined();
 
-      expect(matrixWidgetApi.hasCapability).toBeCalled();
-      expect(matrixWidgetApi.requestCapabilities).toBeCalledWith([
+      expect(matrixWidgetApi.hasCapability).toHaveBeenCalled();
+      expect(matrixWidgetApi.requestCapabilities).toHaveBeenCalledWith([
         'my.capability',
         'org.matrix.msc2762.receive.state_event:m.room.name',
         'io.element.requires_client',
       ]);
-      expect(matrixWidgetApi.updateRequestedCapabilities).toBeCalled();
-      expect(matrixWidgetApi.on).toBeCalledWith(
+      expect(matrixWidgetApi.updateRequestedCapabilities).toHaveBeenCalled();
+      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
         `action:${WidgetApiToWidgetAction.NotifyCapabilities}`,
         expect.any(Function),
       );
-      expect(matrixWidgetApi.off).toBeCalledWith(
+      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         `action:${WidgetApiToWidgetAction.NotifyCapabilities}`,
         expect.any(Function),
       );
@@ -327,11 +327,13 @@ describe('WidgetApiImpl', () => {
 
       expect(widgetApi.hasInitialCapabilities()).toEqual(true);
 
-      expect(matrixWidgetApi.hasCapability).toBeCalledWith('my.capability');
-      expect(matrixWidgetApi.hasCapability).toBeCalledWith(
+      expect(matrixWidgetApi.hasCapability).toHaveBeenCalledWith(
+        'my.capability',
+      );
+      expect(matrixWidgetApi.hasCapability).toHaveBeenCalledWith(
         'org.matrix.msc2762.receive.state_event:m.room.name',
       );
-      expect(matrixWidgetApi.hasCapability).toBeCalledWith(
+      expect(matrixWidgetApi.hasCapability).toHaveBeenCalledWith(
         'io.element.requires_client',
       );
     });
@@ -341,8 +343,10 @@ describe('WidgetApiImpl', () => {
       matrixWidgetApi.hasCapability.mockReturnValueOnce(false);
 
       expect(widgetApi.hasInitialCapabilities()).toEqual(false);
-      expect(matrixWidgetApi.hasCapability).toBeCalledWith('my.capability');
-      expect(matrixWidgetApi.hasCapability).toBeCalledWith(
+      expect(matrixWidgetApi.hasCapability).toHaveBeenCalledWith(
+        'my.capability',
+      );
+      expect(matrixWidgetApi.hasCapability).toHaveBeenCalledWith(
         'org.matrix.msc2762.receive.state_event:m.room.name',
       );
     });
@@ -381,17 +385,17 @@ describe('WidgetApiImpl', () => {
         ]),
       ).resolves.toBeUndefined();
 
-      expect(matrixWidgetApi.hasCapability).toBeCalled();
-      expect(matrixWidgetApi.requestCapabilities).toBeCalledWith([
+      expect(matrixWidgetApi.hasCapability).toHaveBeenCalled();
+      expect(matrixWidgetApi.requestCapabilities).toHaveBeenCalledWith([
         'my.capability',
         'org.matrix.msc2762.receive.state_event:m.room.name',
       ]);
-      expect(matrixWidgetApi.updateRequestedCapabilities).toBeCalled();
-      expect(matrixWidgetApi.on).toBeCalledWith(
+      expect(matrixWidgetApi.updateRequestedCapabilities).toHaveBeenCalled();
+      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
         `action:${WidgetApiToWidgetAction.NotifyCapabilities}`,
         expect.any(Function),
       );
-      expect(matrixWidgetApi.off).toBeCalledWith(
+      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         `action:${WidgetApiToWidgetAction.NotifyCapabilities}`,
         expect.any(Function),
       );
@@ -410,12 +414,16 @@ describe('WidgetApiImpl', () => {
         ]),
       ).resolves.toBeUndefined();
 
-      expect(matrixWidgetApi.hasCapability).toBeCalledWith('my.capability');
-      expect(matrixWidgetApi.hasCapability).toBeCalledWith(
+      expect(matrixWidgetApi.hasCapability).toHaveBeenCalledWith(
+        'my.capability',
+      );
+      expect(matrixWidgetApi.hasCapability).toHaveBeenCalledWith(
         'org.matrix.msc2762.receive.state_event:m.room.name',
       );
-      expect(matrixWidgetApi.requestCapabilities).not.toBeCalled();
-      expect(matrixWidgetApi.updateRequestedCapabilities).not.toBeCalled();
+      expect(matrixWidgetApi.requestCapabilities).not.toHaveBeenCalled();
+      expect(
+        matrixWidgetApi.updateRequestedCapabilities,
+      ).not.toHaveBeenCalled();
     });
 
     it('should fail capabilities request if one of them is denied', async () => {
@@ -445,21 +453,21 @@ describe('WidgetApiImpl', () => {
             'm.room.name',
           ),
         ]),
-      ).rejects.toThrowError(
+      ).rejects.toThrow(
         'Capabilities rejected: org.matrix.msc2762.receive.state_event:m.room.name',
       );
 
-      expect(matrixWidgetApi.hasCapability).toBeCalled();
-      expect(matrixWidgetApi.requestCapabilities).toBeCalledWith([
+      expect(matrixWidgetApi.hasCapability).toHaveBeenCalled();
+      expect(matrixWidgetApi.requestCapabilities).toHaveBeenCalledWith([
         'my.capability',
         'org.matrix.msc2762.receive.state_event:m.room.name',
       ]);
-      expect(matrixWidgetApi.updateRequestedCapabilities).toBeCalled();
-      expect(matrixWidgetApi.on).toBeCalledWith(
+      expect(matrixWidgetApi.updateRequestedCapabilities).toHaveBeenCalled();
+      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
         `action:${WidgetApiToWidgetAction.NotifyCapabilities}`,
         expect.any(Function),
       );
-      expect(matrixWidgetApi.off).toBeCalledWith(
+      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         `action:${WidgetApiToWidgetAction.NotifyCapabilities}`,
         expect.any(Function),
       );
@@ -494,16 +502,20 @@ describe('WidgetApiImpl', () => {
         ]),
       ).resolves.toEqual([undefined, undefined]);
 
-      expect(matrixWidgetApi.hasCapability).toBeCalledWith('my.capability');
-      expect(matrixWidgetApi.requestCapabilities).toBeCalledWith([
+      expect(matrixWidgetApi.hasCapability).toHaveBeenCalledWith(
+        'my.capability',
+      );
+      expect(matrixWidgetApi.requestCapabilities).toHaveBeenCalledWith([
         'my.capability',
       ]);
-      expect(matrixWidgetApi.updateRequestedCapabilities).toBeCalledTimes(1);
-      expect(matrixWidgetApi.on).toBeCalledWith(
+      expect(matrixWidgetApi.updateRequestedCapabilities).toHaveBeenCalledTimes(
+        1,
+      );
+      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
         `action:${WidgetApiToWidgetAction.NotifyCapabilities}`,
         expect.any(Function),
       );
-      expect(matrixWidgetApi.off).toBeCalledWith(
+      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         `action:${WidgetApiToWidgetAction.NotifyCapabilities}`,
         expect.any(Function),
       );
@@ -545,21 +557,25 @@ describe('WidgetApiImpl', () => {
       const promiseFailure = widgetApi.requestCapabilities(['my.capability']);
       const promiseSuccess = widgetApi.requestCapabilities(['my.capability']);
 
-      await expect(promiseFailure).rejects.toThrowError(
+      await expect(promiseFailure).rejects.toThrow(
         'Capabilities rejected: my.capability',
       );
       await expect(promiseSuccess).resolves.toBeUndefined();
 
-      expect(matrixWidgetApi.hasCapability).toBeCalledWith('my.capability');
-      expect(matrixWidgetApi.requestCapabilities).toBeCalledWith([
+      expect(matrixWidgetApi.hasCapability).toHaveBeenCalledWith(
+        'my.capability',
+      );
+      expect(matrixWidgetApi.requestCapabilities).toHaveBeenCalledWith([
         'my.capability',
       ]);
-      expect(matrixWidgetApi.updateRequestedCapabilities).toBeCalledTimes(2);
-      expect(matrixWidgetApi.on).toBeCalledWith(
+      expect(matrixWidgetApi.updateRequestedCapabilities).toHaveBeenCalledTimes(
+        2,
+      );
+      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
         `action:${WidgetApiToWidgetAction.NotifyCapabilities}`,
         expect.any(Function),
       );
-      expect(matrixWidgetApi.off).toBeCalledWith(
+      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         `action:${WidgetApiToWidgetAction.NotifyCapabilities}`,
         expect.any(Function),
       );
@@ -575,18 +591,18 @@ describe('WidgetApiImpl', () => {
 
       await expect(
         widgetApi.requestCapabilities(['my.capability']),
-      ).rejects.toThrowError('Transport Error');
+      ).rejects.toThrow('Transport Error');
 
-      expect(matrixWidgetApi.hasCapability).toBeCalled();
-      expect(matrixWidgetApi.requestCapabilities).toBeCalledWith([
+      expect(matrixWidgetApi.hasCapability).toHaveBeenCalled();
+      expect(matrixWidgetApi.requestCapabilities).toHaveBeenCalledWith([
         'my.capability',
       ]);
-      expect(matrixWidgetApi.updateRequestedCapabilities).toBeCalled();
-      expect(matrixWidgetApi.on).toBeCalledWith(
+      expect(matrixWidgetApi.updateRequestedCapabilities).toHaveBeenCalled();
+      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
         `action:${WidgetApiToWidgetAction.NotifyCapabilities}`,
         expect.any(Function),
       );
-      expect(matrixWidgetApi.off).toBeCalledWith(
+      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         `action:${WidgetApiToWidgetAction.NotifyCapabilities}`,
         expect.any(Function),
       );
@@ -621,8 +637,10 @@ describe('WidgetApiImpl', () => {
           ),
         ]),
       ).toEqual(false);
-      expect(matrixWidgetApi.hasCapability).toBeCalledWith('my.capability');
-      expect(matrixWidgetApi.hasCapability).toBeCalledWith(
+      expect(matrixWidgetApi.hasCapability).toHaveBeenCalledWith(
+        'my.capability',
+      );
+      expect(matrixWidgetApi.hasCapability).toHaveBeenCalledWith(
         'org.matrix.msc2762.receive.state_event:m.room.name',
       );
     });
@@ -640,7 +658,7 @@ describe('WidgetApiImpl', () => {
       await expect(
         widgetApi.receiveSingleStateEvent('com.example.test'),
       ).resolves.toMatchObject({ content: { hello: 'world' }, state_key: '' });
-      expect(matrixWidgetApi.readStateEvents).toBeCalledWith(
+      expect(matrixWidgetApi.readStateEvents).toHaveBeenCalledWith(
         'com.example.test',
         Number.MAX_SAFE_INTEGER,
         '',
@@ -666,7 +684,7 @@ describe('WidgetApiImpl', () => {
         content: { hello: 'world' },
         state_key: 'custom-state-key',
       });
-      expect(matrixWidgetApi.readStateEvents).toBeCalledWith(
+      expect(matrixWidgetApi.readStateEvents).toHaveBeenCalledWith(
         'com.example.test',
         Number.MAX_SAFE_INTEGER,
         'custom-state-key',
@@ -681,8 +699,8 @@ describe('WidgetApiImpl', () => {
 
       await expect(
         widgetApi.receiveSingleStateEvent('com.example.test'),
-      ).rejects.toThrowError('Power to low');
-      expect(matrixWidgetApi.readStateEvents).toBeCalledWith(
+      ).rejects.toThrow('Power to low');
+      expect(matrixWidgetApi.readStateEvents).toHaveBeenCalledWith(
         'com.example.test',
         Number.MAX_SAFE_INTEGER,
         '',
@@ -696,7 +714,7 @@ describe('WidgetApiImpl', () => {
       await expect(
         widgetApi.receiveSingleStateEvent('com.example.test'),
       ).resolves.toBeUndefined();
-      expect(matrixWidgetApi.readStateEvents).toBeCalledWith(
+      expect(matrixWidgetApi.readStateEvents).toHaveBeenCalledWith(
         'com.example.test',
         Number.MAX_SAFE_INTEGER,
         '',
@@ -716,7 +734,7 @@ describe('WidgetApiImpl', () => {
       ).resolves.toEqual([
         expect.objectContaining({ content: { hello: 'world' }, state_key: '' }),
       ]);
-      expect(matrixWidgetApi.readStateEvents).toBeCalledWith(
+      expect(matrixWidgetApi.readStateEvents).toHaveBeenCalledWith(
         'com.example.test',
         Number.MAX_SAFE_INTEGER,
         undefined,
@@ -743,7 +761,7 @@ describe('WidgetApiImpl', () => {
           state_key: 'custom-state-key',
         }),
       ]);
-      expect(matrixWidgetApi.readStateEvents).toBeCalledWith(
+      expect(matrixWidgetApi.readStateEvents).toHaveBeenCalledWith(
         'com.example.test',
         Number.MAX_SAFE_INTEGER,
         'custom-state-key',
@@ -772,7 +790,7 @@ describe('WidgetApiImpl', () => {
           room_id: '!custom-room',
         }),
       ]);
-      expect(matrixWidgetApi.readStateEvents).toBeCalledWith(
+      expect(matrixWidgetApi.readStateEvents).toHaveBeenCalledWith(
         'com.example.test',
         Number.MAX_SAFE_INTEGER,
         undefined,
@@ -799,7 +817,7 @@ describe('WidgetApiImpl', () => {
           state_key: '',
         }),
       ]);
-      expect(matrixWidgetApi.readStateEvents).toBeCalledWith(
+      expect(matrixWidgetApi.readStateEvents).toHaveBeenCalledWith(
         'com.example.test',
         Number.MAX_SAFE_INTEGER,
         undefined,
@@ -814,8 +832,8 @@ describe('WidgetApiImpl', () => {
 
       await expect(
         widgetApi.receiveStateEvents('com.example.test'),
-      ).rejects.toThrowError('Power to low');
-      expect(matrixWidgetApi.readStateEvents).toBeCalledWith(
+      ).rejects.toThrow('Power to low');
+      expect(matrixWidgetApi.readStateEvents).toHaveBeenCalledWith(
         'com.example.test',
         Number.MAX_SAFE_INTEGER,
         undefined,
@@ -829,7 +847,7 @@ describe('WidgetApiImpl', () => {
       await expect(
         widgetApi.receiveStateEvents('com.example.test'),
       ).resolves.toEqual([]);
-      expect(matrixWidgetApi.readStateEvents).toBeCalledWith(
+      expect(matrixWidgetApi.readStateEvents).toHaveBeenCalledWith(
         'com.example.test',
         Number.MAX_SAFE_INTEGER,
         undefined,
@@ -893,22 +911,22 @@ describe('WidgetApiImpl', () => {
           content: { bye: 'world' },
         }),
       ]);
-      expect(matrixWidgetApi.on).toBeCalledWith(
+      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
         'action:send_event',
         expect.any(Function),
       );
-      expect(matrixWidgetApi.readStateEvents).toBeCalledWith(
+      expect(matrixWidgetApi.readStateEvents).toHaveBeenCalledWith(
         'com.example.test',
         Number.MAX_SAFE_INTEGER,
         undefined,
         undefined,
       );
-      expect(matrixWidgetApi.off).toBeCalledWith(
+      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         'action:send_event',
         expect.any(Function),
       );
-      expect(preventDefault).toBeCalledTimes(2);
-      expect(matrixWidgetApi.transport.reply).toBeCalledTimes(2);
+      expect(preventDefault).toHaveBeenCalledTimes(2);
+      expect(matrixWidgetApi.transport.reply).toHaveBeenCalledTimes(2);
     });
 
     it('should receive updates about state events for a custom state key', async () => {
@@ -951,22 +969,22 @@ describe('WidgetApiImpl', () => {
           content: { 'how are you': 'world' },
         }),
       ]);
-      expect(matrixWidgetApi.on).toBeCalledWith(
+      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
         'action:send_event',
         expect.any(Function),
       );
-      expect(matrixWidgetApi.readStateEvents).toBeCalledWith(
+      expect(matrixWidgetApi.readStateEvents).toHaveBeenCalledWith(
         'com.example.test',
         Number.MAX_SAFE_INTEGER,
         'custom-state-key',
         undefined,
       );
-      expect(matrixWidgetApi.off).toBeCalledWith(
+      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         'action:send_event',
         expect.any(Function),
       );
-      expect(preventDefault).toBeCalledTimes(1);
-      expect(matrixWidgetApi.transport.reply).toBeCalledTimes(1);
+      expect(preventDefault).toHaveBeenCalledTimes(1);
+      expect(matrixWidgetApi.transport.reply).toHaveBeenCalledTimes(1);
     });
 
     it('should receive updates about state events for room ids', async () => {
@@ -1011,22 +1029,22 @@ describe('WidgetApiImpl', () => {
           room_id: '!another-room',
         }),
       ]);
-      expect(matrixWidgetApi.on).toBeCalledWith(
+      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
         'action:send_event',
         expect.any(Function),
       );
-      expect(matrixWidgetApi.readStateEvents).toBeCalledWith(
+      expect(matrixWidgetApi.readStateEvents).toHaveBeenCalledWith(
         'com.example.test',
         Number.MAX_SAFE_INTEGER,
         undefined,
         ['!another-room'],
       );
-      expect(matrixWidgetApi.off).toBeCalledWith(
+      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         'action:send_event',
         expect.any(Function),
       );
-      expect(preventDefault).toBeCalledTimes(1);
-      expect(matrixWidgetApi.transport.reply).toBeCalledTimes(1);
+      expect(preventDefault).toHaveBeenCalledTimes(1);
+      expect(matrixWidgetApi.transport.reply).toHaveBeenCalledTimes(1);
     });
 
     it('should error observable if receiving fails', async () => {
@@ -1035,9 +1053,7 @@ describe('WidgetApiImpl', () => {
       );
 
       const $events = widgetApi.observeStateEvents('com.example.test');
-      await expect(firstValueFrom($events)).rejects.toThrowError(
-        'Power to low',
-      );
+      await expect(firstValueFrom($events)).rejects.toThrow('Power to low');
     });
   });
 
@@ -1076,17 +1092,17 @@ describe('WidgetApiImpl', () => {
         type: 'com.example.test',
         content: stateEvent,
       });
-      expect(matrixWidgetApi.on).toBeCalledWith(
+      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
         'action:send_event',
         expect.any(Function),
       );
-      expect(matrixWidgetApi.sendStateEvent).toBeCalled();
-      expect(matrixWidgetApi.off).toBeCalledWith(
+      expect(matrixWidgetApi.sendStateEvent).toHaveBeenCalled();
+      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         'action:send_event',
         expect.any(Function),
       );
-      expect(preventDefault).toBeCalled();
-      expect(matrixWidgetApi.transport.reply).toBeCalled();
+      expect(preventDefault).toHaveBeenCalled();
+      expect(matrixWidgetApi.transport.reply).toHaveBeenCalled();
     });
 
     it('should send state event with custom state key', async () => {
@@ -1125,17 +1141,17 @@ describe('WidgetApiImpl', () => {
         type: 'com.example.test',
         content: stateEvent,
       });
-      expect(matrixWidgetApi.on).toBeCalledWith(
+      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
         'action:send_event',
         expect.any(Function),
       );
-      expect(matrixWidgetApi.sendStateEvent).toBeCalled();
-      expect(matrixWidgetApi.off).toBeCalledWith(
+      expect(matrixWidgetApi.sendStateEvent).toHaveBeenCalled();
+      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         'action:send_event',
         expect.any(Function),
       );
-      expect(preventDefault).toBeCalled();
-      expect(matrixWidgetApi.transport.reply).toBeCalled();
+      expect(preventDefault).toHaveBeenCalled();
+      expect(matrixWidgetApi.transport.reply).toHaveBeenCalled();
     });
 
     it('should send state event to another room', async () => {
@@ -1175,17 +1191,17 @@ describe('WidgetApiImpl', () => {
         type: 'com.example.test',
         content: stateEvent,
       });
-      expect(matrixWidgetApi.on).toBeCalledWith(
+      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
         'action:send_event',
         expect.any(Function),
       );
-      expect(matrixWidgetApi.sendStateEvent).toBeCalled();
-      expect(matrixWidgetApi.off).toBeCalledWith(
+      expect(matrixWidgetApi.sendStateEvent).toHaveBeenCalled();
+      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         'action:send_event',
         expect.any(Function),
       );
-      expect(preventDefault).toBeCalled();
-      expect(matrixWidgetApi.transport.reply).toBeCalled();
+      expect(preventDefault).toHaveBeenCalled();
+      expect(matrixWidgetApi.transport.reply).toHaveBeenCalled();
     });
 
     it('should reject on error while sending', async () => {
@@ -1199,13 +1215,13 @@ describe('WidgetApiImpl', () => {
 
       await expect(() =>
         widgetApi.sendStateEvent('com.example.test', stateEvent),
-      ).rejects.toThrowError('Power to low');
-      expect(matrixWidgetApi.on).toBeCalledWith(
+      ).rejects.toThrow('Power to low');
+      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
         'action:send_event',
         expect.any(Function),
       );
-      expect(matrixWidgetApi.sendStateEvent).toBeCalled();
-      expect(matrixWidgetApi.off).toBeCalledWith(
+      expect(matrixWidgetApi.sendStateEvent).toHaveBeenCalled();
+      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         'action:send_event',
         expect.any(Function),
       );
@@ -1225,7 +1241,7 @@ describe('WidgetApiImpl', () => {
         expect.objectContaining({ content: { hello: 'world' } }),
         expect.objectContaining({ content: { bye: 'world' } }),
       ]);
-      expect(matrixWidgetApi.readRoomEvents).toBeCalledWith(
+      expect(matrixWidgetApi.readRoomEvents).toHaveBeenCalledWith(
         'com.example.test',
         Number.MAX_SAFE_INTEGER,
         undefined,
@@ -1245,7 +1261,7 @@ describe('WidgetApiImpl', () => {
       ).resolves.toEqual([
         expect.objectContaining({ content: { hello: 'world' } }),
       ]);
-      expect(matrixWidgetApi.readRoomEvents).toBeCalledWith(
+      expect(matrixWidgetApi.readRoomEvents).toHaveBeenCalledWith(
         'com.example.test',
         Number.MAX_SAFE_INTEGER,
         'custom-message-type',
@@ -1268,7 +1284,7 @@ describe('WidgetApiImpl', () => {
           room_id: '!custom-room',
         }),
       ]);
-      expect(matrixWidgetApi.readRoomEvents).toBeCalledWith(
+      expect(matrixWidgetApi.readRoomEvents).toHaveBeenCalledWith(
         'com.example.test',
         Number.MAX_SAFE_INTEGER,
         undefined,
@@ -1288,7 +1304,7 @@ describe('WidgetApiImpl', () => {
       ).resolves.toEqual([
         expect.objectContaining({ content: { hello: 'world' } }),
       ]);
-      expect(matrixWidgetApi.readRoomEvents).toBeCalledWith(
+      expect(matrixWidgetApi.readRoomEvents).toHaveBeenCalledWith(
         'com.example.test',
         Number.MAX_SAFE_INTEGER,
         undefined,
@@ -1303,8 +1319,8 @@ describe('WidgetApiImpl', () => {
 
       await expect(
         widgetApi.receiveRoomEvents('com.example.test'),
-      ).rejects.toThrowError('Power to low');
-      expect(matrixWidgetApi.readRoomEvents).toBeCalledWith(
+      ).rejects.toThrow('Power to low');
+      expect(matrixWidgetApi.readRoomEvents).toHaveBeenCalledWith(
         'com.example.test',
         Number.MAX_SAFE_INTEGER,
         undefined,
@@ -1365,22 +1381,22 @@ describe('WidgetApiImpl', () => {
           room_id: '!current-room',
         }),
       ]);
-      expect(matrixWidgetApi.on).toBeCalledWith(
+      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
         'action:send_event',
         expect.any(Function),
       );
-      expect(matrixWidgetApi.readRoomEvents).toBeCalledWith(
+      expect(matrixWidgetApi.readRoomEvents).toHaveBeenCalledWith(
         'com.example.test',
         Number.MAX_SAFE_INTEGER,
         undefined,
         undefined,
       );
-      expect(matrixWidgetApi.off).toBeCalledWith(
+      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         'action:send_event',
         expect.any(Function),
       );
-      expect(preventDefault).toBeCalledTimes(2);
-      expect(matrixWidgetApi.transport.reply).toBeCalledTimes(2);
+      expect(preventDefault).toHaveBeenCalledTimes(2);
+      expect(matrixWidgetApi.transport.reply).toHaveBeenCalledTimes(2);
     });
 
     it('should receive updates about room events for a custom message type', async () => {
@@ -1421,22 +1437,22 @@ describe('WidgetApiImpl', () => {
           room_id: '!current-room',
         }),
       ]);
-      expect(matrixWidgetApi.on).toBeCalledWith(
+      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
         'action:send_event',
         expect.any(Function),
       );
-      expect(matrixWidgetApi.readRoomEvents).toBeCalledWith(
+      expect(matrixWidgetApi.readRoomEvents).toHaveBeenCalledWith(
         'com.example.test',
         Number.MAX_SAFE_INTEGER,
         'my-message-type',
         undefined,
       );
-      expect(matrixWidgetApi.off).toBeCalledWith(
+      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         'action:send_event',
         expect.any(Function),
       );
-      expect(preventDefault).toBeCalledTimes(1);
-      expect(matrixWidgetApi.transport.reply).toBeCalledTimes(1);
+      expect(preventDefault).toHaveBeenCalledTimes(1);
+      expect(matrixWidgetApi.transport.reply).toHaveBeenCalledTimes(1);
     });
 
     it('should receive updates about room events for room ids', async () => {
@@ -1479,22 +1495,22 @@ describe('WidgetApiImpl', () => {
           room_id: '!another-room',
         }),
       ]);
-      expect(matrixWidgetApi.on).toBeCalledWith(
+      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
         'action:send_event',
         expect.any(Function),
       );
-      expect(matrixWidgetApi.readRoomEvents).toBeCalledWith(
+      expect(matrixWidgetApi.readRoomEvents).toHaveBeenCalledWith(
         'com.example.test',
         Number.MAX_SAFE_INTEGER,
         undefined,
         ['!another-room'],
       );
-      expect(matrixWidgetApi.off).toBeCalledWith(
+      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         'action:send_event',
         expect.any(Function),
       );
-      expect(preventDefault).toBeCalledTimes(1);
-      expect(matrixWidgetApi.transport.reply).toBeCalledTimes(1);
+      expect(preventDefault).toHaveBeenCalledTimes(1);
+      expect(matrixWidgetApi.transport.reply).toHaveBeenCalledTimes(1);
     });
 
     it('should error observable if receiving fails', async () => {
@@ -1503,9 +1519,7 @@ describe('WidgetApiImpl', () => {
       );
 
       const $events = widgetApi.observeRoomEvents('com.example.test');
-      await expect(firstValueFrom($events)).rejects.toThrowError(
-        'Power to low',
-      );
+      await expect(firstValueFrom($events)).rejects.toThrow('Power to low');
     });
   });
 
@@ -1543,17 +1557,17 @@ describe('WidgetApiImpl', () => {
         type: 'com.example.test',
         content: roomEvent,
       });
-      expect(matrixWidgetApi.on).toBeCalledWith(
+      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
         'action:send_event',
         expect.any(Function),
       );
-      expect(matrixWidgetApi.sendRoomEvent).toBeCalled();
-      expect(matrixWidgetApi.off).toBeCalledWith(
+      expect(matrixWidgetApi.sendRoomEvent).toHaveBeenCalled();
+      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         'action:send_event',
         expect.any(Function),
       );
-      expect(preventDefault).toBeCalled();
-      expect(matrixWidgetApi.transport.reply).toBeCalled();
+      expect(preventDefault).toHaveBeenCalled();
+      expect(matrixWidgetApi.transport.reply).toHaveBeenCalled();
     });
 
     it('should send room event to another room', async () => {
@@ -1591,17 +1605,17 @@ describe('WidgetApiImpl', () => {
         type: 'com.example.test',
         content: roomEvent,
       });
-      expect(matrixWidgetApi.on).toBeCalledWith(
+      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
         'action:send_event',
         expect.any(Function),
       );
-      expect(matrixWidgetApi.sendRoomEvent).toBeCalled();
-      expect(matrixWidgetApi.off).toBeCalledWith(
+      expect(matrixWidgetApi.sendRoomEvent).toHaveBeenCalled();
+      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         'action:send_event',
         expect.any(Function),
       );
-      expect(preventDefault).toBeCalled();
-      expect(matrixWidgetApi.transport.reply).toBeCalled();
+      expect(preventDefault).toHaveBeenCalled();
+      expect(matrixWidgetApi.transport.reply).toHaveBeenCalled();
     });
 
     it('should reject on error while sending', async () => {
@@ -1618,13 +1632,13 @@ describe('WidgetApiImpl', () => {
 
       await expect(() =>
         widgetApi.sendRoomEvent('com.example.test', roomEvent),
-      ).rejects.toThrowError('Power to low');
-      expect(matrixWidgetApi.on).toBeCalledWith(
+      ).rejects.toThrow('Power to low');
+      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
         'action:send_event',
         expect.any(Function),
       );
-      expect(matrixWidgetApi.sendRoomEvent).toBeCalled();
-      expect(matrixWidgetApi.off).toBeCalledWith(
+      expect(matrixWidgetApi.sendRoomEvent).toHaveBeenCalled();
+      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         'action:send_event',
         expect.any(Function),
       );
@@ -1641,7 +1655,7 @@ describe('WidgetApiImpl', () => {
         },
       });
 
-      expect(matrixWidgetApi.sendToDevice).toBeCalledWith(
+      expect(matrixWidgetApi.sendToDevice).toHaveBeenCalledWith(
         'com.example.message',
         false,
         { '@user-id': { '*': { hello: 'world' } } },
@@ -1702,16 +1716,16 @@ describe('WidgetApiImpl', () => {
           encrypted: false,
         },
       ]);
-      expect(matrixWidgetApi.on).toBeCalledWith(
+      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
         'action:send_to_device',
         expect.any(Function),
       );
-      expect(matrixWidgetApi.off).toBeCalledWith(
+      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         'action:send_to_device',
         expect.any(Function),
       );
-      expect(preventDefault).toBeCalledTimes(3);
-      expect(matrixWidgetApi.transport.reply).toBeCalledTimes(3);
+      expect(preventDefault).toHaveBeenCalledTimes(3);
+      expect(matrixWidgetApi.transport.reply).toHaveBeenCalledTimes(3);
     });
   });
 
@@ -1742,23 +1756,23 @@ describe('WidgetApiImpl', () => {
         data: 'my-return-data',
       });
 
-      expect(parseWidgetId).toBeCalledWith('widget-id');
-      expect(matrixWidgetApi.openModalWidget).toBeCalledWith(
+      expect(parseWidgetId).toHaveBeenCalledWith('widget-id');
+      expect(matrixWidgetApi.openModalWidget).toHaveBeenCalledWith(
         'http://localhost/modal#/?theme=$org.matrix.msc2873.client_theme&matrix_user_id=@my-user-id&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=!current-room&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language&matrix_base_url=$org.matrix.msc4039.matrix_base_url',
         'My Modal',
         [],
         { string: 'example' },
       );
-      expect(matrixWidgetApi.on).toBeCalledWith(
+      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
         'action:close_modal',
         expect.any(Function),
       );
-      expect(matrixWidgetApi.off).toBeCalledWith(
+      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         'action:close_modal',
         expect.any(Function),
       );
-      expect(preventDefault).toBeCalledTimes(1);
-      expect(matrixWidgetApi.transport.reply).toBeCalled();
+      expect(preventDefault).toHaveBeenCalledTimes(1);
+      expect(matrixWidgetApi.transport.reply).toHaveBeenCalled();
     });
 
     it('should fail to open modal due to error while acknowledgement', async () => {
@@ -1786,25 +1800,25 @@ describe('WidgetApiImpl', () => {
           buttons: [],
           data: { string: 'example' },
         }),
-      ).rejects.toThrowError('Transport Error');
+      ).rejects.toThrow('Transport Error');
 
-      expect(parseWidgetId).toBeCalledWith('widget-id');
-      expect(matrixWidgetApi.openModalWidget).toBeCalledWith(
+      expect(parseWidgetId).toHaveBeenCalledWith('widget-id');
+      expect(matrixWidgetApi.openModalWidget).toHaveBeenCalledWith(
         'http://localhost/modal#/?theme=$org.matrix.msc2873.client_theme&matrix_user_id=@my-user-id&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=!current-room&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language&matrix_base_url=$org.matrix.msc4039.matrix_base_url',
         'My Modal',
         [],
         { string: 'example' },
       );
-      expect(matrixWidgetApi.on).toBeCalledWith(
+      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
         'action:close_modal',
         expect.any(Function),
       );
-      expect(matrixWidgetApi.off).toBeCalledWith(
+      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         'action:close_modal',
         expect.any(Function),
       );
-      expect(preventDefault).toBeCalledTimes(1);
-      expect(matrixWidgetApi.transport.reply).toBeCalled();
+      expect(preventDefault).toHaveBeenCalledTimes(1);
+      expect(matrixWidgetApi.transport.reply).toHaveBeenCalled();
     });
 
     it('should throw if called from a modal', async () => {
@@ -1817,7 +1831,7 @@ describe('WidgetApiImpl', () => {
         /Modals can't be opened from another modal widget/,
       );
 
-      expect(parseWidgetId).toBeCalledWith('widget-id');
+      expect(parseWidgetId).toHaveBeenCalledWith('widget-id');
     });
   });
 
@@ -1832,8 +1846,8 @@ describe('WidgetApiImpl', () => {
         widgetApi.setModalButtonEnabled('button.id', true),
       ).resolves.toBeUndefined();
 
-      expect(parseWidgetId).toBeCalledWith('widget-id');
-      expect(matrixWidgetApi.setModalButtonEnabled).toBeCalledWith(
+      expect(parseWidgetId).toHaveBeenCalledWith('widget-id');
+      expect(matrixWidgetApi.setModalButtonEnabled).toHaveBeenCalledWith(
         'button.id',
         true,
       );
@@ -1851,7 +1865,7 @@ describe('WidgetApiImpl', () => {
         /Modal buttons can only be enabled from a modal widget/,
       );
 
-      expect(parseWidgetId).toBeCalledWith('widget-id');
+      expect(parseWidgetId).toHaveBeenCalledWith('widget-id');
     });
   });
 
@@ -1879,17 +1893,17 @@ describe('WidgetApiImpl', () => {
 
       expect(event).toEqual('button.first');
 
-      expect(parseWidgetId).toBeCalledWith('widget-id');
-      expect(matrixWidgetApi.on).toBeCalledWith(
+      expect(parseWidgetId).toHaveBeenCalledWith('widget-id');
+      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
         'action:button_clicked',
         expect.any(Function),
       );
-      expect(matrixWidgetApi.off).toBeCalledWith(
+      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         'action:button_clicked',
         expect.any(Function),
       );
-      expect(preventDefault).toBeCalledTimes(1);
-      expect(matrixWidgetApi.transport.reply).toBeCalledTimes(1);
+      expect(preventDefault).toHaveBeenCalledTimes(1);
+      expect(matrixWidgetApi.transport.reply).toHaveBeenCalledTimes(1);
     });
 
     it('should throw if not called from a modal', async () => {
@@ -1902,7 +1916,7 @@ describe('WidgetApiImpl', () => {
         /Modal buttons can only be observed from a modal widget/,
       );
 
-      expect(parseWidgetId).toBeCalledWith('widget-id');
+      expect(parseWidgetId).toHaveBeenCalledWith('widget-id');
     });
   });
 
@@ -1915,8 +1929,8 @@ describe('WidgetApiImpl', () => {
 
       await expect(widgetApi.closeModal()).resolves.toBeUndefined();
 
-      expect(parseWidgetId).toBeCalledWith('widget-id');
-      expect(matrixWidgetApi.closeModalWidget).toBeCalledWith({
+      expect(parseWidgetId).toHaveBeenCalledWith('widget-id');
+      expect(matrixWidgetApi.closeModalWidget).toHaveBeenCalledWith({
         'm.exited': true,
       });
     });
@@ -1931,8 +1945,8 @@ describe('WidgetApiImpl', () => {
         widgetApi.closeModal({ my: 'data' }),
       ).resolves.toBeUndefined();
 
-      expect(parseWidgetId).toBeCalledWith('widget-id');
-      expect(matrixWidgetApi.closeModalWidget).toBeCalledWith({
+      expect(parseWidgetId).toHaveBeenCalledWith('widget-id');
+      expect(matrixWidgetApi.closeModalWidget).toHaveBeenCalledWith({
         my: 'data',
       });
     });
@@ -1947,7 +1961,7 @@ describe('WidgetApiImpl', () => {
         /Modals can only be closed from a modal widget/,
       );
 
-      expect(parseWidgetId).toBeCalledWith('widget-id');
+      expect(parseWidgetId).toHaveBeenCalledWith('widget-id');
     });
   });
 
@@ -1957,7 +1971,7 @@ describe('WidgetApiImpl', () => {
         widgetApi.navigateTo('https://matrix.to/#/#room:example.com'),
       ).resolves.toBeUndefined();
 
-      expect(matrixWidgetApi.navigateTo).toBeCalledWith(
+      expect(matrixWidgetApi.navigateTo).toHaveBeenCalledWith(
         'https://matrix.to/#/#room:example.com',
       );
     });
@@ -2003,7 +2017,9 @@ describe('WidgetApiImpl', () => {
       await expect(secondResultPromise).resolves.toEqual(token);
 
       // Parallel requests should only request it via the widget api once.
-      expect(matrixWidgetApi.requestOpenIDConnectToken).toBeCalledTimes(1);
+      expect(matrixWidgetApi.requestOpenIDConnectToken).toHaveBeenCalledTimes(
+        1,
+      );
     });
 
     it('should cache OIDC token', async () => {
@@ -2023,7 +2039,9 @@ describe('WidgetApiImpl', () => {
         token,
       );
 
-      expect(matrixWidgetApi.requestOpenIDConnectToken).toBeCalledTimes(1);
+      expect(matrixWidgetApi.requestOpenIDConnectToken).toHaveBeenCalledTimes(
+        1,
+      );
     });
 
     it('should refresh OIDC token once it is to old', async () => {
@@ -2113,7 +2131,7 @@ describe('WidgetApiImpl', () => {
         chunk: [],
         nextToken: 'batch',
       });
-      expect(matrixWidgetApi.readEventRelations).toBeCalledWith(
+      expect(matrixWidgetApi.readEventRelations).toHaveBeenCalledWith(
         '$event-id',
         '!room-id',
         'm.reference',
@@ -2130,10 +2148,10 @@ describe('WidgetApiImpl', () => {
         new Error('Power to low'),
       );
 
-      await expect(
-        widgetApi.readEventRelations('$event-id'),
-      ).rejects.toThrowError('Power to low');
-      expect(matrixWidgetApi.readEventRelations).toBeCalledWith(
+      await expect(widgetApi.readEventRelations('$event-id')).rejects.toThrow(
+        'Power to low',
+      );
+      expect(matrixWidgetApi.readEventRelations).toHaveBeenCalledWith(
         '$event-id',
         undefined,
         undefined,
@@ -2166,7 +2184,10 @@ describe('WidgetApiImpl', () => {
           { userId: '@user-id', displayName: 'User', avatarUrl: 'mxc://...' },
         ],
       });
-      expect(matrixWidgetApi.searchUserDirectory).toBeCalledWith('user', 5);
+      expect(matrixWidgetApi.searchUserDirectory).toHaveBeenCalledWith(
+        'user',
+        5,
+      );
     });
 
     it('should reject if reading the relations room event fails', async () => {
@@ -2174,10 +2195,10 @@ describe('WidgetApiImpl', () => {
         new Error('Power to low'),
       );
 
-      await expect(widgetApi.searchUserDirectory('user')).rejects.toThrowError(
+      await expect(widgetApi.searchUserDirectory('user')).rejects.toThrow(
         'Power to low',
       );
-      expect(matrixWidgetApi.searchUserDirectory).toBeCalledWith(
+      expect(matrixWidgetApi.searchUserDirectory).toHaveBeenCalledWith(
         'user',
         undefined,
       );
@@ -2195,7 +2216,7 @@ describe('WidgetApiImpl', () => {
       await expect(widgetApi.getMediaConfig()).resolves.toEqual({
         'm.upload.size': 5444,
       });
-      expect(matrixWidgetApi.getMediaConfig).toBeCalledWith();
+      expect(matrixWidgetApi.getMediaConfig).toHaveBeenCalledWith();
     });
   });
 
@@ -2214,7 +2235,7 @@ describe('WidgetApiImpl', () => {
       await expect(widgetApi.uploadFile(file)).resolves.toEqual({
         content_uri: 'msx//:example',
       });
-      expect(matrixWidgetApi.uploadFile).toBeCalled();
+      expect(matrixWidgetApi.uploadFile).toHaveBeenCalled();
     });
 
     it('should throw error', async () => {
@@ -2222,10 +2243,10 @@ describe('WidgetApiImpl', () => {
         new Error('can not upload the file'),
       );
 
-      await expect(widgetApi.uploadFile('file')).rejects.toThrowError(
+      await expect(widgetApi.uploadFile('file')).rejects.toThrow(
         'can not upload the file',
       );
-      expect(matrixWidgetApi.uploadFile).toBeCalledWith('file');
+      expect(matrixWidgetApi.uploadFile).toHaveBeenCalledWith('file');
     });
   });
 });

@@ -250,12 +250,12 @@ describe('sendMessage', () => {
         .unwrap(),
     ).resolves.toEqual({});
 
-    expect(widgetApi.sendRoomEvent).toBeCalledWith('m.room.message', {
+    expect(widgetApi.sendRoomEvent).toHaveBeenCalledWith('m.room.message', {
       msgtype: 'm.text',
       body: 'My message',
     });
 
-    expect(widgetApi.sendStateEvent).toBeCalledWith(
+    expect(widgetApi.sendStateEvent).toHaveBeenCalledWith(
       'net.nordeck.message_collection',
       { eventIds: ['$event-id-0', expect.stringMatching(/\$event-[\d]+/)] },
     );
@@ -274,12 +274,12 @@ describe('sendMessage', () => {
         .unwrap(),
     ).resolves.toEqual({});
 
-    expect(widgetApi.sendRoomEvent).toBeCalledWith('m.room.message', {
+    expect(widgetApi.sendRoomEvent).toHaveBeenCalledWith('m.room.message', {
       msgtype: 'm.text',
       body: 'My message',
     });
 
-    expect(widgetApi.sendStateEvent).toBeCalledWith(
+    expect(widgetApi.sendStateEvent).toHaveBeenCalledWith(
       'net.nordeck.message_collection',
       { eventIds: [expect.stringMatching(/\$event-[\d]+/)] },
     );
@@ -320,7 +320,7 @@ describe('sendReaction', () => {
         .unwrap(),
     ).resolves.toEqual({});
 
-    expect(widgetApi.sendRoomEvent).toBeCalledWith('m.reaction', {
+    expect(widgetApi.sendRoomEvent).toHaveBeenCalledWith('m.reaction', {
       'm.relates_to': {
         rel_type: 'm.annotation',
         event_id: '$event-id',
@@ -364,7 +364,7 @@ describe('sendRedaction', () => {
         .unwrap(),
     ).resolves.toEqual({});
 
-    expect(widgetApi.sendRoomEvent).toBeCalledWith('m.room.redaction', {
+    expect(widgetApi.sendRoomEvent).toHaveBeenCalledWith('m.room.redaction', {
       redacts: '$event-id',
     });
   });
@@ -405,7 +405,7 @@ describe('dropMessageFromCollection', () => {
         .unwrap(),
     ).resolves.toEqual({});
 
-    expect(widgetApi.sendStateEvent).toBeCalledWith(
+    expect(widgetApi.sendStateEvent).toHaveBeenCalledWith(
       'net.nordeck.message_collection',
       { eventIds: [] },
     );
@@ -426,7 +426,7 @@ describe('dropMessageFromCollection', () => {
         .unwrap(),
     ).resolves.toEqual({});
 
-    expect(widgetApi.sendStateEvent).not.toBeCalled();
+    expect(widgetApi.sendStateEvent).not.toHaveBeenCalled();
   });
 
   it('should handle send error', async () => {

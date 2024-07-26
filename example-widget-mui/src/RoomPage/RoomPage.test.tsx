@@ -83,7 +83,7 @@ describe('<RoomPage />', () => {
   it('should request the capabilities', async () => {
     render(<RoomPage />, { wrapper });
 
-    expect(widgetApi.requestCapabilities).toBeCalledWith([
+    expect(widgetApi.requestCapabilities).toHaveBeenCalledWith([
       WidgetEventCapability.forStateEvent(
         EventDirection.Receive,
         'm.room.name',
@@ -94,7 +94,7 @@ describe('<RoomPage />', () => {
     await userEvent.click(button);
 
     await waitFor(() => {
-      expect(widgetApi.requestCapabilities).toBeCalledWith([
+      expect(widgetApi.requestCapabilities).toHaveBeenCalledWith([
         WidgetEventCapability.forStateEvent(EventDirection.Send, 'm.room.name'),
       ]);
     });
@@ -118,7 +118,7 @@ describe('<RoomPage />', () => {
       screen.findByText(/current room name: a test room!/i),
     ).resolves.toBeInTheDocument();
 
-    expect(widgetApi.sendStateEvent).toBeCalledWith('m.room.name', {
+    expect(widgetApi.sendStateEvent).toHaveBeenCalledWith('m.room.name', {
       name: 'A Test Room!',
     });
   });

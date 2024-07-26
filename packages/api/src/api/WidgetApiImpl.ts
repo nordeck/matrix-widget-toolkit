@@ -327,6 +327,7 @@ export class WidgetApiImpl implements WidgetApi {
       first(),
     );
 
+    // eslint-disable-next-line no-async-promise-executor
     await new Promise(async (resolve, reject) => {
       const subscription = capabilities$.subscribe({
         next: resolve,

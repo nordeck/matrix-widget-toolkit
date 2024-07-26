@@ -155,7 +155,7 @@ describe('WidgetApiProvider', () => {
     );
 
     expect(await screen.findByText('Child')).toBeInTheDocument();
-    expect(widgetApi.sendRoomEvent).toBeCalledWith('com.example.event', {
+    expect(widgetApi.sendRoomEvent).toHaveBeenCalledWith('com.example.event', {
       some: 'data',
     });
   });
@@ -172,13 +172,13 @@ describe('WidgetApiProvider', () => {
     );
 
     expect(await screen.findByText('Missing capabilities')).toBeInTheDocument();
-    expect(widgetApi.hasInitialCapabilities).toBeCalled();
+    expect(widgetApi.hasInitialCapabilities).toHaveBeenCalled();
 
     await userEvent.click(
       screen.getByRole('button', { name: 'Request capabilities' }),
     );
 
-    expect(widgetApi.rerequestInitialCapabilities).toBeCalled();
+    expect(widgetApi.rerequestInitialCapabilities).toHaveBeenCalled();
 
     expect(screen.getByText('Children')).toBeInTheDocument();
   });

@@ -80,14 +80,14 @@ describe('<ModalDialog />', () => {
     render(<ModalDialog />, { wrapper });
 
     await waitFor(() => {
-      expect(widgetApi.setModalButtonEnabled).toBeCalledWith(
+      expect(widgetApi.setModalButtonEnabled).toHaveBeenCalledWith(
         'net.nordeck.create.poll.yes',
         true,
       );
     });
 
     await waitFor(() => {
-      expect(widgetApi.setModalButtonEnabled).toBeCalledWith(
+      expect(widgetApi.setModalButtonEnabled).toHaveBeenCalledWith(
         'net.nordeck.create.poll.no',
         true,
       );
@@ -102,7 +102,7 @@ describe('<ModalDialog />', () => {
     );
 
     await waitFor(() => {
-      expect(widgetApi.setModalButtonEnabled).toBeCalledWith(
+      expect(widgetApi.setModalButtonEnabled).toHaveBeenCalledWith(
         'net.nordeck.create.poll.yessssss',
         true,
       );
@@ -118,7 +118,7 @@ describe('<ModalDialog />', () => {
     subject.next('net.nordeck.create.poll.yes');
 
     await waitFor(() => {
-      expect(widgetApi.closeModal).toBeCalledWith({ result: 'Yes!' });
+      expect(widgetApi.closeModal).toHaveBeenCalledWith({ result: 'Yes!' });
     });
   });
 
@@ -131,7 +131,9 @@ describe('<ModalDialog />', () => {
     subject.next('net.nordeck.create.poll.yessssss');
 
     await waitFor(() => {
-      expect(widgetApi.closeModal).toBeCalledWith({ result: 'Yes Totally!' });
+      expect(widgetApi.closeModal).toHaveBeenCalledWith({
+        result: 'Yes Totally!',
+      });
     });
   });
 
@@ -144,7 +146,7 @@ describe('<ModalDialog />', () => {
     subject.next('net.nordeck.create.poll.no');
 
     await waitFor(() => {
-      expect(widgetApi.closeModal).toBeCalledWith({ result: 'No!' });
+      expect(widgetApi.closeModal).toHaveBeenCalledWith({ result: 'No!' });
     });
   });
 });

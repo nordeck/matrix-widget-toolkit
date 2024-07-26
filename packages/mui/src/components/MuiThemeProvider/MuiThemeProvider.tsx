@@ -49,7 +49,7 @@ import {
  * Props for the {@link MuiThemeProvider} component.
  */
 // {} usage is safe here, see https://github.com/typescript-eslint/typescript-eslint/issues/2063#issuecomment-675156492
-// eslint-disable-next-line @typescript-eslint/ban-types
+
 export type MuiThemeProviderProps = PropsWithChildren<{}>;
 
 /**
@@ -84,7 +84,7 @@ export function chooseTheme(theme: string): ThemeOptions {
   }
 }
 
-function ElementMuiThemeProvider({ children }: PropsWithChildren<{}>) {
+function ElementMuiThemeProvider({ children }: PropsWithChildren<unknown>) {
   const { theme } = useThemeSelection();
   const [locale, setLocale] = useState<string | undefined>(i18n.languages?.[0]);
 

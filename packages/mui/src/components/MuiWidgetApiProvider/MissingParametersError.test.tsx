@@ -73,7 +73,7 @@ describe('<MissingParametersError>', () => {
     expect(repairButton).toBeInTheDocument();
     await userEvent.click(repairButton);
 
-    expect(repairWidgetRegistration).toBeCalledWith(widgetApi, {
+    expect(repairWidgetRegistration).toHaveBeenCalledWith(widgetApi, {
       name: 'New Widget',
     });
     expect(
@@ -98,7 +98,7 @@ describe('<MissingParametersError>', () => {
     expect(repairButton).toBeInTheDocument();
     await userEvent.click(repairButton);
 
-    expect(repairWidgetRegistration).toBeCalledWith(widgetApi, {
+    expect(repairWidgetRegistration).toHaveBeenCalledWith(widgetApi, {
       name: 'New Widget',
     });
     expect(await screen.findByText('Error')).toBeInTheDocument();

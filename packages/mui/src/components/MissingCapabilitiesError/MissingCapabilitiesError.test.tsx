@@ -43,6 +43,6 @@ describe('<MissingCapabilitiesError>', () => {
       screen.getByRole('button', { name: /request capabilities/i }),
     );
 
-    expect(onRetry).toBeCalled();
+    expect(onRetry).toHaveBeenCalled();
   });
 });

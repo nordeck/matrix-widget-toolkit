@@ -33,7 +33,7 @@ describe('navigateToRoom', () => {
       navigateToRoom(widgetApi, '!my-room-id:example.org'),
     ).resolves.toBeUndefined();
 
-    expect(widgetApi.navigateTo).toBeCalledWith(
+    expect(widgetApi.navigateTo).toHaveBeenCalledWith(
       'https://matrix.to/#/!my-room-id%3Aexample.org',
     );
   });
@@ -45,7 +45,7 @@ describe('navigateToRoom', () => {
       }),
     ).resolves.toBeUndefined();
 
-    expect(widgetApi.navigateTo).toBeCalledWith(
+    expect(widgetApi.navigateTo).toHaveBeenCalledWith(
       'https://matrix.to/#/!my-room-id%3Aexample.org?via=matrix.com',
     );
   });
@@ -57,7 +57,7 @@ describe('navigateToRoom', () => {
       }),
     ).resolves.toBeUndefined();
 
-    expect(widgetApi.navigateTo).toBeCalledWith(
+    expect(widgetApi.navigateTo).toHaveBeenCalledWith(
       'https://matrix.to/#/!my-room-id%3Aexample.org?via=matrix.com&via=example.com',
     );
   });

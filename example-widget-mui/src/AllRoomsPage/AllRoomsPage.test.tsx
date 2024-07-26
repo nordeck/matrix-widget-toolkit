@@ -95,7 +95,7 @@ describe('<AllRoomsPage />', () => {
   it('should request the capabilities', async () => {
     render(<AllRoomsPage />, { wrapper });
 
-    expect(widgetApi.requestCapabilities).toBeCalledWith([
+    expect(widgetApi.requestCapabilities).toHaveBeenCalledWith([
       'org.matrix.msc2762.timeline:*',
       WidgetEventCapability.forStateEvent(
         EventDirection.Receive,
@@ -174,7 +174,7 @@ describe('<AllRoomsPage />', () => {
     const button = await screen.findByRole('button', { name: /room 1/i });
     await userEvent.click(button);
 
-    expect(widgetApi.navigateTo).toBeCalledWith(
+    expect(widgetApi.navigateTo).toHaveBeenCalledWith(
       'https://matrix.to/#/!room-id-1',
     );
   });

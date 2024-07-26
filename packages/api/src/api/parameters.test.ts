@@ -35,7 +35,7 @@ describe('extractWidgetApiParameters', () => {
   it('should fail if parentUrl is missing from location', () => {
     mockLocation('https://example.com/widget?widgetId=my-widget-id');
 
-    expect(() => extractWidgetApiParameters()).toThrowError(
+    expect(() => extractWidgetApiParameters()).toThrow(
       'Missing parameter "parentUrl"',
     );
   });
@@ -43,7 +43,7 @@ describe('extractWidgetApiParameters', () => {
   it('should fail if widgetId is missing from location', () => {
     mockLocation('https://example.com/widget?parentUrl=https://my-parent-url');
 
-    expect(() => extractWidgetApiParameters()).toThrowError(
+    expect(() => extractWidgetApiParameters()).toThrow(
       'Missing parameter "widgetId"',
     );
   });

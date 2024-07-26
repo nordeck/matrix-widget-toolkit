@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-// lazily import the file-under-test and don't have any
-// additional imports.
+// lazily import the file-under-test and don't have any additional imports.
+// eslint-disable-next-line jest/no-export
 export {};
 
 describe('getEnvironment', () => {

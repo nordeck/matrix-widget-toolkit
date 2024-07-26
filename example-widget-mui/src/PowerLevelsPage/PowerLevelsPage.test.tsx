@@ -151,7 +151,7 @@ describe('<PowerLevelsPage />', () => {
   it('should request the capabilities', async () => {
     render(<PowerLevelsPage />, { wrapper });
 
-    expect(widgetApi.requestCapabilities).toBeCalledWith([
+    expect(widgetApi.requestCapabilities).toHaveBeenCalledWith([
       WidgetEventCapability.forStateEvent(
         EventDirection.Receive,
         'm.room.power_levels',
@@ -166,7 +166,7 @@ describe('<PowerLevelsPage />', () => {
     await userEvent.click(button);
 
     await waitFor(() => {
-      expect(widgetApi.requestCapabilities).toBeCalledWith([
+      expect(widgetApi.requestCapabilities).toHaveBeenCalledWith([
         WidgetEventCapability.forStateEvent(
           EventDirection.Send,
           'm.room.power_levels',
@@ -256,12 +256,15 @@ describe('<PowerLevelsPage />', () => {
       expect(demoteButton).not.toBeDisabled();
     });
 
-    expect(widgetApi.sendStateEvent).toBeCalledWith('m.room.power_levels', {
-      users: {
-        '@another-user': 50,
-        '@user-id': 100,
+    expect(widgetApi.sendStateEvent).toHaveBeenCalledWith(
+      'm.room.power_levels',
+      {
+        users: {
+          '@another-user': 50,
+          '@user-id': 100,
+        },
       },
-    });
+    );
   });
 
   it('should demote the user', async () => {
@@ -298,11 +301,14 @@ describe('<PowerLevelsPage />', () => {
 
     expect(demoteButton).toBeDisabled();
 
-    expect(widgetApi.sendStateEvent).toBeCalledWith('m.room.power_levels', {
-      users: {
-        '@another-user': 0,
-        '@user-id': 100,
+    expect(widgetApi.sendStateEvent).toHaveBeenCalledWith(
+      'm.room.power_levels',
+      {
+        users: {
+          '@another-user': 0,
+          '@user-id': 100,
+        },
       },
-    });
+    );
   });
 });

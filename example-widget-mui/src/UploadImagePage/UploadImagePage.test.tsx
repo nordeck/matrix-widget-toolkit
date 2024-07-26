@@ -85,7 +85,7 @@ describe('<UploadImagePage>', () => {
   it('should request the capabilities', async () => {
     render(<UploadImagePage />, { wrapper });
 
-    expect(widgetApi.requestCapabilities).toBeCalledWith([
+    expect(widgetApi.requestCapabilities).toHaveBeenCalledWith([
       WidgetEventCapability.forRoomEvent(
         EventDirection.Receive,
         ROOM_EVENT_UPLOADED_IMAGE,

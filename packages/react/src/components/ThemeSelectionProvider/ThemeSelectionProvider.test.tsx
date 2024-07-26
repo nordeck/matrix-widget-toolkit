@@ -77,8 +77,8 @@ describe('<ThemeSelectionProvider/>', () => {
       setTheme: expect.any(Function),
     });
 
-    expect(extractWidgetParameters).toBeCalled();
-    expect(parseWidgetId).toBeCalledWith('my-id');
+    expect(extractWidgetParameters).toHaveBeenCalled();
+    expect(parseWidgetId).toHaveBeenCalledWith('my-id');
   });
 
   it('should read default theme the media-query', () => {
@@ -102,7 +102,9 @@ describe('<ThemeSelectionProvider/>', () => {
       setTheme: expect.any(Function),
     });
 
-    expect(window.matchMedia).toBeCalledWith('(prefers-color-scheme: dark)');
+    expect(window.matchMedia).toHaveBeenCalledWith(
+      '(prefers-color-scheme: dark)',
+    );
   });
 
   it('should ignore error of extractWidgetParameters and missing matchMedia', () => {

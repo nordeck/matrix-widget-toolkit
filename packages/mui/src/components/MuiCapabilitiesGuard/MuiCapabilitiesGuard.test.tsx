@@ -47,7 +47,7 @@ describe('<MuiCapabilitiesGuard>', () => {
     );
 
     expect(await screen.findByText('Missing capabilities')).toBeInTheDocument();
-    expect(widgetApi.requestCapabilities).toBeCalledWith([
+    expect(widgetApi.requestCapabilities).toHaveBeenCalledWith([
       'com.example.my-capability',
     ]);
   });

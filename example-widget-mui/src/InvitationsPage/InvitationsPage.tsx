@@ -128,6 +128,7 @@ export const InvitationsView = (): ReactElement => {
           loading={loading}
           renderTags={(value, getTagProps) =>
             value.map((option, index) => (
+              // eslint-disable-next-line react/jsx-key
               <Chip
                 avatar={
                   <ElementAvatar

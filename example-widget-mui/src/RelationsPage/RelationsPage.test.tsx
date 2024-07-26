@@ -157,11 +157,13 @@ describe('<RelationsPage />', () => {
       }),
     );
 
-    await screen.findByRole('button', {
-      name: 'Remove reaction "Thumbs Up"',
-      description: 'My message @user-id',
-      pressed: true,
-    });
+    expect(
+      await screen.findByRole('button', {
+        name: 'Remove reaction "Thumbs Up"',
+        description: 'My message @user-id',
+        pressed: true,
+      }),
+    ).toBeInTheDocument();
   });
 
   it('Should remove a reaction', async () => {
@@ -175,11 +177,13 @@ describe('<RelationsPage />', () => {
       }),
     );
 
-    await screen.findByRole('button', {
-      name: 'Add reaction "Snowflake"',
-      description: 'My message @user-id',
-      pressed: false,
-    });
+    expect(
+      await screen.findByRole('button', {
+        name: 'Add reaction "Snowflake"',
+        description: 'My message @user-id',
+        pressed: false,
+      }),
+    ).toBeInTheDocument();
   });
 
   it('should not be able to send a message if the permission for the state event is missing', async () => {

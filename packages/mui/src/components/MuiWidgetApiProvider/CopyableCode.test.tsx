@@ -55,7 +55,7 @@ describe('<CopyableCode/>', () => {
 
     await userEvent.click(copyButton);
 
-    expect(copyToClipboard).toBeCalledWith('Hello World');
+    expect(copyToClipboard).toHaveBeenCalledWith('Hello World');
     expect(screen.getByTestId('CheckOutlinedIcon')).toBeInTheDocument();
 
     await userEvent.tab();

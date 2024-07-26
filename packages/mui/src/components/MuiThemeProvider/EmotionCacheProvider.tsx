@@ -31,6 +31,6 @@ function createEmotionCache() {
 
 const cache = createEmotionCache();
 
-export function EmotionCacheProvider({ children }: PropsWithChildren<{}>) {
+export function EmotionCacheProvider({ children }: PropsWithChildren<unknown>) {
   return <CacheProvider value={cache}>{children}</CacheProvider>;
 }
