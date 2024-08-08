@@ -38,12 +38,12 @@
     "generate-api-report": "tsc && api-extractor run --verbose --local"
   },
   "dependencies": {
-    "@emotion/cache": "^11.13.0",
+    "@emotion/cache": "^11.13.1",
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
     "@fontsource/inter": "^5.0.18",
-    "@mui/icons-material": "^5.16.4",
-    "@mui/material": "^5.16.4",
+    "@mui/icons-material": "^5.16.6",
+    "@mui/material": "^5.16.6",
     "@mui/utils": "^5.14.13",
     "@matrix-widget-toolkit/api": "^3.3.2",
     "@matrix-widget-toolkit/react": "^2.0.0",
