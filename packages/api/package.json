@@ -11,9 +11,9 @@
     "@craco/craco": "^7.1.0",
     "@rollup/plugin-commonjs": "^26.0.1",
     "@types/jest": "^27.5.2",
-    "@types/node": "^20.8.6",
+    "@types/node": "^22.2.0",
     "@types/qs": "^6.9.15",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.4"
   },
   "scripts": {
     "build": "tsc && rollup --config ../../rollup.config.mjs",
