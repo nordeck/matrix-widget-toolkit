@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.7",
+    "@eslint/compat": "^1.1.1",
     "@eslint/js": "^9.7.0",
     "@microsoft/api-extractor": "^7.47.2",
     "@rollup/plugin-commonjs": "^26.0.1",
@@ -37,6 +38,7 @@
     "eslint-plugin-notice": "^1.0.0",
     "eslint-plugin-promise": "^6.6.0",
     "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-testing-library": "^6.3.0",
     "husky": "^9.1.2",
     "lint-staged": "^15.2.7",
     "prettier": "^3.3.3",
@@ -67,5 +69,5 @@
     "node": ">=20",
     "yarn": ">=1.22.1 <2.0.0"
   },
-  "dependencies": {}
+  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }
