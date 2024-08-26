@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
+import { fixupPluginRules } from '@eslint/compat';
 import js from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import jest from 'eslint-plugin-jest';
 import notice from 'eslint-plugin-notice';
 import pluginPromise from 'eslint-plugin-promise';
 import react from 'eslint-plugin-react';
+import testingLibrary from 'eslint-plugin-testing-library';
 import path from 'path';
 import ts from 'typescript-eslint';
 import { fileURLToPath } from 'url';
@@ -92,7 +94,15 @@ export default ts.config(
   // Relax some rules for test files only
   {
     files: ['**/*.test.*'],
+    plugins: {
+      // See https://github.com/testing-library/eslint-plugin-testing-library/issues/899#issuecomment-2121272355 and
+      // https://github.com/testing-library/eslint-plugin-testing-library/issues/924
+      'testing-library': fixupPluginRules({
+        rules: testingLibrary.rules,
+      }),
+    },
     rules: {
+      ...testingLibrary.configs['flat/react'].rules,
       'react/display-name': 'off',
     },
   },
