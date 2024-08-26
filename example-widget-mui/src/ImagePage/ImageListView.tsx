@@ -33,6 +33,7 @@ import {
   UploadedImageEvent,
   isValidUploadedImage,
 } from '../events';
+import { Image } from './Image';
 
 export const ImageListView = (): ReactElement => {
   const widgetApi = useWidgetApi();
@@ -75,13 +76,9 @@ export const ImageListView = (): ReactElement => {
             {imageNames.length > 0 &&
               imageNames.map((image) => (
                 <ImageListItem key={image.event_id}>
-                  <img
-                    src={`${getHttpUriForMxc(
-                      image.content.url,
-                      widgetApi.widgetParameters.baseUrl,
-                    )}?w=164&h=164&fit=crop&auto=format`}
+                  <Image
                     alt={image.content.name}
-                    loading="lazy"
+                    contentUrl={image.content.url}
                   />
                   <ImageListItemBar
                     title={image.content.name}

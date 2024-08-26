@@ -24,6 +24,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AllRoomsPage } from '../AllRoomsPage';
 import { DicePage } from '../DicePage';
 import { IdentityPage } from '../IdentityPage';
+import { ImagePage } from '../ImagePage';
 import { InvitationsPage } from '../InvitationsPage';
 import { ModalDialog, ModalPage } from '../ModalPage';
 import { NavigationPage } from '../NavigationPage';
@@ -31,7 +32,6 @@ import { PowerLevelsPage } from '../PowerLevelsPage';
 import { RelationsPage } from '../RelationsPage';
 import { RoomPage } from '../RoomPage';
 import { ThemePage } from '../ThemePage';
-import { UploadImagePage } from '../UploadImagePage';
 import { WelcomePage } from '../WelcomePage';
 
 export function App({
@@ -65,7 +65,7 @@ export function App({
               <Route path="/relations" element={<RelationsPage />} />
               <Route path="/invitations" element={<InvitationsPage />} />
               <Route path="/theme" element={<ThemePage />} />
-              <Route path="/uploadImage" element={<UploadImagePage />} />
+              <Route path="/image" element={<ImagePage />} />
             </Routes>
           </MuiWidgetApiProvider>
         </Suspense>

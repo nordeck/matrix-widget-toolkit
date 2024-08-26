@@ -49,7 +49,7 @@ import { ROOM_EVENT_UPLOADED_IMAGE, UploadedImageEvent } from '../events';
 /**
  * A component that showcases how to upload image files and render them in a widget.
  */
-export const UploadImagePage = (): ReactElement => {
+export const ImagePage = (): ReactElement => {
   const widgetApi = useWidgetApi();
   const [errorDialogOpen, setErrorDialogOpen] = useState<boolean>(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -137,10 +137,11 @@ export const UploadImagePage = (): ReactElement => {
               ROOM_EVENT_UPLOADED_IMAGE,
             ),
             WidgetApiFromWidgetAction.MSC4039UploadFileAction,
+            WidgetApiFromWidgetAction.MSC4039DownloadFileAction,
             WidgetApiFromWidgetAction.MSC4039GetMediaConfigAction,
           ]}
         >
-          {/* 
+          {/*
           The StoreProvider is located here to keep the example small. Normal
           applications would locate it outside of the router to establish a
           single, global store.

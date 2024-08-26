@@ -16,6 +16,7 @@
 
 import {
   Capability,
+  IDownloadFileActionFromWidgetResponseData,
   IGetMediaConfigActionFromWidgetResponseData,
   IModalWidgetCreateData,
   IModalWidgetOpenRequestDataButton,
@@ -560,6 +561,15 @@ export type WidgetApi = {
   uploadFile(
     file: XMLHttpRequestBodyInit,
   ): Promise<IUploadFileActionFromWidgetResponseData>;
+
+  /**
+   * Download a file to the media repository on the homeserver.
+   * @param contentUrl - MXC URI of the file to download
+   * @returns resolves to an object with: file - the file contents
+   */
+  downloadFile(
+    contentUrl: string,
+  ): Promise<IDownloadFileActionFromWidgetResponseData>;
 
   // TODO: sendSticker, setAlwaysOnScreen
 };

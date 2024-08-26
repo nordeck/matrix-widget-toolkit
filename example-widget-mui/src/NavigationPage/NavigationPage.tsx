@@ -110,9 +110,9 @@ export const NavigationPage = (): ReactElement => {
           design of Element"
         />
         <NavigationItem
-          to="/uploadImage"
-          title="Upload File"
-          description="Example for uploading an image file"
+          to="/image"
+          title="Up- and download image"
+          description="Example for up- and downloading an image file"
         />
       </List>
     </Box>

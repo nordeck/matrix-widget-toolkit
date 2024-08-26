@@ -5,6 +5,7 @@
 ```ts
 
 import { Capability } from 'matrix-widget-api';
+import { IDownloadFileActionFromWidgetResponseData } from 'matrix-widget-api';
 import { IGetMediaConfigActionFromWidgetResponseData } from 'matrix-widget-api';
 import { IModalWidgetCreateData } from 'matrix-widget-api';
 import { IModalWidgetOpenRequestDataButton } from 'matrix-widget-api';
@@ -271,6 +272,7 @@ export type WidgetApi = {
     }>;
     getMediaConfig(): Promise<IGetMediaConfigActionFromWidgetResponseData>;
     uploadFile(file: XMLHttpRequestBodyInit): Promise<IUploadFileActionFromWidgetResponseData>;
+    downloadFile(contentUrl: string): Promise<IDownloadFileActionFromWidgetResponseData>;
 };
 
 // @public
@@ -281,6 +283,7 @@ export class WidgetApiImpl implements WidgetApi {
     widgetParameters: WidgetParameters, { capabilities, supportStandalone }?: WidgetApiOptions);
     closeModal<T extends IModalWidgetReturnData>(data?: T): Promise<void>;
     static create({ capabilities, supportStandalone, }?: WidgetApiOptions): Promise<WidgetApi>;
+    downloadFile(contentUrl: string): Promise<IDownloadFileActionFromWidgetResponseData>;
     getMediaConfig(): Promise<IGetMediaConfigActionFromWidgetResponseData>;
     getWidgetConfig<T extends IWidgetApiRequestData>(): Readonly<WidgetConfig<T> | undefined>;
     hasCapabilities(capabilities: Array<WidgetEventCapability | Capability>): boolean;
