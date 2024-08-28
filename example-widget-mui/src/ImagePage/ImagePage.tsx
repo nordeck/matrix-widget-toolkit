@@ -71,6 +71,7 @@ export const ImagePage = (): ReactElement => {
   const handleFileUpload = useCallback(() => {
     const uploadImage = async () => {
       if (selectedFile) {
+        setLoading(true);
         if (!selectedFile.type.startsWith('image/')) {
           setErrorMessage(
             'Please select a valid image file. You can upload any image format that is supported by the browser.',
@@ -103,18 +104,17 @@ export const ImagePage = (): ReactElement => {
           const responseUploadMedia = await widgetApi.uploadFile(selectedFile);
           const url = responseUploadMedia.content_uri;
 
-          setLoading(true);
           await widgetApi.sendRoomEvent<UploadedImageEvent>(
             ROOM_EVENT_UPLOADED_IMAGE,
             { name: selectedFile.name, size: selectedFile.size, url },
           );
-          setLoading(false);
-          setSelectedFile(null);
 
-          return;
+          setSelectedFile(null);
         } catch (error) {
           setErrorMessage('An error occurred during file upload: ' + error);
           setErrorDialogOpen(true);
+        } finally {
+          setLoading(false);
         }
       }
     };
