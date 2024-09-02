@@ -9,14 +9,14 @@
   "types": "./src/index.ts",
   "devDependencies": {
     "@craco/craco": "^7.1.0",
-    "@testing-library/jest-dom": "^6.4.6",
-    "@testing-library/react": "^16.0.0",
+    "@testing-library/jest-dom": "^6.5.0",
+    "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.5.2",
     "@types/jest": "^27.5.2",
-    "@types/node": "^20.8.6",
+    "@types/node": "^22.5.2",
     "@types/react": "^18.2.74",
     "react-scripts": "5.0.1",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.4"
   },
   "scripts": {
     "build": "tsc && rollup --config ../../rollup.config.mjs",
