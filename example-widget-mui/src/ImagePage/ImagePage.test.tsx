@@ -37,6 +37,8 @@ afterEach(() => widgetApi.stop());
 beforeEach(() => {
   widgetApi = mockWidgetApi();
 
+  global.URL.createObjectURL = jest.fn().mockReturnValue('http://...');
+
   wrapper = ({ children }: PropsWithChildren<{}>) => (
     <WidgetApiMockProvider value={widgetApi}>
       <StoreProvider>
@@ -44,6 +46,10 @@ beforeEach(() => {
       </StoreProvider>
     </WidgetApiMockProvider>
   );
+});
+
+afterEach(() => {
+  jest.restoreAllMocks();
 });
 
 describe('<ImagePage>', () => {
@@ -95,6 +101,7 @@ describe('<ImagePage>', () => {
         ROOM_EVENT_UPLOADED_IMAGE,
       ),
       WidgetApiFromWidgetAction.MSC4039UploadFileAction,
+      WidgetApiFromWidgetAction.MSC4039DownloadFileAction,
       WidgetApiFromWidgetAction.MSC4039GetMediaConfigAction,
     ]);
 
@@ -115,7 +122,7 @@ describe('<ImagePage>', () => {
     widgetApi.sendRoomEvent(ROOM_EVENT_UPLOADED_IMAGE, {
       name: 'image.png',
       size: 123,
-      url: 'http://example.com/image.png',
+      url: 'mxc://...',
     });
 
     render(<ImagePage />, { wrapper });

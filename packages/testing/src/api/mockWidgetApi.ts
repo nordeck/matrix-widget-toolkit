@@ -235,7 +235,9 @@ export function mockWidgetApi(opts?: {
     uploadFile: jest.fn().mockResolvedValue({
       content_uri: 'mxc://...',
     }),
-    downloadFile: jest.fn(),
+    downloadFile: jest.fn().mockResolvedValue({
+      file: new Blob(['image content'], { type: 'image/png' }),
+    }),
   };
 
   widgetApi.receiveRoomEvents.mockImplementation(async (type, options) => {
