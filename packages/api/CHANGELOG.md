@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/api`
 
+## 3.4.0
+
+### Minor Changes
+
+- 9852f94: Add support for the download_file widget action
+
 ## 3.3.2
 
 ### Patch Changes
