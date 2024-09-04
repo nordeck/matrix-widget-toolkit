@@ -27,7 +27,7 @@ import { ComponentType, PropsWithChildren, act } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { ROOM_EVENT_UPLOADED_IMAGE } from '../events';
 import { StoreProvider } from '../store';
-import { UploadImagePage } from './UploadImagePage';
+import { ImagePage } from './ImagePage';
 
 let widgetApi: MockedWidgetApi;
 let wrapper: ComponentType<PropsWithChildren<{}>>;
@@ -36,6 +36,8 @@ afterEach(() => widgetApi.stop());
 
 beforeEach(() => {
   widgetApi = mockWidgetApi();
+
+  global.URL.createObjectURL = jest.fn().mockReturnValue('http://...');
 
   wrapper = ({ children }: PropsWithChildren<{}>) => (
     <WidgetApiMockProvider value={widgetApi}>
@@ -46,9 +48,13 @@ beforeEach(() => {
   );
 });
 
-describe('<UploadImagePage>', () => {
+afterEach(() => {
+  jest.restoreAllMocks();
+});
+
+describe('<ImagePage>', () => {
   it('should render without exploding', async () => {
-    render(<UploadImagePage />, { wrapper });
+    render(<ImagePage />, { wrapper });
 
     expect(
       screen.getByRole('link', { name: /back to navigation/i }),
@@ -66,7 +72,7 @@ describe('<UploadImagePage>', () => {
   });
 
   it('should have no accessibility violations', async () => {
-    const { container } = render(<UploadImagePage />, { wrapper });
+    const { container } = render(<ImagePage />, { wrapper });
 
     expect(
       screen.getByRole('heading', { name: /upload file/i }),
@@ -83,7 +89,7 @@ describe('<UploadImagePage>', () => {
   });
 
   it('should request the capabilities', async () => {
-    render(<UploadImagePage />, { wrapper });
+    render(<ImagePage />, { wrapper });
 
     expect(widgetApi.requestCapabilities).toHaveBeenCalledWith([
       WidgetEventCapability.forRoomEvent(
@@ -95,6 +101,7 @@ describe('<UploadImagePage>', () => {
         ROOM_EVENT_UPLOADED_IMAGE,
       ),
       WidgetApiFromWidgetAction.MSC4039UploadFileAction,
+      WidgetApiFromWidgetAction.MSC4039DownloadFileAction,
       WidgetApiFromWidgetAction.MSC4039GetMediaConfigAction,
     ]);
 
@@ -104,7 +111,7 @@ describe('<UploadImagePage>', () => {
   });
 
   it('should say that no images are loaded yet', async () => {
-    render(<UploadImagePage />, { wrapper });
+    render(<ImagePage />, { wrapper });
 
     await expect(
       screen.findByText(/no images uploaded to this room yet/i),
@@ -115,10 +122,10 @@ describe('<UploadImagePage>', () => {
     widgetApi.sendRoomEvent(ROOM_EVENT_UPLOADED_IMAGE, {
       name: 'image.png',
       size: 123,
-      url: 'http://example.com/image.png',
+      url: 'mxc://...',
     });
 
-    render(<UploadImagePage />, { wrapper });
+    render(<ImagePage />, { wrapper });
 
     await expect(
       screen.findByRole('img', { name: /image.png/i }),

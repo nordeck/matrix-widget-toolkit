@@ -17,7 +17,7 @@ The widget demonstrates:
 - How to read related events ([`Event Relations`](./src/RelationsPage/RelationsPage.tsx)).
 - How to search the User Directory ([`User Directory and Invitations`](./src/InvitationsPage/InvitationsPage.tsx)).
 - How to use the UI components to match the style of Element ([`Theme`](./src/ThemePage/ThemePage.tsx)).
-- How to upload files to the media repository ([`Upload File`](./src/UploadImagePage/UploadImagePage.tsx)).
+- How to upload and download files to the media repository ([`Up- and download image`](./src/ImagePage/ImagePage.tsx)).
 
 ## Demo
 

@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-export { UploadImagePage } from './UploadImagePage';
+export { ImagePage } from './ImagePage';

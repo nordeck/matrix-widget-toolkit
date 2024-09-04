@@ -16,6 +16,7 @@
 
 import {
   Capability,
+  IDownloadFileActionFromWidgetResponseData,
   IGetMediaConfigActionFromWidgetResponseData,
   IModalWidgetCreateData,
   IModalWidgetOpenRequestDataButton,
@@ -798,5 +799,12 @@ export class WidgetApiImpl implements WidgetApi {
     file: XMLHttpRequestBodyInit,
   ): Promise<IUploadFileActionFromWidgetResponseData> {
     return await this.matrixWidgetApi.uploadFile(file);
+  }
+
+  /** {@inheritdoc WidgetApi.downloadFile}  */
+  async downloadFile(
+    contentUrl: string,
+  ): Promise<IDownloadFileActionFromWidgetResponseData> {
+    return await this.matrixWidgetApi.downloadFile(contentUrl);
   }
 }

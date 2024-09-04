@@ -49,7 +49,7 @@ import { ROOM_EVENT_UPLOADED_IMAGE, UploadedImageEvent } from '../events';
 /**
  * A component that showcases how to upload image files and render them in a widget.
  */
-export const UploadImagePage = (): ReactElement => {
+export const ImagePage = (): ReactElement => {
   const widgetApi = useWidgetApi();
   const [errorDialogOpen, setErrorDialogOpen] = useState<boolean>(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -71,6 +71,7 @@ export const UploadImagePage = (): ReactElement => {
   const handleFileUpload = useCallback(() => {
     const uploadImage = async () => {
       if (selectedFile) {
+        setLoading(true);
         if (!selectedFile.type.startsWith('image/')) {
           setErrorMessage(
             'Please select a valid image file. You can upload any image format that is supported by the browser.',
@@ -103,18 +104,17 @@ export const UploadImagePage = (): ReactElement => {
           const responseUploadMedia = await widgetApi.uploadFile(selectedFile);
           const url = responseUploadMedia.content_uri;
 
-          setLoading(true);
           await widgetApi.sendRoomEvent<UploadedImageEvent>(
             ROOM_EVENT_UPLOADED_IMAGE,
             { name: selectedFile.name, size: selectedFile.size, url },
           );
-          setLoading(false);
-          setSelectedFile(null);
 
-          return;
+          setSelectedFile(null);
         } catch (error) {
           setErrorMessage('An error occurred during file upload: ' + error);
           setErrorDialogOpen(true);
+        } finally {
+          setLoading(false);
         }
       }
     };
@@ -137,10 +137,11 @@ export const UploadImagePage = (): ReactElement => {
               ROOM_EVENT_UPLOADED_IMAGE,
             ),
             WidgetApiFromWidgetAction.MSC4039UploadFileAction,
+            WidgetApiFromWidgetAction.MSC4039DownloadFileAction,
             WidgetApiFromWidgetAction.MSC4039GetMediaConfigAction,
           ]}
         >
-          {/* 
+          {/*
           The StoreProvider is located here to keep the example small. Normal
           applications would locate it outside of the router to establish a
           single, global store.
