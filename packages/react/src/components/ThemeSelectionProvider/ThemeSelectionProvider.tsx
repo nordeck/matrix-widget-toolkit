@@ -97,7 +97,7 @@ export function ThemeSelectionProvider({
     let widgetId = '';
     try {
       ({ widgetId } = extractWidgetApiParameters());
-    } catch (e) {
+    } catch {
       // ignore
     }
 
