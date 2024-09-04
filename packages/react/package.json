@@ -23,7 +23,7 @@
     "tsc": "tsc",
     "lint": "eslint .",
     "test": "jest --watch",
-    "depcheck": "depcheck --ignores=@types/node --ignore-dirs=lib,build",
+    "depcheck": "depcheck --ignores=@types/node,@types/jest --ignore-dirs=lib,build",
     "prepack": "node ../../scripts/prepack.js",
     "postpack": "node ../../scripts/postpack.js",
     "translate": "echo \"Nothing to translate\"",
