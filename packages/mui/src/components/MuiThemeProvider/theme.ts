@@ -231,14 +231,27 @@ export const baseTheme: ThemeOptions = {
       },
     },
 
-    // Tooltips have a darker background
+    // Tooltips are fullscreen-aware
+    MuiMenu: {
+      defaultProps: {
+        container: document.fullscreenElement ?? document.body,
+      },
+    },
     MuiTooltip: {
+      // Tooltips have a darker background
       styleOverrides: {
         tooltip: ({ theme }) => ({
           fontSize: defaultTheme.typography.pxToRem(12),
           backgroundColor: 'rgb(33, 38, 44)',
           padding: theme.spacing(1),
         }),
+      },
+
+      // Tooltips are fullscreen-aware
+      defaultProps: {
+        PopperProps: {
+          container: document.fullscreenElement ?? document.body,
+        },
       },
     },
 
