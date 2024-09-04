@@ -104,7 +104,7 @@ export function WidgetApiProvider({
       try {
         await widgetApi.rerequestInitialCapabilities();
         setInitialCapabilitiesGranted(true);
-      } catch (_) {
+      } catch {
         setInitialCapabilitiesGranted(false);
       }
     },

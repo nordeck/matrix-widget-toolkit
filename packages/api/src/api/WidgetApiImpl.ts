@@ -163,7 +163,7 @@ export class WidgetApiImpl implements WidgetApi {
         event.preventDefault();
         try {
           this.matrixWidgetApi.transport.reply(event.detail, {});
-        } catch (_) {
+        } catch {
           // Ignore errors while replying
         }
         return event;
@@ -177,7 +177,7 @@ export class WidgetApiImpl implements WidgetApi {
         event.preventDefault();
         try {
           matrixWidgetApi.transport.reply(event.detail, {});
-        } catch (_) {
+        } catch {
           // Ignore errors while replying
         }
         return event;

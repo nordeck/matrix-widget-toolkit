@@ -64,7 +64,10 @@ const StyledAvatar = styled(Avatar, {
  * @param param0 - {@link ElementAvatarProps}
  */
 export const ElementAvatar = forwardRef<HTMLDivElement, ElementAvatarProps>(
-  function ElementAvatar({ avatarUrl, userId, displayName, ...props }, ref) {
+  function ElementAvatar(
+    { avatarUrl, userId, displayName, ...props }: ElementAvatarProps,
+    ref,
+  ) {
     const src = avatarUrl ? createAvatarUrl(avatarUrl) : undefined;
     const name = displayName ?? userId;
 
