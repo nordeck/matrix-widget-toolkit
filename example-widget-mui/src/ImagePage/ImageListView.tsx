@@ -100,19 +100,3 @@ export const ImageListView = (): ReactElement => {
     </>
   );
 };
-
-// This is a stripped down implementation of the code that is available in the `matrix-js-sdk`
-// For the original version, check
-// https://github.com/matrix-org/matrix-js-sdk/blob/1b7695cdca841672d582168a19bfe77f00207fea/src/content-repo.ts#L36
-export const getHttpUriForMxc = (
-  mxcUrl: string,
-  baseUrl: string | undefined,
-): string | null => {
-  if (mxcUrl.indexOf('mxc://') !== 0) {
-    return null;
-  }
-  const serverAndMediaId = mxcUrl.slice(6);
-  const prefix = '/_matrix/media/v3/download/';
-
-  return baseUrl + prefix + serverAndMediaId;
-};
