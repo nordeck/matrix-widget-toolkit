@@ -1,6 +1,6 @@
 {
   "name": "@matrix-widget-toolkit/testing",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "description": "Testing support for @matrix-widget-toolkit/api.",
   "author": "Nordeck IT + Consulting GmbH",
   "license": "Apache-2.0",

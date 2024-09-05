@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/react`
 
+## 2.0.1
+
+### Patch Changes
+
+- 9a54c89: Update to MUI 6 and latest React / Redux dependencies
+
 ## 2.0.0
 
 ### Major Changes

@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/testing`
 
+## 2.5.0
+
+### Minor Changes
+
+- 9a54c89: Add support for mocking the download_file widget action
+
 ## 2.4.0
 
 ### Minor Changes
