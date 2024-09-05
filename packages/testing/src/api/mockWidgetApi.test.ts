@@ -970,4 +970,12 @@ describe('uploadFile', () => {
       content_uri: 'mxc://...',
     });
   });
+
+  describe('downloadFile', () => {
+    it('should return empty response', async () => {
+      await expect(widgetApi.downloadFile('mxc://...')).resolves.toEqual({
+        file: new Blob(['image content'], { type: 'image/png' }),
+      });
+    });
+  });
 });
