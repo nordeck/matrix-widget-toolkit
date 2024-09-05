@@ -15,13 +15,13 @@
  */
 
 import { SerializedError } from '@reduxjs/toolkit';
-import { coreModuleName } from '@reduxjs/toolkit/dist/query/core/module';
-import { reactHooksModuleName } from '@reduxjs/toolkit/dist/query/react/module';
 import {
   Api,
   BaseQueryFn,
+  coreModuleName,
   createApi,
   fakeBaseQuery,
+  reactHooksModuleName,
 } from '@reduxjs/toolkit/query/react';
 
 /**
