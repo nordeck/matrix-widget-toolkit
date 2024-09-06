@@ -25,6 +25,7 @@ import testingLibrary from 'eslint-plugin-testing-library';
 import path from 'path';
 import ts from 'typescript-eslint';
 import { fileURLToPath } from 'url';
+import hooksPlugin from "eslint-plugin-react-hooks";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -78,7 +79,12 @@ export default ts.config(
   },
   {
     ...react.configs.flat.recommended,
+    plugins: {
+      ...react.configs.flat.recommended.plugins,
+      "react-hooks": fixupPluginRules(hooksPlugin),
+    },
     rules: {
+      ...hooksPlugin.configs.recommended.rules,
       ...react.configs.flat.recommended.rules,
       'react/no-unescaped-entities': 'off',
       // Disabled because it would conflict with removing unused imports
