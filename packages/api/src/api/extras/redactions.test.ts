@@ -15,12 +15,13 @@
  */
 
 import { from, lastValueFrom } from 'rxjs';
+import { describe, expect, it, Mocked, vi } from 'vitest';
 import { RoomEvent, WidgetApi } from '../types';
 import {
-  RedactionRoomEvent,
   isValidRedactionEvent,
   observeRedactionEvents,
   redactEvent,
+  RedactionRoomEvent,
 } from './redactions';
 
 describe('isValidRedactionEvent', () => {
@@ -45,8 +46,8 @@ describe('isValidRedactionEvent', () => {
 describe('redactEvent', () => {
   it('should send a redaction event', async () => {
     const widgetApi = {
-      sendRoomEvent: jest.fn(),
-    } as Partial<jest.Mocked<WidgetApi>> as jest.Mocked<WidgetApi>;
+      sendRoomEvent: vi.fn(),
+    } as Partial<Mocked<WidgetApi>> as Mocked<WidgetApi>;
 
     widgetApi.sendRoomEvent.mockResolvedValue({
       content: {},
@@ -78,8 +79,8 @@ describe('redactEvent', () => {
 describe('observeRedactionEvents', () => {
   it('should observe redaction events', async () => {
     const widgetApi = {
-      observeRoomEvents: jest.fn(),
-    } as Partial<jest.Mocked<WidgetApi>> as jest.Mocked<WidgetApi>;
+      observeRoomEvents: vi.fn(),
+    } as Partial<Mocked<WidgetApi>> as Mocked<WidgetApi>;
 
     widgetApi.observeRoomEvents.mockReturnValue(
       from([

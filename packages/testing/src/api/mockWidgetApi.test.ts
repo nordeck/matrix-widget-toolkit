@@ -17,6 +17,7 @@
 import { redactEvent, StateEvent } from '@matrix-widget-toolkit/api';
 import { Symbols } from 'matrix-widget-api';
 import { bufferTime, firstValueFrom, Observable, take } from 'rxjs';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { MockedWidgetApi, mockWidgetApi } from './mockWidgetApi';
 
 let widgetApi: MockedWidgetApi;

@@ -18,9 +18,10 @@ import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
 import { ComponentType, PropsWithChildren } from 'react';
 import { MemoryRouter } from 'react-router-dom';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { ModalResult } from './ModalDialog';
 import { ModalPage } from './ModalPage';
 
@@ -61,7 +62,7 @@ describe('<ModalPage />', () => {
     await expect(
       screen.findByRole('heading', { name: /example for modals/i }),
     ).resolves.toBeInTheDocument();
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 
   it('should open the modal and display the no answer result', async () => {

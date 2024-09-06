@@ -19,19 +19,19 @@ import {
   extractWidgetParameters as extractWidgetParametersMocked,
   parseWidgetId as parseWidgetIdMocked,
 } from '@matrix-widget-toolkit/api';
-import { act, render, renderHook, screen } from '@testing-library/react';
+import { render, renderHook, screen } from '@testing-library/react';
+import { act } from 'react';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   ThemeSelectionProvider,
   useThemeSelection,
 } from './ThemeSelectionProvider';
 
-jest.mock('@matrix-widget-toolkit/api');
+vi.mock('@matrix-widget-toolkit/api');
 
-const extractWidgetApiParameters = jest.mocked(
-  extractWidgetApiParametersMocked,
-);
-const extractWidgetParameters = jest.mocked(extractWidgetParametersMocked);
-const parseWidgetId = jest.mocked(parseWidgetIdMocked);
+const extractWidgetApiParameters = vi.mocked(extractWidgetApiParametersMocked);
+const extractWidgetParameters = vi.mocked(extractWidgetParametersMocked);
+const parseWidgetId = vi.mocked(parseWidgetIdMocked);
 
 describe('<ThemeSelectionProvider/>', () => {
   let beforeMediaMatch: typeof window.matchMedia;
@@ -88,7 +88,7 @@ describe('<ThemeSelectionProvider/>', () => {
       isOpenedByClient: true,
     });
 
-    window.matchMedia = jest.fn().mockReturnValue({ matches: true });
+    window.matchMedia = vi.fn().mockReturnValue({ matches: true });
 
     const {
       result: { current },

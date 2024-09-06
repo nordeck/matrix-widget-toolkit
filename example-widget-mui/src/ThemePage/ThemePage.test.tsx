@@ -15,9 +15,10 @@
  */
 
 import { render, screen } from '@testing-library/react';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
 import { ComponentType, PropsWithChildren } from 'react';
 import { MemoryRouter } from 'react-router-dom';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { ThemePage } from './ThemePage';
 
 describe('<ThemePage>', () => {
@@ -48,7 +49,7 @@ describe('<ThemePage>', () => {
       screen.findByRole('heading', { name: /theme/i }),
     ).resolves.toBeInTheDocument();
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   }, 15000);
 
   // As this page shows primarily the visual theming, so we skip exhaustive

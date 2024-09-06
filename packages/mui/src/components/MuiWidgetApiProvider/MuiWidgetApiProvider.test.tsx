@@ -20,28 +20,29 @@ import {
   WidgetApi,
 } from '@matrix-widget-toolkit/api';
 import { render, screen } from '@testing-library/react';
+import { beforeEach, describe, expect, it, Mocked, vi } from 'vitest';
 import { MuiWidgetApiProvider } from './MuiWidgetApiProvider';
 
-jest.mock('@matrix-widget-toolkit/api');
+vi.mock('@matrix-widget-toolkit/api');
 
-const hasRequiredWidgetParameters = jest.mocked(
+const hasRequiredWidgetParameters = vi.mocked(
   hasRequiredWidgetParametersMocked,
 );
 
-const extractWidgetParameters = jest.mocked(extractWidgetParametersMocked);
+const extractWidgetParameters = vi.mocked(extractWidgetParametersMocked);
 
 describe('WidgetApiProvider', () => {
-  let widgetApi: jest.Mocked<WidgetApi>;
+  let widgetApi: Mocked<WidgetApi>;
   let widgetApiPromise: Promise<WidgetApi>;
 
   beforeEach(() => {
     widgetApi = {
       widgetId: 'widget-id',
       widgetParameters: { isOpenedByClient: true },
-      rerequestInitialCapabilities: jest.fn(),
-      hasInitialCapabilities: jest.fn(),
-      sendRoomEvent: jest.fn(),
-    } as Partial<jest.Mocked<WidgetApi>> as jest.Mocked<WidgetApi>;
+      rerequestInitialCapabilities: vi.fn(),
+      hasInitialCapabilities: vi.fn(),
+      sendRoomEvent: vi.fn(),
+    } as Partial<Mocked<WidgetApi>> as Mocked<WidgetApi>;
 
     widgetApiPromise = Promise.resolve(widgetApi);
 

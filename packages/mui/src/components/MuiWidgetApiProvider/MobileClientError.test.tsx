@@ -15,7 +15,8 @@
  */
 
 import { render, screen } from '@testing-library/react';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
+import { describe, expect, it } from 'vitest';
 import { MobileClientError } from './MobileClientError';
 
 describe('<MobileClientError/>', () => {
@@ -33,6 +34,6 @@ describe('<MobileClientError/>', () => {
   it('should have no accessibility violations', async () => {
     const { container } = render(<MobileClientError />);
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 });

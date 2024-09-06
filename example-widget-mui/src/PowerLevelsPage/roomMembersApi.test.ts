@@ -20,6 +20,7 @@ import {
 } from '@matrix-widget-toolkit/api';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { waitFor } from '@testing-library/react';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { createStore } from '../store';
 import { roomMembersApi } from './roomMembersApi';
 

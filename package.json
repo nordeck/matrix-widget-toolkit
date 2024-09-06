@@ -6,12 +6,15 @@
     "containers/*",
     "packages/*"
   ],
+  "type": "module",
   "scripts": {
     "dev:example": "yarn workspace @matrix-widget-toolkit/example-widget-mui dev",
-    "start:example": "yarn workspace @matrix-widget-toolkit/example-widget-mui start",
+    "dev:example:https": "yarn workspace @matrix-widget-toolkit/example-widget-mui dev:https",
+    "dev:example:preview": "yarn workspace @matrix-widget-toolkit/example-widget-mui preview",
+    "dev:example:preview:https": "yarn workspace @matrix-widget-toolkit/example-widget-mui preview:https",
     "build": "yarn workspaces run build",
-    "test": "jest --watch",
-    "test:all": "jest --coverage --maxWorkers=50%",
+    "test": "vitest watch",
+    "test:all": "vitest run --coverage",
     "tsc": "yarn workspaces run tsc",
     "lint": "yarn workspaces run lint --max-warnings=0",
     "prettier:check": "prettier --check .",
@@ -34,12 +37,12 @@
     "depcheck": "^1.4.7",
     "eslint": "^9.7.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-jest": "^28.8.3",
     "eslint-plugin-notice": "^1.0.0",
     "eslint-plugin-promise": "^7.1.0",
     "eslint-plugin-react": "^7.36.1",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-testing-library": "^6.3.0",
+    "eslint-plugin-vitest": "^0.5.4",
     "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
@@ -48,10 +51,6 @@
     "typescript": "^5.6.2",
     "typescript-eslint": "^8.6.0",
     "yarn-deduplicate": "^6.0.2"
-  },
-  "resolutions": {
-    "**/react-scripts/@svgr/webpack/@svgr/plugin-svgo/svgo/css-select/nth-check": "^2.0.1",
-    "**/react-scripts/resolve-url-loader": "^5.0.0"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

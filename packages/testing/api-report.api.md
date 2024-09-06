@@ -4,6 +4,7 @@
 
 ```ts
 
+import { Mocked } from 'vitest';
 import { RoomEvent } from '@matrix-widget-toolkit/api';
 import { StateEvent } from '@matrix-widget-toolkit/api';
 import { ToDeviceMessageEvent } from '@matrix-widget-toolkit/api';
@@ -21,7 +22,7 @@ export type MockedWidgetApi = {
     clearStateEvents(opts?: {
         type?: string;
     }): void;
-} & jest.Mocked<WidgetApi>;
+} & Mocked<WidgetApi>;
 
 // @public
 export function mockWidgetApi(opts?: {

@@ -17,11 +17,20 @@
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { render, screen } from '@testing-library/react';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
 import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
 import { ComponentType, PropsWithChildren } from 'react';
 import { MemoryRouter } from 'react-router-dom';
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  beforeEach,
+  describe,
+  expect,
+  it,
+} from 'vitest';
 import { IdentityPage } from './IdentityPage';
 
 let widgetApi: MockedWidgetApi;
@@ -67,7 +76,7 @@ describe('<IdentityPage />', () => {
       screen.findByRole('heading', { name: /Identity/i }),
     ).resolves.toBeInTheDocument();
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 
   it('should show the user information', async () => {

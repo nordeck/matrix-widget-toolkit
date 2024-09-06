@@ -15,6 +15,7 @@
  */
 
 import { Symbols } from 'matrix-widget-api';
+import { describe, expect, it } from 'vitest';
 import { generateRoomTimelineCapabilities } from './capabilities';
 
 describe('generateRoomTimelineCapabilities', () => {

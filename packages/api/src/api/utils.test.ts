@@ -20,6 +20,7 @@ import {
   Symbols,
   WidgetEventCapability,
 } from 'matrix-widget-api';
+import { beforeEach, describe, expect, it } from 'vitest';
 import {
   convertToRawCapabilities,
   equalsSet,

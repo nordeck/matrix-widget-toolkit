@@ -22,19 +22,20 @@ import {
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
 import { ReactNode } from 'react';
+import { beforeEach, describe, expect, it, Mocked, vi } from 'vitest';
 import { MissingParametersError } from './MissingParametersError';
 
-jest.mock('@matrix-widget-toolkit/api');
+vi.mock('@matrix-widget-toolkit/api');
 
-const repairWidgetRegistration = jest.mocked(repairWidgetRegistrationMocked);
-const generateWidgetRegistrationUrl = jest.mocked(
+const repairWidgetRegistration = vi.mocked(repairWidgetRegistrationMocked);
+const generateWidgetRegistrationUrl = vi.mocked(
   generateWidgetRegistrationUrlMocked,
 );
 
 describe('<MissingParametersError>', () => {
-  let widgetApi: jest.Mocked<WidgetApi>;
+  let widgetApi: Mocked<WidgetApi>;
   const wrapper = ({ children }: { children: ReactNode }) => (
     <WidgetApiMockProvider value={widgetApi}>{children}</WidgetApiMockProvider>
   );
@@ -43,9 +44,9 @@ describe('<MissingParametersError>', () => {
     widgetApi = {
       widgetId: 'widget-id',
       widgetParameters: { isOpenedByClient: true },
-      requestCapabilities: jest.fn(),
-      hasCapabilities: jest.fn(),
-    } as Partial<jest.Mocked<WidgetApi>> as jest.Mocked<WidgetApi>;
+      requestCapabilities: vi.fn(),
+      hasCapabilities: vi.fn(),
+    } as Partial<Mocked<WidgetApi>> as Mocked<WidgetApi>;
 
     generateWidgetRegistrationUrl.mockReturnValue('/addwidget …');
   });
@@ -119,6 +120,6 @@ describe('<MissingParametersError>', () => {
       { wrapper },
     );
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 });

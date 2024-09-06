@@ -25,52 +25,53 @@ import {
   WidgetEventCapability,
 } from 'matrix-widget-api';
 import { ReplaySubject, firstValueFrom, take, toArray } from 'rxjs';
+import { Mocked, beforeEach, describe, expect, it, test, vi } from 'vitest';
 import { WidgetApiImpl } from './WidgetApiImpl';
 import { parseWidgetId as parseWidgetIdMocked } from './parameters';
 import { ToDeviceMessageEvent } from './types';
 
-jest.mock('./parameters', () => ({
-  ...jest.requireActual('./parameters'),
-  parseWidgetId: jest.fn(),
+vi.mock('./parameters', async () => ({
+  ...(await vi.importActual<typeof import('./parameters')>('./parameters')),
+  parseWidgetId: vi.fn(),
 }));
 
-const parseWidgetId = jest.mocked(parseWidgetIdMocked);
+const parseWidgetId = vi.mocked(parseWidgetIdMocked);
 
 describe('WidgetApiImpl', () => {
-  type MockedMatrixWidgetApi = jest.Mocked<MatrixWidgetApi> & {
-    transport: jest.Mocked<ITransport>;
+  type MockedMatrixWidgetApi = Mocked<MatrixWidgetApi> & {
+    transport: Mocked<ITransport>;
   };
   let matrixWidgetApi: MockedMatrixWidgetApi;
   let widgetApi: WidgetApiImpl;
 
   beforeEach(() => {
     matrixWidgetApi = {
-      start: jest.fn(),
-      requestCapabilities: jest.fn(),
-      hasCapability: jest.fn(),
-      updateRequestedCapabilities: jest.fn(),
-      sendRoomEvent: jest.fn(),
-      sendStateEvent: jest.fn(),
-      readStateEvents: jest.fn(),
-      readRoomEvents: jest.fn(),
-      sendToDevice: jest.fn(),
-      openModalWidget: jest.fn(),
-      setModalButtonEnabled: jest.fn(),
-      closeModalWidget: jest.fn(),
-      navigateTo: jest.fn(),
-      requestOpenIDConnectToken: jest.fn(),
-      getTurnServers: jest.fn(),
-      readEventRelations: jest.fn(),
-      searchUserDirectory: jest.fn(),
-      getMediaConfig: jest.fn(),
-      uploadFile: jest.fn(),
+      start: vi.fn(),
+      requestCapabilities: vi.fn(),
+      hasCapability: vi.fn(),
+      updateRequestedCapabilities: vi.fn(),
+      sendRoomEvent: vi.fn(),
+      sendStateEvent: vi.fn(),
+      readStateEvents: vi.fn(),
+      readRoomEvents: vi.fn(),
+      sendToDevice: vi.fn(),
+      openModalWidget: vi.fn(),
+      setModalButtonEnabled: vi.fn(),
+      closeModalWidget: vi.fn(),
+      navigateTo: vi.fn(),
+      requestOpenIDConnectToken: vi.fn(),
+      getTurnServers: vi.fn(),
+      readEventRelations: vi.fn(),
+      searchUserDirectory: vi.fn(),
+      getMediaConfig: vi.fn(),
+      uploadFile: vi.fn(),
       transport: {
-        reply: jest.fn(),
+        reply: vi.fn(),
       },
       // Event listener
-      once: jest.fn(),
-      on: jest.fn(),
-      off: jest.fn(),
+      once: vi.fn(),
+      on: vi.fn(),
+      off: vi.fn(),
     } as
       | Partial<MatrixWidgetApi>
       | {
@@ -163,7 +164,7 @@ describe('WidgetApiImpl', () => {
         mainWidgetId: '',
       });
 
-      const preventDefault = jest.fn();
+      const preventDefault = vi.fn();
 
       matrixWidgetApi.once.mockImplementationOnce((_, listener) => {
         listener();
@@ -221,7 +222,7 @@ describe('WidgetApiImpl', () => {
         mainWidgetId: '',
       });
 
-      const preventDefault = jest.fn();
+      const preventDefault = vi.fn();
 
       matrixWidgetApi.transport.reply.mockImplementation(() => {
         throw new Error('Transport Error');
@@ -858,7 +859,7 @@ describe('WidgetApiImpl', () => {
 
   describe('observeStateEvents', () => {
     it('should receive updates about state events', async () => {
-      const preventDefault = jest.fn();
+      const preventDefault = vi.fn();
       matrixWidgetApi.readStateEvents.mockResolvedValue([
         mockRoomEvent({
           content: { hello: 'world' },
@@ -930,7 +931,7 @@ describe('WidgetApiImpl', () => {
     });
 
     it('should receive updates about state events for a custom state key', async () => {
-      const preventDefault = jest.fn();
+      const preventDefault = vi.fn();
       matrixWidgetApi.readStateEvents.mockResolvedValue([
         mockRoomEvent({
           state_key: 'custom-state-key',
@@ -988,7 +989,7 @@ describe('WidgetApiImpl', () => {
     });
 
     it('should receive updates about state events for room ids', async () => {
-      const preventDefault = jest.fn();
+      const preventDefault = vi.fn();
       matrixWidgetApi.readStateEvents.mockResolvedValue([
         mockRoomEvent({
           content: { hello: 'world' },
@@ -1059,7 +1060,7 @@ describe('WidgetApiImpl', () => {
 
   describe('sendStateEvent', () => {
     it('should send state event', async () => {
-      const preventDefault = jest.fn();
+      const preventDefault = vi.fn();
       const stateEvent = { hello: 'world' };
 
       matrixWidgetApi.sendStateEvent.mockResolvedValue({
@@ -1106,7 +1107,7 @@ describe('WidgetApiImpl', () => {
     });
 
     it('should send state event with custom state key', async () => {
-      const preventDefault = jest.fn();
+      const preventDefault = vi.fn();
       const stateEvent = { hello: 'world' };
 
       matrixWidgetApi.sendStateEvent.mockResolvedValue({
@@ -1155,7 +1156,7 @@ describe('WidgetApiImpl', () => {
     });
 
     it('should send state event to another room', async () => {
-      const preventDefault = jest.fn();
+      const preventDefault = vi.fn();
       const stateEvent = { hello: 'world' };
 
       matrixWidgetApi.sendStateEvent.mockResolvedValue({
@@ -1331,7 +1332,7 @@ describe('WidgetApiImpl', () => {
 
   describe('observeRoomEvents', () => {
     it('should receive updates about room events', async () => {
-      const preventDefault = jest.fn();
+      const preventDefault = vi.fn();
       matrixWidgetApi.readRoomEvents.mockResolvedValue([
         mockRoomEvent({
           content: { hello: 'world' },
@@ -1400,7 +1401,7 @@ describe('WidgetApiImpl', () => {
     });
 
     it('should receive updates about room events for a custom message type', async () => {
-      const preventDefault = jest.fn();
+      const preventDefault = vi.fn();
       matrixWidgetApi.readRoomEvents.mockResolvedValue([
         mockRoomEvent({
           content: { hello: 'world', msgtype: 'my-message-type' },
@@ -1456,7 +1457,7 @@ describe('WidgetApiImpl', () => {
     });
 
     it('should receive updates about room events for room ids', async () => {
-      const preventDefault = jest.fn();
+      const preventDefault = vi.fn();
       matrixWidgetApi.readRoomEvents.mockResolvedValue([
         mockRoomEvent({
           content: { hello: 'world' },
@@ -1525,7 +1526,7 @@ describe('WidgetApiImpl', () => {
 
   describe('sendRoomEvent', () => {
     it('should send room event', async () => {
-      const preventDefault = jest.fn();
+      const preventDefault = vi.fn();
       const roomEvent = { hello: 'world' };
 
       matrixWidgetApi.sendRoomEvent.mockResolvedValue({
@@ -1571,7 +1572,7 @@ describe('WidgetApiImpl', () => {
     });
 
     it('should send room event to another room', async () => {
-      const preventDefault = jest.fn();
+      const preventDefault = vi.fn();
       const roomEvent = { hello: 'world' };
 
       matrixWidgetApi.sendRoomEvent.mockResolvedValue({
@@ -1665,7 +1666,7 @@ describe('WidgetApiImpl', () => {
 
   describe('observeToDeviceMessages', () => {
     it('should receive updates about to device messages', async () => {
-      const preventDefault = jest.fn();
+      const preventDefault = vi.fn();
       matrixWidgetApi.on.mockImplementationOnce((_, listener) => {
         listener({
           detail: {
@@ -1736,7 +1737,7 @@ describe('WidgetApiImpl', () => {
         mainWidgetId: '',
       });
 
-      const preventDefault = jest.fn();
+      const preventDefault = vi.fn();
 
       matrixWidgetApi.on.mockImplementationOnce((_, listener) => {
         listener({
@@ -1758,7 +1759,7 @@ describe('WidgetApiImpl', () => {
 
       expect(parseWidgetId).toHaveBeenCalledWith('widget-id');
       expect(matrixWidgetApi.openModalWidget).toHaveBeenCalledWith(
-        'http://localhost/modal#/?theme=$org.matrix.msc2873.client_theme&matrix_user_id=@my-user-id&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=!current-room&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language&matrix_base_url=$org.matrix.msc4039.matrix_base_url',
+        'http://localhost:3000/modal#/?theme=$org.matrix.msc2873.client_theme&matrix_user_id=@my-user-id&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=!current-room&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language&matrix_base_url=$org.matrix.msc4039.matrix_base_url',
         'My Modal',
         [],
         { string: 'example' },
@@ -1781,7 +1782,7 @@ describe('WidgetApiImpl', () => {
         mainWidgetId: '',
       });
 
-      const preventDefault = jest.fn();
+      const preventDefault = vi.fn();
 
       matrixWidgetApi.on.mockImplementationOnce((_, listener) => {
         listener({
@@ -1804,7 +1805,7 @@ describe('WidgetApiImpl', () => {
 
       expect(parseWidgetId).toHaveBeenCalledWith('widget-id');
       expect(matrixWidgetApi.openModalWidget).toHaveBeenCalledWith(
-        'http://localhost/modal#/?theme=$org.matrix.msc2873.client_theme&matrix_user_id=@my-user-id&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=!current-room&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language&matrix_base_url=$org.matrix.msc4039.matrix_base_url',
+        'http://localhost:3000/modal#/?theme=$org.matrix.msc2873.client_theme&matrix_user_id=@my-user-id&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=!current-room&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language&matrix_base_url=$org.matrix.msc4039.matrix_base_url',
         'My Modal',
         [],
         { string: 'example' },
@@ -1876,7 +1877,7 @@ describe('WidgetApiImpl', () => {
         mainWidgetId: '',
       });
 
-      const preventDefault = jest.fn();
+      const preventDefault = vi.fn();
 
       matrixWidgetApi.on.mockImplementationOnce((_, listener) => {
         listener({
@@ -2045,7 +2046,7 @@ describe('WidgetApiImpl', () => {
     });
 
     it('should refresh OIDC token once it is to old', async () => {
-      const dateNow = jest.spyOn(Date, 'now').mockReturnValue(1646000000000);
+      const dateNow = vi.spyOn(Date, 'now').mockReturnValue(1646000000000);
       const token = {
         access_token: 'my-token',
         expires_in: 60,
@@ -2207,11 +2208,9 @@ describe('WidgetApiImpl', () => {
 
   describe('getMediaConfig', () => {
     it('should get media config', async () => {
-      matrixWidgetApi.getMediaConfig.mockResolvedValue(
-        Promise.resolve({
-          'm.upload.size': 5444,
-        }),
-      );
+      matrixWidgetApi.getMediaConfig.mockResolvedValue({
+        'm.upload.size': 5444,
+      });
 
       await expect(widgetApi.getMediaConfig()).resolves.toEqual({
         'm.upload.size': 5444,
@@ -2222,11 +2221,9 @@ describe('WidgetApiImpl', () => {
 
   describe('uploadFile', () => {
     it('should upload a file', async () => {
-      matrixWidgetApi.uploadFile.mockResolvedValue(
-        Promise.resolve({
-          content_uri: 'msx//:example',
-        }),
-      );
+      matrixWidgetApi.uploadFile.mockResolvedValue({
+        content_uri: 'msx//:example',
+      });
 
       const file = new File(['file content'], 'test-image.png', {
         type: 'image/png',

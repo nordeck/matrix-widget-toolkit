@@ -18,11 +18,15 @@
 // allows you to do things like:
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
-import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/vitest';
+
 // Make sure to initialize i18n (see mock below)
 import i18n from 'i18next';
-import { toHaveNoViolations } from 'jest-axe';
+
+import { cleanup } from '@testing-library/react';
+import { AxeResults } from 'axe-core';
 import { initReactI18next } from 'react-i18next';
+import { afterEach, expect } from 'vitest';
 
 i18n.use(initReactI18next).init({
   fallbackLng: 'en',
@@ -32,5 +36,35 @@ i18n.use(initReactI18next).init({
   resources: { en: {} },
 });
 
-// Add support for jest-axe
-expect.extend(toHaveNoViolations);
+// Add support for axe
+expect.extend({
+  toHaveNoViolations(results: AxeResults) {
+    const violations = results.violations ?? [];
+
+    return {
+      pass: violations.length === 0,
+      actual: violations,
+      message() {
+        if (violations.length === 0) {
+          return '';
+        }
+
+        return `Expected no accessibility violations but received some.
+
+${violations
+  .map(
+    (violation) => `[${violation.impact}] ${violation.id}
+${violation.description}
+${violation.helpUrl}
+`,
+  )
+  .join('\n')}
+`;
+      },
+    };
+  },
+});
+
+afterEach(() => {
+  cleanup();
+});
