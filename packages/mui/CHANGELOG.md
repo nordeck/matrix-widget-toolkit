@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/mui`
 
+## 2.0.3
+
+### Patch Changes
+
+- ed8bafa: Ensure that popover elements are also visible in fullscreen at all times
+
 ## 2.0.2
 
 ### Patch Changes
