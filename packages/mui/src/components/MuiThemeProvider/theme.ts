@@ -254,7 +254,12 @@ export const baseTheme: ThemeOptions = {
         },
       },
     },
-
+    // Tooltips are fullscreen-aware
+    MuiPopover: {
+      defaultProps: {
+        container: document.fullscreenElement ?? document.body,
+      },
+    },
     // Buttons have to ripple but have the default keyboard focus ring instead
     MuiButtonBase: {
       defaultProps: {
