@@ -231,8 +231,14 @@ export const baseTheme: ThemeOptions = {
       },
     },
 
-    // Tooltips have a darker background
+    // Tooltips are fullscreen-aware
+    MuiMenu: {
+      defaultProps: {
+        container: document.fullscreenElement ?? document.body,
+      },
+    },
     MuiTooltip: {
+      // Tooltips have a darker background
       styleOverrides: {
         tooltip: ({ theme }) => ({
           fontSize: defaultTheme.typography.pxToRem(12),
@@ -240,8 +246,20 @@ export const baseTheme: ThemeOptions = {
           padding: theme.spacing(1),
         }),
       },
-    },
 
+      // Tooltips are fullscreen-aware
+      defaultProps: {
+        PopperProps: {
+          container: document.fullscreenElement ?? document.body,
+        },
+      },
+    },
+    // Tooltips are fullscreen-aware
+    MuiPopover: {
+      defaultProps: {
+        container: document.fullscreenElement ?? document.body,
+      },
+    },
     // Buttons have to ripple but have the default keyboard focus ring instead
     MuiButtonBase: {
       defaultProps: {
