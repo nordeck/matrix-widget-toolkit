@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/mui`
 
+## 2.0.4
+
+### Patch Changes
+
+- 858d70c: Apply further fixes to the popover elements in fullscreen mode
+
 ## 2.0.3
 
 ### Patch Changes
