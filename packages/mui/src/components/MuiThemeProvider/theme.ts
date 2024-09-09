@@ -109,6 +109,10 @@ function createSwitchStyleOverrides({
  */
 const defaultTheme = createTheme();
 
+function container(): Element {
+  return document.fullscreenElement ?? document.documentElement;
+}
+
 export const baseTheme: ThemeOptions = {
   shape: {
     borderRadius: 8,
@@ -234,7 +238,7 @@ export const baseTheme: ThemeOptions = {
     // Tooltips are fullscreen-aware
     MuiMenu: {
       defaultProps: {
-        container: document.fullscreenElement ?? document.body,
+        container,
       },
     },
     MuiTooltip: {
@@ -249,15 +253,25 @@ export const baseTheme: ThemeOptions = {
 
       // Tooltips are fullscreen-aware
       defaultProps: {
+        slotProps: {
+          popper: {
+            container,
+          },
+        },
         PopperProps: {
-          container: document.fullscreenElement ?? document.body,
+          container,
         },
       },
     },
     // Tooltips are fullscreen-aware
     MuiPopover: {
       defaultProps: {
-        container: document.fullscreenElement ?? document.body,
+        slotProps: {
+          root: {
+            container,
+          },
+        },
+        container,
       },
     },
     // Buttons have to ripple but have the default keyboard focus ring instead
