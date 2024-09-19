@@ -1,6 +1,7 @@
 # Matrix Widget Toolkit
 
 [![CI](https://github.com/nordeck/matrix-widget-toolkit/actions/workflows/ci.yml/badge.svg)](https://github.com/nordeck/matrix-widget-toolkit/actions/workflows/ci.yml)
+[![Matrix](https://img.shields.io/matrix/nordeck%3Amatrix.org)](https://matrix.to/#/#nordeck:matrix.org)
 
 Reusable framework for creating Matrix widgets.
 
