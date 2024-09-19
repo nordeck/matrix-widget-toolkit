@@ -23,6 +23,16 @@ This collection of packages shares the common parts of our widgets:
 - Provide a common theming that integrates well with Element (the only Matrix client that supports the `matrix-widget-api` up to now).
 - Testing support
 
+## Notable Projects
+
+Many projects have been built using this framework. Here is a list of the ones we consider to be a great showcase of what is possible to achieve with it:
+
+- [NeoBoard](https://github.com/nordeck/matrix-neoboard): A collaborative whiteboard widget for Matrix
+- [NeoDateFix](https://github.com/nordeck/matrix-meetings): A solution to organizing meetings in Matrix chat rooms and video conferences
+- [Matrix Poll](https://github.com/nordeck/matrix-poll): This widget allows to conduct polls in Matrix rooms.
+- [Matrix BarCamp](https://github.com/nordeck/matrix-barcamp): A widget for organizing Barcamps in Matrix chat rooms
+- [Beeper Widgets](https://blog.beeper.com/2023/08/22/build-widgets-with-beeper/): Widgets within the [Beeper](https://www.beeper.com/) unified messaging app.
+
 ## Getting Started
 
 This repository contains an [example widget](./example-widget-mui) that shows the usage of the packages.
