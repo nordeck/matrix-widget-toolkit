@@ -56,7 +56,7 @@ export const Image: React.FC<ImageProps> = function ({
         console.log('Error downloading file', error);
       }
     })();
-  }, [contentUrl]);
+  }, [contentUrl, widgetApi]);
 
   if (dataUrl === undefined) {
     return null;
