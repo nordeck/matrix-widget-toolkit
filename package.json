@@ -18,7 +18,7 @@
     "prettier:write": "prettier --write .",
     "depcheck": "yarn workspaces run depcheck",
     "deduplicate": "yarn-deduplicate",
-    "prepare": "husky install",
+    "prepare": "husky",
     "release": "node ./scripts/publishAllPackages.js",
     "translate": "yarn workspaces run translate",
     "generate-api-report": "yarn workspaces run generate-api-report",
