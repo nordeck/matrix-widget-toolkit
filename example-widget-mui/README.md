@@ -35,7 +35,7 @@ cd matrix-widget-toolkit && yarn install
 After this, you can run the example widget locally with the following commands:
 
 - `yarn dev:example`: Start the example app.
-- `yarn start:example`: Start the example app with a self-signed HTTPS certificate.
+- `yarn dev:example:https`: Start the example app with a self-signed HTTPS certificate.
 
 The example widget is embedded into the widget host as an iframe.
 This can cause mixed-content errors if your local widget is served _without_ HTTPS but the Element hosting it is running _with_ HTTPS.
@@ -47,4 +47,4 @@ You have multiple options to solve them:
 - Use a tunneling service such as [`localtunnel`](https://github.com/localtunnel/localtunnel) or [`ngrok`](https://ngrok.com/) to run the widget with a valid HTTPS certificate, use any Element, and start the widget via `yarn dev`.
   This way Chrome behaves closest to how it would behave in production.
 
-Then visit `http(s)://localhost:3000` and follow the instructions on the page to setup the widget.
+Then visit the printed URL and follow the instructions on the page to setup the widget.
