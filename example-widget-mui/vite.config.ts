@@ -19,9 +19,11 @@ import react from '@vitejs/plugin-react-swc';
 import { Plugin, PluginOption, defineConfig } from 'vite';
 
 const plugins: [Plugin | PluginOption] = [react()];
+let port = 5173;
 
 if (process.env.VITE_DEV_SSL === 'true') {
   plugins.push(basicSsl());
+  port = 5174;
 }
 
 // https://vitejs.dev/config/
@@ -50,6 +52,12 @@ export default defineConfig({
     fs: {
       allow: ['..'],
     },
+    port,
+    strictPort: true,
+  },
+  preview: {
+    port,
+    strictPort: true,
   },
   plugins,
   // Use the env prefix from CRA for backward compatibility.
