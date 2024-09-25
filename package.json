@@ -10,8 +10,8 @@
   "scripts": {
     "dev:example": "yarn workspace @matrix-widget-toolkit/example-widget-mui dev",
     "dev:example:https": "yarn workspace @matrix-widget-toolkit/example-widget-mui dev:https",
-    "dev:example:preview": "yarn workspace @matrix-widget-toolkit/example-widget-mui preview",
-    "dev:example:preview:https": "yarn workspace @matrix-widget-toolkit/example-widget-mui preview:https",
+    "preview:example": "yarn workspace @matrix-widget-toolkit/example-widget-mui preview",
+    "preview:example:https": "yarn workspace @matrix-widget-toolkit/example-widget-mui preview:https",
     "build": "yarn workspaces run build",
     "test": "vitest watch",
     "test:all": "vitest run --coverage",

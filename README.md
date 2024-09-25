@@ -61,8 +61,8 @@ The following commands are available:
 - `yarn dev:example`: Start the example app.
 - `yarn dev:example:https`: Start the example app with a self-signed HTTPS certificate.
 - `yarn build`: Build all packages and the example app.
-- `yarn preview`: Preview a built version of the example app. Requires `yarn build` to be run first.
-- `yarn preview:https`: Preview a built version of the example app with a self-signed HTTPS certificate. Requires `yarn build` to be run first.
+- `yarn preview:example`: Preview a built version of the example app. Requires `yarn build` to be run first.
+- `yarn preview:example:https`: Preview a built version of the example app with a self-signed HTTPS certificate. Requires `yarn build` to be run first.
 - `yarn test`: Watch all packages for changes and run tests.
 - `yarn tsc`: Check TypeScript types for errors in all packages.
 - `yarn lint`: Run eslint on all packages.
