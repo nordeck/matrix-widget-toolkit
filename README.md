@@ -52,7 +52,8 @@ You need to install Node.js (`>= 20.0.0`, prefer using an LTS version) and run
 
 After checkout, run `yarn install` to download the required dependencies
 
-> **Warning** Do not use `npm install` when working with this package.
+> [!WARNING]
+> Do not use `npm install` when working with this package.
 
 ### Available Scripts
 
