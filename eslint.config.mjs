@@ -72,9 +72,6 @@ export default ts.config(
       // Disable for the migration to prevent a lot of errors.
       // Should be revisisted
       '@typescript-eslint/ban-types': 'off',
-      // FIXME: Came in an update and should be fixed properly
-      '@typescript-eslint/no-empty-object-type': 'off',
-      '@typescript-eslint/no-wrapper-object-types': 'off',
     },
   },
   {
@@ -113,9 +110,6 @@ export default ts.config(
     rules: {
       ...testingLibrary.configs['flat/react'].rules,
       'react/display-name': 'off',
-      // FIXME: Came in an update and should be fixed properly
-      '@typescript-eslint/no-empty-object-type': 'off',
-      '@typescript-eslint/no-wrapper-object-types': 'off',
     },
   },
   eslintConfigPrettier,
