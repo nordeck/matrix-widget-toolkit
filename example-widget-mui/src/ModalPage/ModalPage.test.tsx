@@ -25,14 +25,14 @@ import { ModalResult } from './ModalDialog';
 import { ModalPage } from './ModalPage';
 
 let widgetApi: MockedWidgetApi;
-let wrapper: ComponentType<PropsWithChildren<{}>>;
+let wrapper: ComponentType<PropsWithChildren>;
 
 afterEach(() => widgetApi.stop());
 
 beforeEach(() => {
   widgetApi = mockWidgetApi();
 
-  wrapper = ({ children }: PropsWithChildren<{}>) => (
+  wrapper = ({ children }: PropsWithChildren) => (
     <WidgetApiMockProvider value={widgetApi}>
       <MemoryRouter>{children}</MemoryRouter>
     </WidgetApiMockProvider>

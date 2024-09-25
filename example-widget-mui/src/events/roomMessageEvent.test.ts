@@ -50,14 +50,14 @@ describe('isValidRoomMessageEvent', () => {
     ).toBe(true);
   });
 
-  it.each<Object>([
+  it.each<object>([
     { msgtype: undefined },
     { msgtype: null },
     { msgtype: 5 },
     { body: undefined },
     { body: null },
     { body: 5 },
-  ])('should reject event with patch %j', (patch: Object) => {
+  ])('should reject event with patch %j', (patch: object) => {
     expect(
       isValidRoomMessageEvent({
         content: {

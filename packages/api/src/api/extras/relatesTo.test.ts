@@ -114,11 +114,11 @@ describe('isValidEventWithRelatesTo', () => {
     ).toBe(true);
   });
 
-  it.each<Object>([
+  it.each<object>([
     { 'm.relates_to': undefined },
     { 'm.relates_to': null },
     { 'm.relates_to': 'text' },
-  ])('should reject event with patch %j', (patch: Object) => {
+  ])('should reject event with patch %j', (patch: object) => {
     expect(
       isValidEventWithRelatesTo({
         content: {
@@ -137,14 +137,14 @@ describe('isValidEventWithRelatesTo', () => {
     ).toBe(false);
   });
 
-  it.each<Object>([
+  it.each<object>([
     { rel_type: undefined },
     { rel_type: null },
     { rel_type: 5 },
     { event_id: undefined },
     { event_id: null },
     { event_id: 5 },
-  ])('should reject relation with patch %j', (patch: Object) => {
+  ])('should reject relation with patch %j', (patch: object) => {
     expect(
       isValidEventWithRelatesTo({
         content: {

@@ -31,7 +31,7 @@ import {
 } from './testUtils';
 
 let widgetApi: MockedWidgetApi;
-let wrapper: ComponentType<PropsWithChildren<{}>>;
+let wrapper: ComponentType<PropsWithChildren>;
 
 afterEach(() => widgetApi.stop());
 
@@ -54,7 +54,7 @@ beforeEach(() => {
   );
   widgetApi.mockSendStateEvent(mockMessageCollectionEvent());
 
-  wrapper = ({ children }: PropsWithChildren<{}>) => (
+  wrapper = ({ children }: PropsWithChildren) => (
     <WidgetApiMockProvider value={widgetApi}>
       <StoreProvider>
         <MemoryRouter>{children}</MemoryRouter>

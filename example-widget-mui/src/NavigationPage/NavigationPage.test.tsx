@@ -21,10 +21,10 @@ import { MemoryRouter } from 'react-router-dom';
 import { NavigationPage } from './NavigationPage';
 
 describe('<NavigationPage>', () => {
-  let wrapper: ComponentType<PropsWithChildren<{}>>;
+  let wrapper: ComponentType<PropsWithChildren>;
 
   beforeEach(() => {
-    wrapper = ({ children }: PropsWithChildren<{}>) => (
+    wrapper = ({ children }: PropsWithChildren) => (
       <MemoryRouter>{children}</MemoryRouter>
     );
   });

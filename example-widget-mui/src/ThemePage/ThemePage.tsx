@@ -99,7 +99,7 @@ export const ThemePage = (): ReactElement => {
   );
 };
 
-export function DemoContainer({ children }: PropsWithChildren<{}>) {
+export function DemoContainer({ children }: PropsWithChildren) {
   return (
     <Box display="flex" flexWrap="wrap" gap={1} m={1}>
       {children}

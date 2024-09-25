@@ -34,12 +34,12 @@ describe('isValidUploadedImage', () => {
     ).toBe(true);
   });
 
-  it.each<Object>([
+  it.each<object>([
     { name: undefined, size: undefined, url: undefined },
     { name: undefined, size: 564, url: 'https://example.org' },
     { name: 'image', size: undefined, url: 'https://example.org' },
     { name: 'image', size: undefined, url: undefined },
-  ])('should reject event with patch %j', (patch: Object) => {
+  ])('should reject event with patch %j', (patch: object) => {
     expect(
       isValidUploadedImage({
         content: {
