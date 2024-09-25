@@ -16,14 +16,9 @@ The container has the following features:
 
 ## Usage
 
-This container works best with widgets that are build in the latest Create React App (CRA) version (we recommend `>=5.0.0`).
-
 ### Preparations
 
-1. Make sure your application doesn't rely on `unsafe-inline`.
-   CRA provides the [`INLINE_RUNTIME_CHUNK=false` option](https://create-react-app.dev/docs/advanced-configuration/) to make it compatible with the environment.
-
-2. Add `<!--#echo var="__INJECT_SCRIPT_TAG__" encoding="none"-->` before the `</head>` tag in your `index.html`:
+1. Add `<!--#echo var="__INJECT_SCRIPT_TAG__" encoding="none"-->` before the `</head>` tag in your `index.html`:
 
    ```diff
    <html>
@@ -37,9 +32,10 @@ This container works best with widgets that are build in the latest Create React
    </html>
    ```
 
-3. Make sure that your build artifacts are in the `static/` folder of your build directory have a `hash` in its name. This is the default for CRA.
+2. Depending on the libraries in use it may be necessary to pass the CSP nonce to them.
+   See the [example widget's index page](../../example-widget-mui/index.html) setting it up for webpack.
 
-4. Create a new Dockerfile in your repository:
+3. Create a new Dockerfile in your repository:
 
    ```Dockerfile
    # Use the latest version of the base image
@@ -66,7 +62,7 @@ This container works best with widgets that are build in the latest Create React
 
 ### Build your image
 
-1. Create a production build of your widget (`npm run build` / `yarn build` in CRA).
+1. Create a production build of your widget: `yarn build`.
 
 2. Build (`docker build .`).
 
