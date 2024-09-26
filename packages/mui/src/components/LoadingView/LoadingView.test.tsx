@@ -15,7 +15,8 @@
  */
 
 import { render, screen } from '@testing-library/react';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
+import { describe, expect, it } from 'vitest';
 import { LoadingView } from './LoadingView';
 
 describe('<LoadingView/>', () => {
@@ -29,7 +30,7 @@ describe('<LoadingView/>', () => {
     const { container } = render(<LoadingView />);
 
     expect(await screen.findByText('Loading…')).toBeInTheDocument();
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 
   it('should not render a loading animation before a certain time is over', () => {

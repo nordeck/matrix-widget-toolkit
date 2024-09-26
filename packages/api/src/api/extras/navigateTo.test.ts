@@ -14,18 +14,19 @@
  * limitations under the License.
  */
 
+import { beforeEach, describe, expect, it, Mocked, vi } from 'vitest';
 import { WidgetApi } from '../types';
 import { navigateToRoom } from './navigateTo';
 
 describe('navigateToRoom', () => {
-  let widgetApi: jest.Mocked<WidgetApi>;
+  let widgetApi: Mocked<WidgetApi>;
 
   beforeEach(() => {
     widgetApi = {
       widgetId: 'widget-id',
       widgetParameters: { isOpenedByClient: true },
-      navigateTo: jest.fn(),
-    } as Partial<WidgetApi> as jest.Mocked<WidgetApi>;
+      navigateTo: vi.fn(),
+    } as Partial<WidgetApi> as Mocked<WidgetApi>;
   });
 
   it('should navigate', async () => {

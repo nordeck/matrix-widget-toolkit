@@ -16,19 +16,20 @@
 
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
 import { useCopyToClipboard as useCopyToClipboardMocked } from 'react-use';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { CopyableCode } from './CopyableCode';
 
-jest.mock('react-use');
+vi.mock('react-use');
 
-const useCopyToClipboard = jest.mocked(useCopyToClipboardMocked);
+const useCopyToClipboard = vi.mocked(useCopyToClipboardMocked);
 
 describe('<CopyableCode/>', () => {
-  const copyToClipboard = jest.fn();
+  const copyToClipboard = vi.fn();
 
   beforeEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
 
     useCopyToClipboard.mockReturnValue([
       { noUserInteraction: false },
@@ -65,6 +66,6 @@ describe('<CopyableCode/>', () => {
   it('should have no accessibility violations', async () => {
     const { container } = render(<CopyableCode code="Hello World" />);
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 });

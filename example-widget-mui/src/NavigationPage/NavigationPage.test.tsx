@@ -15,9 +15,10 @@
  */
 
 import { render, screen, within } from '@testing-library/react';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
 import { ComponentType, PropsWithChildren } from 'react';
 import { MemoryRouter } from 'react-router-dom';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { NavigationPage } from './NavigationPage';
 
 describe('<NavigationPage>', () => {
@@ -42,6 +43,6 @@ describe('<NavigationPage>', () => {
   it('should have no accessibility violations', async () => {
     const { container } = render(<NavigationPage />, { wrapper });
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 });

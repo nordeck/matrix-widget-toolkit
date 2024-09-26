@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+
 // lazily import the file-under-test and don't have any additional imports.
-// eslint-disable-next-line jest/no-export
 export {};
 
 describe('getEnvironment', () => {
@@ -31,7 +32,7 @@ describe('getEnvironment', () => {
 
     // reset window
     delete window.__ENVIRONMENT__;
-    jest.resetModules();
+    vi.resetModules();
   });
 
   it('should return variable from window', async () => {

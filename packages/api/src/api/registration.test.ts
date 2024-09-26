@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { beforeEach, describe, expect, it, Mocked, vi } from 'vitest';
 import {
   generateWidgetRegistrationUrl,
   hasRequiredWidgetParameters,
@@ -127,15 +128,15 @@ describe('generateWidgetRegistrationUrl', () => {
 });
 
 describe('repairWidgetRegistration', () => {
-  let widgetApi: jest.Mocked<WidgetApi>;
+  let widgetApi: Mocked<WidgetApi>;
 
   beforeEach(() => {
     widgetApi = {
       widgetId: 'my-widget-id',
-      requestCapabilities: jest.fn(),
-      receiveSingleStateEvent: jest.fn(),
-      sendStateEvent: jest.fn(),
-    } as Partial<jest.Mocked<WidgetApi>> as jest.Mocked<WidgetApi>;
+      requestCapabilities: vi.fn(),
+      receiveSingleStateEvent: vi.fn(),
+      sendStateEvent: vi.fn(),
+    } as Partial<Mocked<WidgetApi>> as Mocked<WidgetApi>;
 
     mockLocation('https://example.com/');
   });

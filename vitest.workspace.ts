@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Nordeck IT + Consulting GmbH
+ * Copyright 2024 Nordeck IT + Consulting GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,5 @@
  * limitations under the License.
  */
 
-/*
- * This is the root jest config that includes all sub projects to allow
- * running jest from the root directory.
- */
-module.exports = {
-  // Container tests are explicity not included, as they can not be run
-  // without manually starting a docker container.
-  projects: ['<rootDir>/example-widget-mui', '<rootDir>/packages/*'],
-};
+// These are all the packages using vitest. The containers folder is excluded since it is using playwright.
+export default ['example-widget-mui', 'packages/*'];

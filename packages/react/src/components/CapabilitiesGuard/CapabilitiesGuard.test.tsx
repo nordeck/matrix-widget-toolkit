@@ -23,11 +23,12 @@ import {
   PropsWithChildren,
   ReactNode,
 } from 'react';
+import { beforeEach, describe, expect, it, Mocked, vi } from 'vitest';
 import { WidgetApiMockProvider } from '../WidgetApiProvider';
 import { CapabilitiesGuard } from './CapabilitiesGuard';
 
 describe('<CapabilitiesGuard>', () => {
-  let widgetApi: jest.Mocked<WidgetApi>;
+  let widgetApi: Mocked<WidgetApi>;
   let CapabilitiesGuardWithUi: ComponentType<PropsWithChildren<{}>>;
   const wrapper = ({ children }: { children: ReactNode }) => (
     <WidgetApiMockProvider value={widgetApi}>{children}</WidgetApiMockProvider>
@@ -37,9 +38,9 @@ describe('<CapabilitiesGuard>', () => {
     widgetApi = {
       widgetId: 'widget-id',
       widgetParameters: { isOpenedByClient: true },
-      requestCapabilities: jest.fn(),
-      hasCapabilities: jest.fn(),
-    } as Partial<jest.Mocked<WidgetApi>> as jest.Mocked<WidgetApi>;
+      requestCapabilities: vi.fn(),
+      hasCapabilities: vi.fn(),
+    } as Partial<Mocked<WidgetApi>> as Mocked<WidgetApi>;
 
     const LoadingComponent = () => <div>Loading</div>;
     const MissingCapabilitiesComponent = ({

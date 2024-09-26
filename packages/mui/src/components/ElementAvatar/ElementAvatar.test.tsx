@@ -15,7 +15,8 @@
  */
 
 import { render, screen } from '@testing-library/react';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
+import { describe, expect, it } from 'vitest';
 import { ElementAvatar } from './ElementAvatar';
 
 describe('<ElementAvatar>', () => {
@@ -48,7 +49,7 @@ describe('<ElementAvatar>', () => {
       screen.findByRole('presentation', { hidden: true }),
     ).resolves.toBeInTheDocument();
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 
   it('should render avatar url', async () => {

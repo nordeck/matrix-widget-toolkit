@@ -18,16 +18,50 @@
 // allows you to do things like:
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
-import '@testing-library/jest-dom';
-import { toHaveNoViolations } from 'jest-axe';
-// Make sure to initialize i18n (see mock below)
+import '@testing-library/jest-dom/vitest';
+
+import { cleanup } from '@testing-library/react';
 import { TextDecoder, TextEncoder } from 'util';
+import { afterEach, expect, vi } from 'vitest';
+
+// Make sure to initialize i18n (see mock below)
+import { AxeResults } from 'axe-core';
 import './i18n';
 
+// Add support for axe
+expect.extend({
+  toHaveNoViolations(results: AxeResults) {
+    const violations = results.violations ?? [];
+
+    return {
+      pass: violations.length === 0,
+      actual: violations,
+      message() {
+        if (violations.length === 0) {
+          return '';
+        }
+
+        return `Expected no accessibility violations but received some.
+
+${violations
+  .map(
+    (violation) => `[${violation.impact}] ${violation.id}
+${violation.description}
+${violation.helpUrl}
+`,
+  )
+  .join('\n')}
+`;
+      },
+    };
+  },
+});
+
 // Use a different configuration for i18next during tests
-jest.mock('./i18n', () => {
-  const i18n = jest.requireActual('i18next');
-  const { initReactI18next } = jest.requireActual('react-i18next');
+vi.mock('./i18n', async () => {
+  const i18n = await vi.importActual<typeof import('i18next')>('i18next');
+  const { initReactI18next } =
+    await vi.importActual<typeof import('react-i18next')>('react-i18next');
 
   i18n.use(initReactI18next).init({
     fallbackLng: 'en',
@@ -40,9 +74,10 @@ jest.mock('./i18n', () => {
   return i18n;
 });
 
-// Add support for jest-axe
-expect.extend(toHaveNoViolations);
-
 // Polyfills required for jsdom
 global.TextEncoder = TextEncoder as typeof global.TextEncoder;
 global.TextDecoder = TextDecoder as typeof global.TextDecoder;
+
+afterEach(() => {
+  cleanup();
+});
