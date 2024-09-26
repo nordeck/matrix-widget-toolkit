@@ -1,7 +1,7 @@
 # Matrix Widget Toolkit
 
 [![CI](https://github.com/nordeck/matrix-widget-toolkit/actions/workflows/ci.yml/badge.svg)](https://github.com/nordeck/matrix-widget-toolkit/actions/workflows/ci.yml)
-[![Matrix](https://img.shields.io/badge/%5Bmatrix%5D-%23nordeck%3Amatrix.org-blue)](https://matrix.to/#/#nordeck:matrix.org)
+[![Matrix](https://img.shields.io/matrix/nordeck%3Amatrix.org)](https://matrix.to/#/#nordeck:matrix.org)
 
 Reusable framework for creating Matrix widgets.
 
@@ -50,9 +50,10 @@ You need to install Node.js (`>= 20.0.0`, prefer using an LTS version) and run
 
 ### Installation
 
-After checkout, run `yarn install` to download the required dependencies
+After checkout, run `yarn install` to download the required dependencies.
 
-> **Warning** Do not use `npm install` when working with this package.
+> [!WARNING]
+> Do not use `npm install` when working with this package.
 
 ### Available Scripts
 
