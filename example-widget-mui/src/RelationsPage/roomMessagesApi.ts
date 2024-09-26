@@ -200,7 +200,7 @@ export const roomMessagesApi = baseApi.injectEndpoints({
     }),
 
     /** Send a new message to the room and register it in the message collection */
-    sendMessage: builder.mutation<{}, { message: string }>({
+    sendMessage: builder.mutation<EmptyObject, { message: string }>({
       // do the mutation
       queryFn: async ({ message }, { extra }) => {
         const { widgetApi } = extra as ThunkExtraArgument;
@@ -253,7 +253,10 @@ export const roomMessagesApi = baseApi.injectEndpoints({
     }),
 
     /** Send a reaction to another event */
-    sendReaction: builder.mutation<{}, { eventId: string; reaction: string }>({
+    sendReaction: builder.mutation<
+      EmptyObject,
+      { eventId: string; reaction: string }
+    >({
       // do the mutation
       queryFn: async ({ eventId, reaction }, { extra }) => {
         const { widgetApi } = extra as ThunkExtraArgument;
@@ -282,7 +285,7 @@ export const roomMessagesApi = baseApi.injectEndpoints({
     }),
 
     /** Redact an event */
-    sendRedaction: builder.mutation<{}, { eventId: string }>({
+    sendRedaction: builder.mutation<EmptyObject, { eventId: string }>({
       queryFn: async ({ eventId }, { extra }) => {
         const { widgetApi } = extra as ThunkExtraArgument;
 
@@ -304,7 +307,10 @@ export const roomMessagesApi = baseApi.injectEndpoints({
     }),
 
     /** Remove a message from the collection */
-    dropMessageFromCollection: builder.mutation<{}, { eventId: string }>({
+    dropMessageFromCollection: builder.mutation<
+      EmptyObject,
+      { eventId: string }
+    >({
       // do the mutation
       queryFn: async ({ eventId }, { extra }) => {
         const { widgetApi } = extra as ThunkExtraArgument;

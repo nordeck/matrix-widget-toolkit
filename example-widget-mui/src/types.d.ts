@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Nordeck IT + Consulting GmbH
+ * Copyright 2024 Nordeck IT + Consulting GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,8 @@
  * limitations under the License.
  */
 
-import { useWidgetApi } from '@matrix-widget-toolkit/react';
-import { PropsWithChildren, ReactElement, useState } from 'react';
-import { Provider } from 'react-redux';
-import { createStore } from './store';
-
 /**
- * Create and provide the redux store
+ * In TypeScript {} means any object.
+ * Define an explicit type for an empty object here.
  */
-export function StoreProvider({ children }: PropsWithChildren): ReactElement {
-  const widgetApi = useWidgetApi();
-  const [store] = useState(() => createStore({ widgetApi }));
-
-  return <Provider store={store}>{children}</Provider>;
-}
+type EmptyObject = Record<never, never>;

@@ -47,7 +47,7 @@ export type MuiCapabilitiesGuardProps = PropsWithChildren<{
 export function MuiThemeProvider({ children, }: MuiThemeProviderProps): ReactElement;
 
 // @public
-export type MuiThemeProviderProps = PropsWithChildren<{}>;
+export type MuiThemeProviderProps = PropsWithChildren;
 
 // @public
 export function MuiWidgetApiProvider({ widgetRegistration, widgetApiPromise, children, }: MuiWidgetApiProviderProps): ReactElement;
