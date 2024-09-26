@@ -56,7 +56,7 @@ export default defineConfig({
     strictPort: true,
   },
   preview: {
-    port,
+    port: port - 1000,
     strictPort: true,
   },
   plugins,
