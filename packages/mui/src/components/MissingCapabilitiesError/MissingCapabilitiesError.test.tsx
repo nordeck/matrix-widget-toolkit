@@ -16,12 +16,13 @@
 
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
+import { describe, expect, it, vi } from 'vitest';
 import { MissingCapabilitiesError } from './MissingCapabilitiesError';
 
 describe('<MissingCapabilitiesError>', () => {
   it('should render without exploding', () => {
-    render(<MissingCapabilitiesError onRetry={jest.fn()} />);
+    render(<MissingCapabilitiesError onRetry={vi.fn()} />);
 
     expect(screen.getByText('Missing capabilities')).toBeInTheDocument();
     expect(screen.getByText(/the minimum capabilities/i)).toBeInTheDocument();
@@ -29,14 +30,14 @@ describe('<MissingCapabilitiesError>', () => {
 
   it('should have no accessibility violations', async () => {
     const { container } = render(
-      <MissingCapabilitiesError onRetry={jest.fn()} />,
+      <MissingCapabilitiesError onRetry={vi.fn()} />,
     );
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 
   it('should re-request capabilities', async () => {
-    const onRetry = jest.fn();
+    const onRetry = vi.fn();
     render(<MissingCapabilitiesError onRetry={onRetry} />);
 
     await userEvent.click(

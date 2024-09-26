@@ -14,19 +14,22 @@
  * limitations under the License.
  */
 
+import { describe, expect, it, vi } from 'vitest';
 import { getEnvironment } from '../MuiThemeProvider';
 import { createAvatarUrl } from './createAvatarUrl';
 
-jest.mock('../MuiThemeProvider', () => ({
-  ...jest.requireActual('../MuiThemeProvider'),
-  getEnvironment: jest.fn(),
+vi.mock('../MuiThemeProvider', async () => ({
+  ...(await vi.importActual<typeof import('../MuiThemeProvider')>(
+    '../MuiThemeProvider',
+  )),
+  getEnvironment: vi.fn(),
 }));
 
 describe('createAvatarUrl', () => {
   it('should generate avatar URL from non mxc: URL', () => {
-    jest
-      .mocked(getEnvironment)
-      .mockImplementation((_name, defaultValue) => defaultValue);
+    vi.mocked(getEnvironment).mockImplementation(
+      (_name, defaultValue) => defaultValue,
+    );
 
     expect(
       createAvatarUrl(
@@ -38,9 +41,9 @@ describe('createAvatarUrl', () => {
   });
 
   it('should generate avatar URL using default home server', () => {
-    jest
-      .mocked(getEnvironment)
-      .mockImplementation((_name, defaultValue) => defaultValue);
+    vi.mocked(getEnvironment).mockImplementation(
+      (_name, defaultValue) => defaultValue,
+    );
 
     expect(createAvatarUrl('mxc://matrix.org/KbhRFOIJekHQpMVIZGpuNxBG')).toBe(
       'https://matrix-client.matrix.org/_matrix/media/r0/thumbnail/matrix.org/KbhRFOIJekHQpMVIZGpuNxBG?width=60&height=60&method=crop',
@@ -48,13 +51,11 @@ describe('createAvatarUrl', () => {
   });
 
   it('should generate avatar URL using custom home server', () => {
-    jest
-      .mocked(getEnvironment)
-      .mockImplementation((name, defaultValue) =>
-        name === 'REACT_APP_HOME_SERVER_URL'
-          ? 'https://example.com'
-          : defaultValue,
-      );
+    vi.mocked(getEnvironment).mockImplementation((name, defaultValue) =>
+      name === 'REACT_APP_HOME_SERVER_URL'
+        ? 'https://example.com'
+        : defaultValue,
+    );
 
     expect(createAvatarUrl('mxc://matrix.org/KbhRFOIJekHQpMVIZGpuNxBG')).toBe(
       'https://example.com/_matrix/media/r0/thumbnail/matrix.org/KbhRFOIJekHQpMVIZGpuNxBG?width=60&height=60&method=crop',

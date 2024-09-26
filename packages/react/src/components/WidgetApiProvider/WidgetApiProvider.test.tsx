@@ -27,18 +27,27 @@ import {
   PropsWithChildren,
   useEffect,
 } from 'react';
+import {
+  afterEach,
+  beforeEach,
+  describe,
+  expect,
+  it,
+  Mocked,
+  vi,
+} from 'vitest';
 import { useWidgetApi } from './context';
 import { WidgetApiProvider } from './WidgetApiProvider';
 
-jest.mock('@matrix-widget-toolkit/api');
+vi.mock('@matrix-widget-toolkit/api');
 
-const hasRequiredWidgetParameters = jest.mocked(
+const hasRequiredWidgetParameters = vi.mocked(
   hasRequiredWidgetParametersMocked,
 );
-const extractWidgetParameters = jest.mocked(extractWidgetParametersMocked);
+const extractWidgetParameters = vi.mocked(extractWidgetParametersMocked);
 
 describe('WidgetApiProvider', () => {
-  let widgetApi: jest.Mocked<WidgetApi>;
+  let widgetApi: Mocked<WidgetApi>;
   let widgetApiPromise: Promise<WidgetApi>;
   let WidgetApiProviderWithUi: ComponentType<
     PropsWithChildren<{
@@ -51,10 +60,10 @@ describe('WidgetApiProvider', () => {
     widgetApi = {
       widgetId: 'widget-id',
       widgetParameters: { isOpenedByClient: true },
-      rerequestInitialCapabilities: jest.fn(),
-      hasInitialCapabilities: jest.fn(),
-      sendRoomEvent: jest.fn(),
-    } as Partial<jest.Mocked<WidgetApi>> as jest.Mocked<WidgetApi>;
+      rerequestInitialCapabilities: vi.fn(),
+      hasInitialCapabilities: vi.fn(),
+      sendRoomEvent: vi.fn(),
+    } as Partial<Mocked<WidgetApi>> as Mocked<WidgetApi>;
 
     widgetApiPromise = Promise.resolve(widgetApi);
 

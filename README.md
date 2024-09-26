@@ -10,7 +10,7 @@ This repository contains multiple [packages](./packages) that provide reusable c
 - [`@matrix-widget-toolkit/api`](./packages/api): A package that wraps [`matrix-widget-api`](https://github.com/matrix-org/matrix-widget-api) to provide a more convenient API.
 - [`@matrix-widget-toolkit/react`](./packages/react): A package that provides a Widget API integration for React apps.
 - [`@matrix-widget-toolkit/mui`](./packages/mui): A package that provides a matching Mui theme for Element.
-- [`@matrix-widget-toolkit/testing`](./packages/testing): Testing support for `@matrix-widget-toolkit/api`.
+- [`@matrix-widget-toolkit/testing`](./packages/testing): Vitest Testing support for `@matrix-widget-toolkit/api`.
 - [`@matrix-widget-toolkit/widget-server`](./containers/widget-server): A container to host a Matrix widget in a production environment.
 - More packages to follow…
 
@@ -59,8 +59,10 @@ After checkout, run `yarn install` to download the required dependencies
 The following commands are available:
 
 - `yarn dev:example`: Start the example app.
-- `yarn start:example`: Start the example app with a self-signed HTTPS certificate.
+- `yarn dev:example:https`: Start the example app with a self-signed HTTPS certificate.
 - `yarn build`: Build all packages and the example app.
+- `yarn preview:example`: Preview a built version of the example app. Requires `yarn build` to be run first.
+- `yarn preview:example:https`: Preview a built version of the example app with a self-signed HTTPS certificate. Requires `yarn build` to be run first.
 - `yarn test`: Watch all packages for changes and run tests.
 - `yarn tsc`: Check TypeScript types for errors in all packages.
 - `yarn lint`: Run eslint on all packages.

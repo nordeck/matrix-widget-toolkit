@@ -18,10 +18,11 @@ import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
 import { EventDirection, WidgetEventCapability } from 'matrix-widget-api';
 import { ComponentType, PropsWithChildren, act } from 'react';
 import { MemoryRouter } from 'react-router-dom';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { StoreProvider } from '../store';
 import { PowerLevelsPage } from './PowerLevelsPage';
 
@@ -121,7 +122,7 @@ describe('<PowerLevelsPage />', () => {
 
     // TODO: this should not be needed to wrap in act, we should review this later
     await act(async () => {
-      expect(await axe(container)).toHaveNoViolations();
+      expect(await axe.run(container)).toHaveNoViolations();
     });
   });
 

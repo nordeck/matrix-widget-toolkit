@@ -29,6 +29,7 @@ import {
   TypeText,
 } from '@mui/material';
 import { deepmerge } from '@mui/utils';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { baseTheme, lightHighContrastTheme } from './theme';
 
 type TextColor = keyof TypeText;

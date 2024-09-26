@@ -17,12 +17,12 @@
 import { fixupPluginRules } from '@eslint/compat';
 import js from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
-import jest from 'eslint-plugin-jest';
 import notice from 'eslint-plugin-notice';
 import pluginPromise from 'eslint-plugin-promise';
 import react from 'eslint-plugin-react';
 import hooksPlugin from 'eslint-plugin-react-hooks';
 import testingLibrary from 'eslint-plugin-testing-library';
+import vitest from 'eslint-plugin-vitest';
 import path from 'path';
 import ts from 'typescript-eslint';
 import { fileURLToPath } from 'url';
@@ -36,7 +36,6 @@ export default ts.config(
       '**/lib/**',
       '**/build/**',
       '**/craco.config.js',
-      '**/jest.config.js',
       '**/i18next-parser.config.js',
       'scripts/prepack.js',
       'scripts/postpack.js',
@@ -56,10 +55,8 @@ export default ts.config(
   {
     plugins: {
       notice,
-      jest,
     },
     rules: {
-      ...jest.configs['flat/recommended'].rules,
       'notice/notice': [
         'error',
         {
@@ -101,6 +98,7 @@ export default ts.config(
   {
     files: ['**/*.test.*'],
     plugins: {
+      vitest,
       // See https://github.com/testing-library/eslint-plugin-testing-library/issues/899#issuecomment-2121272355 and
       // https://github.com/testing-library/eslint-plugin-testing-library/issues/924
       'testing-library': fixupPluginRules({
@@ -108,6 +106,7 @@ export default ts.config(
       }),
     },
     rules: {
+      ...vitest.configs.recommended.rules,
       ...testingLibrary.configs['flat/react'].rules,
       'react/display-name': 'off',
     },

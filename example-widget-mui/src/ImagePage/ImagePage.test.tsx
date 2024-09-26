@@ -17,7 +17,7 @@
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { render, screen, waitFor } from '@testing-library/react';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
 import {
   EventDirection,
   WidgetApiFromWidgetAction,
@@ -25,6 +25,7 @@ import {
 } from 'matrix-widget-api';
 import { ComponentType, PropsWithChildren, act } from 'react';
 import { MemoryRouter } from 'react-router-dom';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ROOM_EVENT_UPLOADED_IMAGE } from '../events';
 import { StoreProvider } from '../store';
 import { ImagePage } from './ImagePage';
@@ -37,7 +38,7 @@ afterEach(() => widgetApi.stop());
 beforeEach(() => {
   widgetApi = mockWidgetApi();
 
-  global.URL.createObjectURL = jest.fn().mockReturnValue('http://...');
+  global.URL.createObjectURL = vi.fn().mockReturnValue('http://...');
 
   wrapper = ({ children }: PropsWithChildren) => (
     <WidgetApiMockProvider value={widgetApi}>
@@ -49,7 +50,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  jest.restoreAllMocks();
+  vi.restoreAllMocks();
 });
 
 describe('<ImagePage>', () => {
@@ -84,7 +85,7 @@ describe('<ImagePage>', () => {
 
     // TODO: this should not be needed to wrap in act, we should review this later
     await act(async () => {
-      expect(await axe(container)).toHaveNoViolations();
+      expect(await axe.run(container)).toHaveNoViolations();
     });
   });
 

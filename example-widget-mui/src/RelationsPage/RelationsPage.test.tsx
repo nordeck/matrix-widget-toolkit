@@ -18,10 +18,10 @@ import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
-import { ComponentType, PropsWithChildren } from 'react';
-import { act } from 'react-dom/test-utils';
+import axe from 'axe-core';
+import { ComponentType, PropsWithChildren, act } from 'react';
 import { MemoryRouter } from 'react-router-dom';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { StoreProvider } from '../store';
 import { RelationsPage } from './RelationsPage';
 import {
@@ -112,7 +112,7 @@ describe('<RelationsPage />', () => {
 
     // TODO: this should not be needed to wrap in act, we should review this later
     await act(async () => {
-      expect(await axe(container)).toHaveNoViolations();
+      expect(await axe.run(container)).toHaveNoViolations();
     });
   });
 

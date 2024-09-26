@@ -15,18 +15,22 @@
  */
 
 import { render, screen } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
 import { MuiThemeProvider, chooseTheme } from './MuiThemeProvider';
 import { getEnvironment as getEnvironmentMocked } from './environment';
 import { darkTheme, lightHighContrastTheme, lightTheme } from './theme';
 
-jest.mock('./environment', () => ({
-  ...jest.requireActual('./environment'),
-  getEnvironment: jest
+vi.mock('./environment', async () => ({
+  ...(await vi.importActual<typeof import('./environment')>('./environment')),
+  getEnvironment: vi
     .fn()
-    .mockImplementation(jest.requireActual('./environment').getEnvironment),
+    .mockImplementation(
+      (await vi.importActual<typeof import('./environment')>('./environment'))
+        .getEnvironment,
+    ),
 }));
 
-const getEnvironment = jest.mocked(getEnvironmentMocked);
+const getEnvironment = vi.mocked(getEnvironmentMocked);
 
 describe('<MuiThemeProvider/>', () => {
   it('should render without exploding', () => {
