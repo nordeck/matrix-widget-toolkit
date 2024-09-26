@@ -33,7 +33,7 @@ The container has the following features:
    ```
 
 2. Depending on the libraries in use it may be necessary to pass the CSP nonce to them.
-   See the [example widget's index page](../../example-widget-mui/index.html) setting it up for webpack.
+   See the [example widget's index page](../../example-widget-mui/index.html).
 
 3. Create a new Dockerfile in your repository:
 
