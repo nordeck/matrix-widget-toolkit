@@ -12,11 +12,11 @@
   },
   "type": "module",
   "devDependencies": {
-    "@types/lodash": "^4.17.7",
-    "@types/node": "^22.5.3",
-    "@vitest/coverage-v8": "^2.0.5",
+    "@types/lodash": "^4.17.10",
+    "@types/node": "^22.7.4",
+    "@vitest/coverage-v8": "^2.1.2",
     "typescript": "^5.5.4",
-    "vite": "^5.4.3"
+    "vite": "^5.4.8"
   },
   "scripts": {
     "build": "tsc && rollup --config ../../rollup.config.mjs",
