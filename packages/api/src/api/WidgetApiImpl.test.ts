@@ -2173,7 +2173,7 @@ describe('WidgetApiImpl', () => {
           {
             user_id: '@user-id',
             display_name: 'User',
-            avatar_url: 'mxc://...',
+            avatar_url: 'mxc://example.com/imageACSshaw',
           },
         ],
       });
@@ -2182,7 +2182,11 @@ describe('WidgetApiImpl', () => {
         widgetApi.searchUserDirectory('user', { limit: 5 }),
       ).resolves.toEqual({
         results: [
-          { userId: '@user-id', displayName: 'User', avatarUrl: 'mxc://...' },
+          {
+            userId: '@user-id',
+            displayName: 'User',
+            avatarUrl: 'mxc://example.com/imageACSshaw',
+          },
         ],
       });
       expect(matrixWidgetApi.searchUserDirectory).toHaveBeenCalledWith(
@@ -2222,7 +2226,7 @@ describe('WidgetApiImpl', () => {
   describe('uploadFile', () => {
     it('should upload a file', async () => {
       matrixWidgetApi.uploadFile.mockResolvedValue({
-        content_uri: 'msx//:example',
+        content_uri: 'mxc://example.com/imageACSshaw',
       });
 
       const file = new File(['file content'], 'test-image.png', {
@@ -2230,7 +2234,7 @@ describe('WidgetApiImpl', () => {
       });
 
       await expect(widgetApi.uploadFile(file)).resolves.toEqual({
-        content_uri: 'msx//:example',
+        content_uri: 'mxc://example.com/imageACSshaw',
       });
       expect(matrixWidgetApi.uploadFile).toHaveBeenCalled();
     });

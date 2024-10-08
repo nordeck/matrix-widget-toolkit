@@ -25,7 +25,7 @@ describe('<ElementAvatar>', () => {
       <ElementAvatar
         userId="@user-alice"
         displayName="Alice"
-        avatarUrl={'mxc://alice'}
+        avatarUrl={'mxc://example.com/imageAlice'}
       />,
     );
 
@@ -41,7 +41,7 @@ describe('<ElementAvatar>', () => {
       <ElementAvatar
         userId="@user-alice"
         displayName="Alice"
-        avatarUrl={'mxc://alice'}
+        avatarUrl={'mxc://example.com/imageAlice'}
       />,
     );
 
@@ -57,7 +57,7 @@ describe('<ElementAvatar>', () => {
       <ElementAvatar
         userId="@user-alice"
         displayName="Alice"
-        avatarUrl={'mxc://alice'}
+        avatarUrl={'mxc://example.com/imageAlice'}
       />,
     );
 
@@ -65,7 +65,7 @@ describe('<ElementAvatar>', () => {
       screen.findByRole('presentation', { hidden: true }),
     ).resolves.toHaveAttribute(
       'src',
-      expect.stringMatching(/\/_matrix\/media\/r0\/thumbnail\/alice/i),
+      expect.stringMatching(/\/_matrix\/media\/r0\/thumbnail\/.*\/imageAlice/i),
     );
   });
 
