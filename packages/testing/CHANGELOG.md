@@ -1,5 +1,16 @@
 # `@matrix-widget-toolkit/testing`
 
+## 3.0.0
+
+### Major Changes
+
+- f00e7cf: Migrate to vitest for testing. We do not support jest any further
+
+### Patch Changes
+
+- Updated dependencies [f00e7cf]
+  - @matrix-widget-toolkit/api@3.4.1
+
 ## 2.5.0
 
 ### Minor Changes
