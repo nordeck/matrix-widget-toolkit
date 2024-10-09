@@ -123,7 +123,7 @@ describe('<ImagePage>', () => {
     widgetApi.sendRoomEvent(ROOM_EVENT_UPLOADED_IMAGE, {
       name: 'image.png',
       size: 123,
-      url: 'mxc://...',
+      url: 'mxc://example.com/imageACSshaw',
     });
 
     render(<ImagePage />, { wrapper });
