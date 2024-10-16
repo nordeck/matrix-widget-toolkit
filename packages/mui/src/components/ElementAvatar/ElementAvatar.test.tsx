@@ -66,7 +66,7 @@ describe('<ElementAvatar>', () => {
     ).resolves.toHaveAttribute(
       'src',
       expect.stringMatching(
-        /https:\/\/.*\/_matrix\/media\/r0\/thumbnail\/example\.com\/.*imageAlice/i,
+        /\/_matrix\/media\/r0\/thumbnail\/example\.com\/imageAlice/i,
       ),
     );
   });
