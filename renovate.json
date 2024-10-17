@@ -1,6 +1,37 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
+  "extends": ["config:recommended"],
+  "dependencyDashboard": true,
+  "pinVersions": true,
+  "vulnerabilityAlerts": {
+    "groupName": "vulnerabilityAlerts",
+    "enabled": true,
+    "schedule": [],
+    "prCreation": "immediate",
+    "labels": ["renovate"]
+  },
+  "osvVulnerabilityAlerts": true,
+  "transitiveRemediation": true,
+  "baseBranches": ["main"],
+  "packageRules": [
+    {
+      "updateTypes": ["patch"],
+      "automerge": true
+    },
+    {
+      "matchUpdateTypes": ["lockFileMaintenance"],
+      "automerge": true
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "groupName": "major updates",
+      "automerge": false
+    },
+    {
+      "matchDepTypes": ["dependencies"],
+      "automerge": false,
+      "groupName": "security updates",
+      "description": "Manual merge required for security updates"
+    }
   ]
 }
