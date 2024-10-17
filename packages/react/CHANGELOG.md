@@ -1,5 +1,13 @@
 # `@matrix-widget-toolkit/react`
 
+## 2.0.2
+
+### Patch Changes
+
+- f00e7cf: Migrate to vitejs and vitest
+- Updated dependencies [f00e7cf]
+  - @matrix-widget-toolkit/api@3.4.1
+
 ## 2.0.1
 
 ### Patch Changes
