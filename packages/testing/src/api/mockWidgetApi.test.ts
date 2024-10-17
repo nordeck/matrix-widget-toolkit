@@ -968,13 +968,15 @@ describe('getMediaConfig', () => {
 describe('uploadFile', () => {
   it('should return empty response', async () => {
     await expect(widgetApi.uploadFile('data')).resolves.toEqual({
-      content_uri: 'mxc://...',
+      content_uri: 'mxc://example.com/imageACSshaw',
     });
   });
 
   describe('downloadFile', () => {
     it('should return empty response', async () => {
-      await expect(widgetApi.downloadFile('mxc://...')).resolves.toEqual({
+      await expect(
+        widgetApi.downloadFile('mxc://example.com/imageACSshaw'),
+      ).resolves.toEqual({
         file: new Blob(['image content'], { type: 'image/png' }),
       });
     });
