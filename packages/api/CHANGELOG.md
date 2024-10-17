@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/api`
 
+## 3.4.1
+
+### Patch Changes
+
+- f00e7cf: Migrate to vitejs and vitest
+
 ## 3.4.0
 
 ### Minor Changes
