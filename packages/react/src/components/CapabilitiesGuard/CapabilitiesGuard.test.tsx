@@ -29,7 +29,7 @@ import { CapabilitiesGuard } from './CapabilitiesGuard';
 
 describe('<CapabilitiesGuard>', () => {
   let widgetApi: Mocked<WidgetApi>;
-  let CapabilitiesGuardWithUi: ComponentType<PropsWithChildren<{}>>;
+  let CapabilitiesGuardWithUi: ComponentType<PropsWithChildren>;
   const wrapper = ({ children }: { children: ReactNode }) => (
     <WidgetApiMockProvider value={widgetApi}>{children}</WidgetApiMockProvider>
   );

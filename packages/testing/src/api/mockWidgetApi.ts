@@ -243,7 +243,7 @@ export function mockWidgetApi(opts?: {
     searchUserDirectory: vi.fn().mockResolvedValue({ results: [] }),
     getMediaConfig: vi.fn().mockResolvedValue({}),
     uploadFile: vi.fn().mockResolvedValue({
-      content_uri: 'mxc://...',
+      content_uri: 'mxc://example.com/imageACSshaw',
     }),
     downloadFile: vi.fn().mockResolvedValue({
       file: new Blob(['image content'], { type: 'image/png' }),

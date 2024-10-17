@@ -26,7 +26,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { RoomPage } from './RoomPage';
 
 let widgetApi: MockedWidgetApi;
-let wrapper: ComponentType<PropsWithChildren<{}>>;
+let wrapper: ComponentType<PropsWithChildren>;
 
 afterEach(() => widgetApi.stop());
 
@@ -45,7 +45,7 @@ beforeEach(() => {
     room_id: '!room-id',
   });
 
-  wrapper = ({ children }: PropsWithChildren<{}>) => (
+  wrapper = ({ children }: PropsWithChildren) => (
     <WidgetApiMockProvider value={widgetApi}>
       <MemoryRouter>{children}</MemoryRouter>
     </WidgetApiMockProvider>

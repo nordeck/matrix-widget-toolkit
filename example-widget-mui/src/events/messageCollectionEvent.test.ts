@@ -51,13 +51,13 @@ describe('isValidMessageCollectionEvent', () => {
     ).toBe(true);
   });
 
-  it.each<Object>([
+  it.each<object>([
     { eventIds: undefined },
     { eventIds: null },
     { eventIds: 'text' },
     { eventIds: [undefined] },
     { eventIds: [null] },
-  ])('should reject event with patch %j', (patch: Object) => {
+  ])('should reject event with patch %j', (patch: object) => {
     expect(
       isValidMessageCollectionEvent({
         content: {

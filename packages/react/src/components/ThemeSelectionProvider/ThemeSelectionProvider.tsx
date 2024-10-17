@@ -80,7 +80,7 @@ export const useThemeSelection = (): ThemeSelectionContextType => {
 /**
  * Props for the {@link ThemeSelectionProvider} component.
  */
-export type ThemeSelectionProviderProps = PropsWithChildren<{}>;
+export type ThemeSelectionProviderProps = PropsWithChildren;
 
 /**
  * Provides the current theme selection to child components.

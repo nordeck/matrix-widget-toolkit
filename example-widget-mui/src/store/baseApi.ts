@@ -34,7 +34,7 @@ import {
  */
 export const baseApi: Api<
   BaseQueryFn<void, unknown, SerializedError>,
-  {},
+  EmptyObject,
   'baseApi',
   never,
   typeof coreModuleName | typeof reactHooksModuleName

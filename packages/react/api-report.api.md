@@ -41,7 +41,7 @@ export type ThemeSelectionContextType = {
 export function ThemeSelectionProvider({ children, }: ThemeSelectionProviderProps): ReactElement;
 
 // @public
-export type ThemeSelectionProviderProps = PropsWithChildren<{}>;
+export type ThemeSelectionProviderProps = PropsWithChildren;
 
 // @public
 export const useThemeSelection: () => ThemeSelectionContextType;

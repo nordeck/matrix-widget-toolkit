@@ -31,7 +31,7 @@ import { StoreProvider } from '../store';
 import { ImagePage } from './ImagePage';
 
 let widgetApi: MockedWidgetApi;
-let wrapper: ComponentType<PropsWithChildren<{}>>;
+let wrapper: ComponentType<PropsWithChildren>;
 
 afterEach(() => widgetApi.stop());
 
@@ -40,7 +40,7 @@ beforeEach(() => {
 
   global.URL.createObjectURL = vi.fn().mockReturnValue('http://...');
 
-  wrapper = ({ children }: PropsWithChildren<{}>) => (
+  wrapper = ({ children }: PropsWithChildren) => (
     <WidgetApiMockProvider value={widgetApi}>
       <StoreProvider>
         <MemoryRouter>{children}</MemoryRouter>
@@ -123,7 +123,7 @@ describe('<ImagePage>', () => {
     widgetApi.sendRoomEvent(ROOM_EVENT_UPLOADED_IMAGE, {
       name: 'image.png',
       size: 123,
-      url: 'mxc://...',
+      url: 'mxc://example.com/imageACSshaw',
     });
 
     render(<ImagePage />, { wrapper });

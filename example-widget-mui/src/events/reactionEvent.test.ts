@@ -58,11 +58,11 @@ describe('isValidReactionEvent', () => {
     ).toBe(true);
   });
 
-  it.each<Object>([
+  it.each<object>([
     { 'm.relates_to': undefined },
     { 'm.relates_to': null },
     { 'm.relates_to': 'text' },
-  ])('should reject event with patch %j', (patch: Object) => {
+  ])('should reject event with patch %j', (patch: object) => {
     expect(
       isValidReactionEvent({
         content: {
@@ -82,7 +82,7 @@ describe('isValidReactionEvent', () => {
     ).toBe(false);
   });
 
-  it.each<Object>([
+  it.each<object>([
     { rel_type: undefined },
     { rel_type: null },
     { rel_type: 5 },
@@ -92,7 +92,7 @@ describe('isValidReactionEvent', () => {
     { key: undefined },
     { key: null },
     { key: 5 },
-  ])('should reject relation with patch %j', (patch: Object) => {
+  ])('should reject relation with patch %j', (patch: object) => {
     expect(
       isValidReactionEvent({
         content: {
