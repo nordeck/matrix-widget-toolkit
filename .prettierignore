@@ -6,3 +6,6 @@ api-report.api.md
 
 # Ignore the helm chart
 charts/
+
+# Ignore the renovate.json file
+renovate.json
