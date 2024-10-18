@@ -8,7 +8,7 @@ Testing support for `@matrix-widget-toolkit/api`.
 
 When testing widgets that are using `@matrix-widget-toolkit/api` you quickly run
 into the situation where you have to mock `WidgetApi`. While this can be done
-using `jest`, this can be a lot of repeated work and you might miss edge cases
+using `vitest`, this can be a lot of repeated work and you might miss edge cases
 that makes the mock behave differently than the original. The package provides
 a `mockWidgetApi` helper to cover this case. The returned mock can be used to
 emulate a Widget host like Element, so that the widget can interact with the
@@ -62,7 +62,7 @@ const powerLevels = widgetApi.receiveSingleStateEvent('m.room.power_levels');
 
 ### Verifying Sending of Events
 
-As the methods of the mock are using `jest.fn()`, you can verify all of them:
+As the methods of the mock are using `vi.fn()`, you can verify all of them:
 
 ```typescript
 // In your code, send an event:
@@ -82,7 +82,7 @@ expect(widgetApi.sendStateEvent).toBeCalledWith(
 
 ### Overriding Behavior
 
-As the methods of the mock are using `jest.fn()`, you can change their default
+As the methods of the mock are using `vi.fn()`, you can change their default
 behavior by mocking them:
 
 ```typescript
