@@ -22,7 +22,7 @@
     "depcheck": "yarn workspaces run depcheck",
     "deduplicate": "yarn-deduplicate",
     "prepare": "husky",
-    "release": "node ./scripts/publishAllPackages.js",
+    "release": "node ./scripts/publishAllPackages.cjs",
     "translate": "yarn workspaces run translate",
     "generate-api-report": "yarn workspaces run generate-api-report",
     "check-api-report": "yarn workspaces run check-api-report"

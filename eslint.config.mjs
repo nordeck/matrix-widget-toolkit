@@ -39,7 +39,7 @@ export default ts.config(
       '**/i18next-parser.config.js',
       'scripts/prepack.js',
       'scripts/postpack.js',
-      'scripts/publishAllPackages.js',
+      'scripts/publishAllPackages.cjs',
     ],
   },
   {
