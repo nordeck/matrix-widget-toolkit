@@ -10,7 +10,7 @@
 const PACKAGE_PATH = 'package.json';
 const PACKAGE_PATH_BACKUP = 'package.json-prepack';
 
-const fs = require('fs');
+import * as fs from "fs";
 
 const packageContent = JSON.parse(fs.readFileSync(PACKAGE_PATH));
 
