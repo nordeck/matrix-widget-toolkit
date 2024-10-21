@@ -2,11 +2,10 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
   "dependencyDashboard": true,
-  "pinVersions": true,
+  "rangeStrategy": "pin",
   "vulnerabilityAlerts": {
     "groupName": "security updates",
     "enabled": true,
-    "schedule": [],
     "labels": ["security"],
     "prCreation": "immediate"
   },
@@ -24,8 +23,7 @@
     },
     {
       "matchUpdateTypes": ["major"],
-      "groupName": "major updates",
-      "automerge": false
+      "groupName": "major updates"
     }
   ]
 }

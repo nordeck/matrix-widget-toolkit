@@ -1,9 +1,9 @@
 ---
-'@matrix-widget-toolkit/widget-server': minor
-'@matrix-widget-toolkit/api': minor
-'@matrix-widget-toolkit/mui': minor
-'@matrix-widget-toolkit/react': minor
-'@matrix-widget-toolkit/testing': minor
+'@matrix-widget-toolkit/widget-server': patch
+'@matrix-widget-toolkit/api': patch
+'@matrix-widget-toolkit/mui': patch
+'@matrix-widget-toolkit/react': patch
+'@matrix-widget-toolkit/testing': patch
 ---
 
-Switch from dependabot to renovet
+Switch from dependabot to renovete
