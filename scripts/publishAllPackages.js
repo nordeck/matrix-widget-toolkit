@@ -10,8 +10,8 @@ import * as path from 'path';
 
 const packages = fs.readdirSync('packages');
 
-for (var package of packages) {
-  const packagePath = path.resolve('packages', package);
+for (var pkg of packages) {
+  const packagePath = path.resolve('packages', pkg);
 
   if (!fs.lstatSync(packagePath).isDirectory()) {
     continue;
