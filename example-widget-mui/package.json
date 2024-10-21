@@ -17,7 +17,7 @@
     "i18next-chained-backend": "^4.6.2",
     "i18next-http-backend": "^2.6.2",
     "joi": "^17.13.3",
-    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
     "matrix-widget-api": "^1.9.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -36,7 +36,7 @@
     "tsc": "tsc",
     "build": "tsc && vite build",
     "test": "echo \"Tests have to run from root project\"",
-    "depcheck": "depcheck --ignores=@types/node,@vitest/coverage-v8 --ignore-dirs=build",
+    "depcheck": "depcheck --ignores=@types/node,@vitest/coverage-v8,lodash,lodash-es,@types/lodash-es --ignore-dirs=build",
     "translate": "i18next src/**/*.{ts,tsx}",
     "check-api-report": "echo \"Nothing to report\"",
     "generate-api-report": "echo \"Nothing to report\""

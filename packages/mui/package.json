@@ -15,7 +15,7 @@
     "@testing-library/jest-dom": "^6.5.0",
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.5.2",
-    "@types/lodash": "^4.17.10",
+    "@types/lodash-es": "^4.17.10",
     "@types/node": "^22.7.5",
     "@types/react": "^18.2.74",
     "@vitest/coverage-v8": "^2.1.3",
@@ -33,7 +33,7 @@
     "tsc": "tsc",
     "lint": "eslint .",
     "test": "echo \"Tests have to run from root project\"",
-    "depcheck": "depcheck --ignores=@types/node,@vitest/coverage-v8 --ignore-dirs=lib,build",
+    "depcheck": "depcheck --ignores=@types/node,@vitest/coverage-v8,lodash,lodash-es,@types/lodash-es --ignore-dirs=lib,build",
     "prepack": "node ../../scripts/prepack.js",
     "postpack": "node ../../scripts/postpack.js",
     "translate": "i18next src/**/*.{ts,tsx}",
@@ -53,7 +53,7 @@
     "i18next": "^23.16.0",
     "i18next-browser-languagedetector": "^8.0.0",
     "i18next-resources-to-backend": "^1.2.1",
-    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
     "matrix-widget-api": "^1.9.0",
     "react": "^18.2.0",
     "react-i18next": "^15.0.3",
@@ -65,10 +65,13 @@
     "directory": "packages/mui"
   },
   "publishConfig": {
+    "module": "./build/esm/index.js",
+    "main": "./build/cjs/index.js",
     "types": "./build/index.d.ts",
     "exports": {
       "import": "./build/esm/index.js",
-      "require": "./build/cjs/index.js"
+      "require": "./build/cjs/index.js",
+      "types": "./build/index.d.ts"
     }
   },
   "files": [

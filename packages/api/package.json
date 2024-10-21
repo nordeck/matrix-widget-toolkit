@@ -43,10 +43,13 @@
     "directory": "packages/api"
   },
   "publishConfig": {
+    "module": "./build/esm/index.js",
+    "main": "./build/cjs/index.js",
     "types": "./build/index.d.ts",
     "exports": {
       "import": "./build/esm/index.js",
-      "require": "./build/cjs/index.js"
+      "require": "./build/cjs/index.js",
+      "types": "./build/index.d.ts"
     }
   },
   "files": [
