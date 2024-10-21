@@ -35,6 +35,7 @@ const uniqueId = (
     `${str}${++counter}`
 )(0);
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- This is a generic deepEqual function therefore it can accept any type.
 function deepEqual(x: any, y: any): boolean {
   const ok = Object.keys,
     tx = typeof x,
