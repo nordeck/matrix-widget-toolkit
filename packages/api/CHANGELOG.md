@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/api`
 
+## 3.4.2
+
+### Patch Changes
+
+- 55d42f1: Fix the esm exports and lodash exports
+
 ## 3.4.1
 
 ### Patch Changes
