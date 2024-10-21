@@ -6,6 +6,6 @@
 const PACKAGE_PATH = 'package.json';
 const PACKAGE_PATH_BACKUP = 'package.json-prepack';
 
-import * as fs from "fs";
+import * as fs from 'fs';
 
 fs.renameSync(PACKAGE_PATH_BACKUP, PACKAGE_PATH);

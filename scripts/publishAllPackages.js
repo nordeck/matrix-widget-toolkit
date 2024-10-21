@@ -4,9 +4,9 @@
  * !!! This script is intended to only be run by the github workflow! !!!
  */
 
-import * as fs from "fs";
-import * as path from "path";
-import * as child_process from "child_process";
+import * as child_process from 'child_process';
+import * as fs from 'fs';
+import * as path from 'path';
 
 const packages = fs.readdirSync('packages');
 
