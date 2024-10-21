@@ -10,7 +10,6 @@
     "prCreation": "immediate"
   },
   "osvVulnerabilityAlerts": true,
-  "transitiveRemediation": true,
   "baseBranches": ["main"],
   "packageRules": [
     {
