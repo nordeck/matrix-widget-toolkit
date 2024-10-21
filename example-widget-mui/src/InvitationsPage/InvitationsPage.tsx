@@ -36,10 +36,10 @@ import {
   Stack,
   TextField,
 } from '@mui/material';
-import { isError } from 'lodash';
 import { MatrixCapabilities } from 'matrix-widget-api';
 import { ReactElement, useEffect, useId, useState } from 'react';
 import { NavigationBar } from '../NavigationPage';
+import { isError } from '../utils';
 
 /**
  * A component that allows the user to query the user directory

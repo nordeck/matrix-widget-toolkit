@@ -42,7 +42,6 @@ import {
   MenuItem,
   Select,
 } from '@mui/material';
-import { first } from 'lodash';
 import { EventDirection, WidgetEventCapability } from 'matrix-widget-api';
 import { ReactElement, useEffect, useId, useState } from 'react';
 import { STATE_EVENT_ROOM_NAME } from '../events';
@@ -150,7 +149,7 @@ export const PowerLevelsView = (): ReactElement => {
   useEffect(() => {
     setSelectedMember((selected) => {
       if (selected === undefined) {
-        return first(roomMembersData?.ids)?.toString();
+        return roomMembersData?.ids[0]?.toString();
       }
 
       return selected;
