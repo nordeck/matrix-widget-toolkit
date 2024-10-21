@@ -50,13 +50,13 @@
     "@mui/icons-material": "^6.1.4",
     "@mui/material": "^6.1.4",
     "@mui/utils": "^6.0.2",
-    "i18next": "^23.16.0",
+    "i18next": "^23.16.2",
     "i18next-browser-languagedetector": "^8.0.0",
     "i18next-resources-to-backend": "^1.2.1",
     "lodash-es": "^4.17.21",
     "matrix-widget-api": "^1.9.0",
     "react": "^18.2.0",
-    "react-i18next": "^15.0.3",
+    "react-i18next": "^15.1.0",
     "react-use": "^17.5.1"
   },
   "repository": {
