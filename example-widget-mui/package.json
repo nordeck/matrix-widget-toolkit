@@ -56,21 +56,21 @@
   "devDependencies": {
     "@matrix-widget-toolkit/testing": "3.0.1",
     "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.5.0",
+    "@testing-library/jest-dom": "^6.6.2",
     "@testing-library/react": "^16.0.1",
     "@testing-library/user-event": "^14.5.2",
-    "@types/node": "^22.7.5",
+    "@types/node": "^22.7.7",
     "@types/react": "^18.2.74",
     "@types/react-dom": "^18.2.24",
     "@vitejs/plugin-basic-ssl": "^1.1.0",
     "@vitejs/plugin-react-swc": "^3.7.1",
     "@vitest/coverage-v8": "^2.1.3",
-    "axe-core": "^4.10.0",
+    "axe-core": "^4.10.1",
     "happy-dom": "^15.7.3",
     "i18next-parser": "^9.0.2",
     "msw": "^2.4.11",
     "typescript": "^5.6.3",
-    "vite": "^5.4.8",
+    "vite": "^5.4.9",
     "vitest": "^2.1.3"
   }
 }
