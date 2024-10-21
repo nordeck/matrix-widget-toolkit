@@ -1,5 +1,13 @@
 # `@matrix-widget-toolkit/react`
 
+## 2.0.3
+
+### Patch Changes
+
+- 55d42f1: Fix the esm exports and lodash exports
+- Updated dependencies [55d42f1]
+  - @matrix-widget-toolkit/api@3.4.2
+
 ## 2.0.2
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # `@matrix-widget-toolkit/testing`
 
+## 3.0.1
+
+### Patch Changes
+
+- 55d42f1: Fix the esm exports and lodash exports
+- Updated dependencies [55d42f1]
+  - @matrix-widget-toolkit/api@3.4.2
+
 ## 3.0.0
 
 ### Major Changes
