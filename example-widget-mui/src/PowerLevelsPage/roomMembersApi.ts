@@ -21,8 +21,8 @@ import {
   isValidRoomMemberStateEvent,
 } from '@matrix-widget-toolkit/api';
 import { EntityState, createEntityAdapter } from '@reduxjs/toolkit';
-import { isError } from 'lodash';
 import { ThunkExtraArgument, baseApi } from '../store';
+import { isError } from '../utils';
 
 // Use an entity adapter to efficiently interact with a collection of events.
 // The adapter provides selectors and reducers to read and manipulate a state.
