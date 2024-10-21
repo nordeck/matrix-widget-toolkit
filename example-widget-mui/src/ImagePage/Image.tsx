@@ -62,5 +62,12 @@ export const Image: React.FC<ImageProps> = function ({
     return null;
   }
 
-  return <img {...imageProps} src={dataUrl} onLoad={handleLoad} />;
+  return (
+    <img
+      style={{ width: '100%' }}
+      {...imageProps}
+      src={dataUrl}
+      onLoad={handleLoad}
+    />
+  );
 };
