@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-import { split } from 'lodash';
-
 // Based on the way Element selects the initial letter
 // https://github.com/matrix-org/matrix-react-sdk/blob/667ec166d736dfb0ac49f67398a8b7a13db7d5ef/src/Avatar.ts#L121
 export function getInitialLetter(name: string): string | undefined {
@@ -28,6 +26,9 @@ export function getInitialLetter(name: string): string | undefined {
     name = name.substring(1);
   }
 
-  // rely on the grapheme cluster splitter in lodash so that we don't break apart compound emojis
-  return split(name, '', 1)[0].toUpperCase();
+  // rely on the grapheme cluster splitter in the Intl.Seegmenter to get the first character
+  return Array.from(new Intl.Segmenter().segment(name))
+    .map(({ segment }) => segment)
+    .slice(0, 1)[0]
+    .toUpperCase();
 }

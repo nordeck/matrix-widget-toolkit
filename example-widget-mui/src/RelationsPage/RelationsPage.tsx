@@ -45,7 +45,6 @@ import {
   Tooltip,
   unstable_useId as useId,
 } from '@mui/material';
-import { isError } from 'lodash';
 import { EventDirection, WidgetEventCapability } from 'matrix-widget-api';
 import { FormEvent, ReactElement, ReactNode, useMemo, useState } from 'react';
 import { useObservable } from 'react-use';
@@ -57,6 +56,7 @@ import {
 } from '../events';
 import { NavigationBar } from '../NavigationPage';
 import { StoreProvider } from '../store';
+import { isError } from '../utils';
 import {
   useDropMessageFromCollectionMutation,
   useGetMessageQuery,

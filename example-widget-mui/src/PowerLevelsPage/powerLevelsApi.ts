@@ -20,9 +20,9 @@ import {
   StateEvent,
   isValidPowerLevelStateEvent,
 } from '@matrix-widget-toolkit/api';
-import { first, isError } from 'lodash';
 import { EventDirection, WidgetEventCapability } from 'matrix-widget-api';
 import { ThunkExtraArgument, baseApi } from '../store';
+import { isError } from '../utils';
 
 /**
  * Endpoints to receive the current room power levels and update it.
@@ -46,7 +46,7 @@ export const powerLevelsApi = baseApi.injectEndpoints({
             STATE_EVENT_POWER_LEVELS,
           );
 
-          const event = first(events.filter(isValidPowerLevelStateEvent));
+          const event = events.filter(isValidPowerLevelStateEvent)[0];
 
           return { data: { content: event?.content } };
         } catch (e) {
