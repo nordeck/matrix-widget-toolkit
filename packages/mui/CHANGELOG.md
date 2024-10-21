@@ -1,5 +1,14 @@
 # `@matrix-widget-toolkit/mui`
 
+## 2.0.5
+
+### Patch Changes
+
+- f00e7cf: Migrate to vitejs and vitest
+- Updated dependencies [f00e7cf]
+  - @matrix-widget-toolkit/react@2.0.2
+  - @matrix-widget-toolkit/api@3.4.1
+
 ## 2.0.4
 
 ### Patch Changes
