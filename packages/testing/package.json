@@ -23,7 +23,7 @@
     "tsc": "tsc",
     "lint": "eslint .",
     "test": "echo \"Tests have to run from root project\"",
-    "depcheck": "depcheck --ignores=@types/node,@vitest/coverage-v8 --ignore-dirs=lib",
+    "depcheck": "depcheck --ignores=@types/node,@vitest/coverage-v8,lodash,lodash-es,@types/lodash-es --ignore-dirs=lib",
     "prepack": "node ../../scripts/prepack.js",
     "postpack": "node ../../scripts/postpack.js",
     "translate": "echo \"Nothing to translate\"",
