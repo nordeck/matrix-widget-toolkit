@@ -4,18 +4,18 @@
   "dependencyDashboard": true,
   "pinVersions": true,
   "vulnerabilityAlerts": {
-    "groupName": "vulnerabilityAlerts",
+    "groupName": "security updates",
     "enabled": true,
     "schedule": [],
-    "prCreation": "immediate",
-    "labels": ["renovate"]
+    "labels": ["security"],
+    "prCreation": "immediate"
   },
   "osvVulnerabilityAlerts": true,
   "transitiveRemediation": true,
   "baseBranches": ["main"],
   "packageRules": [
     {
-      "updateTypes": ["patch"],
+      "matchUpdateTypes": ["patch"],
       "automerge": true
     },
     {
@@ -26,12 +26,6 @@
       "matchUpdateTypes": ["major"],
       "groupName": "major updates",
       "automerge": false
-    },
-    {
-      "matchDepTypes": ["dependencies"],
-      "automerge": false,
-      "groupName": "security updates",
-      "description": "Manual merge required for security updates"
     }
   ]
 }
