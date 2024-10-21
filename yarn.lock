@@ -3797,10 +3797,10 @@ i18next-resources-to-backend@^1.2.1:
   dependencies:
     "@babel/runtime" "^7.23.2"
 
-i18next@^23.16.0, i18next@^23.5.1:
-  version "23.16.0"
-  resolved "https://registry.yarnpkg.com/i18next/-/i18next-23.16.0.tgz#6127b49a30c19ba5caf0de8aeb3e15df60f7f01e"
-  integrity sha512-Ni3CG6c14teOogY19YNRl+kYaE/Rb59khy0VyHVn4uOZ97E2E/Yziyi6r3C3s9+wacjdLZiq/LLYyx+Cgd+FCw==
+i18next@^23.16.2, i18next@^23.5.1:
+  version "23.16.2"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-23.16.2.tgz#ef6868ef6ac7bcaee4f5fe35132021d44e8d1063"
+  integrity sha512-dFyxwLXxEQK32f6tITBMaRht25mZPJhQ0WbC0p3bO2mWBal9lABTMqSka5k+GLSRWLzeJBKDpH7BeIA9TZI7Jg==
   dependencies:
     "@babel/runtime" "^7.23.2"
 
@@ -5100,10 +5100,10 @@ react-error-boundary@^3.1.4:
   dependencies:
     "@babel/runtime" "^7.12.5"
 
-react-i18next@^15.0.3:
-  version "15.0.3"
-  resolved "https://registry.yarnpkg.com/react-i18next/-/react-i18next-15.0.3.tgz#01606062f7f81f9b3a88f388e0a8097f8230f5d4"
-  integrity sha512-BlO1P+oLKjjIxDBQ0GkAIMacgjfMbnvops+3Y5nZXF7UJ99v4KCWr0Na1azJXC8AMiNWp4kgUcFCJM7U9ZsUDg==
+react-i18next@^15.1.0:
+  version "15.1.0"
+  resolved "https://registry.yarnpkg.com/react-i18next/-/react-i18next-15.1.0.tgz#9494e4add2389f04c205dd7628c1aa75747b98a3"
+  integrity sha512-zj3nJynMnZsy2gPZiOTC7XctCY5eQGqT3tcKMmfJWC9FMvgd+960w/adq61j8iPzpwmsXejqID9qC3Mqu1Xu2Q==
   dependencies:
     "@babel/runtime" "^7.25.0"
     html-parse-stringify "^3.0.1"
