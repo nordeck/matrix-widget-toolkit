@@ -1,0 +1,53 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "dependencyDashboard": true,
+  "rangeStrategy": "pin",
+  "vulnerabilityAlerts": {
+    "groupName": "security updates",
+    "labels": ["security"]
+  },
+  "osvVulnerabilityAlerts": true,
+  "baseBranches": ["main"],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["patch"],
+      "automerge": true
+    },
+    {
+      "matchUpdateTypes": ["lockFileMaintenance"],
+      "automerge": true
+    },
+    {
+      "groupName": "development-dependencies",
+      "matchDepTypes": ["devDependencies"],
+      "labels": ["Dev dependencies"]
+    },
+    {
+      "groupName": "production-dependencies",
+      "matchDepTypes": ["dependencies"],
+      "labels": ["Prod dependencies"]
+    },
+    {
+      "matchUpdateTypes": ["major"],
+      "groupName": "major updates",
+      "labels": ["Major"]
+    },
+    {
+      "groupName": "material-ui",
+      "matchPackageNames": [
+        "@emotion/*",
+        "@mui/*"
+      ],
+      "labels": ["Material-UI"]
+    },
+    {
+      "groupName": "i18next",
+      "matchPackageNames": [
+        "i18next",
+        "react-i18next"
+      ],
+      "labels": ["i18next"]
+    }
+  ]
+}

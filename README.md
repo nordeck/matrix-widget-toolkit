@@ -88,9 +88,9 @@ Learn more in the [`.changeset` folder](./.changeset).
 Once the change is merged to `main`, a "Version Packages" pull request will be created.
 As soon as that is merged, the packages will be released to the package registry.
 
-### Processing Dependabot PRs
+### Processing Renovate PRs
 
-Dependabot PRs which update packages that are direct dependencies of our packages (and not `devDependencies` or only a dependency of the example widget) need a changeset as described above.
+Renovate PRs which update packages that are direct dependencies of our packages (and not `devDependencies` or only a dependency of the example widget) need a changeset as described above.
 Specify the impact as `patch`.
 
 ### Architecture Decision Records
