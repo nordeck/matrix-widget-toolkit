@@ -37,9 +37,11 @@
   "dependencies": {
     "@matrix-widget-toolkit/api": "^3.4.2",
     "matrix-widget-api": "^1.9.0",
-    "react": "^18.2.0",
     "react-error-boundary": "^3.1.4",
     "react-use": "^17.5.1"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
   },
   "repository": {
     "type": "git",
