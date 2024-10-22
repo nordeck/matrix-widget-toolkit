@@ -6,4 +6,4 @@
 '@matrix-widget-toolkit/testing': patch
 ---
 
-Switch from dependabot to renovete
+Switch from dependabot to Renovate
