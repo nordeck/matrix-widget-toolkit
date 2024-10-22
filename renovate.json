@@ -5,8 +5,7 @@
   "rangeStrategy": "pin",
   "vulnerabilityAlerts": {
     "groupName": "security updates",
-    "labels": ["security"],
-    "prCreation": "immediate"
+    "labels": ["security"]
   },
   "osvVulnerabilityAlerts": true,
   "baseBranches": ["main"],
@@ -20,30 +19,35 @@
       "automerge": true
     },
     {
+      "groupName": "development-dependencies",
+      "matchDepTypes": ["devDependencies"],
+      "labels": ["Dev dependencies"]
+    },
+    {
+      "groupName": "production-dependencies",
+      "matchDepTypes": ["dependencies"],
+      "labels": ["Prod dependencies"]
+    },
+    {
       "matchUpdateTypes": ["major"],
-      "groupName": "major updates"
+      "groupName": "major updates",
+      "labels": ["Major"]
     },
     {
       "groupName": "material-ui",
       "matchPackageNames": [
         "@emotion/*",
         "@mui/*"
-      ]
-    },
-    {
-      "groupName": "development-dependencies",
-      "matchDepTypes": ["devDependencies"]
-    },
-    {
-      "groupName": "production-dependencies",
-      "matchDepTypes": ["dependencies"]
+      ],
+      "labels": ["Material-UI"]
     },
     {
       "groupName": "i18next",
       "matchPackageNames": [
         "i18next",
         "react-i18next"
-      ]
+      ],
+      "labels": ["i18next"]
     }
   ]
 }
