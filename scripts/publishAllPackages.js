@@ -4,14 +4,14 @@
  * !!! This script is intended to only be run by the github workflow! !!!
  */
 
-const fs = require('fs');
-const path = require('path');
-const child_process = require('child_process');
+import * as child_process from 'child_process';
+import * as fs from 'fs';
+import * as path from 'path';
 
 const packages = fs.readdirSync('packages');
 
-for (var package of packages) {
-  const packagePath = path.resolve('packages', package);
+for (var pkg of packages) {
+  const packagePath = path.resolve('packages', pkg);
 
   if (!fs.lstatSync(packagePath).isDirectory()) {
     continue;

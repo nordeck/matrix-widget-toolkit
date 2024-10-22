@@ -1,5 +1,23 @@
 # `@matrix-widget-toolkit/mui`
 
+## 2.0.6
+
+### Patch Changes
+
+- 55d42f1: Fix the esm exports and lodash exports
+- Updated dependencies [55d42f1]
+  - @matrix-widget-toolkit/react@2.0.3
+  - @matrix-widget-toolkit/api@3.4.2
+
+## 2.0.5
+
+### Patch Changes
+
+- f00e7cf: Migrate to vitejs and vitest
+- Updated dependencies [f00e7cf]
+  - @matrix-widget-toolkit/react@2.0.2
+  - @matrix-widget-toolkit/api@3.4.1
+
 ## 2.0.4
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@matrix-widget-toolkit/testing",
-  "version": "2.5.0",
+  "version": "3.0.1",
   "description": "Testing support for @matrix-widget-toolkit/api.",
   "author": "Nordeck IT + Consulting GmbH",
   "license": "Apache-2.0",
@@ -12,9 +12,9 @@
   },
   "type": "module",
   "devDependencies": {
-    "@types/lodash": "^4.17.10",
+    "@types/lodash-es": "^4.17.10",
     "@types/node": "^22.7.5",
-    "@vitest/coverage-v8": "^2.1.2",
+    "@vitest/coverage-v8": "^2.1.3",
     "typescript": "^5.6.3",
     "vite": "^5.4.8"
   },
@@ -23,7 +23,7 @@
     "tsc": "tsc",
     "lint": "eslint .",
     "test": "echo \"Tests have to run from root project\"",
-    "depcheck": "depcheck --ignores=@types/node,@vitest/coverage-v8 --ignore-dirs=lib",
+    "depcheck": "depcheck --ignores=@types/node,@vitest/coverage-v8,lodash,lodash-es,@types/lodash-es --ignore-dirs=lib",
     "prepack": "node ../../scripts/prepack.js",
     "postpack": "node ../../scripts/postpack.js",
     "translate": "echo \"Nothing to translate\"",
@@ -31,11 +31,11 @@
     "generate-api-report": "tsc && api-extractor run --verbose --local"
   },
   "dependencies": {
-    "@matrix-widget-toolkit/api": "^3.4.0",
-    "lodash": "^4.17.21",
+    "@matrix-widget-toolkit/api": "^3.4.2",
+    "lodash-es": "^4.17.21",
     "matrix-widget-api": "^1.9.0",
     "rxjs": "^7.8.1",
-    "vitest": "^2.1.2"
+    "vitest": "^2.1.3"
   },
   "repository": {
     "type": "git",
@@ -43,10 +43,13 @@
     "directory": "packages/testing"
   },
   "publishConfig": {
+    "module": "./build/esm/index.js",
+    "main": "./build/cjs/index.js",
     "types": "./build/index.d.ts",
     "exports": {
       "import": "./build/esm/index.js",
-      "require": "./build/cjs/index.js"
+      "require": "./build/cjs/index.js",
+      "types": "./build/index.d.ts"
     }
   },
   "files": [
