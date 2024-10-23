@@ -29,9 +29,18 @@ const fontFamily = [
   '"Noto Color Emoji"',
 ].join(',');
 
-const primaryColor = getEnvironment('REACT_APP_PRIMARY_COLOR', '#0dbd8b');
+const primaryColorlight = getEnvironment(
+  'REACT_APP_LIGHT_PRIMARY_COLOR',
+  '#007a61',
+);
+const primaryColorDark = getEnvironment(
+  'REACT_APP_DARK_PRIMARY_COLOR',
+  '#129a78',
+);
 const primaryColorHighContrast = '#075D53';
 const errorColor = '#ff5b55';
+const errorColorlight = '#d51928';
+const errorColorDark = '#fd3e3c';
 const errorColorHighContrast = '#AA0904';
 
 function createSwitchStyleOverrides({
@@ -119,7 +128,7 @@ export const baseTheme: ThemeOptions = {
   },
   palette: {
     primary: {
-      main: primaryColor,
+      main: primaryColorlight,
       contrastText: '#ffffff',
     },
     error: {
@@ -371,6 +380,12 @@ export const lightTheme: ThemeOptions = {
       default: '#ffffff',
       paper: '#f2f5f8',
     },
+    primary: {
+      main: primaryColorlight,
+    },
+    error: {
+      main: errorColorlight,
+    },
     text: {
       primary: '#17191c',
       secondary: '#61708b',
@@ -538,6 +553,12 @@ export const darkTheme: ThemeOptions = {
     background: {
       default: '#15191e',
       paper: '#20252b',
+    },
+    primary: {
+      main: primaryColorDark,
+    },
+    error: {
+      main: errorColorDark,
     },
     text: {
       primary: '#ffffff',
