@@ -79,7 +79,9 @@ import { EventDirection, WidgetEventCapability } from 'matrix-widget-api';
 
 ## Customization
 
-You can override the primary color by setting the `REACT_APP_PRIMARY_COLOR` environment variable.
+You can override the light primary color by setting the `REACT_APP_LIGHT_PRIMARY_COLOR` environment variable.
+
+You can override the dark primary color by setting the `REACT_APP_DARK_PRIMARY_COLOR` environment variable.
 
 > **Warning** Choosing a different primary color might result in not meeting contrast requirements for accessability.
 

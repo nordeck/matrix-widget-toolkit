@@ -21,6 +21,6 @@ describe('getColor', () => {
   it('should generate stable colors from ids', () => {
     expect(getColor('@oliver.sand:matrix.org')).toBe('#ac3ba8');
     expect(getColor('!OFRzoSUQYSjIXMEZDS:datanauten.de')).toBe('#368bd6');
-    expect(getColor('!vbSFpwCIcbnazhtFTT:matrix.org')).toBe('#0DBD8B');
+    expect(getColor('!vbSFpwCIcbnazhtFTT:matrix.org')).toBe('#007a61');
   });
 });
