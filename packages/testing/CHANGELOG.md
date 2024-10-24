@@ -1,5 +1,13 @@
 # `@matrix-widget-toolkit/testing`
 
+## 3.0.2
+
+### Patch Changes
+
+- 9b1190e: Switch from dependabot to Renovate
+- Updated dependencies [9b1190e]
+  - @matrix-widget-toolkit/api@3.4.3
+
 ## 3.0.1
 
 ### Patch Changes
