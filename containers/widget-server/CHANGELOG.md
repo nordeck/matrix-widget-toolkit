@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/widget-server`
 
+## 1.0.7
+
+### Patch Changes
+
+- 9b1190e: Switch from dependabot to Renovate
+
 ## 1.0.6
 
 ### Patch Changes
