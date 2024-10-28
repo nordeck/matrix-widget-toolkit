@@ -2,4 +2,4 @@
 '@matrix-widget-toolkit/mui': patch
 ---
 
-Align widget and Elementgreen and red colors
+Update default primary and error colors to match current Element Web theme.

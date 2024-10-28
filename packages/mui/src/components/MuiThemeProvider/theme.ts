@@ -38,8 +38,7 @@ const primaryColorDark = getEnvironment(
   '#129a78',
 );
 const primaryColorHighContrast = '#075D53';
-const errorColor = '#ff5b55';
-const errorColorlight = '#d51928';
+const errorColorLight = '#d51928';
 const errorColorDark = '#fd3e3c';
 const errorColorHighContrast = '#AA0904';
 
@@ -132,7 +131,7 @@ export const baseTheme: ThemeOptions = {
       contrastText: '#ffffff',
     },
     error: {
-      main: errorColor,
+      main: errorColorLight,
       contrastText: '#ffffff',
     },
     tonalOffset: 0.025,
@@ -384,7 +383,7 @@ export const lightTheme: ThemeOptions = {
       main: primaryColorlight,
     },
     error: {
-      main: errorColorlight,
+      main: errorColorLight,
     },
     text: {
       primary: '#17191c',
