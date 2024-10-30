@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 
-const isError = (err: unknown) => err instanceof Error;
+const isError = (err: unknown): err is Error => err instanceof Error;
 
 export { isError };

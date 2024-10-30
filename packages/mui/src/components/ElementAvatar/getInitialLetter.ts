@@ -26,7 +26,7 @@ export function getInitialLetter(name: string): string | undefined {
     name = name.substring(1);
   }
 
-  // rely on the grapheme cluster splitter in the Intl.Seegmenter to get the first character
+  // rely on the grapheme cluster splitter in the Intl.Segmenter to get the first character
   return Array.from(new Intl.Segmenter().segment(name))
     .map(({ segment }) => segment)
     .slice(0, 1)[0]

@@ -35,6 +35,24 @@ export function unique<T>(items: Iterable<T>): T[] {
   return Array.from(new Set<T>(items));
 }
 
+// These 2 functions originally were using lodash. These are replacements for them.
+export const uniqueId = (
+  (counter) =>
+  (str = '') =>
+    `${str}${++counter}`
+)(0);
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- This is a generic deepEqual function therefore it can accept any type.
+export function deepEqual(x: any, y: any): boolean {
+  const ok = Object.keys,
+    tx = typeof x,
+    ty = typeof y;
+  return x && y && tx === 'object' && tx === ty
+    ? ok(x).length === ok(y).length &&
+        ok(x).every((key) => deepEqual(x[key], y[key]))
+    : x === y;
+}
+
 export function equalsSet<T>(as: Set<T>, bs: Set<T>): boolean {
   if (as.size !== bs.size) {
     return false;

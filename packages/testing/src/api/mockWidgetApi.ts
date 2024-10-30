@@ -22,29 +22,13 @@ import {
   ToDeviceMessageEvent,
   WidgetApi,
   compareOriginServerTS,
+  deepEqual,
   isValidEventWithRelatesTo,
+  uniqueId,
 } from '@matrix-widget-toolkit/api';
 import { Symbols } from 'matrix-widget-api';
 import { NEVER, Subject, concat, filter, from, map, of, takeUntil } from 'rxjs';
 import { Mocked, vi } from 'vitest';
-
-// These 2 functions originally were using lodash. These are replacements for them.
-const uniqueId = (
-  (counter) =>
-  (str = '') =>
-    `${str}${++counter}`
-)(0);
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- This is a generic deepEqual function therefore it can accept any type.
-function deepEqual(x: any, y: any): boolean {
-  const ok = Object.keys,
-    tx = typeof x,
-    ty = typeof y;
-  return x && y && tx === 'object' && tx === ty
-    ? ok(x).length === ok(y).length &&
-        ok(x).every((key) => deepEqual(x[key], y[key]))
-    : x === y;
-}
 
 /**
  * A mock of `WidgetApi` with some additional methods.
