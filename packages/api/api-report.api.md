@@ -28,6 +28,9 @@ export function calculateUserPowerLevel(powerLevelStateEvent: PowerLevelsStateEv
 // @public
 export function compareOriginServerTS<T>(a: RoomEvent<T>, b: RoomEvent<T>): number;
 
+// @public (undocumented)
+export function deepEqual(x: any, y: any): boolean;
+
 // @public
 export type EventWithRelatesTo<RelationType extends string> = RoomEvent<{
     'm.relates_to': RelatesTo<RelationType>;
@@ -197,6 +200,9 @@ export type TurnServer = {
     username: string;
     credential: string;
 };
+
+// @public (undocumented)
+export const uniqueId: (str?: string) => string;
 
 // @public
 export const WIDGET_CAPABILITY_NAVIGATE = "org.matrix.msc2931.navigate";
