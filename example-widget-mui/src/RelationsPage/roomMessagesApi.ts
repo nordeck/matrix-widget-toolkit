@@ -19,7 +19,6 @@ import {
   redactEvent,
   RoomEvent,
 } from '@matrix-widget-toolkit/api';
-import { isError } from 'lodash';
 import { filter } from 'rxjs';
 import {
   isValidMessageCollectionEvent,
@@ -33,6 +32,7 @@ import {
   STATE_EVENT_MESSAGE_COLLECTION,
 } from '../events';
 import { baseApi, ThunkExtraArgument } from '../store';
+import { isError } from '../utils';
 
 /**
  * Endpoints to receive specific room messages and related reactions.

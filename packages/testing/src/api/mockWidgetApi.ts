@@ -24,10 +24,10 @@ import {
   compareOriginServerTS,
   isValidEventWithRelatesTo,
 } from '@matrix-widget-toolkit/api';
-import { cloneDeep, isEqual, uniqueId } from 'lodash';
 import { Symbols } from 'matrix-widget-api';
 import { NEVER, Subject, concat, filter, from, map, of, takeUntil } from 'rxjs';
 import { Mocked, vi } from 'vitest';
+import { deepEqual, uniqueId } from './utils';
 
 /**
  * A mock of `WidgetApi` with some additional methods.
@@ -143,7 +143,7 @@ export function mockWidgetApi(opts?: {
   };
 
   const mockSendRoomEvent = <T>(event: RoomEvent<T>) => {
-    const ev = cloneDeep(event);
+    const ev = structuredClone(event);
 
     roomEvents.push(ev);
     roomEventSubject.next(ev);
@@ -151,7 +151,7 @@ export function mockWidgetApi(opts?: {
   };
 
   const mockSendStateEvent = <T>(event: StateEvent<T>) => {
-    const ev = cloneDeep(event);
+    const ev = structuredClone(event);
 
     stateEvents = stateEvents
       .filter(
@@ -186,7 +186,7 @@ export function mockWidgetApi(opts?: {
   const mockSendToDeviceMessage = <T = unknown>(
     message: ToDeviceMessageEvent<T>,
   ) => {
-    const m = cloneDeep(message);
+    const m = structuredClone(message);
 
     toDeviceMessageSubject.next(m);
 
@@ -276,7 +276,7 @@ export function mockWidgetApi(opts?: {
         }
       })
       .sort(compareOriginServerTS)
-      .map(cloneDeep);
+      .map((o) => structuredClone(o));
   });
 
   widgetApi.receiveStateEvents.mockImplementation(async (type, options) => {
@@ -300,12 +300,12 @@ export function mockWidgetApi(opts?: {
           return roomIds.includes(ev.room_id);
         }
       })
-      .map(cloneDeep);
+      .map((o) => structuredClone(o));
   });
 
   widgetApi.receiveSingleStateEvent.mockImplementation(
     async (type, stateKey) => {
-      return cloneDeep(
+      return structuredClone(
         stateEvents.find((ev) => {
           if (ev.type !== type) {
             return false;
@@ -349,7 +349,7 @@ export function mockWidgetApi(opts?: {
           return roomIds.includes(ev.room_id);
         }
       }),
-      map(cloneDeep),
+      map((o) => structuredClone(o)),
       takeUntil(stopSubject),
     );
   });
@@ -377,7 +377,7 @@ export function mockWidgetApi(opts?: {
 
     return concat(from(stateEvents), stateEventSubject).pipe(
       filter(filterEvents),
-      map(cloneDeep),
+      map((o) => structuredClone(o)),
       takeUntil(stopSubject),
     );
   });
@@ -437,7 +437,7 @@ export function mockWidgetApi(opts?: {
             ev.room_id === e.room_id &&
             ev.type === e.type &&
             ev.state_key === e.state_key &&
-            isEqual(ev.content, e.content),
+            deepEqual(ev.content, e.content),
         )
       ) {
         return new Promise(() => {
@@ -491,7 +491,7 @@ export function mockWidgetApi(opts?: {
       const end = skip + (opts.limit ?? 50);
 
       return {
-        chunk: relatedEvents.slice(skip, end).map(cloneDeep),
+        chunk: relatedEvents.slice(skip, end).map((o) => structuredClone(o)),
         nextToken: end < relatedEvents.length ? end.toString() : undefined,
       };
     },
