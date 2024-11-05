@@ -37,6 +37,5 @@ export type {
   WidgetParameters,
   WidgetRegistration,
 } from './types';
-export { deepEqual, uniqueId } from './utils';
 export { WidgetApiImpl } from './WidgetApiImpl';
 export type { WidgetApiOptions } from './WidgetApiImpl';

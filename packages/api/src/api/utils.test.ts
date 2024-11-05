@@ -23,13 +23,11 @@ import {
 import { beforeEach, describe, expect, it } from 'vitest';
 import {
   convertToRawCapabilities,
-  deepEqual,
   equalsSet,
   isDefined,
   isInRoom,
   subtractSet,
   unique,
-  uniqueId,
 } from './utils';
 
 describe('convertToRawCapabilities', () => {
@@ -71,48 +69,6 @@ describe('unique', () => {
   it('should filter out duplicate values', () => {
     const items = ['a', 'b', 'a', 'c', 'd', 'd'];
     expect(unique(items)).toEqual(['a', 'b', 'c', 'd']);
-  });
-});
-
-describe('uniqueId', () => {
-  it('should generate unique ids with a prefix', () => {
-    const id1 = uniqueId('$event-');
-    const id2 = uniqueId('$event-');
-    expect(id1).not.toEqual(id2);
-    expect(id1).toMatch(/^\$event-\d+$/);
-    expect(id2).toMatch(/^\$event-\d+$/);
-  });
-});
-
-describe('deepEqual', () => {
-  it('should return true for deeply equal objects', () => {
-    const obj1 = { a: 1, b: { c: 2 } };
-    const obj2 = { a: 1, b: { c: 2 } };
-    expect(deepEqual(obj1, obj2)).toBe(true);
-  });
-
-  it('should return false for objects with different values', () => {
-    const obj1 = { a: 1, b: { c: 2 } };
-    const obj2 = { a: 1, b: { c: 3 } };
-    expect(deepEqual(obj1, obj2)).toBe(false);
-  });
-
-  it('should return false for objects with different keys', () => {
-    const obj1 = { a: 1, b: { c: 2 } };
-    const obj2 = { a: 1, b: { d: 2 } };
-    expect(deepEqual(obj1, obj2)).toBe(false);
-  });
-
-  it('should return true for deeply equal arrays', () => {
-    const arr1 = [1, [2, 3]];
-    const arr2 = [1, [2, 3]];
-    expect(deepEqual(arr1, arr2)).toBe(true);
-  });
-
-  it('should return false for arrays with different values', () => {
-    const arr1 = [1, [2, 3]];
-    const arr2 = [1, [2, 4]];
-    expect(deepEqual(arr1, arr2)).toBe(false);
   });
 });
 

@@ -22,13 +22,12 @@ import {
   ToDeviceMessageEvent,
   WidgetApi,
   compareOriginServerTS,
-  deepEqual,
   isValidEventWithRelatesTo,
-  uniqueId,
 } from '@matrix-widget-toolkit/api';
 import { Symbols } from 'matrix-widget-api';
 import { NEVER, Subject, concat, filter, from, map, of, takeUntil } from 'rxjs';
 import { Mocked, vi } from 'vitest';
+import { deepEqual, uniqueId } from './utils';
 
 /**
  * A mock of `WidgetApi` with some additional methods.
