@@ -16,12 +16,15 @@
 
 import commonjs from '@rollup/plugin-commonjs';
 
+/**
+ * @type {import('rollup').RollupOptions}
+ */
 const config = {
   input: 'lib/src/index.js',
   plugins: [commonjs()],
   output: [
     {
-      file: 'build/cjs/index.js',
+      file: 'build/cjs/index.cjs',
       format: 'cjs',
       interop: 'auto',
     },

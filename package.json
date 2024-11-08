@@ -35,6 +35,7 @@
     "@rollup/plugin-commonjs": "^28.0.0",
     "cross-env": "^7.0.3",
     "depcheck": "^1.4.7",
+    "dree": "^5.1.5",
     "eslint": "^9.7.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-notice": "^1.0.0",
