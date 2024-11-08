@@ -16,6 +16,9 @@
 
 import commonjs from '@rollup/plugin-commonjs';
 
+/**
+ * @type {import('rollup').RollupOptions}
+ */
 const config = {
   input: 'lib/src/index.js',
   plugins: [commonjs()],
