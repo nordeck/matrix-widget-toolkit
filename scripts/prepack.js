@@ -10,14 +10,14 @@
 const PACKAGE_PATH = 'package.json';
 const PACKAGE_PATH_BACKUP = 'package.json-prepack';
 
+import * as dree from 'dree';
 import * as fs from 'fs';
 import * as path from 'path';
-import * as dree from 'dree';
 
 // Ensure the typescript types are in the build folder as cjs and esm variants
 const walkOptions = {
-  depth: 100
-}
+  depth: 100,
+};
 const tree = dree.scan('./lib/src', walkOptions);
 
 function treeWalk(child) {
