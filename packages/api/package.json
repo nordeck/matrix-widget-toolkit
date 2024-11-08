@@ -5,6 +5,7 @@
   "author": "Nordeck IT + Consulting GmbH",
   "license": "Apache-2.0",
   "source": "./src/index.ts",
+  "types": "./src/index.ts",
   "exports": {
     "import": "./src/index.ts",
     "require": "./src/index.ts"
@@ -44,6 +45,7 @@
   "publishConfig": {
     "module": "./build/esm/index.js",
     "main": "./build/cjs/index.cjs",
+    "types": "./build/esm/index.d.ts",
     "exports": {
       ".": {
         "module": "./build/esm/index.js",
