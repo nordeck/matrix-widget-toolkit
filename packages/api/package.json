@@ -33,9 +33,9 @@
     "generate-api-report": "tsc && api-extractor run --verbose --local"
   },
   "dependencies": {
-    "matrix-widget-api": "^1.9.0",
-    "qs": "^6.13.0",
-    "rxjs": "^7.8.1"
+    "matrix-widget-api": "1.9.0",
+    "qs": "6.13.0",
+    "rxjs": "7.8.1"
   },
   "repository": {
     "type": "git",
