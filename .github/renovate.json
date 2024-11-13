@@ -57,6 +57,10 @@
       "groupName": "engines",
       "matchDepTypes": ["engines"],
       "labels": ["Engines"]
+    },
+    {
+      "matchPackageNames": ["node"],
+      "allowedVersions": "<21.0.0"
     }
   ]
 }
