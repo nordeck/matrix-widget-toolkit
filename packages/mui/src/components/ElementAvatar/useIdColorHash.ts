@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Nordeck IT + Consulting GmbH
+ * Copyright 2024 Nordeck IT + Consulting GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@
  * who are trying to impersonate someone else.
  *
  * {@link https://github.com/element-hq/compound-web/blob/5950e6827aaaca5a0b2540093f0b168ca590e8ca/src/components/Avatar/useIdColorHash.ts#L23}
+ * @copyright Copyright 2023  New Vector Ltd
  *
  * @param id - a Matrix ID or room ID
  * @returns a hash of the ID provided
@@ -32,3 +33,7 @@ export function useIdColorHash(id: string): number {
   }, 0);
   return (charCodeSum % MAX) + MIN;
 }
+
+export const isColorHash = (value: number): value is 1 | 2 | 3 | 4 | 5 | 6 => {
+  return [1, 2, 3, 4, 5, 6].includes(value);
+};

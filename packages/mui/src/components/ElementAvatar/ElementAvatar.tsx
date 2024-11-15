@@ -18,7 +18,7 @@ import { Avatar, AvatarProps, styled } from '@mui/material';
 import { forwardRef } from 'react';
 import { createAvatarUrl } from './createAvatarUrl';
 import { getInitialLetter } from './getInitialLetter';
-import { useIdColorHash } from './useIdColorHash';
+import { isColorHash, useIdColorHash } from './useIdColorHash';
 
 /**
  * {@link https://github.com/element-hq/compound-design-tokens}
@@ -59,10 +59,6 @@ const colors = {
     5: '#9f0850',
     6: '#9b2200',
   },
-};
-
-const isColorHash = (value: number): value is 1 | 2 | 3 | 4 | 5 | 6 => {
-  return value in colors['light'];
 };
 
 /**
