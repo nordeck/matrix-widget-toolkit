@@ -784,7 +784,19 @@ export function AvatarsDemo() {
       <p>Avatars can be used together with users or rooms.</p>
       <Stack direction="row" gap={1} my={1}>
         <ElementAvatar userId="@user:matrix.org" /> Avatar without image and
-        name
+        name (@user:matrix.org)
+      </Stack>
+      <Stack direction="row" gap={1} my={1}>
+        <ElementAvatar userId="@alice:matrix.org" /> Avatar without image and
+        name (@alice:matrix.org)
+      </Stack>
+      <Stack direction="row" gap={1} my={1}>
+        <ElementAvatar userId="@bob:matrix.org" /> Avatar without image and name
+        (@bob:matrix.org)
+      </Stack>
+      <Stack direction="row" gap={1} my={1}>
+        <ElementAvatar userId="@charlie:matrix.org" /> Avatar without image and
+        name (@charlie:matrix.org)
       </Stack>
       <Stack direction="row" gap={1} my={1}>
         <ElementAvatar userId="@user:matrix.org" displayName="Display Name" />
