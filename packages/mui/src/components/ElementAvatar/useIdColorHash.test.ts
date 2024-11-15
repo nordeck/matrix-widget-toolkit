@@ -14,15 +14,19 @@
  * limitations under the License.
  */
 
-export function getColor(id: string): string {
-  // Same colors and algorithm as Element is using, to get the same results:
-  // https://github.com/matrix-org/matrix-react-sdk/blob/667ec166d736dfb0ac49f67398a8b7a13db7d5ef/src/Avatar.ts#L91
-  const defaultColors = ['#007a61', '#368bd6', '#ac3ba8'];
-  let total = 0;
-  for (let i = 0; i < id.length; ++i) {
-    total += id.charCodeAt(i);
-  }
-  const colorIndex = total % defaultColors.length;
+import { describe, expect, it } from 'vitest';
+import { useIdColorHash } from './useIdColorHash';
 
-  return defaultColors[colorIndex];
-}
+describe('useIdColorHash', () => {
+  it('should generate stable hashes from ids', () => {
+    expect(useIdColorHash('@oliver.sand:matrix.org')).toMatchInlineSnapshot(
+      `3`,
+    );
+    expect(
+      useIdColorHash('!OFRzoSUQYSjIXMEZDS:datanauten.de'),
+    ).toMatchInlineSnapshot(`5`);
+    expect(
+      useIdColorHash('!vbSFpwCIcbnazhtFTT:matrix.org'),
+    ).toMatchInlineSnapshot(`1`);
+  });
+});

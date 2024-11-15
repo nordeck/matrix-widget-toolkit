@@ -17,8 +17,53 @@
 import { Avatar, AvatarProps, styled } from '@mui/material';
 import { forwardRef } from 'react';
 import { createAvatarUrl } from './createAvatarUrl';
-import { getColor } from './getColor';
 import { getInitialLetter } from './getInitialLetter';
+import { useIdColorHash } from './useIdColorHash';
+
+/**
+ * {@link https://github.com/element-hq/compound-design-tokens}
+ */
+const bgColors = {
+  dark: {
+    1: '#002600',
+    2: '#001b4e',
+    3: '#37004e',
+    4: '#22006a',
+    5: '#450018',
+    6: '#470000',
+  },
+  light: {
+    1: '#e0f8d9',
+    2: '#e3f5f8',
+    3: '#faeefb',
+    4: '#f1efff',
+    5: '#ffecf0',
+    6: '#ffefe4',
+  },
+};
+
+const colors = {
+  dark: {
+    1: '#56c02c',
+    2: '#21bacd',
+    3: '#d991de',
+    4: '#ad9cfe',
+    5: '#fe84a2',
+    6: '#f6913d',
+  },
+  light: {
+    1: '#005f00',
+    2: '#00548c',
+    3: '#822198',
+    4: '#5d26cd',
+    5: '#9f0850',
+    6: '#9b2200',
+  },
+};
+
+const isColorHash = (value: number): value is 1 | 2 | 3 | 4 | 5 | 6 => {
+  return value in colors['light'];
+};
 
 /**
  * Props for the {@link ElementAvatar} component.
@@ -46,13 +91,17 @@ export type ElementAvatarProps = {
 
 const StyledAvatar = styled(Avatar, {
   shouldForwardProp: (p) => p !== 'color',
-})<{ color: string }>(({ theme, color }) => ({
+})<{ colorHash: number }>(({ theme, colorHash }) => ({
   // increase the specificity of the css selector to override styles of
   // chip or button components that provide their own css for avatars.
   '&, &&.MuiChip-avatar': {
     fontSize: 18,
-    background: color,
-    color: theme.palette.common.white,
+    background: isColorHash(colorHash)
+      ? bgColors[theme.palette.mode][colorHash]
+      : bgColors[theme.palette.mode][1],
+    color: isColorHash(colorHash)
+      ? colors[theme.palette.mode][colorHash]
+      : colors[theme.palette.mode][1],
   },
 
   width: 24,
@@ -77,7 +126,7 @@ export const ElementAvatar = forwardRef<HTMLDivElement, ElementAvatarProps>(
         alt=""
         aria-hidden
         src={src}
-        color={getColor(userId)}
+        colorHash={useIdColorHash(userId)}
         {...props}
       >
         {getInitialLetter(name)}
