@@ -94,6 +94,27 @@ export default ts.config(
       ],
     },
   },
+  // mui package specific rules
+  {
+    files: ['packages/mui/**'],
+    rules: {
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector:
+            "CallExpression[callee.name='useTranslation'][arguments.0.value!='widget-toolkit']",
+          message:
+            'useTranslation() must be invoked with the "widget-toolkit" namespace arg: useTranslation("widget-toolkit")',
+        },
+        {
+          selector:
+            "JSXElement[openingElement.name.name='Trans']:not(:has(JSXAttribute[name.name='ns'][value.value!='widget-toolkit']))",
+          message:
+            '<Trans> must be used with the "widget-toolkit" "ns" prop: <Trans … ns="widget-toolkit" … >',
+        },
+      ],
+    },
+  },
   // Relax some rules for test files only
   {
     files: ['**/*.test.*'],
