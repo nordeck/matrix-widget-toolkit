@@ -1,5 +1,16 @@
 # `@matrix-widget-toolkit/mui`
 
+## 2.1.0
+
+### Minor Changes
+
+- 9486231: Remove usage of lodash and replace split with `Intl.Segmenter().segment()` which bumps Firefox requirements to 125 and Chrome to at least 87
+
+### Patch Changes
+
+- 094aa47: Update default primary and error colors to match current Element Web theme.
+- cde8b5b: Align avatar colours with current Element Web
+
 ## 2.0.6
 
 ### Patch Changes
