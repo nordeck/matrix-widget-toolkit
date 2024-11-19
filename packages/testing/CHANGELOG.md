@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/testing`
 
+## 3.0.2
+
+### Patch Changes
+
+- 9486231: Remove usage of lodash
+
 ## 3.0.1
 
 ### Patch Changes
