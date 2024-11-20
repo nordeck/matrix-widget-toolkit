@@ -1,11 +1,20 @@
 #!/bin/sh
 
+set -e
+
+# Detect if IPv6 is available, if not, use an IPv4-only configuration
+
+DEFAULT_CONF_FILE="/etc/nginx/nginx.conf"
+if [ ! -f "/proc/net/if_inet6" ]; then
+    DEFAULT_CONF_FILE="/etc/nginx/nginx.ipv4.conf"
+fi
+
+export DEFAULT_CONF_FILE
+
 # Create a new entrypoint that exports a __ENVIRONMENT_SCRIPT__ variable
-# from all REACT_APP_* environment variables. The variable contains a 
+# from all REACT_APP_* environment variables. The variable contains a
 # variable assignment to window.__ENVIRONMENT__  that should be put
 # into a <script>.
-
-set -e
 
 JSON_CONTENT=""
 
