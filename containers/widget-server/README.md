@@ -12,6 +12,7 @@ The container has the following features:
 - Injects `REACT_APP_*` environment variables into the `index.html` file.
 - Uses a non privileged user (`runAsNonRoot: true`).
 - Supports read-only file systems (`docker run --read-only ...` or `readOnlyRootFilesystem: true`).
+- Supports dual stack and IPv4-only deployment runtimes.
 - Exposes the application on port `8080`.
 
 ## Usage
