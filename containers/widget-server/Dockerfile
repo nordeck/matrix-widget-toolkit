@@ -6,7 +6,7 @@ RUN apk add --no-cache gettext
 # Add the nginx configuration
 COPY files/default.conf /etc/nginx/conf.d/
 
-# Make sure all directories are accessable by the non-root user and wrangle
+# Make sure all directories are accessible by the non-root user and wrangle
 # files around to enable IPv4-only by duplicating `nginx.conf` and`default.conf`
 # and replacing the `listen` directive.
 #
