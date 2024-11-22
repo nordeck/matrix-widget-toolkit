@@ -3,7 +3,7 @@ FROM nginx:1.27.2-alpine-perl
 # Install envsubst
 RUN apk add --no-cache gettext
 
-# Make sure all directories are accessable by the non-root user 
+# Make sure all directories are accessible by the non-root user
 # Inspired by https://hub.docker.com/r/nginxinc/nginx-unprivileged
 RUN set -x\
     && chown -R 101:0 /var/cache/nginx \
@@ -20,7 +20,10 @@ USER 101
 COPY files/default.conf /etc/nginx/conf.d/
 
 # Store the CSP header in a separate file to make it replacable in the deployment.
-COPY files/content-security-policy.conf /etc/nginx/conf.d/headers/
+COPY files/content-security-policy.conf /etc/nginx/conf.d/custom/
+
+# Add mimetypes configuration
+COPY files/mimetypes.conf /etc/nginx/conf.d/custom/
 
 # Create a new entrypoint that exports a __ENVIRONMENT_SCRIPT__ variable
 # from all REACT_APP_* environment variables.
