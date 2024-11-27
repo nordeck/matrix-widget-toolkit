@@ -23,7 +23,7 @@ COPY files/default.conf /etc/nginx/conf.d/
 COPY files/content-security-policy.conf /etc/nginx/conf.d/custom/
 
 # Setup the default listen directive. You can map other files to it
-# on your deployments to support different configs (eg. IPv4-omly).
+# on your deployments to support different configs (e.g. IPv4-only).
 COPY files/listen.conf /etc/nginx/conf.d/custom/
 
 # Add mimetypes configuration

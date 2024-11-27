@@ -98,7 +98,7 @@ The nonce can be read from the `window.NONCE` variable.
 ### Custom `Content-Security-Policy`
 
 The default `Content-Security-Policy` can be replaced if needed.
-Simply replace the `/etc/nginx/conf.d/custom/content-security-policy.conf` file in when building your container image or in the deployment.
+Simply replace the `/etc/nginx/conf.d/custom/content-security-policy.conf` file when building your container image or in the deployment.
 Note that the `$__STYLE_CSP_NONCE__` will be used to add the unique nonce to each request.
 
 It is also possible to extend the existing CSP with additional values:
@@ -110,13 +110,17 @@ Note that it is not possible to remove existing entries without replacing the `c
 
 By default, the container will be built with `nginx` configured to accept both IPv6 and IPv4 network requests.
 
-If you need to change this, for example to setup an IPv4-only deployment, you need to replace the
-`/etc/nginx/conf.d/custom/listen.conf` file or map that to an alternate configuration file.
+If you need to change this, for example to set up an IPv4-only deployment, you can replace the `/etc/nginx/conf.d/custom/listen.conf` file within the container at build time or by mounting an alternative configuration file.
 
-We provide an IPv4-only example in `files/listen.ipv4.conf` file.
+We provide an IPv4-only example in the `files/listen.ipv4.conf` file.
 
 ## Custom `mime.types`
 
 The default `mime.types` can also be replaced.
 
 Provide an alternative `/etc/nginx/conf.d/custom/mimetypes.conf` file when building the container or in your deployment.
+
+### Additional custom configurations
+
+As the sections above show, you can use the `/etc/nginx/conf.d/custom/` folder to add any additional custom configuration that might be required for your deployment.
+All `nginx` configuration directives that are specified within files placed in this folder will be added to the widget server block.
