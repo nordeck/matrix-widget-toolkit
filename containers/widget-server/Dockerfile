@@ -22,6 +22,10 @@ COPY files/default.conf /etc/nginx/conf.d/
 # Store the CSP header in a separate file to make it replacable in the deployment.
 COPY files/content-security-policy.conf /etc/nginx/conf.d/custom/
 
+# Setup the default listen directive. You can map other files to it
+# on your deployments to support different configs (eg. IPv4-omly).
+COPY files/listen.conf /etc/nginx/conf.d/custom/
+
 # Add mimetypes configuration
 COPY files/mimetypes.conf /etc/nginx/conf.d/custom/
 

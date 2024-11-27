@@ -13,6 +13,7 @@ The container has the following features:
 - Uses a non privileged user (`runAsNonRoot: true`).
 - Supports read-only file systems (`docker run --read-only ...` or `readOnlyRootFilesystem: true`).
 - Exposes the application on port `8080`.
+- Allows for IPv4-only deployments.
 
 ## Usage
 
@@ -97,13 +98,22 @@ The nonce can be read from the `window.NONCE` variable.
 ### Custom `Content-Security-Policy`
 
 The default `Content-Security-Policy` can be replaced if needed.
-Simply replace the `/etc/nginx/conf.d/custom/content-security-policy.conf` file when building your container image or in the deployment.
+Simply replace the `/etc/nginx/conf.d/custom/content-security-policy.conf` file in when building your container image or in the deployment.
 Note that the `$__STYLE_CSP_NONCE__` will be used to add the unique nonce to each request.
 
 It is also possible to extend the existing CSP with additional values:
 The values of the `CSP_FONT_SRC`, `CSP_STYLE_SRC`, `CSP_SCRIPT_SRC`, `CSP_IMG_SRC`, `CSP_CONNECT_SRC` environment variables will be appended to the respecting policy.
 Environment variable references can be added as string, e.g. `export CSP_IMG_SRC='${REACT_APP_HOME_SERVER_URL}'`.
 Note that it is not possible to remove existing entries without replacing the `content-security-policy.conf` file.
+
+### Custom `listen` directive
+
+By default, the container will be built with `nginx` configured to accept both IPv6 and IPv4 network requests.
+
+If you need to change this, for example to setup an IPv4-only deployment, you need to replace the
+`/etc/nginx/conf.d/custom/listen.conf` file or map that to an alternate configuration file.
+
+We provide an IPv4-only example in `files/listen.ipv4.conf` file.
 
 ## Custom `mime.types`
 
