@@ -97,10 +97,16 @@ The nonce can be read from the `window.NONCE` variable.
 ### Custom `Content-Security-Policy`
 
 The default `Content-Security-Policy` can be replaced if needed.
-Simply replace the `/etc/nginx/conf.d/headers/content-security-policy.conf` file in when building your container image or in the deployment.
+Simply replace the `/etc/nginx/conf.d/custom/content-security-policy.conf` file when building your container image or in the deployment.
 Note that the `$__STYLE_CSP_NONCE__` will be used to add the unique nonce to each request.
 
 It is also possible to extend the existing CSP with additional values:
 The values of the `CSP_FONT_SRC`, `CSP_STYLE_SRC`, `CSP_SCRIPT_SRC`, `CSP_IMG_SRC`, `CSP_CONNECT_SRC` environment variables will be appended to the respecting policy.
 Environment variable references can be added as string, e.g. `export CSP_IMG_SRC='${REACT_APP_HOME_SERVER_URL}'`.
 Note that it is not possible to remove existing entries without replacing the `content-security-policy.conf` file.
+
+## Custom `mime.types`
+
+The default `mime.types` can also be replaced.
+
+Provide an alternative `/etc/nginx/conf.d/custom/mimetypes.conf` file when building the container or in your deployment.
