@@ -93,6 +93,9 @@ export function isValidRedactionEvent(event: RoomEvent<unknown>): event is Redac
 export function isValidRoomMemberStateEvent(event: StateEvent<unknown>): event is StateEvent<RoomMemberStateEventContent>;
 
 // @public
+export function makeEventFromSendStateEventResult<T>(type: string, stateKey: string, content: T, sender: string, sendResult: ISendEventFromWidgetResponseData): StateEvent<T>;
+
+// @public
 export type MembershipState = 'join' | 'invite' | 'leave' | 'ban' | 'knock';
 
 // @public
@@ -171,6 +174,9 @@ export type RoomMemberStateEventContent = {
     displayname?: string | null;
     avatar_url?: string | null;
 };
+
+// @public
+export function sendStateEventWithEventResult<T>(widgetApi: WidgetApi, type: string, stateKey: string, content: T): Promise<StateEvent<T>>;
 
 // @public
 export const STATE_EVENT_POWER_LEVELS = "m.room.power_levels";
