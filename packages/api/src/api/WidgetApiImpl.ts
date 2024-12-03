@@ -24,6 +24,7 @@ import {
   INotifyCapabilitiesActionRequest,
   IOpenIDCredentials,
   IRoomEvent,
+  ISendEventFromWidgetResponseData,
   IUploadFileActionFromWidgetResponseData,
   IWidgetApiRequest,
   IWidgetApiRequestData,
@@ -419,40 +420,17 @@ export class WidgetApiImpl implements WidgetApi {
   }
 
   /** {@inheritDoc WidgetApi.sendStateEvent} */
-  async sendStateEvent<T>(
+  sendStateEvent<T>(
     eventType: string,
     content: T,
     { roomId, stateKey = '' }: { roomId?: string; stateKey?: string } = {},
-  ): Promise<StateEvent<T>> {
-    const subject = new ReplaySubject<CustomEvent<IWidgetApiRequest>>();
-    const subscription = this.events$.subscribe((e) => subject.next(e));
-
-    try {
-      const { event_id, room_id } = await this.matrixWidgetApi.sendStateEvent(
-        eventType,
-        stateKey,
-        content,
-        roomId,
-      );
-      // TODO: Why do we even return the event, not just the event id, we never
-      // need it.
-      const event = await firstValueFrom(
-        subject.pipe(
-          filter((event) => {
-            const matrixEvent = event.detail.data as unknown as IRoomEvent;
-
-            return (
-              matrixEvent.event_id === event_id &&
-              matrixEvent.room_id === room_id
-            );
-          }),
-          map((event) => event.detail.data as StateEvent<T>),
-        ),
-      );
-      return event;
-    } finally {
-      subscription.unsubscribe();
-    }
+  ): Promise<ISendEventFromWidgetResponseData> {
+    return this.matrixWidgetApi.sendStateEvent(
+      eventType,
+      stateKey,
+      content,
+      roomId,
+    );
   }
 
   /** {@inheritDoc WidgetApi.receiveRoomEvents} */
