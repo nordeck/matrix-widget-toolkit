@@ -23,6 +23,7 @@ import {
   IModalWidgetReturnData,
   IOpenIDCredentials,
   IRoomEvent,
+  ISendEventFromWidgetResponseData,
   IUploadFileActionFromWidgetResponseData,
   IWidget,
   IWidgetApiRequest,
@@ -308,7 +309,7 @@ export type WidgetApi = {
     eventType: string,
     content: T,
     options?: { roomId?: string; stateKey?: string },
-  ): Promise<StateEvent<T>>;
+  ): Promise<ISendEventFromWidgetResponseData>;
 
   /**
    * Receive all room events of a given type from the current room.

@@ -92,7 +92,7 @@ export const PowerLevelsPage = (): ReactElement => {
           ),
         ]}
       >
-        {/* 
+        {/*
           The StoreProvider is located here to keep the example small. Normal
           applications would located it outside of the router to establish a
           single, global store.
