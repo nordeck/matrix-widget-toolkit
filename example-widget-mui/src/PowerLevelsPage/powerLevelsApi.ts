@@ -17,7 +17,6 @@
 import {
   PowerLevelsStateEvent,
   STATE_EVENT_POWER_LEVELS,
-  StateEvent,
   isValidPowerLevelStateEvent,
 } from '@matrix-widget-toolkit/api';
 import { EventDirection, WidgetEventCapability } from 'matrix-widget-api';
@@ -91,11 +90,8 @@ export const powerLevelsApi = baseApi.injectEndpoints({
     }),
 
     /** Update the name of the current room */
-    updatePowerLevels: builder.mutation<
-      StateEvent<PowerLevelsStateEvent>,
-      PowerLevelsStateEvent
-    >({
-      // Optimistic update the local cache to instantly see the updated room name.
+    updatePowerLevels: builder.mutation<null, PowerLevelsStateEvent>({
+      // Optimistic update the local cache to instantly see the updated power levels.
       // Undo the change if the query fails.
       async onQueryStarted(content, { dispatch, queryFulfilled }) {
         const { undo } = dispatch(
@@ -128,12 +124,12 @@ export const powerLevelsApi = baseApi.injectEndpoints({
             ),
           ]);
 
-          const newEvent = await widgetApi.sendStateEvent(
-            STATE_EVENT_POWER_LEVELS,
-            content,
-          );
+          await widgetApi.sendStateEvent(STATE_EVENT_POWER_LEVELS, content);
 
-          return { data: newEvent };
+          // We don't care about the result here.
+          // When executing the mutation, an optimistic update is already done.
+          // Otherwise, the new event should come down the sync.
+          return { data: null };
         } catch (e) {
           return {
             error: {

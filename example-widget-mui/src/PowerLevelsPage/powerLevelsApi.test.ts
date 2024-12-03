@@ -94,22 +94,14 @@ describe('getPowerLevels', () => {
 });
 
 describe('updatePowerLevels', () => {
-  it('should update the topic', async () => {
+  it('should update the power levels', async () => {
     const store = createStore({ widgetApi });
 
-    await expect(
-      store
-        .dispatch(
-          powerLevelsApi.endpoints.updatePowerLevels.initiate({
-            users_default: 100,
-          }),
-        )
-        .unwrap(),
-    ).resolves.toMatchObject({
-      content: {
+    await store.dispatch(
+      powerLevelsApi.endpoints.updatePowerLevels.initiate({
         users_default: 100,
-      },
-    });
+      }),
+    );
 
     expect(widgetApi.sendStateEvent).toHaveBeenCalledWith(
       'm.room.power_levels',
