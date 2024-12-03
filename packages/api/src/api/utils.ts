@@ -17,9 +17,11 @@
 import {
   Capability,
   IRoomEvent,
+  ISendEventFromWidgetResponseData,
   Symbols,
   WidgetEventCapability,
 } from 'matrix-widget-api';
+import { StateEvent, WidgetApi } from './types';
 
 export function convertToRawCapabilities(
   rawCapabilities: Array<WidgetEventCapability | Capability>,
@@ -71,4 +73,57 @@ export function isInRoom(
   }
 
   return roomIds.includes(matrixEvent.room_id);
+}
+
+/**
+ * Create a state event from the arguments.
+ *
+ * @returns A state event with current timestamp origin_server_ts.
+ */
+export function makeEventFromSendStateEventResult<T>(
+  type: string,
+  stateKey: string,
+  content: T,
+  sender: string,
+  sendResult: ISendEventFromWidgetResponseData,
+): StateEvent<T> {
+  if (sendResult.event_id === undefined) {
+    throw new Error('Send state event did not return an event ID');
+  }
+
+  return {
+    content,
+    event_id: sendResult.event_id,
+    origin_server_ts: Date.now(),
+    room_id: sendResult.room_id,
+    sender,
+    state_key: stateKey,
+    type,
+  };
+}
+
+/**
+ * Send a state event and resolve to a "virtual" state event.
+ *
+ * @returns Promise, that resolves to a state event with current timestamp origin_server_ts.
+ */
+export async function sendStateEventWithEventResult<T>(
+  widgetApi: WidgetApi,
+  type: string,
+  stateKey: string,
+  content: T,
+): Promise<StateEvent<T>> {
+  if (widgetApi.widgetParameters.userId === undefined) {
+    throw new Error('Own user ID is undefined');
+  }
+
+  const response = await widgetApi.sendStateEvent(type, content, { stateKey });
+
+  return makeEventFromSendStateEventResult(
+    type,
+    stateKey,
+    content,
+    widgetApi.widgetParameters.userId,
+    response,
+  );
 }

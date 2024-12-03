@@ -37,5 +37,9 @@ export type {
   WidgetParameters,
   WidgetRegistration,
 } from './types';
+export {
+  makeEventFromSendStateEventResult,
+  sendStateEventWithEventResult,
+} from './utils';
 export { WidgetApiImpl } from './WidgetApiImpl';
 export type { WidgetApiOptions } from './WidgetApiImpl';
