@@ -1,5 +1,12 @@
 # `@matrix-widget-toolkit/widget-server`
 
+## 1.1.0
+
+### Minor Changes
+
+- e449db3: Adds configurable listen directive
+- 1fdc00d: Adds proper mime type config for js, mjs and cjs files
+
 ## 1.0.6
 
 ### Patch Changes
