@@ -13,6 +13,7 @@ The container has the following features:
 - Uses a non privileged user (`runAsNonRoot: true`).
 - Supports read-only file systems (`docker run --read-only ...` or `readOnlyRootFilesystem: true`).
 - Exposes the application on port `8080`.
+- Allows for IPv4-only deployments.
 
 ## Usage
 
@@ -105,8 +106,21 @@ The values of the `CSP_FONT_SRC`, `CSP_STYLE_SRC`, `CSP_SCRIPT_SRC`, `CSP_IMG_SR
 Environment variable references can be added as string, e.g. `export CSP_IMG_SRC='${REACT_APP_HOME_SERVER_URL}'`.
 Note that it is not possible to remove existing entries without replacing the `content-security-policy.conf` file.
 
+### Custom `listen` directive
+
+By default, the container will be built with `nginx` configured to accept both IPv6 and IPv4 network requests.
+
+If you need to change this, for example to set up an IPv4-only deployment, you can replace the `/etc/nginx/conf.d/custom/listen.conf` file within the container at build time or by mounting an alternative configuration file.
+
+We provide an IPv4-only example in the `files/listen.ipv4.conf` file.
+
 ## Custom `mime.types`
 
 The default `mime.types` can also be replaced.
 
 Provide an alternative `/etc/nginx/conf.d/custom/mimetypes.conf` file when building the container or in your deployment.
+
+### Additional custom configurations
+
+As the sections above show, you can use the `/etc/nginx/conf.d/custom/` folder to add any additional custom configuration that might be required for your deployment.
+All `nginx` configuration directives that are specified within files placed in this folder will be added to the widget server block.
