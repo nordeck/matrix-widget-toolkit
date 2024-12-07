@@ -12,6 +12,7 @@ import { IModalWidgetOpenRequestDataButton } from 'matrix-widget-api';
 import { IModalWidgetReturnData } from 'matrix-widget-api';
 import { IOpenIDCredentials } from 'matrix-widget-api';
 import { IRoomEvent } from 'matrix-widget-api';
+import { ISendEventFromWidgetResponseData } from 'matrix-widget-api';
 import { IUploadFileActionFromWidgetResponseData } from 'matrix-widget-api';
 import { IWidget } from 'matrix-widget-api';
 import { IWidgetApiRequest } from 'matrix-widget-api';
@@ -90,6 +91,9 @@ export function isValidRedactionEvent(event: RoomEvent<unknown>): event is Redac
 
 // @public
 export function isValidRoomMemberStateEvent(event: StateEvent<unknown>): event is StateEvent<RoomMemberStateEventContent>;
+
+// @public
+export function makeEventFromSendStateEventResult<T>(type: string, stateKey: string, content: T, sender: string, sendResult: ISendEventFromWidgetResponseData): StateEvent<T>;
 
 // @public
 export type MembershipState = 'join' | 'invite' | 'leave' | 'ban' | 'knock';
@@ -172,6 +176,9 @@ export type RoomMemberStateEventContent = {
 };
 
 // @public
+export function sendStateEventWithEventResult<T>(widgetApi: WidgetApi, type: string, stateKey: string, content: T): Promise<StateEvent<T>>;
+
+// @public
 export const STATE_EVENT_POWER_LEVELS = "m.room.power_levels";
 
 // @public
@@ -222,7 +229,7 @@ export type WidgetApi = {
     sendStateEvent<T>(eventType: string, content: T, options?: {
         roomId?: string;
         stateKey?: string;
-    }): Promise<StateEvent<T>>;
+    }): Promise<ISendEventFromWidgetResponseData>;
     receiveRoomEvents<T>(eventType: string, options?: {
         messageType?: string;
         roomIds?: string[] | Symbols.AnyRoom;
@@ -344,7 +351,7 @@ export class WidgetApiImpl implements WidgetApi {
     sendStateEvent<T>(eventType: string, content: T, { roomId, stateKey }?: {
         roomId?: string;
         stateKey?: string;
-    }): Promise<StateEvent<T>>;
+    }): Promise<ISendEventFromWidgetResponseData>;
     sendToDeviceMessage<T>(eventType: string, encrypted: boolean, content: {
         [userId: string]: {
             [deviceId: string | '*']: T;

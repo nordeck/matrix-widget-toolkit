@@ -211,7 +211,6 @@ export function mockWidgetApi(opts?: {
     observeStateEvents: vi.fn(),
     // @ts-expect-error -- Mocks are expected to return no proper T type
     observeRoomEvents: vi.fn(),
-    // @ts-expect-error -- Mocks are expected to return no proper T type
     sendStateEvent: vi.fn(),
     // @ts-expect-error -- Mocks are expected to return no proper T type
     sendRoomEvent: vi.fn(),

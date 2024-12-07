@@ -1060,76 +1060,33 @@ describe('WidgetApiImpl', () => {
 
   describe('sendStateEvent', () => {
     it('should send state event', async () => {
-      const preventDefault = vi.fn();
       const stateEvent = { hello: 'world' };
-
-      matrixWidgetApi.sendStateEvent.mockResolvedValue({
+      matrixWidgetApi.sendStateEvent.mockResolvedValueOnce({
         event_id: '$event-id',
         room_id: '!current-room',
       });
-      matrixWidgetApi.on.mockImplementationOnce((_, listener) => {
-        setTimeout(() => {
-          listener({
-            detail: {
-              data: mockRoomEvent({
-                state_key: '',
-                content: stateEvent,
-              }),
-            },
-            preventDefault,
-          });
-        });
-
-        return matrixWidgetApi;
-      });
-      matrixWidgetApi.off.mockReturnThis();
 
       await expect(
         widgetApi.sendStateEvent('com.example.test', stateEvent),
       ).resolves.toMatchObject({
+        event_id: '$event-id',
         room_id: '!current-room',
-        sender: '@my-user-id',
-        state_key: '',
-        type: 'com.example.test',
-        content: stateEvent,
       });
-      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
-        'action:send_event',
-        expect.any(Function),
+      expect(matrixWidgetApi.sendStateEvent).toHaveBeenCalledWith(
+        'com.example.test',
+        '',
+        stateEvent,
+        undefined,
       );
-      expect(matrixWidgetApi.sendStateEvent).toHaveBeenCalled();
-      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
-        'action:send_event',
-        expect.any(Function),
-      );
-      expect(preventDefault).toHaveBeenCalled();
-      expect(matrixWidgetApi.transport.reply).toHaveBeenCalled();
     });
 
     it('should send state event with custom state key', async () => {
-      const preventDefault = vi.fn();
       const stateEvent = { hello: 'world' };
 
-      matrixWidgetApi.sendStateEvent.mockResolvedValue({
+      matrixWidgetApi.sendStateEvent.mockResolvedValueOnce({
         room_id: '!current-room',
         event_id: '$event-id',
       });
-      matrixWidgetApi.on.mockImplementationOnce((_, listener) => {
-        setTimeout(() => {
-          listener({
-            detail: {
-              data: mockRoomEvent({
-                content: stateEvent,
-                state_key: 'custom-state-key',
-              }),
-            },
-            preventDefault,
-          });
-        });
-
-        return matrixWidgetApi;
-      });
-      matrixWidgetApi.off.mockReturnThis();
 
       await expect(
         widgetApi.sendStateEvent('com.example.test', stateEvent, {
@@ -1137,49 +1094,23 @@ describe('WidgetApiImpl', () => {
         }),
       ).resolves.toMatchObject({
         room_id: '!current-room',
-        sender: '@my-user-id',
-        state_key: 'custom-state-key',
-        type: 'com.example.test',
-        content: stateEvent,
+        event_id: '$event-id',
       });
-      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
-        'action:send_event',
-        expect.any(Function),
+      expect(matrixWidgetApi.sendStateEvent).toHaveBeenCalledWith(
+        'com.example.test',
+        'custom-state-key',
+        stateEvent,
+        undefined,
       );
-      expect(matrixWidgetApi.sendStateEvent).toHaveBeenCalled();
-      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
-        'action:send_event',
-        expect.any(Function),
-      );
-      expect(preventDefault).toHaveBeenCalled();
-      expect(matrixWidgetApi.transport.reply).toHaveBeenCalled();
     });
 
     it('should send state event to another room', async () => {
-      const preventDefault = vi.fn();
       const stateEvent = { hello: 'world' };
 
-      matrixWidgetApi.sendStateEvent.mockResolvedValue({
+      matrixWidgetApi.sendStateEvent.mockResolvedValueOnce({
         room_id: '!another-room',
         event_id: '$event-id',
       });
-      matrixWidgetApi.on.mockImplementationOnce((_, listener) => {
-        setTimeout(() => {
-          listener({
-            detail: {
-              data: mockRoomEvent({
-                state_key: '',
-                room_id: '!another-room',
-                content: stateEvent,
-              }),
-            },
-            preventDefault,
-          });
-        });
-
-        return matrixWidgetApi;
-      });
-      matrixWidgetApi.off.mockReturnThis();
 
       await expect(
         widgetApi.sendStateEvent('com.example.test', stateEvent, {
@@ -1187,22 +1118,14 @@ describe('WidgetApiImpl', () => {
         }),
       ).resolves.toMatchObject({
         room_id: '!another-room',
-        sender: '@my-user-id',
-        state_key: '',
-        type: 'com.example.test',
-        content: stateEvent,
+        event_id: '$event-id',
       });
-      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
-        'action:send_event',
-        expect.any(Function),
+      expect(matrixWidgetApi.sendStateEvent).toHaveBeenCalledWith(
+        'com.example.test',
+        '',
+        stateEvent,
+        '!another-room',
       );
-      expect(matrixWidgetApi.sendStateEvent).toHaveBeenCalled();
-      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
-        'action:send_event',
-        expect.any(Function),
-      );
-      expect(preventDefault).toHaveBeenCalled();
-      expect(matrixWidgetApi.transport.reply).toHaveBeenCalled();
     });
 
     it('should reject on error while sending', async () => {
@@ -1211,20 +1134,15 @@ describe('WidgetApiImpl', () => {
       matrixWidgetApi.sendStateEvent.mockRejectedValue(
         new Error('Power to low'),
       );
-      matrixWidgetApi.on.mockReturnThis();
-      matrixWidgetApi.off.mockReturnThis();
 
       await expect(() =>
         widgetApi.sendStateEvent('com.example.test', stateEvent),
       ).rejects.toThrow('Power to low');
-      expect(matrixWidgetApi.on).toHaveBeenCalledWith(
-        'action:send_event',
-        expect.any(Function),
-      );
-      expect(matrixWidgetApi.sendStateEvent).toHaveBeenCalled();
-      expect(matrixWidgetApi.off).toHaveBeenCalledWith(
-        'action:send_event',
-        expect.any(Function),
+      expect(matrixWidgetApi.sendStateEvent).toHaveBeenCalledWith(
+        'com.example.test',
+        '',
+        stateEvent,
+        undefined,
       );
     });
   });
