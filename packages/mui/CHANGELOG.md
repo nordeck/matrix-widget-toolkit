@@ -1,5 +1,14 @@
 # `@matrix-widget-toolkit/mui`
 
+## 2.1.1
+
+### Patch Changes
+
+- Updated dependencies [76314a9]
+- Updated dependencies [14f1795]
+  - @matrix-widget-toolkit/api@4.0.0
+  - @matrix-widget-toolkit/react@2.0.4
+
 ## 2.1.0
 
 ### Minor Changes
