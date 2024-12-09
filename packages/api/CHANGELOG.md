@@ -1,5 +1,15 @@
 # `@matrix-widget-toolkit/api`
 
+## 4.0.0
+
+### Major Changes
+
+- 14f1795: WidgetApi.sendStateEvent no longer returns the event. Instead it returns the result of the Matrix Widget API.
+
+### Minor Changes
+
+- 76314a9: The api package now exposes some utility functions via the `utils` module
+
 ## 3.4.2
 
 ### Patch Changes
