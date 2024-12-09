@@ -1,5 +1,13 @@
 # `@matrix-widget-toolkit/testing`
 
+## 3.0.3
+
+### Patch Changes
+
+- Updated dependencies [76314a9]
+- Updated dependencies [14f1795]
+  - @matrix-widget-toolkit/api@4.0.0
+
 ## 3.0.2
 
 ### Patch Changes
