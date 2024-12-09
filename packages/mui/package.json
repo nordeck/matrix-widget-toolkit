@@ -51,7 +51,7 @@
     "@mui/icons-material": "6.1.10",
     "@mui/material": "6.1.10",
     "@mui/utils": "6.1.10",
-    "i18next": "23.16.8",
+    "i18next": "24.0.5",
     "i18next-browser-languagedetector": "8.0.0",
     "i18next-resources-to-backend": "1.2.1",
     "matrix-widget-api": "1.10.0",
