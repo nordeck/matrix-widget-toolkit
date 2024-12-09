@@ -39,18 +39,12 @@
     },
     {
       "groupName": "material-ui",
-      "matchPackageNames": [
-        "@emotion/*",
-        "@mui/*"
-      ],
+      "matchPackageNames": ["@emotion/*", "@mui/*"],
       "labels": ["Material-UI"]
     },
     {
       "groupName": "i18next",
-      "matchPackageNames": [
-        "i18next",
-        "react-i18next"
-      ],
+      "matchPackageNames": ["i18next", "react-i18next"],
       "labels": ["i18next"]
     },
     {
@@ -61,6 +55,15 @@
     {
       "matchPackageNames": ["node"],
       "allowedVersions": "<21.0.0"
+    },
+    {
+      "matchPackageNames": [
+        "@types/react",
+        "@types/react-dom",
+        "react",
+        "react-dom"
+      ],
+      "allowedVersions": "<19.0.0"
     }
   ]
 }
