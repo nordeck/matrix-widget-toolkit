@@ -38,7 +38,10 @@
     "depcheck": "depcheck --ignores=@types/node,@vitest/coverage-v8,lodash,lodash-es,@types/lodash-es --ignore-dirs=build",
     "translate": "i18next src/**/*.{ts,tsx}",
     "check-api-report": "echo \"Nothing to report\"",
-    "generate-api-report": "echo \"Nothing to report\""
+    "generate-api-report": "echo \"Nothing to report\"",
+    "clean": "yarn run clean:cache && yarn run clean:build",
+    "clean:cache": "rm -rf node_modules/.vite",
+    "clean:build": "rm -rf build"
   },
   "browserslist": {
     "production": [

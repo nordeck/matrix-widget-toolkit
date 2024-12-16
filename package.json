@@ -25,7 +25,10 @@
     "release": "node ./scripts/publishAllPackages.js",
     "translate": "yarn workspaces run translate",
     "generate-api-report": "yarn workspaces run generate-api-report",
-    "check-api-report": "yarn workspaces run check-api-report"
+    "check-api-report": "yarn workspaces run check-api-report",
+    "clean": "yarn run clean:cache && yarn run clean:build",
+    "clean:cache": "rm -rf node_modules/.vite && yarn workspaces run clean:cache",
+    "clean:build": "yarn workspaces run clean:build"
   },
   "devDependencies": {
     "@changesets/cli": "2.27.10",
