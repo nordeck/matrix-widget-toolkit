@@ -77,6 +77,9 @@ The following commands are available:
   you have to update the `api-report.md` of the related package using this
   script. The API report provides an overview about the exported elements of
   the package.
+- `yarn clean`: Cleans builds and caches
+- `yarn clean:build`: Cleans builds
+- `yarn clean:cache`: Cleans caches
 
 ### Versioning
 

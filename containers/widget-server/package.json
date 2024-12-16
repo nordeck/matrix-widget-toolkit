@@ -16,7 +16,10 @@
     "check-api-report": "echo \"Nothing to report\"",
     "generate-api-report": "echo \"Nothing to report\"",
     "e2e": "playwright test --headed --project=chromium --workers=1 --reporter=dot",
-    "e2e:all": "yarn playwright test --reporter=dot"
+    "e2e:all": "yarn playwright test --reporter=dot",
+    "clean": "yarn run clean:build",
+    "clean:cache": "echo 'script not implemented package'",
+    "clean:build": "docker image rm --force \"matrix-widget-toolkit/widget-server\""
   },
   "devDependencies": {
     "@playwright/test": "1.49.0"
