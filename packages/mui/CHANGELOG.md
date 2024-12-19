@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/mui`
 
+## 2.1.2
+
+### Patch Changes
+
+- a1241cc: Prevent leak of colorHash prop to the DOM when using an avatar
+
 ## 2.1.1
 
 ### Patch Changes
