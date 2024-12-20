@@ -59,7 +59,7 @@
     "i18next-resources-to-backend": "1.2.1",
     "matrix-widget-api": "1.10.0",
     "react-i18next": "15.1.3",
-    "react-use": "17.5.1"
+    "react-use": "17.6.0"
   },
   "repository": {
     "type": "git",
