@@ -45,7 +45,7 @@
     "eslint-plugin-promise": "7.2.1",
     "eslint-plugin-react": "7.37.3",
     "eslint-plugin-react-hooks": "5.1.0",
-    "eslint-plugin-testing-library": "6.5.0",
+    "eslint-plugin-testing-library": "7.1.1",
     "@vitest/eslint-plugin": "1.1.24",
     "husky": "9.1.7",
     "lint-staged": "15.3.0",
