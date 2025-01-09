@@ -86,7 +86,7 @@ export type ElementAvatarProps = {
 } & AvatarProps;
 
 const StyledAvatar = styled(Avatar, {
-  shouldForwardProp: (p) => p !== 'color',
+  shouldForwardProp: (p: string) => !['color', 'colorHash'].includes(p),
 })<{ colorHash: number }>(({ theme, colorHash }) => ({
   // increase the specificity of the css selector to override styles of
   // chip or button components that provide their own css for avatars.

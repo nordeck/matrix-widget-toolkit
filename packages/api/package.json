@@ -12,11 +12,11 @@
   },
   "type": "module",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "28.0.1",
-    "@types/node": "22.10.1",
+    "@rollup/plugin-commonjs": "28.0.2",
+    "@types/node": "22.10.5",
     "@types/qs": "6.9.17",
     "@vitest/coverage-v8": "2.1.8",
-    "typescript": "5.7.2",
+    "typescript": "5.7.3",
     "vite": "5.4.11",
     "vitest": "2.1.8"
   },
@@ -30,7 +30,10 @@
     "postpack": "node ../../scripts/postpack.js",
     "translate": "echo \"Nothing to translate\"",
     "check-api-report": "api-extractor run --verbose",
-    "generate-api-report": "tsc && api-extractor run --verbose --local"
+    "generate-api-report": "tsc && api-extractor run --verbose --local",
+    "clean": "yarn run clean:build",
+    "clean:build": "rm -rf lib",
+    "clean:cache": "echo 'script not implemented package'"
   },
   "dependencies": {
     "matrix-widget-api": "1.10.0",
