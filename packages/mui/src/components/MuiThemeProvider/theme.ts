@@ -204,6 +204,9 @@ export const baseTheme: ThemeOptions = {
 
     // Dialogs have a different padding and font style
     MuiDialog: {
+      defaultProps: {
+        container,
+      },
       styleOverrides: {
         root: {
           // Make margin smaller for scroll=body
