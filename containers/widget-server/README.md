@@ -72,6 +72,12 @@ The container has the following features:
 
 3. Run the image 🎉.
 
+### Security notes
+
+This container does not terminate SSL. It is assumed that SSL termination is done by the infrastructure running the container, e.g. with a reverse-proxy.
+
+For security reasons it is recommended to set the `Strict-Transport-Security` header there, e.g. `Strict-Transport-Security: max-age=15552000`. This tells clients to always use HTTPS ([see MDN description](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security) for details).
+
 ### Caching
 
 The image uses the following caching strategy:
@@ -114,7 +120,7 @@ If you need to change this, for example to set up an IPv4-only deployment, you c
 
 We provide an IPv4-only example in the `files/listen.ipv4.conf` file.
 
-## Custom `mime.types`
+### Custom `mime.types`
 
 The default `mime.types` can also be replaced.
 
