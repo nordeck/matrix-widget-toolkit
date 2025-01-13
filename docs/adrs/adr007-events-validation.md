@@ -51,7 +51,7 @@ We use several ways to validate incoming data.
 
 We write validation logic in plain code when it is not complicated or we don't want to use a library, introducing another external dependency.
 
-[Example][examplePlainRelatesTo] that validates that event has `m.relates_to` in the content:
+[Example][examplePlainRelatesTo] that validates that event has [`m.relates_to` object][matrixEventsRelations] in the content:
 
 <!--prettier-ignore-->
    ```ts
@@ -142,3 +142,4 @@ The Matrix Widget Toolkit `example-widget-mui` provides several [examples][toolk
 [joi]: https://joi.dev/
 [toolkitApiExtras]: https://github.com/nordeck/matrix-widget-toolkit/tree/main/packages/api/src/api/extras
 [toolkitExampleWidgetEvents]: https://github.com/nordeck/matrix-widget-toolkit/tree/main/example-widget-mui/src/events
+[matrixEventsRelations]: https://spec.matrix.org/v1.13/client-server-api/#forming-relationships-between-events
