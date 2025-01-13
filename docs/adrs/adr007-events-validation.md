@@ -22,7 +22,7 @@ Matrix events are described by the Matrix specification with [event schemas][eve
 a reference to implement validation logic of the events used.
 
 Widgets may also load data from other data sources: localstorage, RTC channel, HTTP APIs. In general,
-we could not consider these events and data to be of needed schemas all the time and therefore must validate.
+we could not assume these events and data to be valid all the time and therefore must validate them.
 
 ## Decision
 
@@ -125,7 +125,7 @@ validation features.
 <!-- This section describes the resulting context, after applying the decision. All consequences should be listed here, not just the "positive" ones. A particular decision may have positive, negative, and neutral consequences, but all of them affect the team and project in the future. -->
 
 We apply validation to all incoming Matrix events according to schemas and filter out invalid events. We also
-validate all other data that come from non Matrix data sources.
+validate all other data that comes from non-Matrix data sources.
 
 The Matrix Widget Toolkit `api` package provides [validators][toolkitApiExtras]
 for some Matrix events to be used in widget implementations.
