@@ -130,7 +130,7 @@ validate all other data that come from non Matrix data sources.
 The Matrix Widget Toolkit `api` package provides [validators][toolkitApiExtras]
 for some Matrix events to be used in widget implementations.
 
-Matrix Widget Toolkit `example-widget-mui` provides several [examples][toolkitExampleWidgetEvents] how to implementation validators using Joi.
+The Matrix Widget Toolkit `example-widget-mui` provides several [examples][toolkitExampleWidgetEvents] how to implement validators using Joi.
 
 <!-- This template is taken from a blog post by Michael Nygard http://thinkrelevance.com/blog/2011/11/15/documenting-architecture-decisions -->
 
