@@ -9,7 +9,7 @@ Status: accepted
 Widgets can use Matrix events that are defined in the Matrix specification, as well as custom events that might be
 created and used by other custom Matrix clients or widgets.
 
-Matrix specification states that events should be considered as untrusted data. This applies both to Matrix and
+The Matrix specification states that events should be considered as untrusted data. This applies both to Matrix and
 custom events.
 
 [MSC2801][msc2801] provides reasons why events may not match the specification and the conclusion that
