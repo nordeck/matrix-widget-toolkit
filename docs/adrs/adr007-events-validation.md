@@ -28,7 +28,7 @@ we could not consider these events and data to be of needed schemas all the time
 
 <!-- This section describes our response to these forces. It is stated in full sentences, with active voice. "We will ..." -->
 
-We validate all events and data that are coming into widgets from different sources:
+We validate all events and data that is received by widgets from different sources:
 
 For Matrix events (both from the Matrix specification and custom widget events):
 
