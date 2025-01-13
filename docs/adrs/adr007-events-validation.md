@@ -1,4 +1,4 @@
-# ADR007: Events validation
+# ADR007: Data Validation
 
 Status: accepted
 
