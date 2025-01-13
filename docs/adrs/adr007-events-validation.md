@@ -42,8 +42,8 @@ Schema based validation includes:
 
 - required fields are listed
 - optional and required fields values have the expected data types
-- fields primitive values match expected grammar: dates in ISO 8601, MXC URIs, whitelist values
-- fields object data is also validated according to schema
+- field's primitive values match expected grammar: dates in ISO 8601, MXC URIs, whitelist values
+- field's object data is also validated according to schema
 
 We use several ways to validate incoming data.
 
