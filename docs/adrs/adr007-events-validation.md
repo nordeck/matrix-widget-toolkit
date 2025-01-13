@@ -6,6 +6,9 @@ Status: accepted
 
 ## Context
 
+<!--
+This section describes the forces at play, including technological, political, social, and project local. These forces are probably in tension, and should be called out as such. The language in this section is value-neutral. It is simply describing facts. -->
+
 Widgets can use Matrix events that are defined in the Matrix specification, as well as custom events that might be
 created and used by other custom Matrix clients or widgets.
 
@@ -20,9 +23,6 @@ a reference to implement validation logic of the events used.
 
 Widgets may also load data from other data sources: localstorage, RTC channel, HTTP APIs. In general,
 we could not consider these events and data to be of needed schemas all the time and therefore must validate.
-
-<!--
-This section describes the forces at play, including technological, political, social, and project local. These forces are probably in tension, and should be called out as such. The language in this section is value-neutral. It is simply describing facts. -->
 
 ## Decision
 
