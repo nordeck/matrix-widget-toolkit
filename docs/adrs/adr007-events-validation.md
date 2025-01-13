@@ -12,7 +12,7 @@ created and used by other custom matrix clients or widgets.
 Matrix specification states that events should be considered as untrusted data. This applies both to Matrix and
 custom events.
 
-[MSC 2801][msc2801] provides reasons why events may not match the specification and the conclusion that
+[MSC2801][msc2801] provides reasons why events may not match the specification and the conclusion that
 clients must treat all event data as untrusted.
 
 Matrix events are described by matrix specification with [event schemas][eventSchemas]. This should be used as
