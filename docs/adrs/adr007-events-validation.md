@@ -6,8 +6,8 @@ Status: accepted
 
 ## Context
 
-Widgets are using Matrix events that are defined in Matrix specification and as well custom events that are
-created and used by other custom matrix clients or widgets.
+Widgets can use Matrix events that are defined in the Matrix specification, as well as custom events that might be
+created and used by other custom Matrix clients or widgets.
 
 Matrix specification states that events should be considered as untrusted data. This applies both to Matrix and
 custom events.
