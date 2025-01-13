@@ -127,8 +127,8 @@ Example that validates the content of `m.reaction.event`:
 We apply validation to all incoming Matrix events according to schemas and filter out invalid events. We also
 validate all other data that come from non Matrix data sources.
 
-Matrix Widget Toolkit `api` package providers [validators][toolkitApiExtras]
-for some Matrix events to be used in widgets implementations.
+The Matrix Widget Toolkit `api` package provides [validators][toolkitApiExtras]
+for some Matrix events to be used in widget implementations.
 
 Matrix Widget Toolkit `example-widget-mui` provides several [examples][toolkitExampleWidgetEvents] how to implementation validators using Joi.
 
