@@ -49,7 +49,7 @@ We use several ways to validate incoming data.
 
 ### Plain code
 
-Validation logic could be written in plain code when it is not complicated or we don't want to use some library as external dependency.
+We write validation logic in plain code when it is not complicated or we don't want to use a library, introducing another external dependency.
 
 Example that validates that event has `m.relates_to` in the content:
 
