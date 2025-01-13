@@ -15,7 +15,7 @@ custom events.
 [MSC2801][msc2801] provides reasons why events may not match the specification and the conclusion that
 clients must treat all event data as untrusted.
 
-Matrix events are described by matrix specification with [event schemas][eventSchemas]. This should be used as
+Matrix events are described by the Matrix specification with [event schemas][eventSchemas]. This should be used as
 a reference to implement validation logic of the events used.
 
 Widgets may also load data from other data sources: localstorage, RTC channel, HTTP APIs. In general,
