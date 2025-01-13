@@ -22,7 +22,7 @@ Matrix events are described by the Matrix specification with [event schemas][eve
 a reference to implement validation logic of the events used.
 
 Widgets may also load data from other data sources: localstorage, RTC channel, HTTP APIs. In general,
-we could not consider these events and data to be of needed schemas all the time and therefore must validate.
+we could not assume these events and data to be valid all the time and therefore must validate them.
 
 ## Decision
 
