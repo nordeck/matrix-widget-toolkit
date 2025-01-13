@@ -51,7 +51,7 @@ We use several ways to validate incoming data.
 
 We write validation logic in plain code when it is not complicated or we don't want to use a library, introducing another external dependency.
 
-Example that validates that event has `m.relates_to` in the content:
+[Example][examplePlainRelatesTo] that validates that event has `m.relates_to` in the content:
 
 <!--prettier-ignore-->
    ```ts
@@ -95,7 +95,7 @@ Example that validates that event has `m.relates_to` in the content:
 It is preferred to use [Joi][joi] when we have to validate data with more complex structure. Joi provides powerful
 validation features.
 
-Example that validates the content of `m.reaction.event`:
+[Example][exampleJoiReaction] that validates the content of `m.reaction.event`:
 
 <!--prettier-ignore-->
    ```ts
@@ -137,6 +137,8 @@ Matrix Widget Toolkit `example-widget-mui` provides several [examples][toolkitEx
 [msc2801]: https://github.com/matrix-org/matrix-spec-proposals/pull/2801
 [eventSchemas]: https://github.com/matrix-org/matrix-spec/tree/main/data/event-schemas/schema
 [strippedState]: https://spec.matrix.org/v1.13/client-server-api/#stripped-state
+[examplePlainRelatesTo]: https://github.com/nordeck/matrix-widget-toolkit/blob/20d3c085c65ed063577b4b318aefb4b1610e3d8b/packages/api/src/api/extras/relatesTo.ts#L91-L121
+[exampleJoiReaction]: https://github.com/nordeck/matrix-widget-toolkit/blob/20d3c085c65ed063577b4b318aefb4b1610e3d8b/example-widget-mui/src/events/reactionEvent.ts#L26-L55
 [joi]: https://joi.dev/
 [toolkitApiExtras]: https://github.com/nordeck/matrix-widget-toolkit/tree/main/packages/api/src/api/extras
 [toolkitExampleWidgetEvents]: https://github.com/nordeck/matrix-widget-toolkit/tree/main/example-widget-mui/src/events
