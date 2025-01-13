@@ -30,7 +30,7 @@ we could not consider these events and data to be of needed schemas all the time
 
 We validate all events and data that are coming into widgets from different sources:
 
-For Matrix events (both from Matrix specification and custom widget events):
+For Matrix events (both from the Matrix specification and custom widget events):
 
 - `type` has expected event type, example: `m.room.name`, `net.nordeck.whiteboard`
 - `content` to be an `object` and to be defined
