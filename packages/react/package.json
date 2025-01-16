@@ -13,9 +13,9 @@
   "type": "module",
   "devDependencies": {
     "@testing-library/jest-dom": "6.6.3",
-    "@testing-library/react": "16.1.0",
-    "@testing-library/user-event": "14.5.2",
-    "@types/node": "22.10.5",
+    "@testing-library/react": "16.2.0",
+    "@testing-library/user-event": "14.6.0",
+    "@types/node": "22.10.7",
     "@types/react": "18.3.18",
     "@vitest/coverage-v8": "2.1.8",
     "typescript": "5.7.3",
