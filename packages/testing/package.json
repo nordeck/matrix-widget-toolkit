@@ -13,10 +13,10 @@
   "type": "module",
   "devDependencies": {
     "@types/node": "22.10.7",
-    "@vitest/coverage-v8": "2.1.8",
+    "@vitest/coverage-v8": "3.0.2",
     "typescript": "5.7.3",
     "vite": "6.0.7",
-    "vitest": "2.1.8"
+    "vitest": "3.0.2"
   },
   "scripts": {
     "build": "tsc && rollup --config ../../rollup.config.mjs",
