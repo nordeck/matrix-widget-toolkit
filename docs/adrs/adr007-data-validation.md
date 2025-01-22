@@ -35,6 +35,7 @@ For Matrix events (both from the Matrix specification and custom widget events):
 - `type` has expected event type, example: `m.room.name`, `net.nordeck.whiteboard`
 - `content` to be an `object` and to be defined
 - `content` is validated to match the schema
+- any other used fields are validated
 
 For events and data from other data sources: we apply validation of data to match the schema.
 
@@ -42,8 +43,9 @@ Schema based validation includes:
 
 - required fields are listed
 - optional and required fields values have the expected data types
-- field's primitive values match expected grammar: dates in ISO 8601, MXC URIs, whitelist values
+- field's primitive values match expected grammar, for example: dates in ISO 8601, MXC URIs, whitelist values
 - field's object data is also validated according to schema
+- additional fields that are not used by the application are accepted
 
 We use several ways to validate incoming data.
 
@@ -124,8 +126,9 @@ validation features.
 
 <!-- This section describes the resulting context, after applying the decision. All consequences should be listed here, not just the "positive" ones. A particular decision may have positive, negative, and neutral consequences, but all of them affect the team and project in the future. -->
 
-We apply validation to all incoming Matrix events according to schemas and filter out invalid events. We also
+We apply validation to all incoming Matrix events according to schemas. We also
 validate all other data that comes from non-Matrix data sources.
+Data that doesn't pass validation is discarded.
 
 The Matrix Widget Toolkit `api` package provides [validators][toolkitApiExtras]
 for some Matrix events to be used in widget implementations.
