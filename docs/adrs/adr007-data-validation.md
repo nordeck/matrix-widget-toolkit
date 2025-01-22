@@ -92,9 +92,9 @@ We write validation logic in plain code when it is not complicated or we don't w
     }
    ```
 
-### Joi
+### Using validation library
 
-We prefer to use [Joi][joi] when we need to validate data with more complex structure. Joi provides powerful
+We prefer to use [Joi][joi] as a validation library when we work with more complex data. Joi provides powerful
 validation features.
 
 [Example][exampleJoiReaction] that validates the content of `m.reaction.event`:
