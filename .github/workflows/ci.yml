@@ -167,6 +167,15 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
+      - name: Tag and push as latest
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        run: |
+          # Tag the image as latest
+          docker tag ghcr.io/nordeck/matrix-widget-toolkit/widget-server:${{ steps.vars.outputs.version }} ghcr.io/nordeck/matrix-widget-toolkit/widget-server:latest
+
+          # Push the latest tag
+          docker push ghcr.io/nordeck/matrix-widget-toolkit/widget-server:latest
+
       - name: Load
         uses: docker/build-push-action@v6
         id: dockerLoad
