@@ -152,9 +152,8 @@ jobs:
             org.opencontainers.image.title=Matrix Widget Server
             org.opencontainers.image.description=A webserver to host a matrix widget in a container
             org.opencontainers.image.vendor=Nordeck IT + Consulting GmbH
-          flavor: |
-            latest=false
           tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
             type=semver,pattern={{version}},value=${{ steps.vars.outputs.version }}
             type=semver,pattern={{major}}.{{minor}},value=${{ steps.vars.outputs.version }}
             type=semver,pattern={{major}},value=${{ steps.vars.outputs.version }}
@@ -166,15 +165,6 @@ jobs:
           platforms: ${{ env.DOCKER_PLATFORMS }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
-      - name: Tag and push as latest
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-        run: |
-          # Tag the image as latest
-          docker tag ghcr.io/nordeck/matrix-widget-toolkit/widget-server:${{ steps.vars.outputs.version }} ghcr.io/nordeck/matrix-widget-toolkit/widget-server:latest
-
-          # Push the latest tag
-          docker push ghcr.io/nordeck/matrix-widget-toolkit/widget-server:latest
 
       - name: Load
         uses: docker/build-push-action@v6
