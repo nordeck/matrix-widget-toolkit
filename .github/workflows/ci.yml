@@ -152,9 +152,8 @@ jobs:
             org.opencontainers.image.title=Matrix Widget Server
             org.opencontainers.image.description=A webserver to host a matrix widget in a container
             org.opencontainers.image.vendor=Nordeck IT + Consulting GmbH
-          flavor: |
-            latest=false
           tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
             type=semver,pattern={{version}},value=${{ steps.vars.outputs.version }}
             type=semver,pattern={{major}}.{{minor}},value=${{ steps.vars.outputs.version }}
             type=semver,pattern={{major}},value=${{ steps.vars.outputs.version }}
