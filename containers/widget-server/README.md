@@ -90,6 +90,9 @@ Files like `index.html`, `manifest.json`, or translation files will change on ev
 They should always be refreshed.
 We use a `public, max-age=0, must-revalidate` configuration, so the browser will always try to revalidate if the files are still fresh on each load.
 
+**API Requests**:  
+To ensure security and avoid stale data, API (`/api/`) requests are explicitly set to `Cache-Control: no-store` so they are never cached by clients.
+
 ### Environment Configuration
 
 The image makes selected environment variables that are provided in the _deployment_ of the container (for example in Kubernetes) available to the widget.
