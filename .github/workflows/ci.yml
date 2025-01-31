@@ -139,12 +139,12 @@ jobs:
           USERNAME: ${{ github.repository_owner }}
         if: steps.list-changed.outputs.changed == 'true'
         run: |
-          kubectl create namespace tim
-          kubectl create secret docker-registry tim --docker-server=https://ghcr.io --docker-username="$USERNAME" --docker-password="$GITHUB_TOKEN" --namespace=tim
+          kubectl create namespace matrix-widget-toolkit
+          kubectl create secret docker-registry matrix-widget-toolkit --docker-server=https://ghcr.io --docker-username="$USERNAME" --docker-password="$GITHUB_TOKEN" --namespace=matrix-widget-toolkit
       - name: Run chart-testing (install)
         if: steps.list-changed.outputs.changed == 'true'
         run: |
-          ct install --config=".github/k8s_config.yaml" --target-branch ${{ github.event.repository.default_branch }} --helm-extra-set-args="--set=imagePullSecrets[0].name=tim --set=image.tag=sha-${{ github.sha }}"
+          ct install --config=".github/k8s_config.yaml" --target-branch ${{ github.event.repository.default_branch }} --helm-extra-set-args="--set=imagePullSecrets[0].name=matrix-widget-toolkit --set=image.tag=sha-${{ github.sha }}"
 
   buildContainers:
     name: Build Container
