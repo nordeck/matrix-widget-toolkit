@@ -134,13 +134,10 @@ jobs:
         if: steps.list-changed.outputs.changed == 'true'
         uses: helm/kind-action@v1.10.0
       - name: Prepare k8s cluster
-        env:
-          GITHUB_TOKEN: ${{ secrets.PACKAGE_TOKEN }}
-          USERNAME: ${{ github.repository_owner }}
         if: steps.list-changed.outputs.changed == 'true'
         run: |
           kubectl create namespace matrix-widget-toolkit
-          kubectl create secret docker-registry matrix-widget-toolkit --docker-server=https://ghcr.io --docker-username="$USERNAME" --docker-password="$GITHUB_TOKEN" --namespace=matrix-widget-toolkit
+          kubectl create secret docker-registry matrix-widget-toolkit --docker-server=https://ghcr.io --docker-username="{{ github.repository_owner }}" --docker-password="{{ secrets.GITHUB_TOKEN }}" --namespace=matrix-widget-toolkit
       - name: Run chart-testing (install)
         if: steps.list-changed.outputs.changed == 'true'
         run: |
