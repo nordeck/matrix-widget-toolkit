@@ -1,0 +1,2 @@
+namespace: 'matrix-widget-toolkit'
+release-label: 'app.kubernetes.io/instance'
