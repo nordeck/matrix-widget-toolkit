@@ -107,6 +107,7 @@ export function extractWidgetParameters(): WidgetParameters {
     clientId: params['matrix_client_id'],
     clientLanguage: params['matrix_client_language'],
     baseUrl: params['matrix_base_url'],
+    deviceId: params['matrix_device_id'],
     isOpenedByClient,
   };
 }

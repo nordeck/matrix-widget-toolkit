@@ -16,7 +16,7 @@
 
 import { ElementAvatar } from '@matrix-widget-toolkit/mui';
 import { useWidgetApi } from '@matrix-widget-toolkit/react';
-import { Box, Card, CardHeader } from '@mui/material';
+import { Box, Card, CardContent, CardHeader, Typography } from '@mui/material';
 import { ReactElement } from 'react';
 import { NavigationBar } from '../NavigationPage';
 
@@ -44,6 +44,15 @@ export const WelcomePage = (): ReactElement => {
             }
             title={`Welcome ${userDisplayName}`}
           />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              Your Device ID
+            </Typography>
+
+            <Typography variant="body2" color="text.secondary">
+              {widgetApi.widgetParameters.deviceId}
+            </Typography>
+          </CardContent>
         </Card>
       </Box>
     </>
