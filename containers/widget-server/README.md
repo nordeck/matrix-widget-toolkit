@@ -83,15 +83,12 @@ For security reasons it is recommended to set the `Strict-Transport-Security` he
 The image uses the following caching strategy:
 
 **Uniquely Named Files**:
-All files that have a unique content hash in it's name (example: `[name].[contenthash].js`) should be located in the `static/` folder and are cached by the browser.
+All files that have a unique content hash in it's name (example: `[name].[contenthash].js`) should be located in the `static/` or `assets/` folder and are cached by the browser.
 
 **Mutable Files**:
 Files like `index.html`, `manifest.json`, or translation files will change on every image update and might reference uniquely named files.
 They should always be refreshed.
 We use a `public, max-age=0, must-revalidate` configuration, so the browser will always try to revalidate if the files are still fresh on each load.
-
-**API Requests**:  
-To ensure security and avoid stale data, API (`/api/`) requests are explicitly set to `Cache-Control: no-store` so they are never cached by clients.
 
 ### Environment Configuration
 
