@@ -36,6 +36,7 @@
     "clean:cache": "echo 'script not implemented package'"
   },
   "dependencies": {
+    "joi": "17.13.3",
     "matrix-widget-api": "1.13.1",
     "qs": "6.14.0",
     "rxjs": "7.8.1"

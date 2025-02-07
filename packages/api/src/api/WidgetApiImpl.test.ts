@@ -82,8 +82,8 @@ describe('WidgetApiImpl', () => {
       'widget-id',
       {
         isOpenedByClient: true,
-        userId: '@my-user-id',
-        roomId: '!current-room',
+        userId: '@my-user-id:example.com',
+        roomId: '!current-room:example.com',
       },
       {
         capabilities: [
@@ -131,8 +131,8 @@ describe('WidgetApiImpl', () => {
         'widget-id',
         {
           isOpenedByClient: true,
-          userId: '@my-user-id',
-          roomId: '!current-room',
+          userId: '@my-user-id:example.com',
+          roomId: '!current-room:example.com',
         },
         {
           capabilities: [
@@ -774,28 +774,28 @@ describe('WidgetApiImpl', () => {
       matrixWidgetApi.readStateEvents.mockResolvedValue([
         mockRoomEvent({
           content: { hello: 'world' },
-          room_id: '!custom-room',
+          room_id: '!custom-room:example.com',
           state_key: '',
         }),
       ]);
 
       await expect(
         widgetApi.receiveStateEvents('com.example.test', {
-          roomIds: ['!custom-room'],
+          roomIds: ['!custom-room:example.com'],
         }),
       ).resolves.toEqual([
         expect.objectContaining({
           type: 'com.example.test',
           content: { hello: 'world' },
           state_key: '',
-          room_id: '!custom-room',
+          room_id: '!custom-room:example.com',
         }),
       ]);
       expect(matrixWidgetApi.readStateEvents).toHaveBeenCalledWith(
         'com.example.test',
         Number.MAX_SAFE_INTEGER,
         undefined,
-        ['!custom-room'],
+        ['!custom-room:example.com'],
       );
     });
 
@@ -992,8 +992,9 @@ describe('WidgetApiImpl', () => {
       const preventDefault = vi.fn();
       matrixWidgetApi.readStateEvents.mockResolvedValue([
         mockRoomEvent({
+          state_key: '',
           content: { hello: 'world' },
-          room_id: '!another-room',
+          room_id: '!another-room:example.com',
         }),
       ]);
       matrixWidgetApi.on.mockImplementationOnce((_, listener) => {
@@ -1002,7 +1003,7 @@ describe('WidgetApiImpl', () => {
             data: mockRoomEvent({
               state_key: '',
               content: { 'how are you': 'world' },
-              room_id: '!another-room',
+              room_id: '!another-room:example.com',
             }),
           },
           preventDefault,
@@ -1013,21 +1014,22 @@ describe('WidgetApiImpl', () => {
       matrixWidgetApi.off.mockReturnThis();
 
       const $events = widgetApi.observeStateEvents('com.example.test', {
-        roomIds: ['!another-room'],
+        roomIds: ['!another-room:example.com'],
       });
       const events = await firstValueFrom($events.pipe(take(2), toArray()));
 
       expect(events).toEqual([
         expect.objectContaining({
           type: 'com.example.test',
+          state_key: '',
           content: { hello: 'world' },
-          room_id: '!another-room',
+          room_id: '!another-room:example.com',
         }),
         expect.objectContaining({
           type: 'com.example.test',
           state_key: '',
           content: { 'how are you': 'world' },
-          room_id: '!another-room',
+          room_id: '!another-room:example.com',
         }),
       ]);
       expect(matrixWidgetApi.on).toHaveBeenCalledWith(
@@ -1038,7 +1040,7 @@ describe('WidgetApiImpl', () => {
         'com.example.test',
         Number.MAX_SAFE_INTEGER,
         undefined,
-        ['!another-room'],
+        ['!another-room:example.com'],
       );
       expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         'action:send_event',
@@ -1063,14 +1065,14 @@ describe('WidgetApiImpl', () => {
       const stateEvent = { hello: 'world' };
       matrixWidgetApi.sendStateEvent.mockResolvedValueOnce({
         event_id: '$event-id',
-        room_id: '!current-room',
+        room_id: '!current-room:example.com',
       });
 
       await expect(
         widgetApi.sendStateEvent('com.example.test', stateEvent),
       ).resolves.toMatchObject({
         event_id: '$event-id',
-        room_id: '!current-room',
+        room_id: '!current-room:example.com',
       });
       expect(matrixWidgetApi.sendStateEvent).toHaveBeenCalledWith(
         'com.example.test',
@@ -1084,7 +1086,7 @@ describe('WidgetApiImpl', () => {
       const stateEvent = { hello: 'world' };
 
       matrixWidgetApi.sendStateEvent.mockResolvedValueOnce({
-        room_id: '!current-room',
+        room_id: '!current-room:example.com',
         event_id: '$event-id',
       });
 
@@ -1093,7 +1095,7 @@ describe('WidgetApiImpl', () => {
           stateKey: 'custom-state-key',
         }),
       ).resolves.toMatchObject({
-        room_id: '!current-room',
+        room_id: '!current-room:example.com',
         event_id: '$event-id',
       });
       expect(matrixWidgetApi.sendStateEvent).toHaveBeenCalledWith(
@@ -1108,23 +1110,23 @@ describe('WidgetApiImpl', () => {
       const stateEvent = { hello: 'world' };
 
       matrixWidgetApi.sendStateEvent.mockResolvedValueOnce({
-        room_id: '!another-room',
+        room_id: '!another-room:example.com',
         event_id: '$event-id',
       });
 
       await expect(
         widgetApi.sendStateEvent('com.example.test', stateEvent, {
-          roomId: '!another-room',
+          roomId: '!another-room:example.com',
         }),
       ).resolves.toMatchObject({
-        room_id: '!another-room',
+        room_id: '!another-room:example.com',
         event_id: '$event-id',
       });
       expect(matrixWidgetApi.sendStateEvent).toHaveBeenCalledWith(
         'com.example.test',
         '',
         stateEvent,
-        '!another-room',
+        '!another-room:example.com',
       );
     });
 
@@ -1190,24 +1192,27 @@ describe('WidgetApiImpl', () => {
 
     it('should receive room event with wildcard room ids', async () => {
       matrixWidgetApi.readRoomEvents.mockResolvedValue([
-        mockRoomEvent({ content: { hello: 'world' }, room_id: '!custom-room' }),
+        mockRoomEvent({
+          content: { hello: 'world' },
+          room_id: '!custom-room:example.com',
+        }),
       ]);
 
       await expect(
         widgetApi.receiveRoomEvents('com.example.test', {
-          roomIds: ['!custom-room'],
+          roomIds: ['!custom-room:example.com'],
         }),
       ).resolves.toEqual([
         expect.objectContaining({
           content: { hello: 'world' },
-          room_id: '!custom-room',
+          room_id: '!custom-room:example.com',
         }),
       ]);
       expect(matrixWidgetApi.readRoomEvents).toHaveBeenCalledWith(
         'com.example.test',
         Number.MAX_SAFE_INTEGER,
         undefined,
-        ['!custom-room'],
+        ['!custom-room:example.com'],
       );
     });
 
@@ -1287,17 +1292,17 @@ describe('WidgetApiImpl', () => {
         expect.objectContaining({
           type: 'com.example.test',
           content: { hello: 'world' },
-          room_id: '!current-room',
+          room_id: '!current-room:example.com',
         }),
         expect.objectContaining({
           type: 'com.example.test',
           content: { 'how are you': 'world' },
-          room_id: '!current-room',
+          room_id: '!current-room:example.com',
         }),
         expect.objectContaining({
           type: 'com.example.test',
           content: { bye: 'world' },
-          room_id: '!current-room',
+          room_id: '!current-room:example.com',
         }),
       ]);
       expect(matrixWidgetApi.on).toHaveBeenCalledWith(
@@ -1348,12 +1353,12 @@ describe('WidgetApiImpl', () => {
         expect.objectContaining({
           type: 'com.example.test',
           content: { hello: 'world', msgtype: 'my-message-type' },
-          room_id: '!current-room',
+          room_id: '!current-room:example.com',
         }),
         expect.objectContaining({
           type: 'com.example.test',
           content: { 'how are you': 'world', msgtype: 'my-message-type' },
-          room_id: '!current-room',
+          room_id: '!current-room:example.com',
         }),
       ]);
       expect(matrixWidgetApi.on).toHaveBeenCalledWith(
@@ -1379,7 +1384,7 @@ describe('WidgetApiImpl', () => {
       matrixWidgetApi.readRoomEvents.mockResolvedValue([
         mockRoomEvent({
           content: { hello: 'world' },
-          room_id: '!another-room',
+          room_id: '!another-room:example.com',
         }),
       ]);
       matrixWidgetApi.on.mockImplementationOnce((_, listener) => {
@@ -1387,7 +1392,7 @@ describe('WidgetApiImpl', () => {
           detail: {
             data: mockRoomEvent({
               content: { 'how are you': 'world' },
-              room_id: '!another-room',
+              room_id: '!another-room:example.com',
             }),
           },
           preventDefault,
@@ -1398,7 +1403,7 @@ describe('WidgetApiImpl', () => {
       matrixWidgetApi.off.mockReturnThis();
 
       const $events = widgetApi.observeRoomEvents('com.example.test', {
-        roomIds: ['!another-room'],
+        roomIds: ['!another-room:example.com'],
       });
       const events = await firstValueFrom($events.pipe(take(2), toArray()));
 
@@ -1406,12 +1411,12 @@ describe('WidgetApiImpl', () => {
         expect.objectContaining({
           type: 'com.example.test',
           content: { hello: 'world' },
-          room_id: '!another-room',
+          room_id: '!another-room:example.com',
         }),
         expect.objectContaining({
           type: 'com.example.test',
           content: { 'how are you': 'world' },
-          room_id: '!another-room',
+          room_id: '!another-room:example.com',
         }),
       ]);
       expect(matrixWidgetApi.on).toHaveBeenCalledWith(
@@ -1422,7 +1427,7 @@ describe('WidgetApiImpl', () => {
         'com.example.test',
         Number.MAX_SAFE_INTEGER,
         undefined,
-        ['!another-room'],
+        ['!another-room:example.com'],
       );
       expect(matrixWidgetApi.off).toHaveBeenCalledWith(
         'action:send_event',
@@ -1448,7 +1453,7 @@ describe('WidgetApiImpl', () => {
       const roomEvent = { hello: 'world' };
 
       matrixWidgetApi.sendRoomEvent.mockResolvedValue({
-        room_id: '!current-room',
+        room_id: '!current-room:example.com',
         event_id: '$event-id',
       });
       matrixWidgetApi.on.mockImplementationOnce((_, listener) => {
@@ -1456,7 +1461,7 @@ describe('WidgetApiImpl', () => {
           listener({
             detail: {
               data: mockRoomEvent({
-                room_id: '!current-room',
+                room_id: '!current-room:example.com',
                 content: roomEvent,
               }),
             },
@@ -1471,8 +1476,8 @@ describe('WidgetApiImpl', () => {
       await expect(
         widgetApi.sendRoomEvent('com.example.test', roomEvent),
       ).resolves.toMatchObject({
-        room_id: '!current-room',
-        sender: '@my-user-id',
+        room_id: '!current-room:example.com',
+        sender: '@my-user-id:example.com',
         type: 'com.example.test',
         content: roomEvent,
       });
@@ -1494,7 +1499,7 @@ describe('WidgetApiImpl', () => {
       const roomEvent = { hello: 'world' };
 
       matrixWidgetApi.sendRoomEvent.mockResolvedValue({
-        room_id: '!another-room',
+        room_id: '!another-room:example.com',
         event_id: '$event-id',
       });
       matrixWidgetApi.on.mockImplementationOnce((_, listener) => {
@@ -1502,7 +1507,7 @@ describe('WidgetApiImpl', () => {
           listener({
             detail: {
               data: mockRoomEvent({
-                room_id: '!another-room',
+                room_id: '!another-room:example.com',
                 content: roomEvent,
               }),
             },
@@ -1516,11 +1521,11 @@ describe('WidgetApiImpl', () => {
 
       await expect(
         widgetApi.sendRoomEvent('com.example.test', roomEvent, {
-          roomId: '!another-room',
+          roomId: '!another-room:example.com',
         }),
       ).resolves.toMatchObject({
-        room_id: '!another-room',
-        sender: '@my-user-id',
+        room_id: '!another-room:example.com',
+        sender: '@my-user-id:example.com',
         type: 'com.example.test',
         content: roomEvent,
       });
@@ -1625,13 +1630,13 @@ describe('WidgetApiImpl', () => {
         {
           type: 'com.example.message',
           content: { 'how are you': 'world' },
-          sender: '@my-user-id',
+          sender: '@my-user-id:example.com',
           encrypted: false,
         },
         {
           type: 'com.example.message',
           content: { bye: 'world' },
-          sender: '@my-user-id',
+          sender: '@my-user-id:example.com',
           encrypted: false,
         },
       ]);
@@ -1677,7 +1682,7 @@ describe('WidgetApiImpl', () => {
 
       expect(parseWidgetId).toHaveBeenCalledWith('widget-id');
       expect(matrixWidgetApi.openModalWidget).toHaveBeenCalledWith(
-        'http://localhost:3000/modal#/?theme=$org.matrix.msc2873.client_theme&matrix_user_id=@my-user-id&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=!current-room&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language&matrix_base_url=$org.matrix.msc4039.matrix_base_url',
+        'http://localhost:3000/modal#/?theme=$org.matrix.msc2873.client_theme&matrix_user_id=@my-user-id:example.com&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=!current-room:example.com&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language&matrix_base_url=$org.matrix.msc4039.matrix_base_url',
         'My Modal',
         [],
         { string: 'example' },
@@ -1723,7 +1728,7 @@ describe('WidgetApiImpl', () => {
 
       expect(parseWidgetId).toHaveBeenCalledWith('widget-id');
       expect(matrixWidgetApi.openModalWidget).toHaveBeenCalledWith(
-        'http://localhost:3000/modal#/?theme=$org.matrix.msc2873.client_theme&matrix_user_id=@my-user-id&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=!current-room&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language&matrix_base_url=$org.matrix.msc4039.matrix_base_url',
+        'http://localhost:3000/modal#/?theme=$org.matrix.msc2873.client_theme&matrix_user_id=@my-user-id:example.com&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=!current-room:example.com&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language&matrix_base_url=$org.matrix.msc4039.matrix_base_url',
         'My Modal',
         [],
         { string: 'example' },
@@ -2173,7 +2178,7 @@ describe('WidgetApiImpl', () => {
 function mockRoomEvent<T>({
   content,
   type = 'com.example.test',
-  room_id = '!current-room',
+  room_id = '!current-room:example.com',
   state_key,
 }: {
   content?: T;
@@ -2188,7 +2193,7 @@ function mockRoomEvent<T>({
     state_key,
     event_id: '$event-id',
     origin_server_ts: 0,
-    sender: '@my-user-id',
+    sender: '@my-user-id:example.com',
     unsigned: {},
   };
 }
@@ -2205,7 +2210,7 @@ function mockToDeviceMessage<T>({
   return {
     content: content ?? {},
     type,
-    sender: '@my-user-id',
+    sender: '@my-user-id:example.com',
     encrypted,
   };
 }

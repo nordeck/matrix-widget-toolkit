@@ -50,6 +50,11 @@ import {
   throwError,
 } from 'rxjs';
 import {
+  isValidRoomEvent,
+  isValidStateEvent,
+  isValidToDeviceMessageEvent,
+} from './extras/events';
+import {
   extractWidgetApiParameters,
   extractWidgetParameters,
   parseWidgetId,
@@ -183,7 +188,9 @@ export class WidgetApiImpl implements WidgetApi {
         }
         return event;
       },
-    ).pipe(share());
+    )
+      .pipe(filter((event) => isValidToDeviceMessageEvent(event.detail.data)))
+      .pipe(share());
 
     this.initialCapabilities = [
       ...capabilities,
@@ -372,12 +379,15 @@ export class WidgetApiImpl implements WidgetApi {
       roomIds,
     }: { stateKey?: string; roomIds?: string[] | Symbols.AnyRoom } = {},
   ): Promise<StateEvent<T>[]> {
-    return (await this.matrixWidgetApi.readStateEvents(
+    const unvalidatedEvents = (await this.matrixWidgetApi.readStateEvents(
       eventType,
       Number.MAX_SAFE_INTEGER,
       stateKey,
       typeof roomIds === 'string' ? [Symbols.AnyRoom] : roomIds,
     )) as StateEvent<T>[];
+
+    const validatedEvents = unvalidatedEvents.filter(isValidStateEvent);
+    return validatedEvents;
   }
 
   /** {@inheritDoc WidgetApi.observeStateEvents} */
@@ -416,7 +426,7 @@ export class WidgetApiImpl implements WidgetApi {
       filter(isDefined),
     );
 
-    return concat(historyEvent$, futureEvent$);
+    return concat(historyEvent$, futureEvent$).pipe(filter(isValidStateEvent));
   }
 
   /** {@inheritDoc WidgetApi.sendStateEvent} */
@@ -441,12 +451,15 @@ export class WidgetApiImpl implements WidgetApi {
       roomIds,
     }: { messageType?: string; roomIds?: string[] | Symbols.AnyRoom } = {},
   ): Promise<Array<RoomEvent<T>>> {
-    return (await this.matrixWidgetApi.readRoomEvents(
+    const unvalidatedEvents = (await this.matrixWidgetApi.readRoomEvents(
       eventType,
       Number.MAX_SAFE_INTEGER,
       messageType,
       typeof roomIds === 'string' ? [Symbols.AnyRoom] : roomIds,
     )) as RoomEvent<T>[];
+
+    const validatedEvents = unvalidatedEvents.filter(isValidRoomEvent);
+    return validatedEvents;
   }
 
   /** {@inheritDoc WidgetApi.observeRoomEvents} */
@@ -487,7 +500,7 @@ export class WidgetApiImpl implements WidgetApi {
       filter(isDefined),
     );
 
-    return concat(historyEvent$, futureEvent$);
+    return concat(historyEvent$, futureEvent$).pipe(filter(isValidRoomEvent));
   }
 
   /** {@inheritDoc WidgetApi.sendRoomEvent} */
@@ -577,6 +590,7 @@ export class WidgetApiImpl implements WidgetApi {
   ): Observable<ToDeviceMessageEvent<T>> {
     return this.toDeviceMessages$.pipe(
       map((e) => e.detail.data as ToDeviceMessageEvent<T>),
+      filter(isValidToDeviceMessageEvent),
       filter((e) => e.type === eventType),
     );
   }
