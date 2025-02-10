@@ -406,6 +406,7 @@ export type WidgetParameters = {
     theme?: string;
     clientId?: string;
     clientLanguage?: string;
+    deviceId?: string;
     baseUrl?: string;
     isOpenedByClient: boolean;
 };

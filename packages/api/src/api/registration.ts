@@ -37,6 +37,7 @@ export function hasRequiredWidgetParameters(widgetApi: WidgetApi): boolean {
     typeof widgetApi.widgetParameters.theme === 'string' &&
     typeof widgetApi.widgetParameters.clientId === 'string' &&
     typeof widgetApi.widgetParameters.clientLanguage === 'string' &&
+    typeof widgetApi.widgetParameters.deviceId === 'string' &&
     typeof widgetApi.widgetParameters.baseUrl === 'string'
   );
 }
@@ -75,6 +76,8 @@ export function generateWidgetRegistrationUrl(
       widgetParameters?.clientId ?? '$org.matrix.msc2873.client_id',
     matrix_client_language:
       widgetParameters?.clientLanguage ?? '$org.matrix.msc2873.client_language',
+    matrix_device_id:
+      widgetParameters?.deviceId ?? '$org.matrix.msc3819.matrix_device_id',
     matrix_base_url:
       widgetParameters?.baseUrl ?? '$org.matrix.msc4039.matrix_base_url',
   })

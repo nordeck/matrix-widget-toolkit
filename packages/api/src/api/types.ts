@@ -74,6 +74,10 @@ export type WidgetParameters = {
    */
   clientLanguage?: string;
   /**
+   * The device id of the current client session..
+   */
+  deviceId?: string;
+  /**
    * The homeserver base URL.
    */
   baseUrl?: string;

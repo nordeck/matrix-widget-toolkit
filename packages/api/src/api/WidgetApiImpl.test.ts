@@ -1682,7 +1682,7 @@ describe('WidgetApiImpl', () => {
 
       expect(parseWidgetId).toHaveBeenCalledWith('widget-id');
       expect(matrixWidgetApi.openModalWidget).toHaveBeenCalledWith(
-        'http://localhost:3000/modal#/?theme=$org.matrix.msc2873.client_theme&matrix_user_id=@my-user-id:example.com&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=!current-room:example.com&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language&matrix_base_url=$org.matrix.msc4039.matrix_base_url',
+        'http://localhost:3000/modal#/?theme=$org.matrix.msc2873.client_theme&matrix_user_id=@my-user-id:example.com&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=!current-room:example.com&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language&matrix_device_id=$org.matrix.msc3819.matrix_device_id&matrix_base_url=$org.matrix.msc4039.matrix_base_url',
         'My Modal',
         [],
         { string: 'example' },
@@ -1728,7 +1728,7 @@ describe('WidgetApiImpl', () => {
 
       expect(parseWidgetId).toHaveBeenCalledWith('widget-id');
       expect(matrixWidgetApi.openModalWidget).toHaveBeenCalledWith(
-        'http://localhost:3000/modal#/?theme=$org.matrix.msc2873.client_theme&matrix_user_id=@my-user-id:example.com&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=!current-room:example.com&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language&matrix_base_url=$org.matrix.msc4039.matrix_base_url',
+        'http://localhost:3000/modal#/?theme=$org.matrix.msc2873.client_theme&matrix_user_id=@my-user-id:example.com&matrix_display_name=$matrix_display_name&matrix_avatar_url=$matrix_avatar_url&matrix_room_id=!current-room:example.com&matrix_client_id=$org.matrix.msc2873.client_id&matrix_client_language=$org.matrix.msc2873.client_language&matrix_device_id=$org.matrix.msc3819.matrix_device_id&matrix_base_url=$org.matrix.msc4039.matrix_base_url',
         'My Modal',
         [],
         { string: 'example' },
