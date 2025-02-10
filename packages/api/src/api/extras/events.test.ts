@@ -29,7 +29,7 @@ const roomEvent: RoomEvent = {
   sender: '@user-id',
   event_id: '$id',
   content: {},
-  origin_server_ts: 0,
+  origin_server_ts: 1739189593951,
   room_id: '!room-id',
 };
 
@@ -63,7 +63,7 @@ const roomEventData = {
   sender: '@user:example.com',
   event_id: '$event-1',
   room_id: '!room:example.com',
-  origin_server_ts: 23,
+  origin_server_ts: 1739189593951,
   content: {
     body: 'This is a test',
   },
@@ -140,7 +140,7 @@ describe('isValidRoomEvent', () => {
         content: 23,
       },
     ],
-  ])('should return false for an invalid event', (event) => {
+  ])('should return false for an invalid event (%#)', (event) => {
     expect(isValidRoomEvent(event)).toBe(false);
   });
 });
@@ -242,7 +242,7 @@ describe('isValidStateEVent', () => {
         state_key: 23,
       },
     ],
-  ])('should return false for an invalid state event', (event) => {
+  ])('should return false for an invalid state event (%#)', (event) => {
     expect(isValidStateEvent(event)).toBe(false);
   });
 });

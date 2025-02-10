@@ -87,7 +87,7 @@ const eventSchemaProps = {
   sender: Joi.string().pattern(new RegExp('^@.*:.*$')).required(),
   event_id: Joi.string().pattern(new RegExp('^\\$.*')).required(),
   room_id: Joi.string().pattern(new RegExp('^!.*:.*')).required(),
-  origin_server_ts: Joi.number().required(),
+  origin_server_ts: Joi.date().timestamp('javascript').required(),
   content: Joi.object().required(),
 };
 
