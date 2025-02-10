@@ -84,9 +84,9 @@ const eventSchemaProps = {
   type: Joi.string().required(),
   // Do roughly check against the format
   // https://spec.matrix.org/v1.13/appendices/#common-identifier-format
-  sender: Joi.string().pattern(new RegExp('^@.*:.*$')).required(),
+  sender: Joi.string().pattern(new RegExp('^@[^\\s:]*:\\S*$')).required(),
   event_id: Joi.string().pattern(new RegExp('^\\$.*')).required(),
-  room_id: Joi.string().pattern(new RegExp('^!.*:.*')).required(),
+  room_id: Joi.string().pattern(new RegExp('^![^:]*:\\S*')).required(),
   origin_server_ts: Joi.date().timestamp('javascript').required(),
   content: Joi.object().required(),
 };
