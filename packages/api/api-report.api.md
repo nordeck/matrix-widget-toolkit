@@ -90,7 +90,16 @@ export function isValidPowerLevelStateEvent(event: StateEvent<unknown>): event i
 export function isValidRedactionEvent(event: RoomEvent<unknown>): event is RedactionRoomEvent;
 
 // @public
+export function isValidRoomEvent(event: unknown): event is RoomEvent<any>;
+
+// @public
 export function isValidRoomMemberStateEvent(event: StateEvent<unknown>): event is StateEvent<RoomMemberStateEventContent>;
+
+// @public
+export function isValidStateEVent(event: unknown): event is StateEvent<any>;
+
+// @public
+export function isValidToDeviceMessageEvent(event: unknown): event is ToDeviceMessageEvent<any>;
 
 // @public
 export function makeEventFromSendStateEventResult<T>(type: string, stateKey: string, content: T, sender: string, sendResult: ISendEventFromWidgetResponseData): StateEvent<T>;
