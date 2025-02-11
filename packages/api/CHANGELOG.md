@@ -1,5 +1,12 @@
 # `@matrix-widget-toolkit/api`
 
+## 4.1.0
+
+### Minor Changes
+
+- f451122: Adds support for the matrix_device_id widget parameter required for Matrix RTC
+- c91c947: Events that are retrieved via the WidgetApi are now validated more strictly.
+
 ## 4.0.0
 
 ### Major Changes

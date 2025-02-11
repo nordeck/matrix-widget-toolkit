@@ -1,5 +1,15 @@
 # `@matrix-widget-toolkit/mui`
 
+## 2.1.2
+
+### Patch Changes
+
+- 77ae438: Add a defaultProps container to the MUI Dialog to address the fullscreen issue.
+- a1241cc: Prevent leak of colorHash prop to the DOM when using an avatar
+- Updated dependencies [f451122]
+- Updated dependencies [c91c947]
+  - @matrix-widget-toolkit/api@4.1.0
+
 ## 2.1.1
 
 ### Patch Changes
