@@ -1,5 +1,5 @@
 /*
- * Copyright 2024 Nordeck IT + Consulting GmbH
+ * Copyright 2025 Nordeck IT + Consulting GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,9 +15,8 @@
  */
 
 /**
- * In TypeScript {} means any object.
- * Define an explicit type for an empty object here.
+ * @packageDocumentation This is a package that exposes the Matrix RTC API
+ *  without having to import from the matrix-js-sdk.
  */
-type EmptyObject = Record<never, never>;
 
-declare module 'another-json';
+export * from './matrixrtc';

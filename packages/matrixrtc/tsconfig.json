@@ -1,8 +1,9 @@
 // Package specific tsconfig that extends the root one.
 {
-  "extends": "../tsconfig.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "target": "es2022",
+    "outDir": "lib",
     "rootDir": ".",
     /* Bundler mode */
     "allowImportingTsExtensions": true,
@@ -11,10 +12,5 @@
     "noEmit": true
   },
 
-  "include": ["src", "../../../matrix-js-sdk/src/@types/*.d.ts"],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
-  ]
+  "include": ["src", "../../../../matrix-js-sdk/src/@types/*.d.ts"]
 }
