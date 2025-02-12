@@ -62,6 +62,12 @@ export const NavigationPage = (): ReactElement => {
         />
 
         <NavigationItem
+          to="/realtime"
+          title="Matrix RTC"
+          description="Example on using Matrix RTC for Realtime Communications"
+        />
+
+        <NavigationItem
           to="/dice"
           title="Dice"
           description="Example on how room events are send and processed"

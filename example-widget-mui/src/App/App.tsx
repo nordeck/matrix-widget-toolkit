@@ -29,6 +29,7 @@ import { InvitationsPage } from '../InvitationsPage';
 import { ModalDialog, ModalPage } from '../ModalPage';
 import { NavigationPage } from '../NavigationPage';
 import { PowerLevelsPage } from '../PowerLevelsPage';
+import { RealtimePage } from '../RealtimePage';
 import { RelationsPage } from '../RelationsPage';
 import { RoomPage } from '../RoomPage';
 import { ThemePage } from '../ThemePage';
@@ -56,6 +57,7 @@ export function App({
               <Route path="/" element={<NavigationPage />} />
               <Route path="/welcome" element={<WelcomePage />} />
               <Route path="/identity" element={<IdentityPage />} />
+              <Route path="/realtime" element={<RealtimePage />} />
               <Route path="/dice" element={<DicePage />} />
               <Route path="/room" element={<RoomPage />} />
               <Route path="/allrooms" element={<AllRoomsPage />} />

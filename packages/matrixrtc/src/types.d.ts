@@ -14,10 +14,4 @@
  * limitations under the License.
  */
 
-/**
- * In TypeScript {} means any object.
- * Define an explicit type for an empty object here.
- */
-type EmptyObject = Record<never, never>;
-
 declare module 'another-json';
