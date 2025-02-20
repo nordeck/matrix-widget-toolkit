@@ -149,16 +149,15 @@ export function WidgetApiProvider({
   // Check for custom required parameters that are not part of the default setup
   // and fail registration if they are missing.
   const customRequiredParameters = widgetRegistration?.requiredParameters ?? [];
-  const parametersDict = widgetApi.widgetParameters as Record<
-    WidgetParameter,
-    unknown
-  >;
 
   if (customRequiredParameters.length > 0) {
     hasParameters =
       hasParameters &&
       customRequiredParameters.every((param: WidgetParameter) => {
-        return (typeof parametersDict[param] as string) === 'string';
+        return (
+          param in widgetApi.widgetParameters &&
+          (typeof widgetApi.widgetParameters[param] as string) === 'string'
+        );
       });
   }
 
