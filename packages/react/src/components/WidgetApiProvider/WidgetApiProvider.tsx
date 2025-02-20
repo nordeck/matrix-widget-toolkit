@@ -16,8 +16,9 @@
 
 import {
   extractWidgetParameters,
-  hasRequiredWidgetParameters,
+  hasWidgetParameters,
   WidgetApi,
+  WidgetParameter,
   WidgetRegistration,
 } from '@matrix-widget-toolkit/api';
 import {
@@ -143,7 +144,23 @@ export function WidgetApiProvider({
     );
   }
 
-  const hasParameters = hasRequiredWidgetParameters(widgetApi);
+  let hasParameters = hasWidgetParameters(widgetApi);
+
+  // Check for custom required parameters that are not part of the default setup
+  // and fail registration if they are missing.
+  const customRequiredParameters = widgetRegistration?.requiredParameters ?? [];
+  const parametersDict = widgetApi.widgetParameters as Record<
+    WidgetParameter,
+    unknown
+  >;
+
+  if (customRequiredParameters.length > 0) {
+    hasParameters =
+      hasParameters &&
+      customRequiredParameters.every((param: WidgetParameter) => {
+        return (typeof parametersDict[param] as string) === 'string';
+      });
+  }
 
   return (
     <WidgetApiContext.Provider value={widgetApi}>

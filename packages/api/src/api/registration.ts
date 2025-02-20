@@ -23,12 +23,12 @@ import { extractRawWidgetParameters } from './parameters';
 import { WidgetApi, WidgetParameters, WidgetRegistration } from './types';
 
 /**
- * Checks whether all widget parameters were provided to the widget.
+ * Checks whether the necessary widget parameters were provided to the widget.
  *
  * @param widgetApi - The widget api to read the parameters from
  * @returns True, if all parameters were provided.
  */
-export function hasRequiredWidgetParameters(widgetApi: WidgetApi): boolean {
+export function hasWidgetParameters(widgetApi: WidgetApi): boolean {
   return (
     typeof widgetApi.widgetParameters.userId === 'string' &&
     typeof widgetApi.widgetParameters.displayName === 'string' &&
@@ -37,7 +37,6 @@ export function hasRequiredWidgetParameters(widgetApi: WidgetApi): boolean {
     typeof widgetApi.widgetParameters.theme === 'string' &&
     typeof widgetApi.widgetParameters.clientId === 'string' &&
     typeof widgetApi.widgetParameters.clientLanguage === 'string' &&
-    typeof widgetApi.widgetParameters.deviceId === 'string' &&
     typeof widgetApi.widgetParameters.baseUrl === 'string'
   );
 }
