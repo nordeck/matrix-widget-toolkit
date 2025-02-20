@@ -35,6 +35,21 @@ import {
 import { Observable } from 'rxjs';
 
 /**
+ * Enumeration of widget parameters that can be checked if they are available upon registration.
+ */
+export enum WidgetParameter {
+  UserId = 'userId',
+  DisplayName = 'displayName',
+  AvatarUrl = 'avatarUrl',
+  RoomId = 'roomId',
+  Theme = 'theme',
+  ClientId = 'clientId',
+  ClientLanguage = 'clientLanguage',
+  DeviceId = 'deviceId',
+  BaseUrl = 'baseUrl',
+}
+
+/**
  * Parameters passed from the client to the widget during initialization.
  */
 export type WidgetParameters = {
@@ -158,6 +173,12 @@ export type WidgetRegistration = {
    * The display name of the widget.
    */
   name?: string;
+  /**
+   * Checks for custom widget-specific registration parameters that might be required.
+   *
+   * Added for backwards compatibility with old widget registrations.
+   */
+  requiredParameters?: WidgetParameter[];
   /**
    * The avatar URL used to display an icon on the widget.
    *

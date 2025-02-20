@@ -16,7 +16,7 @@
 
 import {
   extractWidgetParameters as extractWidgetParametersMocked,
-  hasRequiredWidgetParameters as hasRequiredWidgetParametersMocked,
+  hasWidgetParameters as hasWidgetParametersMocked,
   WidgetApi,
 } from '@matrix-widget-toolkit/api';
 import { render, screen } from '@testing-library/react';
@@ -25,9 +25,7 @@ import { MuiWidgetApiProvider } from './MuiWidgetApiProvider';
 
 vi.mock('@matrix-widget-toolkit/api');
 
-const hasRequiredWidgetParameters = vi.mocked(
-  hasRequiredWidgetParametersMocked,
-);
+const hasWidgetParameters = vi.mocked(hasWidgetParametersMocked);
 
 const extractWidgetParameters = vi.mocked(extractWidgetParametersMocked);
 
@@ -50,7 +48,7 @@ describe('WidgetApiProvider', () => {
   });
 
   it('should render without exploding', async () => {
-    hasRequiredWidgetParameters.mockReturnValue(true);
+    hasWidgetParameters.mockReturnValue(true);
     widgetApi.hasInitialCapabilities.mockReturnValue(true);
 
     render(

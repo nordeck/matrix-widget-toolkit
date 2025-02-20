@@ -16,8 +16,10 @@
 
 import {
   extractWidgetParameters as extractWidgetParametersMocked,
-  hasRequiredWidgetParameters as hasRequiredWidgetParametersMocked,
+  hasWidgetParameters as hasWidgetParametersMocked,
   WidgetApi,
+  WidgetParameter,
+  WidgetRegistration,
 } from '@matrix-widget-toolkit/api';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -41,9 +43,7 @@ import { WidgetApiProvider } from './WidgetApiProvider';
 
 vi.mock('@matrix-widget-toolkit/api');
 
-const hasRequiredWidgetParameters = vi.mocked(
-  hasRequiredWidgetParametersMocked,
-);
+const hasWidgetParameters = vi.mocked(hasWidgetParametersMocked);
 const extractWidgetParameters = vi.mocked(extractWidgetParametersMocked);
 
 describe('WidgetApiProvider', () => {
@@ -52,6 +52,7 @@ describe('WidgetApiProvider', () => {
   let WidgetApiProviderWithUi: ComponentType<
     PropsWithChildren<{
       widgetApiPromise: Promise<WidgetApi>;
+      widgetRegistration?: WidgetRegistration | undefined;
     }>
   >;
   const oldConsoleError = console.error;
@@ -91,9 +92,11 @@ describe('WidgetApiProvider', () => {
 
     WidgetApiProviderWithUi = ({
       widgetApiPromise,
+      widgetRegistration,
       children,
     }: PropsWithChildren<{
       widgetApiPromise: Promise<WidgetApi>;
+      widgetRegistration?: WidgetRegistration | undefined;
     }>) => (
       <WidgetApiProvider
         childErrorComponent={ChildErrorComponent}
@@ -103,6 +106,7 @@ describe('WidgetApiProvider', () => {
         mobileClientErrorComponent={MobileClientErrorComponent}
         outsideClientErrorComponent={OutsideClientErrorComponent}
         widgetApiPromise={widgetApiPromise}
+        widgetRegistration={widgetRegistration}
       >
         {children}
       </WidgetApiProvider>
@@ -131,7 +135,7 @@ describe('WidgetApiProvider', () => {
   });
 
   it('should render children after widget API is initalized', async () => {
-    hasRequiredWidgetParameters.mockReturnValue(true);
+    hasWidgetParameters.mockReturnValue(true);
     widgetApi.hasInitialCapabilities.mockReturnValue(true);
 
     render(
@@ -144,7 +148,7 @@ describe('WidgetApiProvider', () => {
   });
 
   it('should provide widget API in context to children', async () => {
-    hasRequiredWidgetParameters.mockReturnValue(true);
+    hasWidgetParameters.mockReturnValue(true);
     widgetApi.hasInitialCapabilities.mockReturnValue(true);
 
     const Child = () => {
@@ -170,7 +174,7 @@ describe('WidgetApiProvider', () => {
   });
 
   it('should show an error message if one of the initial capabilities is denied', async () => {
-    hasRequiredWidgetParameters.mockReturnValue(true);
+    hasWidgetParameters.mockReturnValue(true);
     widgetApi.hasInitialCapabilities.mockReturnValue(false);
     widgetApi.rerequestInitialCapabilities.mockResolvedValue(undefined);
 
@@ -223,7 +227,7 @@ describe('WidgetApiProvider', () => {
   });
 
   it('should show an error if some of the required widget parameters are missing', async () => {
-    hasRequiredWidgetParameters.mockReturnValue(false);
+    hasWidgetParameters.mockReturnValue(false);
     widgetApi.hasInitialCapabilities.mockReturnValue(true);
 
     render(
@@ -237,8 +241,26 @@ describe('WidgetApiProvider', () => {
     ).toBeInTheDocument();
   });
 
+  it('should show an error if a specific required widget parameter is missing', async () => {
+    hasWidgetParameters.mockReturnValue(true);
+    widgetApi.hasInitialCapabilities.mockReturnValue(true);
+
+    render(
+      <WidgetApiProviderWithUi
+        widgetApiPromise={widgetApiPromise}
+        widgetRegistration={{ requiredParameters: [WidgetParameter.DeviceId] }}
+      >
+        <div>Children</div>
+      </WidgetApiProviderWithUi>,
+    );
+
+    expect(
+      await screen.findByText('Wrong widget registration'),
+    ).toBeInTheDocument();
+  });
+
   it('should show an error if a child component fails to render', async () => {
-    hasRequiredWidgetParameters.mockReturnValue(true);
+    hasWidgetParameters.mockReturnValue(true);
     widgetApi.hasInitialCapabilities.mockReturnValue(true);
 
     const Child = () => {

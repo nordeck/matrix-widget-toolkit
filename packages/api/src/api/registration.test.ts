@@ -17,21 +17,21 @@
 import { beforeEach, describe, expect, it, Mocked, vi } from 'vitest';
 import {
   generateWidgetRegistrationUrl,
-  hasRequiredWidgetParameters,
+  hasWidgetParameters,
   repairWidgetRegistration,
   STATE_EVENT_WIDGETS,
 } from './registration';
 import { WidgetApi } from './types';
 
-describe('hasRequiredWidgetParameters', () => {
-  it('should fail if a required parameter is missing', () => {
+describe('hasWidgetParameters', () => {
+  it('should fail if a parameter is missing', () => {
     const widgetApi = {
       widgetParameters: {
         displayName: 'my-display-name',
       },
     } as Partial<WidgetApi> as WidgetApi;
 
-    expect(hasRequiredWidgetParameters(widgetApi)).toEqual(false);
+    expect(hasWidgetParameters(widgetApi)).toEqual(false);
   });
 
   it('should succeed if all required parameter are available', () => {
@@ -49,7 +49,7 @@ describe('hasRequiredWidgetParameters', () => {
       },
     } as Partial<WidgetApi> as WidgetApi;
 
-    expect(hasRequiredWidgetParameters(widgetApi)).toEqual(true);
+    expect(hasWidgetParameters(widgetApi)).toEqual(true);
   });
 
   it('should succeed, even if a parameter is just an empty string', () => {
@@ -67,7 +67,7 @@ describe('hasRequiredWidgetParameters', () => {
       },
     } as Partial<WidgetApi> as WidgetApi;
 
-    expect(hasRequiredWidgetParameters(widgetApi)).toEqual(true);
+    expect(hasWidgetParameters(widgetApi)).toEqual(true);
   });
 });
 
