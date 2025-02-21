@@ -1,4 +1,4 @@
-FROM nginx:1.27.3-alpine-perl
+FROM nginx:1.27.4-alpine-perl
 
 # Install envsubst
 RUN apk add --no-cache gettext
