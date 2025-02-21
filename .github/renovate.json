@@ -2,13 +2,14 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
   "dependencyDashboard": true,
-  "rangeStrategy": "pin",
   "vulnerabilityAlerts": {
     "groupName": "security updates",
-    "labels": ["security"]
+    "labels": ["security"],
+    "automerge": false
   },
   "osvVulnerabilityAlerts": true,
   "baseBranches": ["main"],
+  "automergeType": "branch",
   "packageRules": [
     {
       "groupName": "patch updates",
@@ -40,6 +41,7 @@
     {
       "groupName": "material-ui",
       "matchPackageNames": ["@emotion/*", "@mui/*"],
+      "matchDepTypes": ["dependencies", "peerDependencies"],
       "labels": ["Material-UI"]
     },
     {
@@ -53,17 +55,43 @@
       "labels": ["Engines"]
     },
     {
+      "groupName": "node version restrictions",
       "matchPackageNames": ["node"],
-      "allowedVersions": "<21.0.0"
+      "allowedVersions": "<21.0.0",
+      "matchUpdateTypes": ["patch", "minor"]
     },
     {
+      "groupName": "react dependencies",
       "matchPackageNames": [
         "@types/react",
         "@types/react-dom",
         "react",
-        "react-dom"
+        "react-dom",
+        "react-error-boundary"
       ],
-      "allowedVersions": "<19.0.0"
+      "matchDepTypes": ["dependencies", "peerDependencies"],
+      "allowedVersions": "<19.0.0",
+      "labels": ["React"]
+    },
+    {
+      "groupName": "eslint & prettier",
+      "matchPackageNames": [
+        "eslint",
+        "prettier",
+        "eslint-config-prettier",
+        "eslint-plugin-notice",
+        "eslint-plugin-promise",
+        "eslint-plugin-react",
+        "eslint-plugin-react-hooks",
+        "eslint-plugin-testing-library",
+        "@eslint/compat",
+        "@eslint/js",
+        "@vitest/eslint-plugin",
+        "typescript-eslint",
+        "prettier-plugin-organize-imports"
+      ],
+      "matchDepTypes": ["dependencies", "peerDependencies"],
+      "labels": ["Linting"]
     }
   ]
 }
