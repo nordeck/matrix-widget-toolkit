@@ -1,5 +1,15 @@
 # `@matrix-widget-toolkit/react`
 
+## 2.0.5
+
+### Patch Changes
+
+- 97618fd: WidgetRegistration options for WidgetApiPromise can now have a requiredParameters list that will be checked upon registation.
+- Updated dependencies [97618fd]
+- Updated dependencies [f451122]
+- Updated dependencies [c91c947]
+  - @matrix-widget-toolkit/api@4.1.0
+
 ## 2.0.4
 
 ### Patch Changes
