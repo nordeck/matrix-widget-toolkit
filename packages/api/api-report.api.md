@@ -66,13 +66,13 @@ export function getRoomMemberDisplayName(member: StateEvent<RoomMemberStateEvent
 export function hasActionPower(powerLevelStateEvent: PowerLevelsStateEvent | undefined, userId: string | undefined, action: PowerLevelsActions): boolean;
 
 // @public
-export function hasRequiredWidgetParameters(widgetApi: WidgetApi): boolean;
-
-// @public
 export function hasRoomEventPower(powerLevelStateEvent: PowerLevelsStateEvent | undefined, userId: string | undefined, eventType: string): boolean;
 
 // @public
 export function hasStateEventPower(powerLevelStateEvent: PowerLevelsStateEvent | undefined, userId: string | undefined, eventType: string): boolean;
+
+// @public
+export function hasWidgetParameters(widgetApi: WidgetApi): boolean;
 
 // @public
 export function isRoomEvent(event: RoomEvent | StateEvent): event is RoomEvent;
@@ -398,6 +398,28 @@ export type WidgetId = {
 };
 
 // @public
+export enum WidgetParameter {
+    // (undocumented)
+    AvatarUrl = "avatarUrl",
+    // (undocumented)
+    BaseUrl = "baseUrl",
+    // (undocumented)
+    ClientId = "clientId",
+    // (undocumented)
+    ClientLanguage = "clientLanguage",
+    // (undocumented)
+    DeviceId = "deviceId",
+    // (undocumented)
+    DisplayName = "displayName",
+    // (undocumented)
+    RoomId = "roomId",
+    // (undocumented)
+    Theme = "theme",
+    // (undocumented)
+    UserId = "userId"
+}
+
+// @public
 export type WidgetParameters = {
     userId?: string;
     displayName?: string;
@@ -415,6 +437,7 @@ export type WidgetParameters = {
 export type WidgetRegistration = {
     type?: string;
     name?: string;
+    requiredParameters?: WidgetParameter[];
     avatarUrl?: string;
     data?: Record<string, unknown> | {
         title?: string;

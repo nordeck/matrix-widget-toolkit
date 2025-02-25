@@ -24,9 +24,10 @@ export {
 export type { WidgetApiParameters, WidgetId } from './parameters';
 export {
   generateWidgetRegistrationUrl,
-  hasRequiredWidgetParameters,
+  hasWidgetParameters,
   repairWidgetRegistration,
 } from './registration';
+export { WidgetParameter } from './types';
 export type {
   RoomEvent,
   StateEvent,

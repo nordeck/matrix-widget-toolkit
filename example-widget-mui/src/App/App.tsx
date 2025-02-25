@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { WidgetApi } from '@matrix-widget-toolkit/api';
+import { WidgetApi, WidgetParameter } from '@matrix-widget-toolkit/api';
 import {
   MuiThemeProvider,
   MuiWidgetApiProvider,
@@ -50,6 +50,8 @@ export function App({
               name: 'Example Widget',
               type: 'com.example.clock',
               data: { title: 'Learn more…' },
+              // Device ID is required for the WelcomePage example
+              requiredParameters: [WidgetParameter.DeviceId],
             }}
           >
             <Routes>
