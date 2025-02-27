@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/testing`
 
+## 3.0.4
+
+### Patch Changes
+
+- 8315e96: Dependencies update
+
 ## 3.0.3
 
 ### Patch Changes

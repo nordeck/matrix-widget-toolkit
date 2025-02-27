@@ -7,12 +7,12 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@matrix-widget-toolkit/api": "4.0.0",
-    "@matrix-widget-toolkit/mui": "2.1.1",
-    "@matrix-widget-toolkit/react": "2.0.4",
-    "@mui/icons-material": "6.4.5",
-    "@mui/material": "6.4.5",
-    "@reduxjs/toolkit": "2.5.1",
+    "@matrix-widget-toolkit/api": "4.1.0",
+    "@matrix-widget-toolkit/mui": "2.1.2",
+    "@matrix-widget-toolkit/react": "2.0.5",
+    "@mui/icons-material": "6.4.6",
+    "@mui/material": "6.4.6",
+    "@reduxjs/toolkit": "2.6.0",
     "i18next": "24.2.2",
     "i18next-chained-backend": "4.6.2",
     "i18next-http-backend": "3.0.2",
@@ -22,9 +22,9 @@
     "react-dom": "18.3.1",
     "react-i18next": "15.4.1",
     "react-redux": "9.2.0",
-    "react-router-dom": "7.1.5",
+    "react-router-dom": "7.2.0",
     "react-use": "17.6.0",
-    "rxjs": "7.8.1"
+    "rxjs": "7.8.2"
   },
   "scripts": {
     "dev": "vite",
@@ -56,23 +56,23 @@
     ]
   },
   "devDependencies": {
-    "@matrix-widget-toolkit/testing": "3.0.3",
+    "@matrix-widget-toolkit/testing": "3.0.4",
     "@testing-library/dom": "10.4.0",
     "@testing-library/jest-dom": "6.6.3",
     "@testing-library/react": "16.2.0",
     "@testing-library/user-event": "14.6.1",
-    "@types/node": "22.13.1",
+    "@types/node": "22.13.5",
     "@types/react": "18.3.18",
     "@types/react-dom": "18.3.5",
     "@vitejs/plugin-basic-ssl": "1.2.0",
-    "@vitejs/plugin-react-swc": "3.7.2",
-    "@vitest/coverage-v8": "3.0.5",
+    "@vitejs/plugin-react-swc": "3.8.0",
+    "@vitest/coverage-v8": "3.0.7",
     "axe-core": "4.10.2",
     "happy-dom": "16.8.1",
-    "i18next-parser": "9.1.0",
-    "msw": "2.7.0",
+    "i18next-parser": "9.3.0",
+    "msw": "2.7.3",
     "typescript": "5.7.3",
-    "vite": "6.0.11",
-    "vitest": "3.0.5"
+    "vite": "6.2.0",
+    "vitest": "3.0.7"
   }
 }
