@@ -3707,10 +3707,10 @@ gulp-sort@^2.0.0:
   dependencies:
     through2 "^2.0.1"
 
-happy-dom@16.8.1:
-  version "16.8.1"
-  resolved "https://registry.yarnpkg.com/happy-dom/-/happy-dom-16.8.1.tgz#43d7e998fd36aa6062acbdfa88262ef0bc0a105e"
-  integrity sha512-n0QrmT9lD81rbpKsyhnlz3DgnMZlaOkJPpgi746doA+HvaMC79bdWkwjrNnGJRvDrWTI8iOcJiVTJ5CdT/AZRw==
+happy-dom@17.1.8:
+  version "17.1.8"
+  resolved "https://registry.yarnpkg.com/happy-dom/-/happy-dom-17.1.8.tgz#e45f61daa31cf1f03c76150daec81527f9607a0b"
+  integrity sha512-Yxbq/FG79z1rhAf/iB6YM8wO2JB/JDQBy99RiLSs+2siEAi5J05x9eW1nnASHZJbpldjJE2KuFLsLZ+AzX/IxA==
   dependencies:
     webidl-conversions "^7.0.0"
     whatwg-mimetype "^3.0.0"
