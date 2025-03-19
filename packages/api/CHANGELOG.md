@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/api`
 
+## 4.1.1
+
+### Patch Changes
+
+- 6216a89: Disable the update_state API to resolve issues with reading room state.
+
 ## 4.1.0
 
 ### Minor Changes
