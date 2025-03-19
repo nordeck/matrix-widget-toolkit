@@ -1,6 +1,6 @@
 {
   "name": "@matrix-widget-toolkit/api",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "A simplified layer on top of matrix-widget-api to use build widgets.",
   "author": "Nordeck IT + Consulting GmbH",
   "license": "Apache-2.0",
