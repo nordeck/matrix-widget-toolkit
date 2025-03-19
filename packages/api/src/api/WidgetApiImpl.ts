@@ -16,6 +16,7 @@
 
 import {
   Capability,
+  CurrentApiVersions,
   IDownloadFileActionFromWidgetResponseData,
   IGetMediaConfigActionFromWidgetResponseData,
   IModalWidgetCreateData,
@@ -32,6 +33,7 @@ import {
   WidgetApi as MatrixWidgetApi,
   ModalButtonID,
   Symbols,
+  UnstableApiVersion,
   WidgetApiToWidgetAction,
   WidgetEventCapability,
 } from 'matrix-widget-api';
@@ -162,6 +164,23 @@ export class WidgetApiImpl implements WidgetApi {
     public readonly widgetParameters: WidgetParameters,
     { capabilities = [], supportStandalone = false }: WidgetApiOptions = {},
   ) {
+    // Disable the update_state API that is not implemented.
+    this.matrixWidgetApi.on(
+      `action:${WidgetApiToWidgetAction.SupportedApiVersions}`,
+      (event: CustomEvent<IWidgetApiRequest>) => {
+        event.preventDefault();
+
+        const supportedVersions = CurrentApiVersions.filter(
+          (apiVersion) =>
+            apiVersion !== UnstableApiVersion.MSC2762_UPDATE_STATE,
+        );
+
+        matrixWidgetApi.transport.reply(event.detail, {
+          supported_versions: supportedVersions,
+        });
+      },
+    );
+
     this.events$ = fromEvent(
       this.matrixWidgetApi,
       `action:${WidgetApiToWidgetAction.SendEvent}`,
