@@ -15,7 +15,7 @@
  */
 
 import { describe, expect, it } from 'vitest';
-import { RoomEvent, StateEvent } from '../types';
+import { RoomEvent, StateEvent, ToDeviceMessageEvent } from '../types';
 import {
   isRoomEvent,
   isStateEvent,
@@ -58,7 +58,7 @@ describe('isRoomEvent', () => {
   });
 });
 
-const roomEventData = {
+const roomEventData: RoomEvent = {
   type: 'm.room.message',
   sender: '@user:example.com',
   event_id: '$event-1',
@@ -70,184 +70,69 @@ const roomEventData = {
 };
 
 describe('isValidRoomEvent', () => {
-  it('should return true for a valid event', () => {
+  it('should accept room event', () => {
+    expect(isValidRoomEvent(roomEventData)).toBe(true);
+  });
+
+  it.each<object>([
+    { type: undefined },
+    { sender: undefined },
+    { event_id: undefined },
+    { origin_server_ts: undefined },
+    { content: undefined },
+    { type: 23 },
+    { sender: 23 },
+    { event_id: 23 },
+    { origin_server_ts: 'string' },
+    { content: 23 },
+  ])('should reject room event with patch %p', (patch: object) => {
     expect(
       isValidRoomEvent({
         ...roomEventData,
+        ...patch,
       }),
-    ).toBe(true);
-  });
-
-  it.each([
-    [{}],
-    [
-      {
-        ...roomEventData,
-        type: undefined,
-      },
-    ],
-    [
-      {
-        ...roomEventData,
-        sender: undefined,
-      },
-    ],
-    [
-      {
-        ...roomEventData,
-        event_id: undefined,
-      },
-    ],
-    [
-      {
-        ...roomEventData,
-        origin_server_ts: undefined,
-      },
-    ],
-    [
-      {
-        ...roomEventData,
-        content: undefined,
-      },
-    ],
-    [
-      {
-        ...roomEventData,
-        type: 23,
-      },
-    ],
-    [
-      {
-        ...roomEventData,
-        sender: 23,
-      },
-    ],
-    [
-      {
-        ...roomEventData,
-        event_id: 23,
-      },
-    ],
-    [
-      {
-        ...roomEventData,
-        origin_server_ts: 'string',
-      },
-    ],
-    [
-      {
-        ...roomEventData,
-        content: 23,
-      },
-    ],
-  ])('should return false for an invalid event (%#)', (event) => {
-    expect(isValidRoomEvent(event)).toBe(false);
+    ).toBe(false);
   });
 });
 
-const stateEventData = {
+const stateEventData: StateEvent = {
   ...roomEventData,
   state_key: '',
 };
 
-describe('isValidStateEVent', () => {
+describe('isValidStateEvent', () => {
   it.each([
     [{ ...stateEventData }],
     [{ ...stateEventData, state_key: '@user:example.com' }],
-  ])('should return true for a valid state event', (event) => {
-    expect(
-      isValidStateEvent({
-        ...event,
-      }),
-    ).toBe(true);
+  ])('should accept state event', (event) => {
+    expect(isValidStateEvent(event)).toBe(true);
   });
 
-  it.each([
-    [{}],
-    [
-      {
+  it.each<object>([
+    { type: undefined },
+    { sender: undefined },
+    { event_id: undefined },
+    { room_id: undefined },
+    { origin_server_ts: undefined },
+    { content: undefined },
+    { type: 23 },
+    { sender: 23 },
+    { event_id: 23 },
+    { room_id: 23 },
+    { origin_server_ts: 'string' },
+    { content: 23 },
+    { state_key: 23 },
+  ])('should reject state event with patch %p', (patch: object) => {
+    expect(
+      isValidStateEvent({
         ...stateEventData,
-        type: undefined,
-      },
-    ],
-    [
-      {
-        ...stateEventData,
-        sender: undefined,
-      },
-    ],
-    [
-      {
-        ...stateEventData,
-        event_id: undefined,
-      },
-    ],
-    [
-      {
-        ...stateEventData,
-        room_id: undefined,
-      },
-    ],
-    [
-      {
-        ...stateEventData,
-        origin_server_ts: undefined,
-      },
-    ],
-    [
-      {
-        ...stateEventData,
-        content: undefined,
-      },
-    ],
-    [
-      {
-        ...stateEventData,
-        type: 23,
-      },
-    ],
-    [
-      {
-        ...stateEventData,
-        sender: 23,
-      },
-    ],
-    [
-      {
-        ...stateEventData,
-        event_id: 23,
-      },
-    ],
-    [
-      {
-        ...stateEventData,
-        room_id: 23,
-      },
-    ],
-    [
-      {
-        ...stateEventData,
-        origin_server_ts: 'string',
-      },
-    ],
-    [
-      {
-        ...stateEventData,
-        content: 23,
-      },
-    ],
-    [
-      {
-        ...stateEventData,
-        state_key: 23,
-      },
-    ],
-  ])('should return false for an invalid state event (%#)', (event) => {
-    expect(isValidStateEvent(event)).toBe(false);
+        ...patch,
+      }),
+    ).toBe(false);
   });
 });
 
-const toDeviceMessageData = {
+const toDeviceMessageData: ToDeviceMessageEvent = {
   type: 'm.new_device',
   sender: '@user:example.com',
   encrypted: false,
@@ -258,61 +143,25 @@ describe('isValidToDeviceMessageEvent', () => {
   it.each([
     [{ ...toDeviceMessageData }],
     [{ ...toDeviceMessageData, encrypted: true }],
-  ])('should return true for a valid to device message', (event) => {
+  ])('should accept to device message', (event) => {
     expect(isValidToDeviceMessageEvent(event)).toBe(true);
   });
 
-  it.each([
-    [{}],
-    [
-      {
+  it.each<object>([
+    { type: undefined },
+    { sender: undefined },
+    { encrypted: undefined },
+    { content: undefined },
+    { type: 23 },
+    { sender: 23 },
+    { encrypted: 23 },
+    { content: 23 },
+  ])('should reject to device message with patch %p', (patch: object) => {
+    expect(
+      isValidToDeviceMessageEvent({
         ...toDeviceMessageData,
-        type: undefined,
-      },
-    ],
-    [
-      {
-        ...toDeviceMessageData,
-        sender: undefined,
-      },
-    ],
-    [
-      {
-        ...toDeviceMessageData,
-        encrypted: undefined,
-      },
-    ],
-    [
-      {
-        ...toDeviceMessageData,
-        content: undefined,
-      },
-    ],
-    [
-      {
-        ...toDeviceMessageData,
-        type: 23,
-      },
-    ],
-    [
-      {
-        ...toDeviceMessageData,
-        sender: 23,
-      },
-    ],
-    [
-      {
-        ...toDeviceMessageData,
-        encrypted: 23,
-      },
-    ],
-    [
-      {
-        ...toDeviceMessageData,
-        content: 23,
-      },
-    ],
-  ])('should return false for invalid to device message', (event) => {
-    expect(isValidToDeviceMessageEvent(event)).toBe(false);
+        ...patch,
+      }),
+    ).toBe(false);
   });
 });
