@@ -108,12 +108,20 @@ describe('isValidStateEvent', () => {
     expect(isValidStateEvent(event)).toBe(true);
   });
 
+  it('should accept stripped state event', () => {
+    expect(
+      isValidStateEvent({
+        ...stateEventData,
+        event_id: undefined,
+        origin_server_ts: undefined,
+      }),
+    ).toBe(true);
+  });
+
   it.each<object>([
     { type: undefined },
     { sender: undefined },
-    { event_id: undefined },
     { room_id: undefined },
-    { origin_server_ts: undefined },
     { content: undefined },
     { type: 23 },
     { sender: 23 },
