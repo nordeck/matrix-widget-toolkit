@@ -68,7 +68,7 @@
     "@vitejs/plugin-react-swc": "3.8.0",
     "@vitest/coverage-v8": "3.0.7",
     "axe-core": "4.10.2",
-    "happy-dom": "16.8.1",
+    "happy-dom": "17.1.8",
     "i18next-parser": "9.3.0",
     "msw": "2.7.3",
     "typescript": "5.7.3",
