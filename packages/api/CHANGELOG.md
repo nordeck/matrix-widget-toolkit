@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/api`
 
+## 4.1.2
+
+### Patch Changes
+
+- 65e3b0e: Update validations to accept stripped state.
+
 ## 4.1.1
 
 ### Patch Changes
