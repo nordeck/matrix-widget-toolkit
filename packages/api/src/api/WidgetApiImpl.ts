@@ -34,6 +34,7 @@ import {
   ModalButtonID,
   Symbols,
   UnstableApiVersion,
+  UpdateDelayedEventAction,
   WidgetApiToWidgetAction,
   WidgetEventCapability,
 } from 'matrix-widget-api';
@@ -462,6 +463,28 @@ export class WidgetApiImpl implements WidgetApi {
     );
   }
 
+  /** {@inheritDoc WidgetApi.sendDelayedStateEvent} */
+  async sendDelayedStateEvent<T>(
+    eventType: string,
+    content: T,
+    delay: number,
+    { roomId, stateKey = '' }: { roomId?: string; stateKey?: string } = {},
+  ): Promise<{ delay_id: string }> {
+    const { delay_id } = await this.matrixWidgetApi.sendStateEvent(
+      eventType,
+      stateKey,
+      content,
+      roomId,
+      delay,
+    );
+
+    if (!delay_id) {
+      throw new Error('Delayed event must have a delay_id');
+    }
+
+    return { delay_id };
+  }
+
   /** {@inheritDoc WidgetApi.receiveRoomEvents} */
   async receiveRoomEvents<T>(
     eventType: string,
@@ -556,6 +579,35 @@ export class WidgetApiImpl implements WidgetApi {
     } finally {
       subscription.unsubscribe();
     }
+  }
+
+  /** {@inheritDoc WidgetApi.sendDelayedRoomEvent} */
+  async sendDelayedRoomEvent<T>(
+    eventType: string,
+    content: T,
+    delay: number,
+    { roomId }: { roomId?: string } = {},
+  ): Promise<{ delay_id: string }> {
+    const { delay_id } = await this.matrixWidgetApi.sendRoomEvent(
+      eventType,
+      content,
+      roomId,
+      delay,
+    );
+
+    if (!delay_id) {
+      throw new Error('Delayed event must have a delay_id');
+    }
+
+    return { delay_id };
+  }
+
+  /** {@inheritDoc WidgetApi.updateDelayedEvent} */
+  async updateDelayedEvent(
+    delayId: string,
+    action: UpdateDelayedEventAction,
+  ): Promise<void> {
+    await this.matrixWidgetApi.updateDelayedEvent(delayId, action);
   }
 
   /** {@inheritDoc WidgetApi.readEventRelations} */

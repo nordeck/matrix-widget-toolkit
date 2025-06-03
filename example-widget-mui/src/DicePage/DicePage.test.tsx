@@ -19,7 +19,11 @@ import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import axe from 'axe-core';
-import { EventDirection, WidgetEventCapability } from 'matrix-widget-api';
+import {
+  EventDirection,
+  UpdateDelayedEventAction,
+  WidgetEventCapability,
+} from 'matrix-widget-api';
 import { ComponentType, PropsWithChildren } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
@@ -55,7 +59,7 @@ describe('<DicePage />', () => {
       screen.getByText(/nobody has thrown the dice in this room yet/i),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole('button', { name: /throw dice/i }),
+      screen.getByRole('button', { name: /throw dice$/i }),
     ).toBeInTheDocument();
   });
 
@@ -79,7 +83,7 @@ describe('<DicePage />', () => {
       ),
     ]);
 
-    const button = await screen.findByRole('button', { name: /throw dice/i });
+    const button = await screen.findByRole('button', { name: /throw dice$/i });
     await userEvent.click(button);
 
     expect(widgetApi.requestCapabilities).toHaveBeenCalledWith([
@@ -124,7 +128,7 @@ describe('<DicePage />', () => {
   it('should throw a dice', async () => {
     render(<DicePage />, { wrapper });
 
-    const button = await screen.findByRole('button', { name: /throw dice/i });
+    const button = await screen.findByRole('button', { name: /throw dice$/i });
     await userEvent.click(button);
 
     await expect(
@@ -136,6 +140,68 @@ describe('<DicePage />', () => {
       {
         pips: expect.any(Number),
       },
+    );
+  });
+
+  it('should throw a dice delayed', async () => {
+    render(<DicePage />, { wrapper });
+
+    const button = await screen.findByRole('button', {
+      name: /throw dice 10 seconds delayed/i,
+    });
+    await userEvent.click(button);
+
+    await expect(
+      screen.findByText(/your last throw: ./i),
+    ).resolves.toBeInTheDocument();
+    await expect(
+      screen.findByText(/Your last delay id: ./i),
+    ).resolves.toBeInTheDocument();
+
+    expect(widgetApi.sendDelayedRoomEvent).toHaveBeenCalledWith(
+      'net.nordeck.throw_dice',
+      {
+        pips: expect.any(Number),
+      },
+      expect.any(Number),
+    );
+  });
+
+  it.each([
+    UpdateDelayedEventAction.Cancel,
+    UpdateDelayedEventAction.Restart,
+    UpdateDelayedEventAction.Send,
+  ])('should update (%s) a throw dice delayed', async (action) => {
+    render(<DicePage />, { wrapper });
+
+    const button = await screen.findByRole('button', {
+      name: /throw dice 10 seconds delayed/i,
+    });
+    await userEvent.click(button);
+
+    await expect(
+      screen.findByText(/your last throw: ./i),
+    ).resolves.toBeInTheDocument();
+    await expect(
+      screen.findByText(/Your last delay id: ./i),
+    ).resolves.toBeInTheDocument();
+
+    expect(widgetApi.sendDelayedRoomEvent).toHaveBeenCalledWith(
+      'net.nordeck.throw_dice',
+      {
+        pips: expect.any(Number),
+      },
+      expect.any(Number),
+    );
+
+    const updateButton = await screen.findByRole('button', {
+      name: new RegExp(action, 'i'),
+    });
+    await userEvent.click(updateButton);
+
+    expect(widgetApi.updateDelayedEvent).toHaveBeenCalledWith(
+      'syd_wlGAStYmBRRdjnWiHSDA',
+      action,
     );
   });
 });

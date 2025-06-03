@@ -20,6 +20,7 @@ import { IWidgetApiRequestData } from 'matrix-widget-api';
 import { ModalButtonID } from 'matrix-widget-api';
 import { Observable } from 'rxjs';
 import { Symbols } from 'matrix-widget-api';
+import { UpdateDelayedEventAction } from 'matrix-widget-api';
 import { WidgetApi as WidgetApi_2 } from 'matrix-widget-api';
 import { WidgetEventCapability } from 'matrix-widget-api';
 
@@ -239,6 +240,12 @@ export type WidgetApi = {
         roomId?: string;
         stateKey?: string;
     }): Promise<ISendEventFromWidgetResponseData>;
+    sendDelayedStateEvent<T>(eventType: string, content: T, delay: number, options?: {
+        roomId?: string;
+        stateKey?: string;
+    }): Promise<{
+        delay_id: string;
+    }>;
     receiveRoomEvents<T>(eventType: string, options?: {
         messageType?: string;
         roomIds?: string[] | Symbols.AnyRoom;
@@ -250,6 +257,12 @@ export type WidgetApi = {
     sendRoomEvent<T>(eventType: string, content: T, options?: {
         roomId?: string;
     }): Promise<RoomEvent<T>>;
+    sendDelayedRoomEvent<T>(eventType: string, content: T, delay: number, options?: {
+        roomId?: string;
+    }): Promise<{
+        delay_id: string;
+    }>;
+    updateDelayedEvent(delayId: string, action: UpdateDelayedEventAction): Promise<void>;
     readEventRelations(eventId: string, options?: {
         roomId?: string;
         limit?: number;
@@ -354,6 +367,17 @@ export class WidgetApiImpl implements WidgetApi {
             avatarUrl?: string;
         }>;
     }>;
+    sendDelayedRoomEvent<T>(eventType: string, content: T, delay: number, { roomId }?: {
+        roomId?: string;
+    }): Promise<{
+        delay_id: string;
+    }>;
+    sendDelayedStateEvent<T>(eventType: string, content: T, delay: number, { roomId, stateKey }?: {
+        roomId?: string;
+        stateKey?: string;
+    }): Promise<{
+        delay_id: string;
+    }>;
     sendRoomEvent<T>(eventType: string, content: T, { roomId }?: {
         roomId?: string;
     }): Promise<RoomEvent<T>>;
@@ -367,6 +391,7 @@ export class WidgetApiImpl implements WidgetApi {
         };
     }): Promise<void>;
     setModalButtonEnabled(buttonId: ModalButtonID, isEnabled: boolean): Promise<void>;
+    updateDelayedEvent(delayId: string, action: UpdateDelayedEventAction): Promise<void>;
     uploadFile(file: XMLHttpRequestBodyInit): Promise<IUploadFileActionFromWidgetResponseData>;
     readonly widgetId: string;
     readonly widgetParameters: WidgetParameters;
