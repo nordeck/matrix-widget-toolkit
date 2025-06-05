@@ -5,4 +5,4 @@
 '@matrix-widget-toolkit/mui': patch
 ---
 
-Update vitest to 3.2.1 and change workspaces to projects instead
+Update vitest to 3.2.1 and update deprecated workspace config to projects config
