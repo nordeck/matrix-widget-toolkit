@@ -14,5 +14,11 @@
  * limitations under the License.
  */
 
-// These are all the packages using vitest. The containers folder is excluded since it is using playwright.
-export default ['example-widget-mui', 'packages/*'];
+import { defineConfig } from 'vitest/config';
+
+export default defineConfig({
+  test: {
+    // These are all the packages using vitest. The containers folder is excluded since it is using playwright.
+    projects: ['example-widget-mui', 'packages/*'],
+  },
+});

@@ -335,7 +335,9 @@ describe('sendStateEvent', () => {
       content: {
         key: 'value',
       },
+      // @ts-expect-error - Error due to https://github.com/vitest-dev/vitest/issues/8082
       event_id: expect.any(String),
+      // @ts-expect-error - Error due to https://github.com/vitest-dev/vitest/issues/8082
       origin_server_ts: expect.any(Number),
       room_id: '!room-id',
       sender: '@user-id',
@@ -356,7 +358,9 @@ describe('sendStateEvent', () => {
       content: {
         key: 'new',
       },
+      // @ts-expect-error - Error due to https://github.com/vitest-dev/vitest/issues/8082
       event_id: expect.any(String),
+      // @ts-expect-error - Error due to https://github.com/vitest-dev/vitest/issues/8082
       origin_server_ts: expect.any(Number),
       room_id: '!room-id',
       sender: '@user-id',
