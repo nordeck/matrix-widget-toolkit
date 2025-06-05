@@ -32,7 +32,7 @@ import {
   UpdateDelayedEventAction,
   WidgetEventCapability,
 } from 'matrix-widget-api';
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useEffect, useRef, useState } from 'react';
 import { filter, map } from 'rxjs';
 import { NavigationBar } from '../NavigationPage';
 import {
@@ -66,12 +66,18 @@ export const DicePage = (): ReactElement => {
   );
 };
 
+type Timeout = ReturnType<typeof setTimeout>;
+const eventDelayMs = 10000;
+
 export const DiceView = (): ReactElement => {
   const widgetApi = useWidgetApi();
   const [lastOwnDice, setLastOwnDice] = useState<number | undefined>();
   const [lastDelayId, setLastDelayId] = useState<string | undefined>();
+  const [lastDelayIdExpired, setLastDelayIdExpired] = useState<boolean>(false);
   const [lastDelayError, setLastDelayError] = useState<string | undefined>();
   const [dices, setDices] = useState<number[]>([]);
+
+  const lastDelayIdTimeoutRef = useRef<Timeout>();
 
   useEffect(() => {
     setDices([]);
@@ -90,6 +96,12 @@ export const DiceView = (): ReactElement => {
       subscription.unsubscribe();
     };
   }, [widgetApi]);
+
+  useEffect(() => {
+    return () => {
+      clearTimeout(lastDelayIdTimeoutRef.current);
+    };
+  }, []);
 
   async function handleThrowDice() {
     await widgetApi.requestCapabilities([
@@ -121,11 +133,17 @@ export const DiceView = (): ReactElement => {
       const { delay_id } = await widgetApi.sendDelayedRoomEvent<ThrowDiceEvent>(
         STATE_EVENT_THROW_DICE,
         { pips },
-        10000,
+        eventDelayMs,
       );
       setLastOwnDice(pips);
       setLastDelayId(delay_id);
+      setLastDelayIdExpired(false);
       setLastDelayError(undefined);
+
+      clearTimeout(lastDelayIdTimeoutRef.current);
+      lastDelayIdTimeoutRef.current = setTimeout(() => {
+        setLastDelayIdExpired(true);
+      }, eventDelayMs);
     } catch {
       setLastDelayError(
         'Could not send a delayed event. Please check if homeserver supports delayed events.',
@@ -146,6 +164,9 @@ export const DiceView = (): ReactElement => {
 
     try {
       await widgetApi.updateDelayedEvent(lastDelayId, action);
+      if (action !== UpdateDelayedEventAction.Restart) {
+        setLastDelayIdExpired(true);
+      }
       setLastDelayError(undefined);
     } catch (e) {
       setLastDelayError(isError(e) ? e.message : JSON.stringify(e));
@@ -200,13 +221,15 @@ export const DiceView = (): ReactElement => {
       )}
 
       {lastDelayId && (
-        <>
-          <Alert severity="success" sx={{ mt: 2 }}>
-            Your last delay id: {lastDelayId}
-          </Alert>
+        <Alert severity="success" sx={{ mt: 2 }}>
+          Your last delay id: {lastDelayId}
+        </Alert>
+      )}
 
+      {lastDelayId && !lastDelayIdExpired && (
+        <>
           <Typography sx={{ mt: 2 }} variant="h6">
-            Throw dice delayed event:
+            Throw dice delayed event actions:
           </Typography>
 
           <ButtonGroup sx={{ mt: 1 }} variant="outlined" fullWidth>

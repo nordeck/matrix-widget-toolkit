@@ -155,7 +155,10 @@ describe('<DicePage />', () => {
       screen.findByText(/your last throw: ./i),
     ).resolves.toBeInTheDocument();
     await expect(
-      screen.findByText(/Your last delay id: ./i),
+      screen.findByText(/your last delay id: ./i),
+    ).resolves.toBeInTheDocument();
+    await expect(
+      screen.findByText(/throw dice delayed event actions:/i),
     ).resolves.toBeInTheDocument();
 
     expect(widgetApi.sendDelayedRoomEvent).toHaveBeenCalledWith(
@@ -203,5 +206,11 @@ describe('<DicePage />', () => {
       'syd_wlGAStYmBRRdjnWiHSDA',
       action,
     );
+
+    if (action === UpdateDelayedEventAction.Restart) {
+      expect(updateButton).toBeInTheDocument();
+    } else {
+      expect(updateButton).not.toBeInTheDocument();
+    }
   });
 });
