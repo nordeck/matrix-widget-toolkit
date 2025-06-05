@@ -1,0 +1,115 @@
+{
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  // We default to using the normal recommended config. Everything else is layered on top of this.
+  extends: [
+    'config:recommended',
+    // https://docs.renovatebot.com/presets-default/#automergepatch - Automerge lockfile maintenance, path, pin and separate minor and patch
+    ':automergePatch',
+    // Pin docker
+    'docker:pinDigests',
+    // Pin Github Actions
+    'helpers:pinGitHubActionDigests',
+    // Pin dev dependencies (See https://docs.renovatebot.com/upgrade-best-practices/#extends-pindevdependencies why this is a good idea for us)
+    ':pinDevDependencies',
+    // https://docs.renovatebot.com/presets-schedule/#scheduleweekly - Run renovate on early mondays instead of running it too often
+    'schedule:weekly',
+    // https://docs.renovatebot.com/presets-schedule/#scheduleautomergeweekdays - Run automerge on a weekdays (so it doesnt break on the weekend)
+    'schedule:automergeWeekdays',
+  ],
+  dependencyDashboard: true,
+  // https://docs.renovatebot.com/configuration-options/#osvvulnerabilityalerts - we use osv.dev here to not rely on Github
+  osvVulnerabilityAlerts: true,
+  // https://docs.renovatebot.com/configuration-options/#vulnerabilityalerts - Don't use Github alerts but rely on osv.dev instead
+  vulnerabilityAlerts: {
+    enabled: false,
+  },
+  // https://docs.renovatebot.com/configuration-options/#automergetype - We use branch to not get raced by commits to main
+  automergeType: 'branch',
+  npm: {
+    // https://docs.renovatebot.com/presets-npm/#npmunpublishsafe - This effectively waits 14 days before making a PR. This is somewhat of a safety measure and recommended by renovate at https://docs.renovatebot.com/upgrade-best-practices/#wait-two-weeks-before-automerging-third-party-dependencies
+    minimumReleaseAge: '14 days',
+  },
+  // https://docs.renovatebot.com/configuration-options/#reviewersfromcodeowners - Set reviewers based on the CODEOWNERS file
+  reviewersFromCodeOwners: true,
+  // https://docs.renovatebot.com/configuration-options/#lockfilemaintenance - Ensure the lockfile is maintained properly
+  lockFileMaintenance: {
+    enabled: true,
+  },
+  // Set the timezone for schedules
+  timezone: 'Europe/Berlin',
+  // https://docs.renovatebot.com/configuration-options/#packagerules - Note that later overrides earlier rules
+  packageRules: [
+    // Do not automerge matrix-widget-api updates as they dont follow semver
+    {
+      matchPackageNames: ['matrix-widget-api'],
+      matchUpdateTypes: ['major', 'minor', 'patch', 'digest'],
+      automerge: false,
+      labels: ['matrix-widget-api'],
+    },
+    // https://docs.renovatebot.com/node/#configuring-which-version-of-npm-renovate-uses - Update engines (for example npm) in the package.json
+    {
+      groupName: 'engines',
+      matchDepTypes: ['engines'],
+      labels: ['Engines'],
+    },
+    // Extending the react monorepo preset essentially.
+    {
+      groupName: 'react monorepo',
+      extends: ['monorepo:react'],
+      matchPackageNames: ['@types/react', '@types/react-*', 'react', 'react-*'],
+      matchUpdateTypes: ['digest', 'patch', 'minor'],
+      labels: ['React'],
+    },
+    // Group i18next regular updates and group major updates into another package to not block each other
+    {
+      groupName: 'i18next-regular',
+      matchPackageNames: ['i18next', 'i18next-*', 'react-i18next'],
+      matchUpdateTypes: ['digest', 'patch', 'minor'],
+      labels: ['i18next'],
+    },
+    {
+      groupName: 'i18next-major',
+      matchUpdateTypes: ['major'],
+      matchPackageNames: ['i18next', 'i18next-*', 'react-i18next'],
+      labels: ['i18next', 'Major Update'],
+    },
+    // Splitting of reactjs major updates which allows us to get a preview branch "for free"
+    {
+      groupName: 'react monorepo major',
+      extends: ['monorepo:react'],
+      matchPackageNames: ['@types/react', '@types/react-*', 'react', 'react-*'],
+      matchUpdateTypes: ['major'],
+      labels: ['React', 'Major'],
+    },
+    // Extending the eslint group
+    {
+      groupName: 'linters-regular',
+      extends: ['monorepo:typescript-eslint', 'monorepo:eslint'],
+      matchPackageNames: [
+        '@eslint/*',
+        'eslint',
+        'eslint-*',
+        'typescript-eslint',
+        'prettier',
+        'prettier-*',
+      ],
+      matchUpdateTypes: ['digest', 'patch', 'minor'],
+      labels: ['Linting'],
+    },
+    // Ensure we do major updates in an extra group instead
+    {
+      groupName: 'linters-major',
+      extends: ['monorepo:typescript-eslint', 'monorepo:eslint'],
+      matchPackageNames: [
+        '@eslint/*',
+        'eslint',
+        'eslint-*',
+        'typescript-eslint',
+        'prettier',
+        'prettier-*',
+      ],
+      matchUpdateTypes: ['major'],
+      labels: ['Linting', 'Major'],
+    },
+  ],
+}
