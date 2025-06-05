@@ -37,6 +37,17 @@
   },
   // Set the timezone for schedules
   timezone: 'Europe/Berlin',
+  // Ensures that appVersion in the helm chart is tracked/updated too
+  customManagers: [
+    {
+      customType: 'regex',
+      datasourceTemplate: 'docker',
+      managerFilePatterns: ['/(^|/)Chart\\.yaml$/'],
+      matchStrings: [
+        '#\\s?renovate: image=(?<depName>.*?)\\s?appVersion:\\s?("|\')?(?<currentValue>[\\w+\\.\\-]*)("|\')',
+      ],
+    },
+  ],
   // https://docs.renovatebot.com/configuration-options/#packagerules - Note that later overrides earlier rules
   packageRules: [
     // Do not automerge matrix-widget-api updates as they dont follow semver
