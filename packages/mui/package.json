@@ -17,13 +17,13 @@
     "@testing-library/user-event": "14.6.1",
     "@types/node": "22.13.5",
     "@types/react": "18.3.18",
-    "@vitest/coverage-v8": "3.0.7",
+    "@vitest/coverage-v8": "3.2.1",
     "axe-core": "4.10.2",
     "copyfiles": "2.4.1",
     "i18next-parser": "9.3.0",
     "typescript": "5.7.3",
     "vite": "6.2.0",
-    "vitest": "3.0.7"
+    "vitest": "3.2.1"
   },
   "peerDependencies": {
     "react": "18.3.1"
