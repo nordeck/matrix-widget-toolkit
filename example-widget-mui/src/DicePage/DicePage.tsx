@@ -164,7 +164,12 @@ export const DiceView = (): ReactElement => {
 
     try {
       await widgetApi.updateDelayedEvent(lastDelayId, action);
-      if (action !== UpdateDelayedEventAction.Restart) {
+      if (action === UpdateDelayedEventAction.Restart) {
+        clearTimeout(lastDelayIdTimeoutRef.current);
+        lastDelayIdTimeoutRef.current = setTimeout(() => {
+          setLastDelayIdExpired(true);
+        }, eventDelayMs);
+      } else {
         setLastDelayIdExpired(true);
       }
       setLastDelayError(undefined);
