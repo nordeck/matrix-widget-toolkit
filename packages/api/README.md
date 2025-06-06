@@ -148,3 +148,12 @@ It returns a promise that resolves with the result of the modal.
 Inside the modal widget, you can use `observeModalButtons()` to listen to clicks on the bottom buttons of the modal.
 You can use `setModalButtonEnabled()` to disable buttons from within the widget.
 Once you are done, you can call `closeModal()` to close the modal and pass the results back to the main widget.
+
+### Delayed events
+
+You can send and update delayed events (MSC4140). The configuration for delayed events on the homeserver
+needs to be applied, for example:
+
+```
+max_event_delay_duration: 24h
+```

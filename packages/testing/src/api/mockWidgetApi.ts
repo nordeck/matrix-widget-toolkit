@@ -212,8 +212,15 @@ export function mockWidgetApi(opts?: {
     // @ts-expect-error -- Mocks are expected to return no proper T type
     observeRoomEvents: vi.fn(),
     sendStateEvent: vi.fn(),
+    sendDelayedStateEvent: vi
+      .fn()
+      .mockResolvedValue({ delay_id: 'syd_bcooaGNyKtyFbIGjGMQR' }),
     // @ts-expect-error -- Mocks are expected to return no proper T type
     sendRoomEvent: vi.fn(),
+    sendDelayedRoomEvent: vi
+      .fn()
+      .mockResolvedValue({ delay_id: 'syd_wlGAStYmBRRdjnWiHSDA' }),
+    updateDelayedEvent: vi.fn().mockResolvedValue(undefined),
     closeModal: vi.fn().mockResolvedValue(undefined),
     // @ts-expect-error -- Mocks are expected to return no proper T type
     getWidgetConfig: vi.fn(),

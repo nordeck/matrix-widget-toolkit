@@ -15,7 +15,7 @@
  */
 
 import { redactEvent, StateEvent } from '@matrix-widget-toolkit/api';
-import { Symbols } from 'matrix-widget-api';
+import { Symbols, UpdateDelayedEventAction } from 'matrix-widget-api';
 import { bufferTime, firstValueFrom, Observable, take } from 'rxjs';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { MockedWidgetApi, mockWidgetApi } from './mockWidgetApi';
@@ -167,6 +167,31 @@ describe('sendRoomEvent', () => {
     await expect(
       widgetApi.receiveRoomEvents('com.example.test1'),
     ).resolves.toEqual([expectedEvent]);
+  });
+});
+
+describe('sendDelayedRoomEvent', () => {
+  it('should send delayed room event', async () => {
+    await expect(
+      widgetApi.sendDelayedRoomEvent(
+        'com.example.test',
+        {
+          key: 'value',
+        },
+        1000,
+      ),
+    ).resolves.toEqual({ delay_id: 'syd_wlGAStYmBRRdjnWiHSDA' });
+  });
+});
+
+describe('updateDelayedEvent', () => {
+  it('should update delayed event', async () => {
+    await expect(
+      widgetApi.updateDelayedEvent(
+        'syd_wlGAStYmBRRdjnWiHSDA',
+        UpdateDelayedEventAction.Cancel,
+      ),
+    ).resolves.toBeUndefined();
   });
 });
 
@@ -392,6 +417,20 @@ describe('sendStateEvent', () => {
         ),
       ]),
     ).rejects.toThrow('Timeout');
+  });
+});
+
+describe('sendDelayedStateEvent', () => {
+  it('should send delayed state event', async () => {
+    await expect(
+      widgetApi.sendDelayedStateEvent(
+        'com.example.test',
+        {
+          key: 'value',
+        },
+        1000,
+      ),
+    ).resolves.toEqual({ delay_id: 'syd_bcooaGNyKtyFbIGjGMQR' });
   });
 });
 
