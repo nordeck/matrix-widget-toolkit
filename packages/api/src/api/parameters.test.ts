@@ -172,5 +172,5 @@ describe('parseWidgetId', () => {
 
 function mockLocation(url: string): void {
   Reflect.deleteProperty(window, 'location');
-  window.location = new URL(url) as unknown as Location;
+  window.location = new URL(url) as unknown as string & Location;
 }
