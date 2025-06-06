@@ -54,11 +54,11 @@
     "@mui/icons-material": "6.4.11",
     "@mui/material": "6.4.11",
     "@mui/utils": "6.4.9",
-    "i18next": "24.2.2",
+    "i18next": "24.2.3",
     "i18next-browser-languagedetector": "8.0.4",
     "i18next-resources-to-backend": "1.2.1",
     "matrix-widget-api": "1.13.1",
-    "react-i18next": "15.4.1",
+    "react-i18next": "15.5.2",
     "react-use": "17.6.0"
   },
   "repository": {
