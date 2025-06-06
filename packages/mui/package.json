@@ -13,17 +13,17 @@
   "type": "module",
   "devDependencies": {
     "@testing-library/jest-dom": "6.6.3",
-    "@testing-library/react": "16.2.0",
+    "@testing-library/react": "16.3.0",
     "@testing-library/user-event": "14.6.1",
-    "@types/node": "22.13.5",
-    "@types/react": "18.3.18",
-    "@vitest/coverage-v8": "3.0.7",
-    "axe-core": "4.10.2",
+    "@types/node": "22.15.30",
+    "@types/react": "18.3.23",
+    "@vitest/coverage-v8": "3.2.2",
+    "axe-core": "4.10.3",
     "copyfiles": "2.4.1",
     "i18next-parser": "9.3.0",
-    "typescript": "5.7.3",
-    "vite": "6.2.0",
-    "vitest": "3.0.7"
+    "typescript": "5.8.3",
+    "vite": "6.3.5",
+    "vitest": "3.2.2"
   },
   "peerDependencies": {
     "react": "18.3.1"
@@ -54,11 +54,11 @@
     "@mui/icons-material": "6.4.11",
     "@mui/material": "6.4.11",
     "@mui/utils": "6.4.9",
-    "i18next": "24.2.2",
+    "i18next": "25.2.1",
     "i18next-browser-languagedetector": "8.0.4",
     "i18next-resources-to-backend": "1.2.1",
     "matrix-widget-api": "1.13.1",
-    "react-i18next": "15.4.1",
+    "react-i18next": "15.5.2",
     "react-use": "17.6.0"
   },
   "repository": {
