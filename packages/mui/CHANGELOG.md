@@ -1,5 +1,20 @@
 # `@matrix-widget-toolkit/mui`
 
+## 2.1.3
+
+### Patch Changes
+
+- 0dd3803: Upgrade react-i18next to 15.5.2
+- d46f021: Update vitest to 3.2.1 and update deprecated workspace config to projects config
+- 0dd3803: Update i18next to 24.2.3
+- d7bd2e8: Update Vite package
+- 022183f: Update i18next to 25.2.1
+- Updated dependencies [05c406c]
+- Updated dependencies [d46f021]
+- Updated dependencies [d7bd2e8]
+  - @matrix-widget-toolkit/api@4.2.0
+  - @matrix-widget-toolkit/react@2.0.6
+
 ## 2.1.2
 
 ### Patch Changes

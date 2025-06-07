@@ -1,5 +1,16 @@
 # `@matrix-widget-toolkit/react`
 
+## 2.0.6
+
+### Patch Changes
+
+- d46f021: Update vitest to 3.2.1 and update deprecated workspace config to projects config
+- d7bd2e8: Update Vite package
+- Updated dependencies [05c406c]
+- Updated dependencies [d46f021]
+- Updated dependencies [d7bd2e8]
+  - @matrix-widget-toolkit/api@4.2.0
+
 ## 2.0.5
 
 ### Patch Changes
