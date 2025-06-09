@@ -1,5 +1,20 @@
 # `@matrix-widget-toolkit/testing`
 
+## 3.1.0
+
+### Minor Changes
+
+- 05c406c: Add support for the delayed events
+
+### Patch Changes
+
+- d46f021: Update vitest to 3.2.1 and update deprecated workspace config to projects config
+- d7bd2e8: Update Vite package
+- Updated dependencies [05c406c]
+- Updated dependencies [d46f021]
+- Updated dependencies [d7bd2e8]
+  - @matrix-widget-toolkit/api@4.2.0
+
 ## 3.0.4
 
 ### Patch Changes
