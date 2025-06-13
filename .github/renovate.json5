@@ -53,49 +53,42 @@
     // Do not automerge matrix-widget-api updates as they dont follow semver
     {
       matchPackageNames: ['matrix-widget-api'],
-      matchUpdateTypes: ['major', 'minor', 'patch', 'digest'],
+      matchUpdateTypes: [
+        'major',
+        'minor',
+        'patch',
+        'pin',
+        'pinDigest',
+        'digest',
+        'lockFileMaintenance',
+        'rollback',
+        'bump',
+        'replacement',
+      ],
       automerge: false,
-      labels: ['matrix-widget-api'],
+      addLabels: ['matrix-widget-api'],
     },
     // https://docs.renovatebot.com/node/#configuring-which-version-of-npm-renovate-uses - Update engines (for example npm) in the package.json
     {
       groupName: 'engines',
       matchDepTypes: ['engines'],
       labels: ['Engines'],
+      rangeStrategy: 'replace',
     },
-    // Extending the react monorepo preset essentially.
+    // Any react related package
     {
-      groupName: 'react monorepo',
-      extends: ['monorepo:react'],
+      groupName: 'react dependencies',
       matchPackageNames: ['@types/react', '@types/react-*', 'react', 'react-*'],
-      matchUpdateTypes: ['digest', 'patch', 'minor'],
-      labels: ['React'],
+      addLabels: ['React'],
     },
     // Group i18next regular updates and group major updates into another package to not block each other
     {
-      groupName: 'i18next-regular',
+      groupName: 'i18next dependencies',
       matchPackageNames: ['i18next', 'i18next-*', 'react-i18next'],
-      matchUpdateTypes: ['digest', 'patch', 'minor'],
-      labels: ['i18next'],
+      addLabels: ['i18next'],
     },
     {
-      groupName: 'i18next-major',
-      matchUpdateTypes: ['major'],
-      matchPackageNames: ['i18next', 'i18next-*', 'react-i18next'],
-      labels: ['i18next', 'Major Update'],
-    },
-    // Splitting of reactjs major updates which allows us to get a preview branch "for free"
-    {
-      groupName: 'react monorepo major',
-      extends: ['monorepo:react'],
-      matchPackageNames: ['@types/react', '@types/react-*', 'react', 'react-*'],
-      matchUpdateTypes: ['major'],
-      labels: ['React', 'Major'],
-    },
-    // Extending the eslint group
-    {
-      groupName: 'linters-regular',
-      extends: ['monorepo:typescript-eslint', 'monorepo:eslint'],
+      groupName: 'linter dependencies',
       matchPackageNames: [
         '@eslint/*',
         'eslint',
@@ -104,23 +97,32 @@
         'prettier',
         'prettier-*',
       ],
-      matchUpdateTypes: ['digest', 'patch', 'minor'],
-      labels: ['Linting'],
+      addLabels: ['Linting'],
     },
-    // Ensure we do major updates in an extra group instead
     {
-      groupName: 'linters-major',
-      extends: ['monorepo:typescript-eslint', 'monorepo:eslint'],
-      matchPackageNames: [
-        '@eslint/*',
-        'eslint',
-        'eslint-*',
-        'typescript-eslint',
-        'prettier',
-        'prettier-*',
-      ],
+      groupName: 'patch updates',
+      matchUpdateTypes: ['patch'],
+      addLabels: ['patch'],
+    },
+    {
+      groupName: 'lockFileMaintenance updates',
+      matchUpdateTypes: ['lockFileMaintenance'],
+      addLabels: ['lockFileMaintenance'],
+    },
+    {
+      groupName: 'development-dependencies',
+      matchDepTypes: ['devDependencies'],
+      addLabels: ['Dev dependencies'],
+    },
+    {
+      groupName: 'production-dependencies',
+      matchDepTypes: ['dependencies'],
+      addLabels: ['Prod dependencies'],
+    },
+    {
+      groupName: 'major updates',
       matchUpdateTypes: ['major'],
-      labels: ['Linting', 'Major'],
+      addLabels: ['Major'],
     },
   ],
 }
