@@ -19,10 +19,6 @@
   dependencyDashboard: true,
   // https://docs.renovatebot.com/configuration-options/#osvvulnerabilityalerts - we use osv.dev here to not rely on Github
   osvVulnerabilityAlerts: true,
-  // https://docs.renovatebot.com/configuration-options/#vulnerabilityalerts - Don't use Github alerts but rely on osv.dev instead
-  vulnerabilityAlerts: {
-    enabled: false,
-  },
   // https://docs.renovatebot.com/configuration-options/#automergetype - We use branch to not get raced by commits to main
   automergeType: 'branch',
   npm: {
