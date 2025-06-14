@@ -15,15 +15,15 @@
     "@testing-library/jest-dom": "6.6.3",
     "@testing-library/react": "16.3.0",
     "@testing-library/user-event": "14.6.1",
-    "@types/node": "22.15.30",
+    "@types/node": "22.15.31",
     "@types/react": "18.3.23",
-    "@vitest/coverage-v8": "3.2.2",
+    "@vitest/coverage-v8": "3.2.3",
     "axe-core": "4.10.3",
     "copyfiles": "2.4.1",
     "i18next-parser": "9.3.0",
     "typescript": "5.8.3",
     "vite": "6.3.5",
-    "vitest": "3.2.2"
+    "vitest": "3.2.3"
   },
   "peerDependencies": {
     "react": "18.3.1"
