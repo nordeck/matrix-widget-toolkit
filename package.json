@@ -48,7 +48,7 @@
     "eslint-plugin-testing-library": "7.4.0",
     "@vitest/eslint-plugin": "1.2.1",
     "husky": "9.1.7",
-    "lint-staged": "15.5.2",
+    "lint-staged": "16.1.1",
     "prettier": "3.5.3",
     "prettier-plugin-organize-imports": "4.1.0",
     "rollup": "4.41.1",
