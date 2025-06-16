@@ -44,21 +44,34 @@
   ],
   // https://docs.renovatebot.com/configuration-options/#packagerules - Note that later overrides earlier rules
   packageRules: [
+    {
+      groupName: 'patch updates',
+      matchUpdateTypes: ['patch'],
+      addLabels: ['patch'],
+    },
+    {
+      groupName: 'lockFileMaintenance updates',
+      matchUpdateTypes: ['lockFileMaintenance'],
+      addLabels: ['lockFileMaintenance'],
+    },
+    {
+      groupName: 'development-dependencies',
+      matchDepTypes: ['devDependencies'],
+      addLabels: ['Dev dependencies'],
+    },
+    {
+      groupName: 'production-dependencies',
+      matchDepTypes: ['dependencies'],
+      addLabels: ['Prod dependencies'],
+    },
+    {
+      groupName: 'major updates',
+      matchUpdateTypes: ['major'],
+      addLabels: ['Major'],
+    },
     // Do not automerge matrix-widget-api updates as they dont follow semver
     {
       matchPackageNames: ['matrix-widget-api'],
-      matchUpdateTypes: [
-        'major',
-        'minor',
-        'patch',
-        'pin',
-        'pinDigest',
-        'digest',
-        'lockFileMaintenance',
-        'rollback',
-        'bump',
-        'replacement',
-      ],
       automerge: false,
       addLabels: ['matrix-widget-api'],
     },
@@ -92,31 +105,6 @@
         'prettier-*',
       ],
       addLabels: ['Linting'],
-    },
-    {
-      groupName: 'patch updates',
-      matchUpdateTypes: ['patch'],
-      addLabels: ['patch'],
-    },
-    {
-      groupName: 'lockFileMaintenance updates',
-      matchUpdateTypes: ['lockFileMaintenance'],
-      addLabels: ['lockFileMaintenance'],
-    },
-    {
-      groupName: 'development-dependencies',
-      matchDepTypes: ['devDependencies'],
-      addLabels: ['Dev dependencies'],
-    },
-    {
-      groupName: 'production-dependencies',
-      matchDepTypes: ['dependencies'],
-      addLabels: ['Prod dependencies'],
-    },
-    {
-      groupName: 'major updates',
-      matchUpdateTypes: ['major'],
-      addLabels: ['Major'],
     },
   ],
 }
