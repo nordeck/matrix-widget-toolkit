@@ -23,7 +23,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version-file: 'package.json'
+          node-version: 'lts/*'
           cache: 'yarn'
           registry-url: 'https://registry.npmjs.org'
 
@@ -159,7 +159,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version-file: 'package.json'
+          node-version: 'lts/*'
           cache: 'yarn'
           registry-url: 'https://registry.npmjs.org'
 
