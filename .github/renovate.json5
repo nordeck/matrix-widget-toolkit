@@ -48,7 +48,7 @@
     {
       groupName: 'patch updates',
       matchUpdateTypes: ['patch'],
-      addLabels: ['patch'],
+      addLabels: ['Patch'],
     },
     {
       groupName: 'lockFileMaintenance updates',
@@ -58,12 +58,12 @@
     {
       groupName: 'development-dependencies',
       matchDepTypes: ['devDependencies'],
-      addLabels: ['Dev dependencies'],
+      addLabels: ['Dev'],
     },
     {
       groupName: 'production-dependencies',
       matchDepTypes: ['dependencies'],
-      addLabels: ['Prod dependencies'],
+      addLabels: ['Prod'],
     },
     {
       groupName: 'major updates',
@@ -83,13 +83,11 @@
       labels: ['Engines'],
       rangeStrategy: 'replace',
     },
-    // Any react related package
     {
       groupName: 'react monorepo',
       matchPackageNames: ['@types/react', '@types/react-*', 'react', 'react-*'],
       addLabels: ['React'],
     },
-    // Group i18next regular updates and group major updates into another package to not block each other
     {
       groupName: 'i18next dependencies',
       matchPackageNames: ['i18next', 'i18next-*', 'react-i18next'],
@@ -108,25 +106,21 @@
       ],
       addLabels: ['Linting'],
     },
-    // Any mui related package
     {
       groupName: 'mui dependencies',
       matchPackageNames: ['@emotion/*', '@mui/*'],
-      addLabels: ['Mui'],
+      addLabels: ['MUI'],
     },
-    // Any testing-library related package
     {
       groupName: 'testing-library dependencies',
       matchPackageNames: ['@testing-library/*'],
       addLabels: ['testing-library'],
     },
-    // Any vite related package
     {
       groupName: 'vite dependencies',
       matchPackageNames: ['vite', '@vitejs/*', 'vitest', '@vitest/*'],
       addLabels: ['Vite'],
     },
-    // Any rollup related package
     {
       groupName: 'rollup dependencies',
       matchPackageNames: ['@rollup/*'],
