@@ -84,7 +84,7 @@
     },
     // Any react related package
     {
-      groupName: 'react dependencies',
+      groupName: 'react monorepo',
       matchPackageNames: ['@types/react', '@types/react-*', 'react', 'react-*'],
       addLabels: ['React'],
     },
