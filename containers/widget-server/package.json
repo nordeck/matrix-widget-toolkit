@@ -22,6 +22,6 @@
     "clean:build": "docker image rm --force \"matrix-widget-toolkit/widget-server\""
   },
   "devDependencies": {
-    "@playwright/test": "1.52.0"
+    "@playwright/test": "1.53.1"
   }
 }
