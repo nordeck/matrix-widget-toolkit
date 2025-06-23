@@ -13,6 +13,9 @@
     // Pin dev dependencies (See https://docs.renovatebot.com/upgrade-best-practices/#extends-pindevdependencies why this is a good idea for us)
     ':pinDevDependencies',
     // https://docs.renovatebot.com/presets-schedule/#scheduleweekly - Run renovate on early mondays instead of running it too often
+    // Clock giver is: https://docs.renovatebot.com/mend-hosted/overview/#resources-and-scheduling
+    //
+    // This means it runs every 4h. Meaning it runs ~ once per week for schedule: weekly
     'schedule:weekly',
     // https://docs.renovatebot.com/presets-schedule/#scheduleautomergeweekdays - Run automerge on a weekdays (so it doesnt break on the weekend)
     'schedule:automergeWeekdays',
