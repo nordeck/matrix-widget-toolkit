@@ -130,5 +130,10 @@
       matchPackageNames: ['@rollup/*'],
       addLabels: ['Rollup'],
     },
+    {
+      groupName: 'matrix-widget-toolkit monorepo',
+      matchPackageNames: ['@matrix-widget-toolkit/*'],
+      addLabels: ['Matrix-Widget-Toolkit'],
+    },
   ],
 }
