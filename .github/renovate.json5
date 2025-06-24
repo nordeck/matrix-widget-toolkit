@@ -98,7 +98,6 @@
     },
     {
       groupName: 'linter dependencies',
-      extends: ['group:linters'],
       matchPackageNames: [
         '@eslint/*',
         'eslint',
