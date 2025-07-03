@@ -70,7 +70,7 @@
     "axe-core": "4.10.3",
     "happy-dom": "16.8.1",
     "i18next-parser": "9.3.0",
-    "msw": "2.9.0",
+    "msw": "2.10.2",
     "typescript": "5.8.3",
     "vite": "6.3.5",
     "vitest": "3.2.2"
