@@ -30,7 +30,7 @@
     "title": "Wrong widget registration"
   },
   "mobile-client": {
-    "instructions": "The widget doesn't work in mobile clients due to technical limitations. Open the widget on you Desktop or Web client.",
+    "instructions": "The widget doesn't work in mobile clients due to technical limitations. Open the widget on your Desktop or Web client.",
     "title": "Mobile clients are not supported"
   },
   "outside-client": {
