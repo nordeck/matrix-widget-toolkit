@@ -35,6 +35,8 @@
   },
   // Set the timezone for schedules
   timezone: 'Europe/Berlin',
+  // Increase the number of concurrent PRs to 10 since we only run once a week
+  prHourlyLimit: 10,
   // Ensures that appVersion in the helm chart is tracked/updated too
   customManagers: [
     {
