@@ -12,11 +12,6 @@
     'helpers:pinGitHubActionDigests',
     // Pin dev dependencies (See https://docs.renovatebot.com/upgrade-best-practices/#extends-pindevdependencies why this is a good idea for us)
     ':pinDevDependencies',
-    // https://docs.renovatebot.com/presets-schedule/#scheduleweekly - Run renovate on early mondays instead of running it too often
-    // Clock giver is: https://docs.renovatebot.com/mend-hosted/overview/#resources-and-scheduling
-    //
-    // This means it runs every 4h. Meaning it runs ~ once per week for schedule: weekly
-    'schedule:weekly',
     // https://docs.renovatebot.com/presets-schedule/#scheduleautomergeweekdays - Run automerge on a weekdays (so it doesnt break on the weekend)
     'schedule:automergeWeekdays',
   ],
@@ -33,6 +28,11 @@
   lockFileMaintenance: {
     enabled: true,
   },
+  // https://docs.renovatebot.com/presets-schedule/#scheduleweekly - Run renovate on early mondays instead of running it too often
+  // Clock giver is: https://docs.renovatebot.com/mend-hosted/overview/#resources-and-scheduling
+  // This means it gets scheduled to run every 4h on average, however our experience is that the schedule queue is not steady enough to guarantee actually being scheduled within this period to use 'schedule:weekly'.
+  // We therefore define our own more lenient schedule on that basis.
+  schedule: ['* 0-5 * * 1'],
   // Set the timezone for schedules
   timezone: 'Europe/Berlin',
   // Increase the number of concurrent PRs to 10 since we only run once a week
