@@ -6,6 +6,8 @@
     'config:recommended',
     // https://docs.renovatebot.com/presets-default/#automergepatch - Automerge lockfile maintenance, path, pin and separate minor and patch
     ':automergePatch',
+    // this is missing from the automergePatch preset
+    ':automergeDigest',
     // Pin docker
     'docker:pinDigests',
     // Pin Github Actions
@@ -27,6 +29,10 @@
   // https://docs.renovatebot.com/configuration-options/#lockfilemaintenance - Ensure the lockfile is maintained properly
   lockFileMaintenance: {
     enabled: true,
+  },
+  // there is no preset for this
+  pinDigest: {
+    automerge: true,
   },
   // https://docs.renovatebot.com/presets-schedule/#scheduleweekly - Run renovate on early mondays instead of running it too often
   // Clock giver is: https://docs.renovatebot.com/mend-hosted/overview/#resources-and-scheduling
