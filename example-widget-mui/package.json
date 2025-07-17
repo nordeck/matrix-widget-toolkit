@@ -65,14 +65,14 @@
     "@types/react": "18.3.23",
     "@types/react-dom": "18.3.7",
     "@vitejs/plugin-basic-ssl": "1.2.0",
-    "@vitejs/plugin-react-swc": "3.10.1",
-    "@vitest/coverage-v8": "3.2.2",
+    "@vitejs/plugin-react-swc": "3.10.2",
+    "@vitest/coverage-v8": "3.2.4",
     "axe-core": "4.10.3",
     "happy-dom": "16.8.1",
     "i18next-parser": "9.3.0",
     "msw": "2.10.2",
     "typescript": "5.8.3",
     "vite": "6.3.5",
-    "vitest": "3.2.2"
+    "vitest": "3.2.4"
   }
 }
