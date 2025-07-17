@@ -30,7 +30,7 @@
   lockFileMaintenance: {
     enabled: true,
   },
-  // there is not preset for this
+  // there is no preset for this
   pinDigest: {
     automerge: true,
   },
