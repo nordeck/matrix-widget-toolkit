@@ -1,4 +1,4 @@
-FROM nginx:1.27.4-alpine-perl@sha256:b948629705bb94a3947846babda0a222577b1eadcc3e551bfafef47c7581666b
+FROM nginx:1.27.5-alpine-perl@sha256:113552fa0c0cbb9d049fe837303e28a6faa3c695bdfcbfb96d4196dbf5d7ec41
 
 # Install envsubst
 RUN apk add --no-cache gettext
@@ -11,7 +11,7 @@ RUN set -x\
     && chown -R 101:0 /etc/nginx \
     && chmod -R g+w /etc/nginx \
     && sed -i '/user  nginx;/d' /etc/nginx/nginx.conf \
-    && sed -i 's,/var/run/nginx.pid,/tmp/nginx.pid,' /etc/nginx/nginx.conf
+    && sed -i 's,\(/var\)\{0\,1\}/run/nginx.pid,/tmp/nginx.pid,' /etc/nginx/nginx.conf
 
 # The nginx base image already creates the nginx user with UID 101 and GUI 101
 USER 101
