@@ -29,6 +29,8 @@
   // https://docs.renovatebot.com/configuration-options/#lockfilemaintenance - Ensure the lockfile is maintained properly
   lockFileMaintenance: {
     enabled: true,
+    // override the broken default "before 4am on monday" schedule (see the global `schedule` below)
+    schedule: ['* 0-5 * * 1'],
   },
   // there is no preset for this
   pinDigest: {
