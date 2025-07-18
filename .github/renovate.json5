@@ -18,7 +18,11 @@
     'schedule:automergeWeekdays',
   ],
   dependencyDashboard: true,
-  // https://docs.renovatebot.com/configuration-options/#osvvulnerabilityalerts - we use osv.dev here to not rely on Github
+  // https://docs.renovatebot.com/configuration-options/#vulnerabilityalerts - enabled by default, but does not set a label by default
+  vulnerabilityAlerts: {
+    labels: ['Security'],
+  },
+  // https://docs.renovatebot.com/configuration-options/#osvvulnerabilityalerts - we use osv.dev here to not rely entirely on Github
   osvVulnerabilityAlerts: true,
   // https://docs.renovatebot.com/configuration-options/#automergetype - We use branch to not get raced by commits to main
   automergeType: 'branch',
@@ -29,6 +33,8 @@
   // https://docs.renovatebot.com/configuration-options/#lockfilemaintenance - Ensure the lockfile is maintained properly
   lockFileMaintenance: {
     enabled: true,
+    // override the broken default "before 4am on monday" schedule (see the global `schedule` below)
+    schedule: ['* 0-5 * * 1'],
   },
   // there is no preset for this
   pinDigest: {
@@ -64,7 +70,7 @@
     {
       groupName: 'lockFileMaintenance updates',
       matchUpdateTypes: ['lockFileMaintenance'],
-      addLabels: ['lockFileMaintenance'],
+      addLabels: ['Lockfile'],
     },
     {
       groupName: 'development-dependencies',
@@ -116,7 +122,7 @@
         'prettier-*',
         '@typescript-eslint/*',
       ],
-      addLabels: ['Linting'],
+      addLabels: ['Linters'],
     },
     {
       groupName: 'mui dependencies',
@@ -141,7 +147,7 @@
     {
       groupName: 'matrix-widget-toolkit monorepo',
       matchPackageNames: ['@matrix-widget-toolkit/*'],
-      addLabels: ['Matrix-Widget-Toolkit'],
+      addLabels: ['matrix-widget-toolkit'],
     },
   ],
 }
