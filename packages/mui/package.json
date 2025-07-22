@@ -47,7 +47,7 @@
   "dependencies": {
     "@emotion/cache": "11.14.0",
     "@emotion/react": "11.14.0",
-    "@emotion/styled": "11.14.0",
+    "@emotion/styled": "11.14.1",
     "@fontsource/inter": "5.1.1",
     "@matrix-widget-toolkit/api": "^4.2.0",
     "@matrix-widget-toolkit/react": "^2.0.6",
