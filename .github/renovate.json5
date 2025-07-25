@@ -149,5 +149,10 @@
       matchPackageNames: ['@matrix-widget-toolkit/*'],
       addLabels: ['matrix-widget-toolkit'],
     },
+    // override for pins in the end so they're all nicely grouped
+    {
+      groupName: 'pin dependencies',
+      matchUpdateTypes: ['pin', 'pinDigest'],
+    },
   ],
 }
