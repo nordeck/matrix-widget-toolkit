@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/mui`
 
+## 2.1.4
+
+### Patch Changes
+
+- c10df6a: Fix typo in mobile-client instructions
+
 ## 2.1.3
 
 ### Patch Changes
