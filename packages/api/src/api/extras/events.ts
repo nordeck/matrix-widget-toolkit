@@ -48,7 +48,12 @@ export function isRoomEvent(event: RoomEvent | StateEvent): event is RoomEvent {
 // Allow any here, so that the validation works for every event
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function isValidRoomEvent(event: unknown): event is RoomEvent<any> {
-  return roomEventSchema.validate(event).error === undefined;
+  const result = roomEventSchema.validate(event);
+  if (result.error) {
+    console.warn('Invalid room event:', result.error.details, { event });
+    return false;
+  }
+  return true;
 }
 
 /**
@@ -60,7 +65,12 @@ export function isValidRoomEvent(event: unknown): event is RoomEvent<any> {
 // Allow any here, so that the validation works for every event
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function isValidStateEvent(event: unknown): event is StateEvent<any> {
-  return stateEventSchema.validate(event).error === undefined;
+  const result = stateEventSchema.validate(event);
+  if (result.error) {
+    console.warn('Invalid state event:', result.error.details, { event });
+    return false;
+  }
+  return true;
 }
 
 /**
@@ -74,7 +84,14 @@ export function isValidToDeviceMessageEvent(
   // Allow any here, so that the validation works for every event
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): event is ToDeviceMessageEvent<any> {
-  return toDeviceMessageSchema.validate(event).error === undefined;
+  const result = toDeviceMessageSchema.validate(event);
+  if (result.error) {
+    console.warn('Invalid to device message event:', result.error.details, {
+      event,
+    });
+    return false;
+  }
+  return true;
 }
 
 /**

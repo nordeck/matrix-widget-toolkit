@@ -16,8 +16,18 @@
 
 import { RoomEvent } from '@matrix-widget-toolkit/api';
 import Joi from 'joi';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { isValidEvent } from './validation';
+
+// Mock console.warn for tests
+const originalConsoleWarn = console.warn;
+beforeEach(() => {
+  console.warn = vi.fn();
+});
+
+afterEach(() => {
+  console.warn = originalConsoleWarn;
+});
 
 const exampleSchema = Joi.object({
   key: Joi.string(),
@@ -60,6 +70,19 @@ describe('isValidEvent', () => {
 
     expect(isValidEvent(event, 'com.example.event', exampleSchema)).toEqual(
       false,
+    );
+  });
+
+  it('should log warning when content validation fails', () => {
+    event.content = { other: 'my-value' };
+
+    expect(isValidEvent(event, 'com.example.event', exampleSchema)).toEqual(
+      false,
+    );
+    expect(console.warn).toHaveBeenCalledWith(
+      'Error while validating com.example.event event:',
+      expect.any(Array),
+      { event },
     );
   });
 

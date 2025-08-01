@@ -33,7 +33,11 @@ export function isValidEvent(
   const result = schema.validate(event.content);
 
   if (result.error) {
-    // TODO: Log here if desired: console.warn('Error while validating event', result.error);
+    console.warn(
+      `Error while validating ${eventType} event:`,
+      result.error.details,
+      { event },
+    );
     return false;
   }
 
