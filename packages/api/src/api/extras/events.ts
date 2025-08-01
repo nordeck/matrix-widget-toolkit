@@ -85,7 +85,8 @@ const eventSchemaProps = {
   // Do roughly check against the format
   // https://spec.matrix.org/v1.13/appendices/#common-identifier-format
   sender: Joi.string().pattern(new RegExp('^@[^\\s:]*:\\S*$')).required(),
-  room_id: Joi.string().pattern(new RegExp('^![^:]*:\\S*')).required(),
+  // Prior versions of the code had checked for a server_name. However in room version 12+ this got dropped. There is no way for us to check this here.
+  room_id: Joi.string().pattern(new RegExp('^!')).required(),
   content: Joi.object().required(),
 };
 
