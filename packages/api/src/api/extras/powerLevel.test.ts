@@ -51,6 +51,19 @@ const room_version_12_create_event: StateEvent<StateEventCreateContent> = {
   state_key: '',
   type: 'm.room.create',
 };
+const room_version_12_create_event_with_additional_creators: StateEvent<StateEventCreateContent> =
+  {
+    content: {
+      room_version: '12',
+      additional_creators: ['@other-creator:example.com'],
+    },
+    event_id: 'event-id',
+    origin_server_ts: 0,
+    room_id: '!room-id',
+    sender: '@user-id:example.com',
+    state_key: '',
+    type: 'm.room.create',
+  };
 
 describe('isValidPowerLevelStateEvent', () => {
   it('should permit valid event', () => {
@@ -400,7 +413,7 @@ describe('Room Version 12 Create Event', () => {
     expect(
       calculateStateEventPowerLevel(
         {
-          users: { '@user-id': 100 },
+          users: { '@user-id:example.com': 100 },
           state_default: 100,
         },
         room_version_12_create_event,
@@ -408,6 +421,102 @@ describe('Room Version 12 Create Event', () => {
       ),
     ).toEqual(150);
   });
+
+  it('should allow m.room.tombstone events with power level 150', () => {
+    expect(
+      hasStateEventPower(
+        {
+          users: { '@user-id:example.com': 150 },
+          state_default: 150,
+        },
+        room_version_12_create_event,
+        '@user-id:example.com',
+        'm.room.tombstone',
+      ),
+    ).toEqual(true);
+  });
+
+  it('should allow kick, ban, redact and invite actions as a room creator', () => {
+    const plEvent = {
+      users: { '@user-id:example.com': 100 },
+      ban: 100,
+      invite: 100,
+      kick: 100,
+      redact: 100,
+    };
+    expect(
+      hasActionPower(
+        plEvent,
+        room_version_12_create_event,
+        '@user-id:example.com',
+        'ban',
+      ),
+    ).toEqual(true);
+    expect(
+      hasActionPower(
+        plEvent,
+        room_version_12_create_event,
+        '@user-id:example.com',
+        'invite',
+      ),
+    ).toEqual(true);
+    expect(
+      hasActionPower(
+        plEvent,
+        room_version_12_create_event,
+        '@user-id:example.com',
+        'kick',
+      ),
+    ).toEqual(true);
+    expect(
+      hasActionPower(
+        plEvent,
+        room_version_12_create_event,
+        '@user-id:example.com',
+        'redact',
+      ),
+    ).toEqual(true);
+  });
+  it('should not allow kick, ban, redact and invite actions when user is additional creator', () => {
+    const plEvent = {
+      users: { '@user-id:example.com': 100 },
+      ban: 100,
+      invite: 100,
+      kick: 100,
+      redact: 100,
+    };
+    expect(
+      hasActionPower(
+        plEvent,
+        room_version_12_create_event_with_additional_creators,
+        '@other-creator:example.com',
+        'ban',
+      ),
+    ).toEqual(true);
+    expect(
+      hasActionPower(
+        plEvent,
+        room_version_12_create_event_with_additional_creators,
+        '@other-creator:example.com',
+        'invite',
+      ),
+    ).toEqual(true);
+    expect(
+      hasActionPower(
+        plEvent,
+        room_version_12_create_event_with_additional_creators,
+        '@other-creator:example.com',
+        'kick',
+      ),
+    ).toEqual(true);
+    expect(
+      hasActionPower(
+        plEvent,
+        room_version_12_create_event_with_additional_creators,
+        '@other-creator:example.com',
+        'redact',
+      ),
+    ).toEqual(true);
+  });
 });
-// TODO: Test room version 12 changed behavior
 // TODO: Change creator differences in room version 1-10 vs 11+
