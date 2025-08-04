@@ -179,6 +179,10 @@ export const PowerLevelsView = (): ReactElement => {
     ? selectAllRoomMembers(roomMembersData)
     : [];
 
+  if (selectedMember === undefined) {
+    return <Box>Loading...</Box>;
+  }
+
   // check if we (=the user of the widget) has the power to promote or
   // demote others
   const canPromoteOrDemote = hasStateEventPower(

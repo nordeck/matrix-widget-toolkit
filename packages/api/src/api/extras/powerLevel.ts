@@ -111,6 +111,7 @@ export function hasStateEventPower(
   );
   const eventLevel = calculateStateEventPowerLevel(
     powerLevelStateEvent,
+    createRoomStateEvent,
     eventType,
   );
   return compareUserPowerLevelToNormalPowerLevel(userLevel, eventLevel);
@@ -236,8 +237,17 @@ export function calculateRoomEventPowerLevel(
  */
 export function calculateStateEventPowerLevel(
   powerLevelStateEvent: PowerLevelsStateEvent | undefined,
+  createRoomStateEvent: StateEvent<StateEventCreateContent> | undefined,
   eventType: string,
 ): number {
+  // In room version 12 we need 150 for m.room.tombstone events and it cant be changed by the user.
+  if (
+    createRoomStateEvent?.content?.room_version === '12' &&
+    eventType === 'm.room.tombstone'
+  ) {
+    return 150;
+  }
+
   // See https://github.com/matrix-org/matrix-spec/blob/203b9756f52adfc2a3b63d664f18cdbf9f8bf126/data/event-schemas/schema/m.room.power_levels.yaml#L14-L19
   return (
     powerLevelStateEvent?.events?.[eventType] ??

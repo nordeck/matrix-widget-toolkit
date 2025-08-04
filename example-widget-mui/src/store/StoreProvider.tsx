@@ -22,9 +22,14 @@ import { createStore } from './store';
 /**
  * Create and provide the redux store
  */
-export function StoreProvider({ children }: PropsWithChildren): ReactElement {
+export function StoreProvider({
+  children,
+  preloadedState,
+}: PropsWithChildren<{
+  preloadedState?: unknown;
+}>): ReactElement {
   const widgetApi = useWidgetApi();
-  const [store] = useState(() => createStore({ widgetApi }));
+  const [store] = useState(() => createStore({ widgetApi, preloadedState }));
 
   return <Provider store={store}>{children}</Provider>;
 }
