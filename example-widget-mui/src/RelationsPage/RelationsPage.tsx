@@ -18,8 +18,10 @@ import {
   hasActionPower,
   hasRoomEventPower,
   hasStateEventPower,
+  isValidCreateEventSchema,
   isValidPowerLevelStateEvent,
   ROOM_EVENT_REDACTION,
+  STATE_EVENT_CREATE,
   STATE_EVENT_POWER_LEVELS,
 } from '@matrix-widget-toolkit/api';
 import { MuiCapabilitiesGuard } from '@matrix-widget-toolkit/mui';
@@ -48,7 +50,7 @@ import {
 import { EventDirection, WidgetEventCapability } from 'matrix-widget-api';
 import { FormEvent, ReactElement, ReactNode, useMemo, useState } from 'react';
 import { useObservable } from 'react-use';
-import { filter, map } from 'rxjs';
+import { filter, from, map, switchMap } from 'rxjs';
 import {
   ROOM_EVENT_REACTION,
   ROOM_EVENT_ROOM_MESSAGE,
@@ -357,34 +359,44 @@ function usePermissions() {
     () =>
       widgetApi.observeStateEvents('m.room.power_levels').pipe(
         filter(isValidPowerLevelStateEvent),
-        map((ev) => ({
-          canEdit:
-            hasStateEventPower(
-              ev.content,
-              widgetApi.widgetParameters.userId,
-              STATE_EVENT_MESSAGE_COLLECTION,
-            ) &&
-            hasRoomEventPower(
-              ev.content,
-              widgetApi.widgetParameters.userId,
-              ROOM_EVENT_REDACTION,
-            ) &&
-            hasActionPower(
-              ev.content,
-              widgetApi.widgetParameters.userId,
-              'redact',
-            ),
-          canSendReaction: hasRoomEventPower(
-            ev.content,
-            widgetApi.widgetParameters.userId,
-            ROOM_EVENT_REACTION,
+        switchMap((powerLevelsEvent) =>
+          from(widgetApi.receiveSingleStateEvent(STATE_EVENT_CREATE, '')).pipe(
+            filter(isValidCreateEventSchema),
+            map((createEvent) => ({
+              canEdit:
+                hasStateEventPower(
+                  powerLevelsEvent.content,
+                  createEvent,
+                  widgetApi.widgetParameters.userId,
+                  STATE_EVENT_MESSAGE_COLLECTION,
+                ) &&
+                hasRoomEventPower(
+                  powerLevelsEvent.content,
+                  createEvent,
+                  widgetApi.widgetParameters.userId,
+                  ROOM_EVENT_REDACTION,
+                ) &&
+                hasActionPower(
+                  powerLevelsEvent.content,
+                  createEvent,
+                  widgetApi.widgetParameters.userId,
+                  'redact',
+                ),
+              canSendReaction: hasRoomEventPower(
+                powerLevelsEvent.content,
+                createEvent,
+                widgetApi.widgetParameters.userId,
+                ROOM_EVENT_REACTION,
+              ),
+              canSendRedaction: hasRoomEventPower(
+                powerLevelsEvent.content,
+                createEvent,
+                widgetApi.widgetParameters.userId,
+                ROOM_EVENT_REDACTION,
+              ),
+            })),
           ),
-          canSendRedaction: hasRoomEventPower(
-            ev.content,
-            widgetApi.widgetParameters.userId,
-            ROOM_EVENT_REDACTION,
-          ),
-        })),
+        ),
       ),
     [widgetApi],
   );

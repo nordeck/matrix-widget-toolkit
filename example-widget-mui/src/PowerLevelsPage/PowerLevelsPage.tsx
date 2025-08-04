@@ -48,6 +48,7 @@ import { STATE_EVENT_ROOM_NAME } from '../events';
 import { NavigationBar } from '../NavigationPage';
 import { StoreProvider } from '../store';
 import {
+  useGetCreateEventQuery,
   useGetPowerLevelsQuery,
   useUpdatePowerLevelsMutation,
 } from './powerLevelsApi';
@@ -142,6 +143,7 @@ export const PowerLevelsView = (): ReactElement => {
 
   const { data: powerLevelsEvent } = useGetPowerLevelsQuery();
   const { data: roomMembersData } = useGetRoomMembersQuery();
+  const { data: createEvent } = useGetCreateEventQuery();
 
   const [selectedMember, setSelectedMember] = useState<string | undefined>();
 
@@ -181,6 +183,7 @@ export const PowerLevelsView = (): ReactElement => {
   // demote others
   const canPromoteOrDemote = hasStateEventPower(
     powerLevelsEvent?.content,
+    createEvent?.event,
     widgetApi.widgetParameters.userId,
     STATE_EVENT_POWER_LEVELS,
   );
@@ -188,6 +191,7 @@ export const PowerLevelsView = (): ReactElement => {
   // we assume that users that can change the name can be promoted or demoted
   const userIsModerator = hasStateEventPower(
     powerLevelsEvent?.content,
+    createEvent?.event,
     selectedMember,
     STATE_EVENT_ROOM_NAME,
   );
@@ -231,6 +235,7 @@ export const PowerLevelsView = (): ReactElement => {
             title={type}
             permitted={hasStateEventPower(
               powerLevelsEvent?.content,
+              createEvent?.event,
               selectedMember,
               type,
             )}
@@ -252,6 +257,7 @@ export const PowerLevelsView = (): ReactElement => {
             title={type}
             permitted={hasRoomEventPower(
               powerLevelsEvent?.content,
+              createEvent?.event,
               selectedMember,
               type,
             )}
@@ -273,6 +279,7 @@ export const PowerLevelsView = (): ReactElement => {
             title={action}
             permitted={hasActionPower(
               powerLevelsEvent?.content,
+              createEvent?.event,
               selectedMember,
               action,
             )}

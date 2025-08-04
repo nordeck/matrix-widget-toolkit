@@ -17,12 +17,15 @@
 export { generateRoomTimelineCapabilities } from './capabilities';
 export { getRoomMemberDisplayName } from './displayName';
 export {
+  STATE_EVENT_CREATE,
   isRoomEvent,
   isStateEvent,
+  isValidCreateEventSchema,
   isValidRoomEvent,
   isValidStateEvent as isValidStateEVent,
   isValidToDeviceMessageEvent,
 } from './events';
+export type { StateEventCreateContent } from './events';
 export { WIDGET_CAPABILITY_NAVIGATE, navigateToRoom } from './navigateTo';
 export type { NavigateToRoomOptions } from './navigateTo';
 export { compareOriginServerTS } from './originServerTs';
