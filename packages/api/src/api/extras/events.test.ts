@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { RoomEvent, StateEvent, ToDeviceMessageEvent } from '../types';
 import {
   isRoomEvent,
@@ -23,6 +23,16 @@ import {
   isValidStateEvent,
   isValidToDeviceMessageEvent,
 } from './events';
+
+// Mock console.warn for tests
+const originalConsoleWarn = console.warn;
+beforeEach(() => {
+  console.warn = vi.fn();
+});
+
+afterEach(() => {
+  console.warn = originalConsoleWarn;
+});
 
 const roomEvent: RoomEvent = {
   type: 'com.example.type',
@@ -93,6 +103,16 @@ describe('isValidRoomEvent', () => {
       }),
     ).toBe(false);
   });
+
+  it('should log warning when validation fails', () => {
+    const invalidEvent = { ...roomEventData, type: undefined };
+    expect(isValidRoomEvent(invalidEvent)).toBe(false);
+    expect(console.warn).toHaveBeenCalledWith(
+      'Invalid room event:',
+      expect.any(Array),
+      { event: invalidEvent },
+    );
+  });
 });
 
 const stateEventData: StateEvent = {
@@ -138,6 +158,16 @@ describe('isValidStateEvent', () => {
       }),
     ).toBe(false);
   });
+
+  it('should log warning when validation fails', () => {
+    const invalidEvent = { ...stateEventData, type: undefined };
+    expect(isValidStateEvent(invalidEvent)).toBe(false);
+    expect(console.warn).toHaveBeenCalledWith(
+      'Invalid state event:',
+      expect.any(Array),
+      { event: invalidEvent },
+    );
+  });
 });
 
 const toDeviceMessageData: ToDeviceMessageEvent = {
@@ -171,5 +201,15 @@ describe('isValidToDeviceMessageEvent', () => {
         ...patch,
       }),
     ).toBe(false);
+  });
+
+  it('should log warning when validation fails', () => {
+    const invalidEvent = { ...toDeviceMessageData, type: undefined };
+    expect(isValidToDeviceMessageEvent(invalidEvent)).toBe(false);
+    expect(console.warn).toHaveBeenCalledWith(
+      'Invalid to device message event:',
+      expect.any(Array),
+      { event: invalidEvent },
+    );
   });
 });
