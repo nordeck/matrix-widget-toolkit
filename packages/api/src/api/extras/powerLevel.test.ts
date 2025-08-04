@@ -40,6 +40,18 @@ const room_version_11_create_event: StateEvent<StateEventCreateContent> = {
   type: 'm.room.create',
 };
 
+const room_version_12_create_event: StateEvent<StateEventCreateContent> = {
+  content: {
+    room_version: '12',
+  },
+  event_id: 'event-id',
+  origin_server_ts: 0,
+  room_id: '!room-id',
+  sender: '@user-id:example.com',
+  state_key: '',
+  type: 'm.room.create',
+};
+
 describe('isValidPowerLevelStateEvent', () => {
   it('should permit valid event', () => {
     const event: StateEvent = {
@@ -316,6 +328,7 @@ describe('calculateStateEventPowerLevel', () => {
           events: {},
           state_default: 25,
         },
+        room_version_11_create_event,
         'my-event',
       ),
     ).toEqual(25);
@@ -327,13 +340,20 @@ describe('calculateStateEventPowerLevel', () => {
         {
           events: { 'my-event': 42 },
         },
+        room_version_11_create_event,
         'my-event',
       ),
     ).toEqual(42);
   });
 
   it('should return fallback event level if power levels definition is empty', () => {
-    expect(calculateStateEventPowerLevel({}, 'my-event')).toEqual(50);
+    expect(
+      calculateStateEventPowerLevel(
+        {},
+        room_version_11_create_event,
+        'my-event',
+      ),
+    ).toEqual(50);
   });
 });
 
@@ -374,3 +394,20 @@ describe('calculateActionPowerLevel', () => {
     },
   );
 });
+
+describe('Room Version 12 Create Event', () => {
+  it('should not allow m.room.tombstone events with power level 100', () => {
+    expect(
+      calculateStateEventPowerLevel(
+        {
+          users: { '@user-id': 100 },
+          state_default: 100,
+        },
+        room_version_12_create_event,
+        'm.room.tombstone',
+      ),
+    ).toEqual(150);
+  });
+});
+// TODO: Test room version 12 changed behavior
+// TODO: Change creator differences in room version 1-10 vs 11+
