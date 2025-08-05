@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/api`
 
+## 4.3.0
+
+### Minor Changes
+
+- ce67d9c: Reduce strictness on room_ids to comply with changes in room version 12
+
 ## 4.2.0
 
 ### Minor Changes
