@@ -37,7 +37,12 @@ export {
   hasStateEventPower,
   isValidPowerLevelStateEvent,
 } from './powerLevel';
-export type { PowerLevelsActions, PowerLevelsStateEvent } from './powerLevel';
+export type {
+  PowerLevelsActions,
+  PowerLevelsStateEvent,
+  ROOM_VERSION_12_CREATOR,
+  USER_POWERLEVEL_TYPE,
+} from './powerLevel';
 export {
   ROOM_EVENT_REDACTION,
   isValidRedactionEvent,
