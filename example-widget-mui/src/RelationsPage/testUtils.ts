@@ -30,12 +30,12 @@ export function mockMessageCollectionEvent({
 } = {}): StateEvent<MessageCollectionEvent> {
   return {
     type: 'net.nordeck.message_collection',
-    sender: '@user-id',
+    sender: '@user-id:example.com',
     state_key,
     content: { eventIds: ['$message-event-id'], ...content },
     origin_server_ts: 0,
     event_id: '$collection-event-id',
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
   };
 }
 
@@ -47,11 +47,11 @@ export function mockRoomMessageEvent({
 } = {}): RoomEvent<RoomMessageEvent> {
   return {
     type: 'm.room.message',
-    sender: '@user-id',
+    sender: '@user-id:example.com',
     content: { msgtype: 'm.text', body: 'My message', ...content },
     origin_server_ts: 0,
     event_id: '$message-event-id',
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
   };
 }
 
@@ -64,7 +64,7 @@ export function mockReactionEvent({
 } = {}): RoomEvent<ReactionEvent> {
   return {
     type: 'm.reaction',
-    sender: '@user-id',
+    sender: '@user-id:example.com',
     content: {
       'm.relates_to': {
         rel_type: 'm.annotation',
@@ -75,6 +75,6 @@ export function mockReactionEvent({
     },
     origin_server_ts: 0,
     event_id,
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
   };
 }

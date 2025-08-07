@@ -33,18 +33,19 @@ afterEach(() => widgetApi.stop());
 
 beforeEach(() => {
   widgetApi = mockWidgetApi();
+  // @ts-expect-error - This is a test, we can set the userId directly
+  widgetApi.widgetParameters.userId = '@user-id:example.com';
 
   widgetApi.mockSendStateEvent({
     type: 'm.room.create',
     sender: '@user-id:example.com',
     state_key: '',
     content: {
-      creator: '@user-id:example.com',
-      room_version: '10',
+      room_version: '11',
     },
     origin_server_ts: 0,
     event_id: '$create-event-id',
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
   });
   widgetApi.mockSendStateEvent({
     type: 'm.room.power_levels',
@@ -55,7 +56,7 @@ beforeEach(() => {
     },
     origin_server_ts: 0,
     event_id: '$event-id',
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
   });
   widgetApi.mockSendStateEvent({
     type: 'm.room.member',
@@ -64,7 +65,7 @@ beforeEach(() => {
     content: { membership: 'join' },
     origin_server_ts: 0,
     event_id: '$event-id',
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
   });
   widgetApi.mockSendStateEvent({
     type: 'm.room.member',
@@ -73,63 +74,12 @@ beforeEach(() => {
     content: { membership: 'join' },
     origin_server_ts: 0,
     event_id: '$event-id',
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
   });
-
-  // Create preloaded state with room members data
-  const roomMembersData = {
-    ids: ['@another-user:example.com', '@user-id:example.com'],
-    entities: {
-      '@another-user:example.com': {
-        type: 'm.room.member',
-        sender: '@user-id:example.com',
-        state_key: '@another-user:example.com',
-        content: { membership: 'join' },
-        origin_server_ts: 0,
-        event_id: '$event-id',
-        room_id: '!room-id',
-      },
-      '@user-id:example.com': {
-        type: 'm.room.member',
-        sender: '@user-id:example.com',
-        state_key: '@user-id:example.com',
-        content: { membership: 'join' },
-        origin_server_ts: 0,
-        event_id: '$event-id',
-        room_id: '!room-id',
-      },
-    },
-  };
-
-  const preloadedState = {
-    baseApi: {
-      queries: {
-        'getRoomMembers(undefined)': {
-          status: 'fulfilled',
-          endpointName: 'getRoomMembers',
-          requestId: 'test-request-id',
-          data: roomMembersData,
-        },
-      },
-      mutations: {},
-      provided: {},
-      subscriptions: {},
-      config: {
-        online: true,
-        focused: true,
-        middlewareRegistered: true,
-        refetchOnFocus: false,
-        refetchOnReconnect: false,
-        refetchOnMountOrArgChange: false,
-        keepUnusedDataFor: 60,
-        reducerPath: 'baseApi',
-      },
-    },
-  };
 
   wrapper = ({ children }: PropsWithChildren) => (
     <WidgetApiMockProvider value={widgetApi}>
-      <StoreProvider preloadedState={preloadedState}>
+      <StoreProvider>
         <MemoryRouter>{children}</MemoryRouter>
       </StoreProvider>
     </WidgetApiMockProvider>
@@ -224,6 +174,10 @@ describe('<PowerLevelsPage />', () => {
         EventDirection.Receive,
         'm.room.member',
       ),
+      WidgetEventCapability.forStateEvent(
+        EventDirection.Receive,
+        'm.room.create',
+      ),
     ]);
 
     const button = await screen.findByRole('button', { name: /promote/i });
@@ -280,7 +234,7 @@ describe('<PowerLevelsPage />', () => {
       },
       origin_server_ts: 0,
       event_id: '$event-id',
-      room_id: '!room-id',
+      room_id: '!room-id:example.com',
     });
 
     render(<PowerLevelsPage />, { wrapper });
@@ -344,7 +298,7 @@ describe('<PowerLevelsPage />', () => {
       },
       origin_server_ts: 0,
       event_id: '$event-id',
-      room_id: '!room-id',
+      room_id: '!room-id:example.com',
     });
 
     render(<PowerLevelsPage />, { wrapper });

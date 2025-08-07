@@ -53,7 +53,9 @@ describe('<ModalDialog />', () => {
 
     await expect(screen.findByText(/a title/i)).resolves.toBeInTheDocument();
     expect(screen.getByText(/some content…/i)).toBeInTheDocument();
-    expect(screen.getByText(/Room ID: !room-id/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Room ID: !room-id:example.com/i),
+    ).toBeInTheDocument();
     expect(
       screen.getByRole('button', { name: /i am confident!/i }),
     ).toBeInTheDocument();

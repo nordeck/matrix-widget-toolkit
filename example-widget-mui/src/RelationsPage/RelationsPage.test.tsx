@@ -16,7 +16,7 @@
 
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import axe from 'axe-core';
 import { ComponentType, PropsWithChildren, act } from 'react';
@@ -37,15 +37,26 @@ afterEach(() => widgetApi.stop());
 
 beforeEach(() => {
   widgetApi = mockWidgetApi();
+  // @ts-expect-error - This is a test, we can set the userId directly
+  widgetApi.widgetParameters.userId = '@user-id:example.com';
 
   widgetApi.mockSendStateEvent({
     type: 'm.room.power_levels',
-    sender: '@user-id',
+    sender: '@user-id:example.com',
     state_key: '',
     content: { users_default: 50 },
     origin_server_ts: 0,
     event_id: '$event-id',
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
+  });
+  widgetApi.mockSendStateEvent({
+    type: 'm.room.create',
+    sender: '@user-id:example.com',
+    state_key: '',
+    content: { room_version: '11' },
+    origin_server_ts: 0,
+    event_id: '$create-event-id',
+    room_id: '!room-id:example.com',
   });
 
   widgetApi.mockSendRoomEvent(mockRoomMessageEvent());
@@ -75,29 +86,34 @@ describe('<RelationsPage />', () => {
       screen.findByRole('heading', { name: 'Event Relations' }),
     ).resolves.toBeInTheDocument();
 
-    expect(
-      screen.getByRole('textbox', { name: 'Send a message' }),
-    ).toBeInTheDocument();
+    // Wait for the component to calculate permissions
+    await waitFor(() => {
+      expect(
+        screen.getByRole('textbox', { name: 'Send a message' }),
+      ).toBeInTheDocument();
+    });
     expect(screen.getByRole('button', { name: 'Send' })).toBeInTheDocument();
 
     const list = screen.getByRole('list', { name: 'Messages' });
     const listitem = await within(list).findByRole('listitem', {
-      name: 'My message @user-id',
+      name: 'My message @user-id:example.com',
     });
 
     expect(within(listitem).getByText('My message')).toBeInTheDocument();
-    expect(within(listitem).getByText('@user-id')).toBeInTheDocument();
+    expect(
+      within(listitem).getByText('@user-id:example.com'),
+    ).toBeInTheDocument();
     expect(
       within(listitem).getByRole('button', {
         name: 'Remove reaction "Snowflake"',
-        description: 'My message @user-id',
+        description: 'My message @user-id:example.com',
         pressed: true,
       }),
     ).toBeInTheDocument();
     expect(
       within(listitem).getByRole('button', {
         name: 'Add reaction "Thumbs Up"',
-        description: 'My message @user-id',
+        description: 'My message @user-id:example.com',
         pressed: false,
       }),
     ).toBeInTheDocument();
@@ -125,7 +141,7 @@ describe('<RelationsPage />', () => {
     await userEvent.type(textfield, 'Hey, how are you?{enter}');
 
     const listbox = await screen.findByRole('listitem', {
-      name: 'Hey, how are you? @user-id',
+      name: 'Hey, how are you? @user-id:example.com',
     });
 
     expect(textfield).toHaveValue('');
@@ -133,14 +149,14 @@ describe('<RelationsPage />', () => {
     expect(
       within(listbox).getByRole('button', {
         name: 'Add reaction "Snowflake"',
-        description: 'Hey, how are you? @user-id',
+        description: 'Hey, how are you? @user-id:example.com',
         pressed: false,
       }),
     ).toBeInTheDocument();
     expect(
       within(listbox).getByRole('button', {
         name: 'Add reaction "Thumbs Up"',
-        description: 'Hey, how are you? @user-id',
+        description: 'Hey, how are you? @user-id:example.com',
         pressed: false,
       }),
     ).toBeInTheDocument();
@@ -152,7 +168,7 @@ describe('<RelationsPage />', () => {
     await userEvent.click(
       await screen.findByRole('button', {
         name: 'Add reaction "Thumbs Up"',
-        description: 'My message @user-id',
+        description: 'My message @user-id:example.com',
         pressed: false,
       }),
     );
@@ -160,7 +176,7 @@ describe('<RelationsPage />', () => {
     expect(
       await screen.findByRole('button', {
         name: 'Remove reaction "Thumbs Up"',
-        description: 'My message @user-id',
+        description: 'My message @user-id:example.com',
         pressed: true,
       }),
     ).toBeInTheDocument();
@@ -172,7 +188,7 @@ describe('<RelationsPage />', () => {
     await userEvent.click(
       await screen.findByRole('button', {
         name: 'Remove reaction "Snowflake"',
-        description: 'My message @user-id',
+        description: 'My message @user-id:example.com',
         pressed: true,
       }),
     );
@@ -180,7 +196,7 @@ describe('<RelationsPage />', () => {
     expect(
       await screen.findByRole('button', {
         name: 'Add reaction "Snowflake"',
-        description: 'My message @user-id',
+        description: 'My message @user-id:example.com',
         pressed: false,
       }),
     ).toBeInTheDocument();
@@ -189,12 +205,21 @@ describe('<RelationsPage />', () => {
   it('should not be able to send a message if the permission for the state event is missing', async () => {
     widgetApi.mockSendStateEvent({
       type: 'm.room.power_levels',
-      sender: '@user-id',
+      sender: '@user-id:example.com',
       state_key: '',
       content: { users_default: 0 },
       origin_server_ts: 0,
       event_id: '$event-id',
-      room_id: '!room-id',
+      room_id: '!room-id:example.com',
+    });
+    widgetApi.mockSendStateEvent({
+      type: 'm.room.create',
+      sender: '@user-id:example.com',
+      state_key: '',
+      content: { room_version: '11' },
+      origin_server_ts: 0,
+      event_id: '$create-event-id',
+      room_id: '!room-id:example.com',
     });
 
     render(<RelationsPage />, { wrapper });
@@ -209,13 +234,13 @@ describe('<RelationsPage />', () => {
 
     const addReactionButton = await screen.findByRole('button', {
       name: 'Add reaction "Thumbs Up"',
-      description: 'My message @user-id',
+      description: 'My message @user-id:example.com',
       pressed: false,
     });
 
     const removeReactionButton = await screen.findByRole('button', {
       name: 'Remove reaction "Snowflake"',
-      description: 'My message @user-id',
+      description: 'My message @user-id:example.com',
       pressed: true,
     });
 
@@ -225,16 +250,27 @@ describe('<RelationsPage />', () => {
     act(() => {
       widgetApi.mockSendStateEvent({
         type: 'm.room.power_levels',
-        sender: '@user-id',
+        sender: '@user-id:example.com',
         state_key: '',
         content: { users_default: 0, events_default: 50 },
         origin_server_ts: 0,
         event_id: '$event-id',
-        room_id: '!room-id',
+        room_id: '!room-id:example.com',
+      });
+      widgetApi.mockSendStateEvent({
+        type: 'm.room.create',
+        sender: '@user-id:example.com',
+        state_key: '',
+        content: { room_version: '11' },
+        origin_server_ts: 0,
+        event_id: '$create-event-id',
+        room_id: '!room-id:example.com',
       });
     });
 
-    expect(addReactionButton).toBeDisabled();
+    await waitFor(() => {
+      expect(addReactionButton).toBeDisabled();
+    });
     expect(removeReactionButton).toBeDisabled();
   });
 });

@@ -44,16 +44,16 @@ events:
 // Prepopulate the power levels event in the room:
 widgetApi.mockSendStateEvent({
   type: 'm.room.power_levels',
-  sender: '@user-id',
+  sender: '@user-id:example.com',
   content: {
     users: {
-      '@my-user': 100,
+      '@my-user:example.com': 100,
     },
   },
   state_key: '',
   origin_server_ts: 0,
   event_id: '$event-id-0',
-  room_id: '!room-id',
+  room_id: '!room-id:example.com',
 });
 
 // You can receive it using any of the methods of the widget api:

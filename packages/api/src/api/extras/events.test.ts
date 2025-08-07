@@ -40,7 +40,7 @@ const roomEvent: RoomEvent = {
   event_id: '$id',
   content: {},
   origin_server_ts: 1739189593951,
-  room_id: '!room-id',
+  room_id: '!room-id:example.com',
 };
 
 const stateEvent: StateEvent = {

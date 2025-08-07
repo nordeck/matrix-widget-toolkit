@@ -172,9 +172,12 @@ export function calculateUserPowerLevel(
     return 0;
   }
   // If we have room version 12 we must check if the user is the creator of the room and needs to have the highest power level.
-  if (createRoomStateEvent?.content?.room_version === '12') {
+  if (
+    createRoomStateEvent?.content?.room_version === '12' ||
+    createRoomStateEvent?.content?.room_version === 'org.matrix.hydra.11'
+  ) {
     // If the user is the creator of the room, we return the special ROOM_VERSION_12_CREATOR value.
-    if (createRoomStateEvent.content.creator === userId) {
+    if (createRoomStateEvent.sender === userId) {
       return ROOM_VERSION_12_CREATOR;
     }
     if (createRoomStateEvent.content.additional_creators?.includes(userId)) {
@@ -240,9 +243,10 @@ export function calculateStateEventPowerLevel(
   createRoomStateEvent: StateEvent<StateEventCreateContent> | undefined,
   eventType: string,
 ): number {
-  // In room version 12 we need 150 for m.room.tombstone events and it cant be changed by the user.
+  // In room version 12 (and the beta org.matrix.hydra.11 version) we need 150 for m.room.tombstone events and it cant be changed by the user.
   if (
-    createRoomStateEvent?.content?.room_version === '12' &&
+    (createRoomStateEvent?.content?.room_version === '12' ||
+      createRoomStateEvent?.content?.room_version === 'org.matrix.hydra.11') &&
     eventType === 'm.room.tombstone'
   ) {
     return 150;

@@ -115,7 +115,7 @@ export type MockedWidgetApi = {
  *               Use `userId` to specify who uses the widget
  *               (default: '\@user-id').
  *               Use `roomId` to specify the room where the widget is installed
- *               (default: '!room-id').
+ *               (default: '!room-id:example.com').
  *               Use `widgetId` to specify the ID of the widget
  *               (default: 'widget-id').
  *
@@ -127,8 +127,8 @@ export function mockWidgetApi(opts?: {
   widgetId?: string;
 }): MockedWidgetApi {
   const {
-    userId = '@user-id',
-    roomId = '!room-id',
+    userId = '@user-id:example.com',
+    roomId = '!room-id:example.com',
     widgetId = 'widget-id',
   } = opts ?? {};
   const roomEventSubject = new Subject<RoomEvent>();

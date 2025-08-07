@@ -28,7 +28,7 @@ import { RoomNameEvent } from '../events';
 import { AllRoomsPage } from './AllRoomsPage';
 
 function mockRoomNameEvent({
-  room_id = '!room-id',
+  room_id = '!room-id:example.com',
   content = {},
 }: {
   room_id?: string;
@@ -118,19 +118,34 @@ describe('<AllRoomsPage />', () => {
 
   it('should render a list of rooms', async () => {
     widgetApi.mockSendStateEvent(
-      mockRoomNameEvent({ room_id: '!room-id-1', content: { name: 'Room 1' } }),
+      mockRoomNameEvent({
+        room_id: '!room-id-1:example.com',
+        content: { name: 'Room 1' },
+      }),
     );
     widgetApi.mockSendStateEvent(
-      mockRoomNameEvent({ room_id: '!room-id-2', content: { name: 'Room 2' } }),
+      mockRoomNameEvent({
+        room_id: '!room-id-2:example.com',
+        content: { name: 'Room 2' },
+      }),
     );
     widgetApi.mockSendStateEvent(
-      mockRoomNameEvent({ room_id: '!room-id-3', content: { name: 'Room 3' } }),
+      mockRoomNameEvent({
+        room_id: '!room-id-3:example.com',
+        content: { name: 'Room 3' },
+      }),
     );
     widgetApi.mockSendStateEvent(
-      mockRoomNameEvent({ room_id: '!room-id-4', content: { name: 'Room 4' } }),
+      mockRoomNameEvent({
+        room_id: '!room-id-4:example.com',
+        content: { name: 'Room 4' },
+      }),
     );
     widgetApi.mockSendStateEvent(
-      mockRoomNameEvent({ room_id: '!room-id-5', content: { name: 'Room 5' } }),
+      mockRoomNameEvent({
+        room_id: '!room-id-5:example.com',
+        content: { name: 'Room 5' },
+      }),
     );
 
     render(<AllRoomsPage />, { wrapper });
@@ -152,7 +167,10 @@ describe('<AllRoomsPage />', () => {
     ).resolves.toBeInTheDocument();
 
     widgetApi.mockSendStateEvent(
-      mockRoomNameEvent({ room_id: '!room-id-1', content: { name: 'Room 1' } }),
+      mockRoomNameEvent({
+        room_id: '!room-id-1:example.com',
+        content: { name: 'Room 1' },
+      }),
     );
 
     await userEvent.click(
@@ -167,7 +185,10 @@ describe('<AllRoomsPage />', () => {
 
   it('should navigate to the room', async () => {
     widgetApi.mockSendStateEvent(
-      mockRoomNameEvent({ room_id: '!room-id-1', content: { name: 'Room 1' } }),
+      mockRoomNameEvent({
+        room_id: '!room-id-1:example.com',
+        content: { name: 'Room 1' },
+      }),
     );
 
     render(<AllRoomsPage />, { wrapper });
@@ -176,7 +197,7 @@ describe('<AllRoomsPage />', () => {
     await userEvent.click(button);
 
     expect(widgetApi.navigateTo).toHaveBeenCalledWith(
-      'https://matrix.to/#/!room-id-1',
+      'https://matrix.to/#/!room-id-1%3Aexample.com',
     );
   });
 });
