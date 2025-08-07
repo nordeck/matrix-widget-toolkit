@@ -34,7 +34,7 @@ beforeEach(() => {
     content: { users_default: 50 },
     origin_server_ts: 0,
     event_id: '$event-id',
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
   });
 });
 
@@ -81,7 +81,7 @@ describe('getPowerLevels', () => {
       content: { users_default: 0 },
       origin_server_ts: 1,
       event_id: '$event-id-1',
-      room_id: '!room-id',
+      room_id: '!room-id:example.com',
     });
 
     // wait for the change
@@ -120,7 +120,7 @@ describe('updatePowerLevels', () => {
       content: { events_default: 100 },
       origin_server_ts: 1,
       event_id: '$event-id-1',
-      room_id: '!room-id',
+      room_id: '!room-id:example.com',
     });
 
     const store = createStore({ widgetApi });

@@ -178,7 +178,7 @@ export function isValidCreateEventSchema(
   }
   const result = createEventSchema.validate(event);
   if (result.error) {
-    console.warn('Invalid to device message event:', result.error.details, {
+    console.warn('Invalid room create message event:', result.error.details, {
       event,
     });
     return false;

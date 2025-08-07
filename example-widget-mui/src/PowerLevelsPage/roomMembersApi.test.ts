@@ -38,7 +38,7 @@ function mockRoomMemberEvent({
     content: { membership: 'join', ...content },
     origin_server_ts: 0,
     event_id: '$event-id',
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
   };
 }
 

@@ -32,9 +32,9 @@ beforeEach(() => {
     content: {
       id: 1,
     },
-    sender: '@user-id',
+    sender: '@user-id:example.com',
     event_id: 'event-1',
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
     origin_server_ts: 1,
   });
   widgetApi.mockSendRoomEvent({
@@ -42,7 +42,7 @@ beforeEach(() => {
     content: {
       id: 3,
     },
-    sender: '@user-id',
+    sender: '@user-id:example.com',
     event_id: 'event-3',
     room_id: '!other-room-id',
     origin_server_ts: 3,
@@ -52,9 +52,9 @@ beforeEach(() => {
     content: {
       id: 2,
     },
-    sender: '@user-id',
+    sender: '@user-id:example.com',
     event_id: 'event-2',
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
     origin_server_ts: 2,
   });
 
@@ -64,9 +64,9 @@ beforeEach(() => {
     content: {
       id: 1,
     },
-    sender: '@user-id',
+    sender: '@user-id:example.com',
     event_id: 'event-1',
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
     origin_server_ts: 1,
   });
   widgetApi.mockSendStateEvent({
@@ -75,9 +75,9 @@ beforeEach(() => {
     content: {
       id: 2,
     },
-    sender: '@user-id',
+    sender: '@user-id:example.com',
     event_id: 'event-2',
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
     origin_server_ts: 2,
   });
   widgetApi.mockSendStateEvent({
@@ -86,9 +86,9 @@ beforeEach(() => {
     content: {
       id: 3,
     },
-    sender: '@user-id',
+    sender: '@user-id:example.com',
     event_id: 'event-3',
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
     origin_server_ts: 3,
   });
   widgetApi.mockSendStateEvent({
@@ -97,7 +97,7 @@ beforeEach(() => {
     content: {
       id: 4,
     },
-    sender: '@user-id',
+    sender: '@user-id:example.com',
     event_id: 'event-4',
     room_id: '!other-room-id',
     origin_server_ts: 4,
@@ -114,8 +114,8 @@ describe('sendRoomEvent', () => {
       },
       event_id: expect.any(String),
       origin_server_ts: expect.any(Number),
-      room_id: '!room-id',
-      sender: '@user-id',
+      room_id: '!room-id:example.com',
+      sender: '@user-id:example.com',
       type: 'com.example.test3',
     };
 
@@ -136,8 +136,8 @@ describe('sendRoomEvent', () => {
       content: {},
       event_id: expect.any(String),
       origin_server_ts: expect.any(Number),
-      room_id: '!room-id',
-      sender: '@user-id',
+      room_id: '!room-id:example.com',
+      sender: '@user-id:example.com',
       type: 'm.room.redaction',
       redacts: '$event-id',
     };
@@ -157,8 +157,8 @@ describe('sendRoomEvent', () => {
       content: {},
       event_id: 'event-1',
       origin_server_ts: expect.any(Number),
-      room_id: '!room-id',
-      sender: '@user-id',
+      room_id: '!room-id:example.com',
+      sender: '@user-id:example.com',
       type: 'com.example.test1',
     };
 
@@ -228,9 +228,9 @@ describe('receiveRoomEvents', () => {
         id: 1,
         msgtype: 'only',
       },
-      sender: '@user-id',
+      sender: '@user-id:example.com',
       event_id: 'event-2',
-      room_id: '!room-id',
+      room_id: '!room-id:example.com',
       origin_server_ts: 1,
     });
 
@@ -308,9 +308,9 @@ describe('observeRoomEvents', () => {
       content: {
         id: 4,
       },
-      sender: '@user-id',
+      sender: '@user-id:example.com',
       event_id: 'event-4',
-      room_id: '!room-id',
+      room_id: '!room-id:example.com',
       origin_server_ts: 4,
     });
 
@@ -327,9 +327,9 @@ describe('observeRoomEvents', () => {
         id: 1,
         msgtype: 'only',
       },
-      sender: '@user-id',
+      sender: '@user-id:example.com',
       event_id: 'event-2',
-      room_id: '!room-id',
+      room_id: '!room-id:example.com',
       origin_server_ts: 1,
     });
 
@@ -362,8 +362,8 @@ describe('sendStateEvent', () => {
       },
       event_id: expect.any(String),
       origin_server_ts: expect.any(Number),
-      room_id: '!room-id',
-      sender: '@user-id',
+      room_id: '!room-id:example.com',
+      sender: '@user-id:example.com',
       state_key: '',
       type: 'com.example.test6',
     };
@@ -383,8 +383,8 @@ describe('sendStateEvent', () => {
       },
       event_id: expect.any(String),
       origin_server_ts: expect.any(Number),
-      room_id: '!room-id',
-      sender: '@user-id',
+      room_id: '!room-id:example.com',
+      sender: '@user-id:example.com',
       state_key: '',
       type: 'com.example.test6',
     };
@@ -506,9 +506,9 @@ describe('receiveStateEvents', () => {
       content: {
         id: 5,
       },
-      sender: '@user-id',
+      sender: '@user-id:example.com',
       event_id: 'event-5',
-      room_id: '!room-id',
+      room_id: '!room-id:example.com',
       origin_server_ts: 5,
     });
 
@@ -588,9 +588,9 @@ describe('observeStateEvents', () => {
       content: {
         id: 5,
       },
-      sender: '@user-id',
+      sender: '@user-id:example.com',
       event_id: 'event-5',
-      room_id: '!room-id',
+      room_id: '!room-id:example.com',
       origin_server_ts: 5,
     });
 
@@ -615,9 +615,9 @@ describe('observeStateEvents', () => {
       content: {
         id: 5,
       },
-      sender: '@user-id',
+      sender: '@user-id:example.com',
       event_id: 'event-5',
-      room_id: '!room-id',
+      room_id: '!room-id:example.com',
       origin_server_ts: 5,
     });
 
@@ -735,9 +735,9 @@ describe('readEventRelations', () => {
       content: {
         id: 1,
       },
-      sender: '@user-id',
+      sender: '@user-id:example.com',
       event_id: 'event-1',
-      room_id: '!room-id',
+      room_id: '!room-id:example.com',
       origin_server_ts: 1,
     });
     widgetApi.mockSendRoomEvent({
@@ -749,9 +749,9 @@ describe('readEventRelations', () => {
           event_id: 'event-1',
         },
       },
-      sender: '@user-id',
+      sender: '@user-id:example.com',
       event_id: 'event-2',
-      room_id: '!room-id',
+      room_id: '!room-id:example.com',
       origin_server_ts: 3,
     });
     widgetApi.mockSendRoomEvent({
@@ -763,9 +763,9 @@ describe('readEventRelations', () => {
           event_id: 'event-1',
         },
       },
-      sender: '@user-id',
+      sender: '@user-id:example.com',
       event_id: 'event-3',
-      room_id: '!room-id',
+      room_id: '!room-id:example.com',
       origin_server_ts: 2,
     });
     widgetApi.mockSendRoomEvent({
@@ -777,7 +777,7 @@ describe('readEventRelations', () => {
           event_id: 'event-1',
         },
       },
-      sender: '@user-id',
+      sender: '@user-id:example.com',
       event_id: 'event-4',
       room_id: '!other-room-id',
       origin_server_ts: 2,
@@ -787,7 +787,7 @@ describe('readEventRelations', () => {
       content: {
         id: 5,
       },
-      sender: '@user-id',
+      sender: '@user-id:example.com',
       event_id: 'event-1',
       room_id: '!other-room-id',
       origin_server_ts: 1,
@@ -870,7 +870,7 @@ describe('sendToDeviceMessage', () => {
     );
 
     await widgetApi.sendToDeviceMessage('com.example.message', true, {
-      '@user-id': {
+      '@user-id:example.com': {
         '*': { my: 'content' },
       },
     });
@@ -878,7 +878,7 @@ describe('sendToDeviceMessage', () => {
     await expect(messagePromise).resolves.toEqual({
       content: { my: 'content' },
       encrypted: true,
-      sender: '@user-id',
+      sender: '@user-id:example.com',
       type: 'com.example.message',
     });
   });
@@ -889,7 +889,7 @@ describe('sendToDeviceMessage', () => {
     );
 
     await widgetApi.sendToDeviceMessage('com.example.message', false, {
-      '@user-id': {
+      '@user-id:example.com': {
         'device-id': { my: 'content' },
       },
     });
@@ -899,7 +899,7 @@ describe('sendToDeviceMessage', () => {
         my: 'content',
       },
       encrypted: false,
-      sender: '@user-id',
+      sender: '@user-id:example.com',
       type: 'com.example.message',
     });
   });
@@ -931,7 +931,7 @@ describe('sendToDeviceMessage', () => {
       '@other-user-id': {
         '*': { other: 'content' },
       },
-      '@user-id': {
+      '@user-id:example.com': {
         '*': { my: 'content' },
       },
     });
@@ -939,7 +939,7 @@ describe('sendToDeviceMessage', () => {
     await expect(messagesPromise).resolves.toEqual([
       {
         content: { my: 'content' },
-        sender: '@user-id',
+        sender: '@user-id:example.com',
         encrypted: false,
         type: 'com.example.message',
       },
@@ -956,21 +956,21 @@ describe('observeToDeviceMessages', () => {
     widgetApi.mockSendToDeviceMessage({
       content: { other: 'content' },
       encrypted: false,
-      sender: '@user-id',
+      sender: '@user-id:example.com',
       type: 'com.example.other',
     });
 
     widgetApi.mockSendToDeviceMessage({
       content: { my: 'content' },
       encrypted: false,
-      sender: '@user-id',
+      sender: '@user-id:example.com',
       type: 'com.example.message',
     });
 
     await expect(messagePromise).resolves.toEqual({
       content: { my: 'content' },
       encrypted: false,
-      sender: '@user-id',
+      sender: '@user-id:example.com',
       type: 'com.example.message',
     });
   });

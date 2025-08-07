@@ -114,6 +114,10 @@ export const RelationsPage = (): ReactElement => {
               EventDirection.Send,
               ROOM_EVENT_REDACTION,
             ),
+            WidgetEventCapability.forStateEvent(
+              EventDirection.Receive,
+              STATE_EVENT_CREATE,
+            ),
           ]}
         >
           {/* 

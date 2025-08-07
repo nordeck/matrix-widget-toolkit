@@ -20,6 +20,7 @@ import {
   hasRoomEventPower,
   hasStateEventPower,
   PowerLevelsActions,
+  STATE_EVENT_CREATE,
   STATE_EVENT_POWER_LEVELS,
   STATE_EVENT_ROOM_MEMBER,
 } from '@matrix-widget-toolkit/api';
@@ -90,6 +91,10 @@ export const PowerLevelsPage = (): ReactElement => {
           WidgetEventCapability.forStateEvent(
             EventDirection.Receive,
             STATE_EVENT_ROOM_MEMBER,
+          ),
+          WidgetEventCapability.forStateEvent(
+            EventDirection.Receive,
+            STATE_EVENT_CREATE,
           ),
         ]}
       >
