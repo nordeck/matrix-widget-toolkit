@@ -519,4 +519,53 @@ describe('Room Version 12 Create Event', () => {
     ).toEqual(true);
   });
 });
-// TODO: Change creator differences in room version 1-10 vs 11+
+
+describe('Creator is detected correctly in room versions 1-10 vs 11+', () => {
+  it('should return true for creator in room version 11+', () => {
+    const plEvent = undefined;
+    for (const version of ['11', '12']) {
+      expect(
+        hasStateEventPower(
+          plEvent,
+          {
+            content: {
+              room_version: version,
+            },
+            event_id: 'event-id',
+            origin_server_ts: 0,
+            room_id: '!room-id:example.com',
+            sender: '@user-id:example.com',
+            state_key: '',
+            type: 'm.room.create',
+          },
+          '@user-id:example.com',
+          'm.room.create',
+        ),
+      ).toEqual(true);
+    }
+  });
+  it('should return true for creator in room version 1-10', () => {
+    const plEvent = undefined;
+    for (const version of ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']) {
+      expect(
+        hasStateEventPower(
+          plEvent,
+          {
+            content: {
+              room_version: version,
+              creator: '@user-id:example.com',
+            },
+            event_id: 'event-id',
+            origin_server_ts: 0,
+            room_id: '!room-id:example.com',
+            sender: '@user-id:example.com',
+            state_key: '',
+            type: 'm.room.create',
+          },
+          '@user-id:example.com',
+          'm.room.create',
+        ),
+      ).toEqual(true);
+    }
+  });
+});
