@@ -20,6 +20,7 @@ import {
   hasRoomEventPower,
   hasStateEventPower,
   PowerLevelsActions,
+  STATE_EVENT_CREATE,
   STATE_EVENT_POWER_LEVELS,
   STATE_EVENT_ROOM_MEMBER,
 } from '@matrix-widget-toolkit/api';
@@ -48,6 +49,7 @@ import { STATE_EVENT_ROOM_NAME } from '../events';
 import { NavigationBar } from '../NavigationPage';
 import { StoreProvider } from '../store';
 import {
+  useGetCreateEventQuery,
   useGetPowerLevelsQuery,
   useUpdatePowerLevelsMutation,
 } from './powerLevelsApi';
@@ -89,6 +91,10 @@ export const PowerLevelsPage = (): ReactElement => {
           WidgetEventCapability.forStateEvent(
             EventDirection.Receive,
             STATE_EVENT_ROOM_MEMBER,
+          ),
+          WidgetEventCapability.forStateEvent(
+            EventDirection.Receive,
+            STATE_EVENT_CREATE,
           ),
         ]}
       >
@@ -142,6 +148,7 @@ export const PowerLevelsView = (): ReactElement => {
 
   const { data: powerLevelsEvent } = useGetPowerLevelsQuery();
   const { data: roomMembersData } = useGetRoomMembersQuery();
+  const { data: createEvent } = useGetCreateEventQuery();
 
   const [selectedMember, setSelectedMember] = useState<string | undefined>();
 
@@ -177,10 +184,15 @@ export const PowerLevelsView = (): ReactElement => {
     ? selectAllRoomMembers(roomMembersData)
     : [];
 
+  if (selectedMember === undefined) {
+    return <Box>Loading...</Box>;
+  }
+
   // check if we (=the user of the widget) has the power to promote or
   // demote others
   const canPromoteOrDemote = hasStateEventPower(
     powerLevelsEvent?.content,
+    createEvent?.event,
     widgetApi.widgetParameters.userId,
     STATE_EVENT_POWER_LEVELS,
   );
@@ -188,6 +200,7 @@ export const PowerLevelsView = (): ReactElement => {
   // we assume that users that can change the name can be promoted or demoted
   const userIsModerator = hasStateEventPower(
     powerLevelsEvent?.content,
+    createEvent?.event,
     selectedMember,
     STATE_EVENT_ROOM_NAME,
   );
@@ -231,6 +244,7 @@ export const PowerLevelsView = (): ReactElement => {
             title={type}
             permitted={hasStateEventPower(
               powerLevelsEvent?.content,
+              createEvent?.event,
               selectedMember,
               type,
             )}
@@ -252,6 +266,7 @@ export const PowerLevelsView = (): ReactElement => {
             title={type}
             permitted={hasRoomEventPower(
               powerLevelsEvent?.content,
+              createEvent?.event,
               selectedMember,
               type,
             )}
@@ -273,6 +288,7 @@ export const PowerLevelsView = (): ReactElement => {
             title={action}
             permitted={hasActionPower(
               powerLevelsEvent?.content,
+              createEvent?.event,
               selectedMember,
               action,
             )}

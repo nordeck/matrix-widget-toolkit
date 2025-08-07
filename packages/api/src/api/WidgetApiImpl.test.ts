@@ -2044,7 +2044,7 @@ describe('WidgetApiImpl', () => {
 
       await expect(
         widgetApi.readEventRelations('$event-id', {
-          roomId: '!room-id',
+          roomId: '!room-id:example.com',
           limit: 5,
           from: 'from-token',
           relationType: 'm.reference',
@@ -2057,7 +2057,7 @@ describe('WidgetApiImpl', () => {
       });
       expect(matrixWidgetApi.readEventRelations).toHaveBeenCalledWith(
         '$event-id',
-        '!room-id',
+        '!room-id:example.com',
         'm.reference',
         'm.room.message',
         5,

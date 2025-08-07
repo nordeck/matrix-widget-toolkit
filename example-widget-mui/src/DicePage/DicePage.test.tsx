@@ -107,7 +107,7 @@ describe('<DicePage />', () => {
       type: 'net.nordeck.throw_dice',
       event_id: '$0',
       origin_server_ts: 0,
-      room_id: '!room-id',
+      room_id: '!room-id:example.com',
       sender: '@user-id',
       content: { pips: 5 },
     });
@@ -115,7 +115,7 @@ describe('<DicePage />', () => {
       type: 'net.nordeck.throw_dice',
       event_id: '$1',
       origin_server_ts: 1,
-      room_id: '!room-id',
+      room_id: '!room-id:example.com',
       sender: '@user-id',
       content: { pips: 3 },
     });
