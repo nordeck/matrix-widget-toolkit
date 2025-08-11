@@ -19,10 +19,12 @@ import { RoomEvent, StateEvent, ToDeviceMessageEvent } from '../types';
 import {
   isRoomEvent,
   isStateEvent,
+  isValidCreateEventSchema,
   isValidPowerLevelStateEvent,
   isValidRoomEvent,
   isValidStateEvent,
   isValidToDeviceMessageEvent,
+  StateEventCreateContent,
 } from './events';
 
 // Mock console.warn for tests
@@ -313,5 +315,119 @@ describe('isValidPowerLevelStateEvent', () => {
     };
 
     expect(isValidPowerLevelStateEvent(event)).toEqual(false);
+  });
+});
+
+describe('isValidCreateEventSchema', () => {
+  it('should accept valid create event', () => {
+    const event: StateEvent<StateEventCreateContent> = {
+      content: {
+        room_version: '12',
+      },
+      event_id: 'event-id',
+      origin_server_ts: 0,
+      room_id: '!room-id:example.com',
+      sender: '@user-id:example.com',
+      state_key: '',
+      type: 'm.room.create',
+    };
+
+    expect(isValidCreateEventSchema(event)).toEqual(true);
+  });
+
+  it('should accept additional properties', () => {
+    const event: StateEvent<StateEventCreateContent> = {
+      content: {
+        room_version: '12',
+        // @ts-expect-error - additionalProperty is not part of the schema but this is what we want to test
+        additionalProperty: true,
+      },
+      event_id: 'event-id',
+      origin_server_ts: 0,
+      room_id: '!room-id:example.com',
+      sender: '@user-id:example.com',
+      state_key: '',
+      type: 'm.room.create',
+    };
+
+    expect(isValidCreateEventSchema(event)).toEqual(true);
+  });
+
+  it('should reject wrong event type', () => {
+    const event: StateEvent<StateEventCreateContent> = {
+      content: {
+        room_version: '12',
+      },
+      event_id: 'event-id',
+      origin_server_ts: 0,
+      room_id: '!room-id:example.com',
+      sender: '@user-id:example.com',
+      state_key: '',
+      type: 'another-type',
+    };
+
+    expect(isValidCreateEventSchema(event)).toEqual(false);
+  });
+
+  it('should accept room id without a server name', () => {
+    const event: StateEvent<StateEventCreateContent> = {
+      content: {
+        room_version: '12',
+      },
+      event_id: 'event-id',
+      origin_server_ts: 0,
+      room_id: '!room-id',
+      sender: '@user-id:example.com',
+      state_key: '',
+      type: 'm.room.create',
+    };
+
+    expect(isValidCreateEventSchema(event)).toEqual(true);
+  });
+
+  it('should reject wrong event structure (missing content)', () => {
+    // @ts-expect-error - we are in a test case
+    const event: StateEvent<StateEventCreateContent> = {
+      event_id: 'event-id',
+      origin_server_ts: 0,
+      room_id: '!room-id:example.com',
+      sender: '@user-id:example.com',
+      state_key: '',
+      type: 'm.room.create',
+    };
+
+    expect(isValidCreateEventSchema(event)).toEqual(false);
+  });
+
+  it('should reject invalid sender', () => {
+    const event: StateEvent<StateEventCreateContent> = {
+      content: {
+        room_version: '12',
+      },
+      event_id: 'event-id',
+      origin_server_ts: 0,
+      room_id: '!room-id:example.com',
+      sender: '@user-id',
+      state_key: '',
+      type: 'm.room.create',
+    };
+
+    expect(isValidCreateEventSchema(event)).toEqual(false);
+  });
+
+  it('should reject invalid room id', () => {
+    const event: StateEvent<StateEventCreateContent> = {
+      content: {
+        room_version: '12',
+      },
+      event_id: 'event-id',
+      origin_server_ts: 0,
+      room_id: '!room-id',
+      sender: '@user-id',
+      state_key: '',
+      type: 'm.room.create',
+    };
+
+    expect(isValidCreateEventSchema(event)).toEqual(false);
   });
 });
