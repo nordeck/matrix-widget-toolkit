@@ -31,6 +31,9 @@ export function calculateUserPowerLevel(powerLevelStateEvent: PowerLevelsStateEv
 export function compareOriginServerTS<T>(a: RoomEvent<T>, b: RoomEvent<T>): number;
 
 // @public
+export function compareUserPowerLevelToNormalPowerLevel(userPowerLevel: UserPowerLevelType, normalPowerLevel: number): boolean;
+
+// @public
 export type EventWithRelatesTo<RelationType extends string> = RoomEvent<{
     'm.relates_to': RelatesTo<RelationType>;
 }>;

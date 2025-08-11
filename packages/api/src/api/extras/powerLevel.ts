@@ -33,7 +33,13 @@ export const ROOM_VERSION_12_CREATOR = 'ROOM_VERSION_12_CREATOR';
 
 export type UserPowerLevelType = number | typeof ROOM_VERSION_12_CREATOR;
 
-function compareUserPowerLevelToNormalPowerLevel(
+/**
+ * Compare a user's power level to a normal power level.
+ * @param userPowerLevel - The user's power level
+ * @param normalPowerLevel - The normal power level
+ * @returns True if the user's power level is greater than or equal to the normal power level, false otherwise
+ */
+export function compareUserPowerLevelToNormalPowerLevel(
   userPowerLevel: UserPowerLevelType,
   normalPowerLevel: number,
 ): boolean {
