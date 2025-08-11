@@ -24,7 +24,6 @@ export {
   isValidPowerLevelStateEvent,
   STATE_EVENT_POWER_LEVELS,
 } from './events';
-export type { PowerLevelsActions, PowerLevelsStateEvent } from './events';
 
 /**
  * Room version 12 requires us to have something larger than Max integer for room creators.
@@ -32,10 +31,10 @@ export type { PowerLevelsActions, PowerLevelsStateEvent } from './events';
  */
 export const ROOM_VERSION_12_CREATOR = 'ROOM_VERSION_12_CREATOR';
 
-export type USER_POWERLEVEL_TYPE = number | typeof ROOM_VERSION_12_CREATOR;
+export type UserPowerLevelType = number | typeof ROOM_VERSION_12_CREATOR;
 
-export function compareUserPowerLevelToNormalPowerLevel(
-  userPowerLevel: USER_POWERLEVEL_TYPE,
+function compareUserPowerLevelToNormalPowerLevel(
+  userPowerLevel: UserPowerLevelType,
   normalPowerLevel: number,
 ): boolean {
   if (userPowerLevel === ROOM_VERSION_12_CREATOR) {
@@ -127,7 +126,7 @@ export function hasStateEventPower(
  *   * redact: Redact a message from another user
  *
  * @param powerLevelStateEvent - the content of the `m.room.power_levels` event
- * @param roomStateEvent - the `m.room.power_levels` event for the room
+ * @param createRoomStateEvent - the `m.room.create` event for the room
  * @param userId - the id of the user
  * @param action - the action
  * @returns if true, the user has the power
@@ -165,7 +164,7 @@ export function calculateUserPowerLevel(
   powerLevelStateEvent: PowerLevelsStateEvent | undefined,
   createRoomStateEvent: StateEvent<StateEventCreateContent> | undefined,
   userId: string,
-): USER_POWERLEVEL_TYPE {
+): UserPowerLevelType {
   // This is practically not allowed and therefor not covered by the spec. However a js consumer could still pass an undefined userId so we handle it gracefully.
   if (!userId) {
     // If no user ID is provided, we return the default user power level or 0 if not set.
@@ -235,6 +234,7 @@ export function calculateRoomEventPowerLevel(
  * Calculate the power level that a user needs send a specific state event.
  *
  * @param powerLevelStateEvent - the content of the `m.room.power_levels` event
+ * @param createRoomStateEvent - the `m.room.create` event
  * @param eventType - the type of state event
  * @returns the power level that is needed
  */

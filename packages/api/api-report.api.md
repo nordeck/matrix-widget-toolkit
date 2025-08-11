@@ -25,7 +25,7 @@ import { WidgetApi as WidgetApi_2 } from 'matrix-widget-api';
 import { WidgetEventCapability } from 'matrix-widget-api';
 
 // @public
-export function calculateUserPowerLevel(powerLevelStateEvent: PowerLevelsStateEvent | undefined, createRoomStateEvent: StateEvent<StateEventCreateContent> | undefined, userId: string): USER_POWERLEVEL_TYPE;
+export function calculateUserPowerLevel(powerLevelStateEvent: PowerLevelsStateEvent | undefined, createRoomStateEvent: StateEvent<StateEventCreateContent> | undefined, userId: string): UserPowerLevelType;
 
 // @public
 export function compareOriginServerTS<T>(a: RoomEvent<T>, b: RoomEvent<T>): number;
@@ -232,7 +232,7 @@ export type TurnServer = {
 };
 
 // @public (undocumented)
-export type USER_POWERLEVEL_TYPE = number | typeof ROOM_VERSION_12_CREATOR;
+export type UserPowerLevelType = number | typeof ROOM_VERSION_12_CREATOR;
 
 // @public
 export const WIDGET_CAPABILITY_NAVIGATE = "org.matrix.msc2931.navigate";

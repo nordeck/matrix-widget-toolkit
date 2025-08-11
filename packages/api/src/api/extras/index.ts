@@ -25,7 +25,11 @@ export {
   isValidStateEvent as isValidStateEVent,
   isValidToDeviceMessageEvent,
 } from './events';
-export type { StateEventCreateContent } from './events';
+export type {
+  PowerLevelsActions,
+  PowerLevelsStateEvent,
+  StateEventCreateContent,
+} from './events';
 export { WIDGET_CAPABILITY_NAVIGATE, navigateToRoom } from './navigateTo';
 export type { NavigateToRoomOptions } from './navigateTo';
 export { compareOriginServerTS } from './originServerTs';
@@ -37,12 +41,7 @@ export {
   hasStateEventPower,
   isValidPowerLevelStateEvent,
 } from './powerLevel';
-export type {
-  PowerLevelsActions,
-  PowerLevelsStateEvent,
-  ROOM_VERSION_12_CREATOR,
-  USER_POWERLEVEL_TYPE,
-} from './powerLevel';
+export type { ROOM_VERSION_12_CREATOR, UserPowerLevelType } from './powerLevel';
 export {
   ROOM_EVENT_REDACTION,
   isValidRedactionEvent,

@@ -19,6 +19,7 @@ import { RoomEvent, StateEvent, ToDeviceMessageEvent } from '../types';
 import {
   isRoomEvent,
   isStateEvent,
+  isValidPowerLevelStateEvent,
   isValidRoomEvent,
   isValidStateEvent,
   isValidToDeviceMessageEvent,
@@ -211,5 +212,106 @@ describe('isValidToDeviceMessageEvent', () => {
       expect.any(Array),
       { event: invalidEvent },
     );
+  });
+});
+
+describe('isValidPowerLevelStateEvent', () => {
+  it('should permit valid event', () => {
+    const event: StateEvent = {
+      content: {
+        events: {
+          'event-name': 50,
+        },
+        users_default: 25,
+      },
+      event_id: 'event-id',
+      origin_server_ts: 0,
+      room_id: '!room-id:example.com',
+      sender: '@user-id:example.com',
+      state_key: '',
+      type: 'm.room.power_levels',
+    };
+
+    expect(isValidPowerLevelStateEvent(event)).toEqual(true);
+  });
+
+  it('should permit additional properties', () => {
+    const event: StateEvent = {
+      content: {
+        additionalProperty: true,
+      },
+      event_id: 'event-id',
+      origin_server_ts: 0,
+      room_id: '!room-id:example.com',
+      sender: '@user-id:example.com',
+      state_key: '',
+      type: 'm.room.power_levels',
+    };
+
+    expect(isValidPowerLevelStateEvent(event)).toEqual(true);
+  });
+
+  it('should deny wrong event type', () => {
+    const event: StateEvent = {
+      content: {},
+      event_id: 'event-id',
+      origin_server_ts: 0,
+      room_id: '!room-id:example.com',
+      sender: '@user-id:example.com',
+      state_key: '',
+      type: 'another-type',
+    };
+
+    expect(isValidPowerLevelStateEvent(event)).toEqual(false);
+  });
+
+  it('should deny wrong event structure (wrong type for events_default)', () => {
+    const event: StateEvent = {
+      content: {
+        events_default: 'test',
+      },
+      event_id: 'event-id',
+      origin_server_ts: 0,
+      room_id: '!room-id:example.com',
+      sender: '@user-id:example.com',
+      state_key: '',
+      type: 'm.room.power_levels',
+    };
+
+    expect(isValidPowerLevelStateEvent(event)).toEqual(false);
+  });
+
+  it('should deny wrong event structure (null value for events)', () => {
+    const event: StateEvent = {
+      content: {
+        events: null,
+      },
+      event_id: 'event-id',
+      origin_server_ts: 0,
+      room_id: '!room-id:example.com',
+      sender: '@user-id:example.com',
+      state_key: '',
+      type: 'm.room.power_levels',
+    };
+
+    expect(isValidPowerLevelStateEvent(event)).toEqual(false);
+  });
+
+  it('should deny wrong event structure (wrong type for events key-value pairs)', () => {
+    const event: StateEvent = {
+      content: {
+        events: {
+          'event-type': false,
+        },
+      },
+      event_id: 'event-id',
+      origin_server_ts: 0,
+      room_id: '!room-id:example.com',
+      sender: '@user-id:example.com',
+      state_key: '',
+      type: 'm.room.power_levels',
+    };
+
+    expect(isValidPowerLevelStateEvent(event)).toEqual(false);
   });
 });
