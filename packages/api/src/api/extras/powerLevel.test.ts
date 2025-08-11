@@ -25,6 +25,7 @@ import {
   hasActionPower,
   hasRoomEventPower,
   hasStateEventPower,
+  ROOM_VERSION_12_CREATOR,
 } from './powerLevel';
 
 const room_version_11_create_event: StateEvent<StateEventCreateContent> = {
@@ -199,6 +200,29 @@ describe('calculateUserLevel', () => {
     expect(
       calculateUserPowerLevel({}, room_version_11_create_event, 'my-user-id'),
     ).toEqual(0);
+  });
+
+  it('should return ROOM_VERSION_12_CREATOR if user is room creator in a room version 12 room', () => {
+    expect(
+      calculateUserPowerLevel(
+        {
+          users: { '@another-user-id:example.com': 42 },
+        },
+        room_version_12_create_event,
+        '@user-id:example.com',
+      ),
+    ).toEqual(ROOM_VERSION_12_CREATOR);
+  });
+  it('should return ROOM_VERSION_12_CREATOR if user is additional creator in a room version 12 room', () => {
+    expect(
+      calculateUserPowerLevel(
+        {
+          users: { '@another-user-id:example.com': 42 },
+        },
+        room_version_12_create_event_with_additional_creators,
+        '@other-creator:example.com',
+      ),
+    ).toEqual(ROOM_VERSION_12_CREATOR);
   });
 });
 
