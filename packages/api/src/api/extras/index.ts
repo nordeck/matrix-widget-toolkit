@@ -34,14 +34,16 @@ export { WIDGET_CAPABILITY_NAVIGATE, navigateToRoom } from './navigateTo';
 export type { NavigateToRoomOptions } from './navigateTo';
 export { compareOriginServerTS } from './originServerTs';
 export {
+  ROOM_VERSION_12_CREATOR,
   STATE_EVENT_POWER_LEVELS,
   calculateUserPowerLevel,
+  compareUserPowerLevelToNormalPowerLevel,
   hasActionPower,
   hasRoomEventPower,
   hasStateEventPower,
   isValidPowerLevelStateEvent,
 } from './powerLevel';
-export type { ROOM_VERSION_12_CREATOR, UserPowerLevelType } from './powerLevel';
+export type { UserPowerLevelType } from './powerLevel';
 export {
   ROOM_EVENT_REDACTION,
   isValidRedactionEvent,
