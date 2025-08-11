@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/api`
 
+## 5.0.1
+
+### Patch Changes
+
+- 10a2ee5: Expose `ROOM_VERSION_12_CREATOR` and `compareUserPowerLevelToNormalPowerLevel` on the API surface
+
 ## 5.0.0
 
 ### Major Changes
