@@ -155,6 +155,10 @@ export function hasActionPower(
 /**
  * Calculate the power level of the user based on a `m.room.power_levels` event.
  *
+ * Note that we return the @see UserPowerLevelType type instead of a number as Room Version 12
+ * gives a Room creator (and additionalCreators) always the highest power level regardless
+ * of the highest next Powerlevel number.
+ *
  * @param powerLevelStateEvent - the content of the `m.room.power_levels` event.
  * @param createRoomStateEvent - the `m.room.create` event for the room.
  * @param userId - the ID of the user.
