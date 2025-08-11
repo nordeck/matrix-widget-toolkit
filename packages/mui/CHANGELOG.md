@@ -1,5 +1,19 @@
 # `@matrix-widget-toolkit/mui`
 
+## 2.2.0
+
+### Minor Changes
+
+- ce67d9c: Reduce strictness on room_ids to comply with changes in room version 12
+
+### Patch Changes
+
+- c10df6a: Fix typo in mobile-client instructions
+- Updated dependencies [56a2fa1]
+- Updated dependencies [ce67d9c]
+  - @matrix-widget-toolkit/api@5.0.0
+  - @matrix-widget-toolkit/react@2.1.0
+
 ## 2.1.3
 
 ### Patch Changes
