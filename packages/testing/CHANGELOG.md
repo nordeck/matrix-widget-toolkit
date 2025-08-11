@@ -1,5 +1,24 @@
 # `@matrix-widget-toolkit/testing`
 
+## 4.0.0
+
+### Major Changes
+
+- 56a2fa1: Rework powerlevel calculations to comply with spec in all room versions.
+
+  Note this now requires the create room event to be passed to the power level functions.
+  Additionally, the mock widget api now has changed user id and room id defaults to comply with matrix spec.
+
+### Minor Changes
+
+- ce67d9c: Reduce strictness on room_ids to comply with changes in room version 12
+
+### Patch Changes
+
+- Updated dependencies [56a2fa1]
+- Updated dependencies [ce67d9c]
+  - @matrix-widget-toolkit/api@5.0.0
+
 ## 3.1.0
 
 ### Minor Changes
