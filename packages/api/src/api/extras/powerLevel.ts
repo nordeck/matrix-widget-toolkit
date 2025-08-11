@@ -15,154 +15,105 @@
  */
 
 import { StateEvent } from '../types';
+import type {
+  PowerLevelsActions,
+  PowerLevelsStateEvent,
+  StateEventCreateContent,
+} from './events';
+export {
+  isValidPowerLevelStateEvent,
+  STATE_EVENT_POWER_LEVELS,
+} from './events';
 
 /**
- * The name of the power levels state event.
+ * Room version 12 requires us to have something larger than Max integer for room creators.
+ * This is a workaround to allow the room creator to always have the highest power level.
  */
-export const STATE_EVENT_POWER_LEVELS = 'm.room.power_levels';
+export const ROOM_VERSION_12_CREATOR = 'ROOM_VERSION_12_CREATOR';
 
-/**
- * The types of actions.
- */
-export type PowerLevelsActions = 'invite' | 'kick' | 'ban' | 'redact';
+export type UserPowerLevelType = number | typeof ROOM_VERSION_12_CREATOR;
 
-/**
- * The content of an `m.room.power_levels` event.
- */
-export type PowerLevelsStateEvent = {
-  events?: { [key: string]: number };
-  state_default?: number;
-  events_default?: number;
-  users?: { [key: string]: number };
-  users_default?: number;
-  ban?: number;
-  invite?: number;
-  kick?: number;
-  redact?: number;
-};
-
-function isNumberOrUndefined(value: unknown): boolean {
-  return value === undefined || typeof value === 'number';
-}
-
-function isStringToNumberMapOrUndefined(value: unknown) {
-  return (
-    value === undefined ||
-    (value !== null &&
-      typeof value === 'object' &&
-      Object.entries(value).every(
-        ([k, v]) => typeof k === 'string' && typeof v === 'number',
-      ))
-  );
-}
-
-/**
- * Validates that `event` is has a valid structure for a
- * {@link PowerLevelsStateEvent}.
- * @param event - The event to validate.
- * @returns True, if the event is valid.
- */
-export function isValidPowerLevelStateEvent(
-  event: StateEvent<unknown>,
-): event is StateEvent<PowerLevelsStateEvent> {
-  if (
-    event.type !== STATE_EVENT_POWER_LEVELS ||
-    typeof event.content !== 'object'
-  ) {
+function compareUserPowerLevelToNormalPowerLevel(
+  userPowerLevel: UserPowerLevelType,
+  normalPowerLevel: number,
+): boolean {
+  if (userPowerLevel === ROOM_VERSION_12_CREATOR) {
+    // Room version 12 creator has the highest power level.
+    return true;
+  }
+  if (typeof userPowerLevel !== 'number') {
+    // If the user power level is not a number, we cannot compare it to a normal power level.
     return false;
   }
-
-  const content = event.content as Partial<PowerLevelsStateEvent>;
-
-  if (!isStringToNumberMapOrUndefined(content.events)) {
-    return false;
-  }
-
-  if (!isNumberOrUndefined(content.state_default)) {
-    return false;
-  }
-
-  if (!isNumberOrUndefined(content.events_default)) {
-    return false;
-  }
-
-  if (!isStringToNumberMapOrUndefined(content.users)) {
-    return false;
-  }
-
-  if (!isNumberOrUndefined(content.users_default)) {
-    return false;
-  }
-
-  if (!isNumberOrUndefined(content.ban)) {
-    return false;
-  }
-
-  if (!isNumberOrUndefined(content.invite)) {
-    return false;
-  }
-
-  if (!isNumberOrUndefined(content.kick)) {
-    return false;
-  }
-
-  if (!isNumberOrUndefined(content.redact)) {
-    return false;
-  }
-
-  return true;
+  // Compare the user power level to the normal power level.
+  return userPowerLevel >= normalPowerLevel;
 }
 
 /**
  * Check if a user has the power to send a specific room event.
  *
  * @param powerLevelStateEvent - the content of the `m.room.power_levels` event
+ * @param createRoomStateEvent - the `m.room.create` event for the room
  * @param userId - the id of the user
  * @param eventType - the type of room event
  * @returns if true, the user has the power
  */
 export function hasRoomEventPower(
   powerLevelStateEvent: PowerLevelsStateEvent | undefined,
+  createRoomStateEvent: StateEvent<StateEventCreateContent> | undefined,
   userId: string | undefined,
   eventType: string,
 ): boolean {
-  if (!powerLevelStateEvent) {
-    // See https://github.com/matrix-org/matrix-spec/blob/203b9756f52adfc2a3b63d664f18cdbf9f8bf126/data/event-schemas/schema/m.room.power_levels.yaml#L36-L43
-    return true;
+  if (!userId) {
+    // This is invalid but required to be checked due to widget API which may not know it
+    throw new Error(
+      'Cannot check action power without a user ID. Please provide a user ID.',
+    );
   }
-
-  const userLevel = calculateUserPowerLevel(powerLevelStateEvent, userId);
+  const userLevel = calculateUserPowerLevel(
+    powerLevelStateEvent,
+    createRoomStateEvent,
+    userId,
+  );
   const eventLevel = calculateRoomEventPowerLevel(
     powerLevelStateEvent,
     eventType,
   );
-  return userLevel >= eventLevel;
+  return compareUserPowerLevelToNormalPowerLevel(userLevel, eventLevel);
 }
 
 /**
  * Check if a user has the power to send a specific state event.
  *
  * @param powerLevelStateEvent - the content of the `m.room.power_levels` event
+ * @param createRoomStateEvent - the `m.room.create` event for the room
  * @param userId - the id of the user
  * @param eventType - the type of state event
  * @returns if true, the user has the power
  */
 export function hasStateEventPower(
   powerLevelStateEvent: PowerLevelsStateEvent | undefined,
+  createRoomStateEvent: StateEvent<StateEventCreateContent> | undefined,
   userId: string | undefined,
   eventType: string,
 ): boolean {
-  if (!powerLevelStateEvent) {
-    // See https://github.com/matrix-org/matrix-spec/blob/203b9756f52adfc2a3b63d664f18cdbf9f8bf126/data/event-schemas/schema/m.room.power_levels.yaml#L36-L43
-    return true;
+  if (!userId) {
+    // This is invalid but required to be checked due to widget API which may not know it
+    throw new Error(
+      'Cannot check action power without a user ID. Please provide a user ID.',
+    );
   }
-
-  const userLevel = calculateUserPowerLevel(powerLevelStateEvent, userId);
+  const userLevel = calculateUserPowerLevel(
+    powerLevelStateEvent,
+    createRoomStateEvent,
+    userId,
+  );
   const eventLevel = calculateStateEventPowerLevel(
     powerLevelStateEvent,
+    createRoomStateEvent,
     eventType,
   );
-  return userLevel >= eventLevel;
+  return compareUserPowerLevelToNormalPowerLevel(userLevel, eventLevel);
 }
 
 /**
@@ -175,42 +126,93 @@ export function hasStateEventPower(
  *   * redact: Redact a message from another user
  *
  * @param powerLevelStateEvent - the content of the `m.room.power_levels` event
+ * @param createRoomStateEvent - the `m.room.create` event for the room
  * @param userId - the id of the user
  * @param action - the action
  * @returns if true, the user has the power
  */
 export function hasActionPower(
   powerLevelStateEvent: PowerLevelsStateEvent | undefined,
+  createRoomStateEvent: StateEvent<StateEventCreateContent> | undefined,
   userId: string | undefined,
   action: PowerLevelsActions,
 ): boolean {
-  if (!powerLevelStateEvent) {
-    // See https://github.com/matrix-org/matrix-spec/blob/203b9756f52adfc2a3b63d664f18cdbf9f8bf126/data/event-schemas/schema/m.room.power_levels.yaml#L36-L43
-    return true;
+  if (!userId) {
+    // This is invalid but required to be checked due to widget API which may not know it
+    throw new Error(
+      'Cannot check action power without a user ID. Please provide a user ID.',
+    );
   }
-
-  const userLevel = calculateUserPowerLevel(powerLevelStateEvent, userId);
+  const userLevel = calculateUserPowerLevel(
+    powerLevelStateEvent,
+    createRoomStateEvent,
+    userId,
+  );
   const eventLevel = calculateActionPowerLevel(powerLevelStateEvent, action);
-  return userLevel >= eventLevel;
+  return compareUserPowerLevelToNormalPowerLevel(userLevel, eventLevel);
 }
 
 /**
  * Calculate the power level of the user based on a `m.room.power_levels` event.
  *
+ * Note that we return the @see UserPowerLevelType type instead of a number as Room Version 12
+ * gives a Room creator (and additionalCreators) always the highest power level regardless
+ * of the highest next Powerlevel number.
+ *
  * @param powerLevelStateEvent - the content of the `m.room.power_levels` event.
+ * @param createRoomStateEvent - the `m.room.create` event for the room.
  * @param userId - the ID of the user.
  * @returns the power level of the user.
  */
 export function calculateUserPowerLevel(
-  powerLevelStateEvent: PowerLevelsStateEvent,
-  userId?: string,
-): number {
-  // See https://github.com/matrix-org/matrix-spec/blob/203b9756f52adfc2a3b63d664f18cdbf9f8bf126/data/event-schemas/schema/m.room.power_levels.yaml#L8-L12
-  return (
-    (userId ? powerLevelStateEvent.users?.[userId] : undefined) ??
-    powerLevelStateEvent.users_default ??
-    0
-  );
+  powerLevelStateEvent: PowerLevelsStateEvent | undefined,
+  createRoomStateEvent: StateEvent<StateEventCreateContent> | undefined,
+  userId: string,
+): UserPowerLevelType {
+  // This is practically not allowed and therefor not covered by the spec. However a js consumer could still pass an undefined userId so we handle it gracefully.
+  if (!userId) {
+    // If no user ID is provided, we return the default user power level or 0 if not set.
+    return 0;
+  }
+  // If we have room version 12 we must check if the user is the creator of the room and needs to have the highest power level.
+  if (
+    createRoomStateEvent?.content?.room_version === '12' ||
+    createRoomStateEvent?.content?.room_version === 'org.matrix.hydra.11'
+  ) {
+    // If the user is the creator of the room, we return the special ROOM_VERSION_12_CREATOR value.
+    if (createRoomStateEvent.sender === userId) {
+      return ROOM_VERSION_12_CREATOR;
+    }
+    if (createRoomStateEvent.content.additional_creators?.includes(userId)) {
+      // If the user is an additional creator of the room, we return the special ROOM_VERSION_12_CREATOR value.
+      return ROOM_VERSION_12_CREATOR;
+    }
+  }
+
+  // If there is no power level state event, we assume the user has no power unless they are the room creator in which case they get PL 100.
+  if (!powerLevelStateEvent) {
+    if (
+      ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].includes(
+        createRoomStateEvent?.content?.room_version ?? '1',
+      )
+    ) {
+      // Room version 1-10 does not have a room version, so we assume the creator has power level 100.
+      return createRoomStateEvent?.content?.creator === userId ? 100 : 0;
+    } else {
+      // For room versions 11 and above, we assume the sender has power level 100.
+      return createRoomStateEvent?.sender === userId ? 100 : 0;
+    }
+  }
+  if (powerLevelStateEvent.users && userId in powerLevelStateEvent.users) {
+    // If the user is explicitly listed in the users map, return their power level.
+    return powerLevelStateEvent.users[userId];
+  } else if (powerLevelStateEvent.users_default !== undefined) {
+    // If the user is not explicitly listed, return the default user power level.
+    return powerLevelStateEvent.users_default;
+  } else {
+    // If no users or default is set, return 0.
+    return 0;
+  }
 }
 
 /**
@@ -221,13 +223,13 @@ export function calculateUserPowerLevel(
  * @returns the power level that is needed
  */
 export function calculateRoomEventPowerLevel(
-  powerLevelStateEvent: PowerLevelsStateEvent,
+  powerLevelStateEvent: PowerLevelsStateEvent | undefined,
   eventType: string,
 ): number {
   // See https://github.com/matrix-org/matrix-spec/blob/203b9756f52adfc2a3b63d664f18cdbf9f8bf126/data/event-schemas/schema/m.room.power_levels.yaml#L14-L19
   return (
-    powerLevelStateEvent.events?.[eventType] ??
-    powerLevelStateEvent.events_default ??
+    powerLevelStateEvent?.events?.[eventType] ??
+    powerLevelStateEvent?.events_default ??
     0
   );
 }
@@ -236,17 +238,28 @@ export function calculateRoomEventPowerLevel(
  * Calculate the power level that a user needs send a specific state event.
  *
  * @param powerLevelStateEvent - the content of the `m.room.power_levels` event
+ * @param createRoomStateEvent - the `m.room.create` event
  * @param eventType - the type of state event
  * @returns the power level that is needed
  */
 export function calculateStateEventPowerLevel(
-  powerLevelStateEvent: PowerLevelsStateEvent,
+  powerLevelStateEvent: PowerLevelsStateEvent | undefined,
+  createRoomStateEvent: StateEvent<StateEventCreateContent> | undefined,
   eventType: string,
 ): number {
+  // In room version 12 (and the beta org.matrix.hydra.11 version) we need 150 for m.room.tombstone events and it cant be changed by the user.
+  if (
+    (createRoomStateEvent?.content?.room_version === '12' ||
+      createRoomStateEvent?.content?.room_version === 'org.matrix.hydra.11') &&
+    eventType === 'm.room.tombstone'
+  ) {
+    return 150;
+  }
+
   // See https://github.com/matrix-org/matrix-spec/blob/203b9756f52adfc2a3b63d664f18cdbf9f8bf126/data/event-schemas/schema/m.room.power_levels.yaml#L14-L19
   return (
-    powerLevelStateEvent.events?.[eventType] ??
-    powerLevelStateEvent.state_default ??
+    powerLevelStateEvent?.events?.[eventType] ??
+    powerLevelStateEvent?.state_default ??
     50
   );
 }
@@ -265,7 +278,7 @@ export function calculateStateEventPowerLevel(
  * @returns the power level that is needed
  */
 export function calculateActionPowerLevel(
-  powerLevelStateEvent: PowerLevelsStateEvent,
+  powerLevelStateEvent: PowerLevelsStateEvent | undefined,
   action: PowerLevelsActions,
 ): number {
   // See https://github.com/matrix-org/matrix-spec/blob/203b9756f52adfc2a3b63d664f18cdbf9f8bf126/data/event-schemas/schema/m.room.power_levels.yaml#L27-L32

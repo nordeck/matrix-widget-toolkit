@@ -35,14 +35,14 @@ beforeEach(() => {
 
   widgetApi.mockSendStateEvent({
     type: 'm.room.name',
-    sender: '@user-id',
+    sender: '@user-id:example.com',
     state_key: '',
     content: {
       name: 'A Test Room',
     },
     origin_server_ts: 0,
     event_id: '$event-id',
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
   });
 
   wrapper = ({ children }: PropsWithChildren) => (

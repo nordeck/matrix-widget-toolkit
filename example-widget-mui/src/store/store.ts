@@ -22,6 +22,7 @@ import { baseApi } from './baseApi';
 type CreateStoreOpts = {
   /** The widget api instance. */
   widgetApi: WidgetApi;
+  preloadedState?: unknown;
 };
 
 /**
@@ -30,7 +31,7 @@ type CreateStoreOpts = {
  * @param param0 - {@link CreateStoreOpts}
  * @returns an initialized store instance
  */
-export function createStore({ widgetApi }: CreateStoreOpts) {
+export function createStore({ widgetApi, preloadedState }: CreateStoreOpts) {
   const roomId = widgetApi.widgetParameters.roomId;
   const userId = widgetApi.widgetParameters.userId;
 
@@ -43,6 +44,7 @@ export function createStore({ widgetApi }: CreateStoreOpts) {
       // register the extensible RTK Query API
       [baseApi.reducerPath]: baseApi.reducer,
     },
+    preloadedState,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         thunk: {

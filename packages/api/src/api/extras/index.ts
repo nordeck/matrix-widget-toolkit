@@ -17,11 +17,18 @@
 export { generateRoomTimelineCapabilities } from './capabilities';
 export { getRoomMemberDisplayName } from './displayName';
 export {
+  STATE_EVENT_CREATE,
   isRoomEvent,
   isStateEvent,
+  isValidCreateEventSchema,
   isValidRoomEvent,
   isValidStateEvent as isValidStateEVent,
   isValidToDeviceMessageEvent,
+} from './events';
+export type {
+  PowerLevelsActions,
+  PowerLevelsStateEvent,
+  StateEventCreateContent,
 } from './events';
 export { WIDGET_CAPABILITY_NAVIGATE, navigateToRoom } from './navigateTo';
 export type { NavigateToRoomOptions } from './navigateTo';
@@ -34,7 +41,7 @@ export {
   hasStateEventPower,
   isValidPowerLevelStateEvent,
 } from './powerLevel';
-export type { PowerLevelsActions, PowerLevelsStateEvent } from './powerLevel';
+export type { ROOM_VERSION_12_CREATOR, UserPowerLevelType } from './powerLevel';
 export {
   ROOM_EVENT_REDACTION,
   isValidRedactionEvent,

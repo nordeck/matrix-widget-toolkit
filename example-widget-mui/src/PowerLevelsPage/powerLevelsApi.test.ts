@@ -29,12 +29,12 @@ beforeEach(() => {
 
   widgetApi.mockSendStateEvent({
     type: 'm.room.power_levels',
-    sender: '@user-id',
+    sender: '@user-id:example.com',
     state_key: '',
     content: { users_default: 50 },
     origin_server_ts: 0,
     event_id: '$event-id',
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
   });
 });
 
@@ -76,12 +76,12 @@ describe('getPowerLevels', () => {
 
     widgetApi.mockSendStateEvent({
       type: 'm.room.power_levels',
-      sender: '@user-id',
+      sender: '@user-id:example.com',
       state_key: '',
       content: { users_default: 0 },
       origin_server_ts: 1,
       event_id: '$event-id-1',
-      room_id: '!room-id',
+      room_id: '!room-id:example.com',
     });
 
     // wait for the change
@@ -115,12 +115,12 @@ describe('updatePowerLevels', () => {
     // override the original mock so the event is not forwarded to the reader
     widgetApi.sendStateEvent.mockResolvedValue({
       type: 'm.room.power_levels',
-      sender: '@user-id',
+      sender: '@user-id:example.com',
       state_key: '',
       content: { events_default: 100 },
       origin_server_ts: 1,
       event_id: '$event-id-1',
-      room_id: '!room-id',
+      room_id: '!room-id:example.com',
     });
 
     const store = createStore({ widgetApi });

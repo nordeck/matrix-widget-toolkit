@@ -25,7 +25,7 @@ import { WidgetApi as WidgetApi_2 } from 'matrix-widget-api';
 import { WidgetEventCapability } from 'matrix-widget-api';
 
 // @public
-export function calculateUserPowerLevel(powerLevelStateEvent: PowerLevelsStateEvent, userId?: string): number;
+export function calculateUserPowerLevel(powerLevelStateEvent: PowerLevelsStateEvent | undefined, createRoomStateEvent: StateEvent<StateEventCreateContent> | undefined, userId: string): UserPowerLevelType;
 
 // @public
 export function compareOriginServerTS<T>(a: RoomEvent<T>, b: RoomEvent<T>): number;
@@ -64,13 +64,13 @@ export function getOriginalEventId<T>(event: RoomEventOrNewContent<T>): string;
 export function getRoomMemberDisplayName(member: StateEvent<RoomMemberStateEventContent>, allRoomMembers?: StateEvent<RoomMemberStateEventContent>[]): string;
 
 // @public
-export function hasActionPower(powerLevelStateEvent: PowerLevelsStateEvent | undefined, userId: string | undefined, action: PowerLevelsActions): boolean;
+export function hasActionPower(powerLevelStateEvent: PowerLevelsStateEvent | undefined, createRoomStateEvent: StateEvent<StateEventCreateContent> | undefined, userId: string | undefined, action: PowerLevelsActions): boolean;
 
 // @public
-export function hasRoomEventPower(powerLevelStateEvent: PowerLevelsStateEvent | undefined, userId: string | undefined, eventType: string): boolean;
+export function hasRoomEventPower(powerLevelStateEvent: PowerLevelsStateEvent | undefined, createRoomStateEvent: StateEvent<StateEventCreateContent> | undefined, userId: string | undefined, eventType: string): boolean;
 
 // @public
-export function hasStateEventPower(powerLevelStateEvent: PowerLevelsStateEvent | undefined, userId: string | undefined, eventType: string): boolean;
+export function hasStateEventPower(powerLevelStateEvent: PowerLevelsStateEvent | undefined, createRoomStateEvent: StateEvent<StateEventCreateContent> | undefined, userId: string | undefined, eventType: string): boolean;
 
 // @public
 export function hasWidgetParameters(widgetApi: WidgetApi): boolean;
@@ -80,6 +80,9 @@ export function isRoomEvent(event: RoomEvent | StateEvent): event is RoomEvent;
 
 // @public
 export function isStateEvent(event: RoomEvent | StateEvent): event is StateEvent;
+
+// @public
+export function isValidCreateEventSchema(event: StateEvent<unknown> | undefined): event is StateEvent<StateEventCreateContent>;
 
 // @public
 export function isValidEventWithRelatesTo(event: RoomEvent): event is EventWithRelatesTo<string>;
@@ -171,6 +174,9 @@ export function repairWidgetRegistration(widgetApi: WidgetApi, registration?: Wi
 export const ROOM_EVENT_REDACTION = "m.room.redaction";
 
 // @public
+export const ROOM_VERSION_12_CREATOR = "ROOM_VERSION_12_CREATOR";
+
+// @public
 export type RoomEvent<T = unknown> = Omit<IRoomEvent, 'content' | 'state_key' | 'unsigned'> & {
     content: T;
 };
@@ -189,6 +195,9 @@ export type RoomMemberStateEventContent = {
 export function sendStateEventWithEventResult<T>(widgetApi: WidgetApi, type: string, stateKey: string, content: T): Promise<StateEvent<T>>;
 
 // @public
+export const STATE_EVENT_CREATE = "m.room.create";
+
+// @public
 export const STATE_EVENT_POWER_LEVELS = "m.room.power_levels";
 
 // @public
@@ -198,6 +207,13 @@ export const STATE_EVENT_ROOM_MEMBER = "m.room.member";
 export type StateEvent<T = unknown> = Omit<IRoomEvent, 'content' | 'unsigned' | 'state_key'> & {
     state_key: string;
     content: T;
+};
+
+// @public (undocumented)
+export type StateEventCreateContent = {
+    room_version?: string;
+    creator?: string;
+    additional_creators?: string[];
 };
 
 // @public
@@ -214,6 +230,9 @@ export type TurnServer = {
     username: string;
     credential: string;
 };
+
+// @public (undocumented)
+export type UserPowerLevelType = number | typeof ROOM_VERSION_12_CREATOR;
 
 // @public
 export const WIDGET_CAPABILITY_NAVIGATE = "org.matrix.msc2931.navigate";

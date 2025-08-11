@@ -33,35 +33,48 @@ afterEach(() => widgetApi.stop());
 
 beforeEach(() => {
   widgetApi = mockWidgetApi();
+  // @ts-expect-error - This is a test, we can set the userId directly
+  widgetApi.widgetParameters.userId = '@user-id:example.com';
 
   widgetApi.mockSendStateEvent({
-    type: 'm.room.power_levels',
-    sender: '@user-id',
+    type: 'm.room.create',
+    sender: '@user-id:example.com',
     state_key: '',
     content: {
-      users: { '@user-id': 100 },
+      room_version: '11',
+    },
+    origin_server_ts: 0,
+    event_id: '$create-event-id',
+    room_id: '!room-id:example.com',
+  });
+  widgetApi.mockSendStateEvent({
+    type: 'm.room.power_levels',
+    sender: '@user-id:example.com',
+    state_key: '',
+    content: {
+      users: { '@user-id:example.com': 100 },
     },
     origin_server_ts: 0,
     event_id: '$event-id',
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
   });
   widgetApi.mockSendStateEvent({
     type: 'm.room.member',
-    sender: '@user-id',
-    state_key: '@another-user',
+    sender: '@user-id:example.com',
+    state_key: '@another-user:example.com',
     content: { membership: 'join' },
     origin_server_ts: 0,
     event_id: '$event-id',
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
   });
   widgetApi.mockSendStateEvent({
     type: 'm.room.member',
-    sender: '@user-id',
-    state_key: '@user-id',
+    sender: '@user-id:example.com',
+    state_key: '@user-id:example.com',
     content: { membership: 'join' },
     origin_server_ts: 0,
     event_id: '$event-id',
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
   });
 
   wrapper = ({ children }: PropsWithChildren) => (
@@ -93,7 +106,7 @@ describe('<PowerLevelsPage />', () => {
 
     await userEvent.click(
       await within(listbox).findByRole('option', {
-        name: '@another-user',
+        name: '@another-user:example.com',
         selected: true,
         checked: true,
       }),
@@ -137,7 +150,7 @@ describe('<PowerLevelsPage />', () => {
 
     await userEvent.click(
       within(listbox).getByRole('option', {
-        name: '@user-id You',
+        name: '@user-id:example.com You',
         selected: false,
       }),
     );
@@ -146,7 +159,7 @@ describe('<PowerLevelsPage />', () => {
       screen.getByRole('combobox', {
         name: 'Username',
       }),
-    ).toHaveTextContent('@user-id');
+    ).toHaveTextContent('@user-id:example.com');
   });
 
   it('should request the capabilities', async () => {
@@ -160,6 +173,10 @@ describe('<PowerLevelsPage />', () => {
       WidgetEventCapability.forStateEvent(
         EventDirection.Receive,
         'm.room.member',
+      ),
+      WidgetEventCapability.forStateEvent(
+        EventDirection.Receive,
+        'm.room.create',
       ),
     ]);
 
@@ -191,7 +208,7 @@ describe('<PowerLevelsPage />', () => {
 
     await userEvent.click(
       within(listbox).getByRole('option', {
-        name: '@user-id You',
+        name: '@user-id:example.com You',
         selected: false,
       }),
     );
@@ -208,16 +225,16 @@ describe('<PowerLevelsPage />', () => {
   it('should disable actions if the user has no power to update the power of others', async () => {
     widgetApi.mockSendStateEvent({
       type: 'm.room.power_levels',
-      sender: '@user-id',
+      sender: '@user-id:example.com',
       state_key: '',
       content: {
         users: {
-          '@user-id': 0,
+          '@user-id:example.com': 0,
         },
       },
       origin_server_ts: 0,
       event_id: '$event-id',
-      room_id: '!room-id',
+      room_id: '!room-id:example.com',
     });
 
     render(<PowerLevelsPage />, { wrapper });
@@ -261,8 +278,8 @@ describe('<PowerLevelsPage />', () => {
       'm.room.power_levels',
       {
         users: {
-          '@another-user': 50,
-          '@user-id': 100,
+          '@another-user:example.com': 50,
+          '@user-id:example.com': 100,
         },
       },
     );
@@ -271,17 +288,17 @@ describe('<PowerLevelsPage />', () => {
   it('should demote the user', async () => {
     widgetApi.mockSendStateEvent({
       type: 'm.room.power_levels',
-      sender: '@user-id',
+      sender: '@user-id:example.com',
       state_key: '',
       content: {
         users: {
-          '@another-user': 50,
-          '@user-id': 100,
+          '@another-user:example.com': 50,
+          '@user-id:example.com': 100,
         },
       },
       origin_server_ts: 0,
       event_id: '$event-id',
-      room_id: '!room-id',
+      room_id: '!room-id:example.com',
     });
 
     render(<PowerLevelsPage />, { wrapper });
@@ -306,8 +323,8 @@ describe('<PowerLevelsPage />', () => {
       'm.room.power_levels',
       {
         users: {
-          '@another-user': 0,
-          '@user-id': 100,
+          '@another-user:example.com': 0,
+          '@user-id:example.com': 100,
         },
       },
     );
