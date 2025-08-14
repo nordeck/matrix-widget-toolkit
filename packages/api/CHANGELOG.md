@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/api`
 
+## 5.0.2
+
+### Patch Changes
+
+- efe1e05: Add optional `type` to the content of `m.room.create`
+
 ## 5.0.1
 
 ### Patch Changes
