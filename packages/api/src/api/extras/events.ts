@@ -145,6 +145,7 @@ export type StateEventCreateContent = {
   room_version?: string; // Room version 1 does not have a room version, so we allow it to be undefined.
   creator?: string; // The user ID of the creator of the room.
   additional_creators?: string[]; // The user IDs of additional creators of the room.
+  type?: string; // Optional room type to denote a room’s intended function outside of traditional conversation.
 };
 
 export const createEventSchema = Joi.object<
@@ -159,6 +160,8 @@ export const createEventSchema = Joi.object<
     creator: Joi.string().optional(),
     // Room version 12 introduces the additional_creators field.
     additional_creators: Joi.array().items(Joi.string()).optional(),
+    // Optional room type
+    type: Joi.string().optional(),
   })
     .unknown()
     .required(),

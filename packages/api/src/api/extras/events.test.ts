@@ -335,6 +335,23 @@ describe('isValidCreateEventSchema', () => {
     expect(isValidCreateEventSchema(event)).toEqual(true);
   });
 
+  it('should accept create event with content with type', () => {
+    const event: StateEvent<StateEventCreateContent> = {
+      content: {
+        room_version: '12',
+        type: 'special_room',
+      },
+      event_id: 'event-id',
+      origin_server_ts: 0,
+      room_id: '!room-id',
+      sender: '@user-id:example.com',
+      state_key: '',
+      type: 'm.room.create',
+    };
+
+    expect(isValidCreateEventSchema(event)).toEqual(true);
+  });
+
   it('should accept additional properties', () => {
     const event: StateEvent<StateEventCreateContent> = {
       content: {

@@ -217,6 +217,7 @@ export type StateEventCreateContent = {
     room_version?: string;
     creator?: string;
     additional_creators?: string[];
+    type?: string;
 };
 
 // @public
