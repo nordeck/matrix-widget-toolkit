@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Create a new entrypoint that exports a __ENVIRONMENT_SCRIPT__ variable
-# from all REACT_APP_* environment variables. The variable contains a 
+# from all REACT_APP_* environment variables. The variable contains a
 # variable assignment to window.__ENVIRONMENT__  that should be put
 # into a <script>.
 
@@ -26,6 +26,7 @@ __ENVIRONMENT__=`echo -n "{$JSON_CONTENT}" | base64 -w 0`
 export __ENVIRONMENT_SCRIPT__="window.__ENVIRONMENT__ = '${__ENVIRONMENT__}';"
 
 # compile the CSP hooks
+export __CSP_FRAME_SRC__=`echo $CSP_FRAME_SRC | envsubst`
 export __CSP_FONT_SRC__=`echo $CSP_FONT_SRC | envsubst`
 export __CSP_STYLE_SRC__=`echo $CSP_STYLE_SRC | envsubst`
 export __CSP_SCRIPT_SRC__=`echo $CSP_SCRIPT_SRC | envsubst`
