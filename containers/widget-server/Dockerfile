@@ -38,4 +38,4 @@ COPY files/provide_environment.sh /
 VOLUME /var/cache/nginx /tmp
 
 ENTRYPOINT [ "/provide_environment.sh" ]
-CMD [ "nginx", "-g", "daemon off; load_module \"modules/ngx_http_perl_module.so\"; env __ENVIRONMENT_SCRIPT__; env __CSP_FONT_SRC__; env __CSP_STYLE_SRC__; env __CSP_SCRIPT_SRC__; env __CSP_IMG_SRC__; env __CSP_CONNECT_SRC__;" ]
+CMD [ "nginx", "-g", "daemon off; load_module \"modules/ngx_http_perl_module.so\"; env __ENVIRONMENT_SCRIPT__; env __CSP_FRAME_SRC__; env __CSP_FONT_SRC__; env __CSP_STYLE_SRC__; env __CSP_SCRIPT_SRC__; env __CSP_IMG_SRC__; env __CSP_CONNECT_SRC__;" ]
