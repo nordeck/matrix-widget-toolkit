@@ -61,7 +61,7 @@
     "@testing-library/jest-dom": "6.6.3",
     "@testing-library/react": "16.3.0",
     "@testing-library/user-event": "14.6.1",
-    "@types/node": "22.15.35",
+    "@types/node": "22.18.3",
     "@types/react": "18.3.24",
     "@types/react-dom": "18.3.7",
     "@vitejs/plugin-basic-ssl": "1.2.0",
@@ -70,8 +70,8 @@
     "axe-core": "4.10.3",
     "happy-dom": "16.8.1",
     "i18next-parser": "9.3.0",
-    "msw": "2.10.4",
-    "typescript": "5.8.3",
+    "msw": "2.11.2",
+    "typescript": "5.9.2",
     "vite": "6.3.6",
     "vitest": "3.2.4"
   }
