@@ -16,7 +16,7 @@
     "i18next": "25.2.1",
     "i18next-chained-backend": "4.6.2",
     "i18next-http-backend": "3.0.2",
-    "joi": "17.13.3",
+    "joi": "18.0.1",
     "matrix-widget-api": "1.13.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
