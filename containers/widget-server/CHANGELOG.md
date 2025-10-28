@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/widget-server`
 
+## 1.2.0
+
+### Minor Changes
+
+- 64385e0: Add CSP_FRAME_SRC support to enable custom frame-src origins
+
 ## 1.1.1
 
 ### Patch Changes
