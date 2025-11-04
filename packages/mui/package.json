@@ -20,7 +20,7 @@
     "@vitest/coverage-v8": "3.2.4",
     "axe-core": "4.10.3",
     "copyfiles": "2.4.1",
-    "i18next-parser": "9.3.0",
+    "i18next-cli": "^1.20.1",
     "typescript": "5.8.3",
     "vite": "6.4.1",
     "vitest": "3.2.4"
@@ -37,7 +37,7 @@
     "depcheck": "depcheck --ignores=@types/node,@vitest/coverage-v8,lodash,lodash-es,@types/lodash-es --ignore-dirs=lib,build",
     "prepack": "node ../../scripts/prepack.js",
     "postpack": "node ../../scripts/postpack.js",
-    "translate": "i18next src/**/*.{ts,tsx}",
+    "translate": "i18next-cli extract --sync-primary",
     "check-api-report": "api-extractor run --verbose",
     "generate-api-report": "tsc && api-extractor run --verbose --local",
     "clean": "yarn run clean:build",
