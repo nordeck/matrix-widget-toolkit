@@ -36,7 +36,6 @@ export default ts.config(
       '**/lib/**',
       '**/build/**',
       '**/craco.config.js',
-      '**/i18next-parser.config.js',
       'scripts/prepack.js',
       'scripts/postpack.js',
       'scripts/publishAllPackages.js',
