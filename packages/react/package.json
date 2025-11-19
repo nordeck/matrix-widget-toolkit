@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "@matrix-widget-toolkit/api": "^5.0.0",
-    "matrix-widget-api": "1.13.1",
+    "matrix-widget-api": "1.14.0",
     "react-error-boundary": "6.0.0",
     "react-use": "17.6.0"
   },
