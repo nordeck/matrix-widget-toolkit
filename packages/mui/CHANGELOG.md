@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/mui`
 
+## 2.2.1
+
+### Patch Changes
+
+- 3d6fa5f: Use i18next-cli instead of i18next-parser
+
 ## 2.2.0
 
 ### Minor Changes
