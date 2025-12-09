@@ -22,7 +22,7 @@
     "react-dom": "18.3.1",
     "react-i18next": "15.5.3",
     "react-redux": "9.2.0",
-    "react-router-dom": "7.9.5",
+    "react-router-dom": "7.9.6",
     "react-use": "17.6.0",
     "rxjs": "7.8.2"
   },
@@ -62,7 +62,7 @@
     "@testing-library/react": "16.3.0",
     "@testing-library/user-event": "14.6.1",
     "@types/node": "22.18.13",
-    "@types/react": "18.3.26",
+    "@types/react": "18.3.27",
     "@types/react-dom": "18.3.7",
     "@vitejs/plugin-basic-ssl": "1.2.0",
     "@vitejs/plugin-react-swc": "3.10.2",
