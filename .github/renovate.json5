@@ -18,6 +18,7 @@
     'schedule:automergeWeekdays',
   ],
   dependencyDashboard: true,
+  rangeStrategy: 'replace',
   // https://docs.renovatebot.com/configuration-options/#vulnerabilityalerts - enabled by default, but does not set a label by default
   vulnerabilityAlerts: {
     labels: ['Security'],
