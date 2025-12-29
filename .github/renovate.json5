@@ -63,6 +63,10 @@
   // https://docs.renovatebot.com/configuration-options/#packagerules - Note that later overrides earlier rules
   packageRules: [
     {
+      matchDepTypes: ['dependencies'],
+      rangeStrategy: 'bump',
+    },
+    {
       groupName: 'patch updates',
       matchUpdateTypes: ['patch'],
       addLabels: ['Patch'],
