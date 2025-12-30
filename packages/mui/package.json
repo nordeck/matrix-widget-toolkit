@@ -26,7 +26,7 @@
     "vitest": "3.2.4"
   },
   "peerDependencies": {
-    "react": "18.3.1"
+    "react": "^18.3.1"
   },
   "scripts": {
     "build": "tsc && rollup --config ../../rollup.config.mjs",
@@ -45,21 +45,21 @@
     "clean:cache": "echo 'script not implemented package'"
   },
   "dependencies": {
-    "@emotion/cache": "11.14.0",
-    "@emotion/react": "11.14.0",
-    "@emotion/styled": "11.14.1",
-    "@fontsource/inter": "5.1.1",
+    "@emotion/cache": "^11.14.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@fontsource/inter": "^5.1.1",
     "@matrix-widget-toolkit/api": "^5.0.0",
     "@matrix-widget-toolkit/react": "^2.1.0",
-    "@mui/icons-material": "6.5.0",
-    "@mui/material": "6.5.0",
-    "@mui/utils": "6.4.9",
-    "i18next": "25.2.1",
-    "i18next-browser-languagedetector": "8.0.5",
-    "i18next-resources-to-backend": "1.2.1",
-    "matrix-widget-api": "1.13.1",
-    "react-i18next": "15.5.3",
-    "react-use": "17.6.0"
+    "@mui/icons-material": "^6.5.0",
+    "@mui/material": "^6.5.0",
+    "@mui/utils": "^6.4.9",
+    "i18next": "^25.2.1",
+    "i18next-browser-languagedetector": "^8.0.5",
+    "i18next-resources-to-backend": "^1.2.1",
+    "matrix-widget-api": "^1.13.1",
+    "react-i18next": "^15.5.3",
+    "react-use": "^17.6.0"
   },
   "repository": {
     "type": "git",
