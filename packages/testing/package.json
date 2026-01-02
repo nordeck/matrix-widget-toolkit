@@ -1,6 +1,6 @@
 {
   "name": "@matrix-widget-toolkit/testing",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Testing support for @matrix-widget-toolkit/api.",
   "author": "Nordeck IT + Consulting GmbH",
   "license": "Apache-2.0",
@@ -34,7 +34,7 @@
     "clean:cache": "echo 'script not implemented package'"
   },
   "dependencies": {
-    "@matrix-widget-toolkit/api": "^5.0.0",
+    "@matrix-widget-toolkit/api": "^5.0.3",
     "matrix-widget-api": "^1.13.1",
     "rxjs": "^7.8.2"
   },
