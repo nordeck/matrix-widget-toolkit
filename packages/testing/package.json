@@ -35,8 +35,8 @@
   },
   "dependencies": {
     "@matrix-widget-toolkit/api": "^5.0.0",
-    "matrix-widget-api": "1.13.1",
-    "rxjs": "7.8.2"
+    "matrix-widget-api": "^1.13.1",
+    "rxjs": "^7.8.2"
   },
   "repository": {
     "type": "git",
