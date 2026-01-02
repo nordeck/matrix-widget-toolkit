@@ -13,6 +13,12 @@ jobs:
     timeout-minutes: 15
     outputs:
       example-widget-mui-image-tag: ${{ steps.meta_example-widget-mui.outputs.version }}
+    permissions:
+      # Used for trusted publishing to npm via OIDC
+      id-token: write
+      # Default token permissions
+      contents: read
+      packages: read
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
@@ -103,7 +109,8 @@ jobs:
           publish: yarn release
         env:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
-          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+          # Use OIDC for npm authentication instead of NPM_TOKEN
+          NPM_TOKEN: '' # https://github.com/changesets/changesets/issues/1152#issuecomment-3190884868
   helm-lint-test:
     runs-on: ubuntu-latest
     needs: build
