@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/api`
 
+## 5.0.3
+
+### Patch Changes
+
+- 1db968e: Update toolkit production dependencies to use semantic versioning ranges
+
 ## 5.0.2
 
 ### Patch Changes

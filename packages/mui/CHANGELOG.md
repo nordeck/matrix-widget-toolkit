@@ -1,5 +1,15 @@
 # `@matrix-widget-toolkit/mui`
 
+## 2.2.1
+
+### Patch Changes
+
+- 1db968e: Update toolkit production dependencies to use semantic versioning ranges
+- 3d6fa5f: Use i18next-cli instead of i18next-parser
+- Updated dependencies [1db968e]
+  - @matrix-widget-toolkit/react@2.1.1
+  - @matrix-widget-toolkit/api@5.0.3
+
 ## 2.2.0
 
 ### Minor Changes

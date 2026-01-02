@@ -1,5 +1,13 @@
 # `@matrix-widget-toolkit/react`
 
+## 2.1.1
+
+### Patch Changes
+
+- 1db968e: Update toolkit production dependencies to use semantic versioning ranges
+- Updated dependencies [1db968e]
+  - @matrix-widget-toolkit/api@5.0.3
+
 ## 2.1.0
 
 ### Minor Changes
