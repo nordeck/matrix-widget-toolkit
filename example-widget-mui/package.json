@@ -61,7 +61,7 @@
     "@testing-library/jest-dom": "6.6.4",
     "@testing-library/react": "16.3.0",
     "@testing-library/user-event": "14.6.1",
-    "@types/node": "22.18.13",
+    "@types/node": "22.19.3",
     "@types/react": "18.3.27",
     "@types/react-dom": "18.3.7",
     "@vitejs/plugin-basic-ssl": "2.1.0",
@@ -70,7 +70,7 @@
     "axe-core": "4.11.0",
     "happy-dom": "20.0.11",
     "i18next-cli": "1.20.4",
-    "msw": "2.11.6",
+    "msw": "2.12.4",
     "typescript": "5.9.3",
     "vite": "7.3.0",
     "vitest": "4.0.16"
