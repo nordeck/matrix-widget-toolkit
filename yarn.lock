@@ -3478,7 +3478,7 @@ i18next-chained-backend@4.6.2:
   dependencies:
     "@babel/runtime" "^7.23.2"
 
-i18next-cli@^1.20.1:
+i18next-cli@1.20.4:
   version "1.20.4"
   resolved "https://registry.yarnpkg.com/i18next-cli/-/i18next-cli-1.20.4.tgz#3fcd31b8d5ea6ae321ea5b3ef798722eb8150649"
   integrity sha512-7GW0Ak5wNAFgW9uIP2P38WyEpXLE2xm79Yhv5u0eNxpQfaXziIEwGmRBd8S/cGkuwAWd2o+WYOYHsZjCG5pv5w==
