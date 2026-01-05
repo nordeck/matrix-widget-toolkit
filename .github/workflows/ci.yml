@@ -13,6 +13,15 @@ jobs:
     timeout-minutes: 15
     outputs:
       example-widget-mui-image-tag: ${{ steps.meta_example-widget-mui.outputs.version }}
+    permissions:
+      # Used for trusted publishing to npm via OIDC
+      id-token: write
+      # Used for changesets action
+      pull-requests: write
+      issues: write
+      contents: write
+      # Used for pushing container images
+      packages: write
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
@@ -88,22 +97,15 @@ jobs:
           labels: ${{ steps.meta_example-widget-mui.outputs.labels }}
           platforms: linux/amd64,linux/arm64,linux/s390x
 
-      - name: Generate GitHub token
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-        id: generate_token
-        uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # @v2.1.0
-        with:
-          app_id: ${{ secrets.GH_APP_OS_APP_ID }}
-          private_key: ${{ secrets.GH_APP_OS_PRIVATE_KEY }}
-
       - name: Create Release Pull Request or Publish Packages
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         uses: changesets/action@06245a4e0a36c064a573d4150030f5ec548e4fcc # v1.4.10
         with:
           publish: yarn release
         env:
-          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
-          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Use OIDC for npm authentication instead of NPM_TOKEN
+          NPM_TOKEN: '' # https://github.com/changesets/changesets/issues/1152#issuecomment-3190884868
   helm-lint-test:
     runs-on: ubuntu-latest
     needs: build
