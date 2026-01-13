@@ -14,7 +14,7 @@
     "@mui/material": "^6.5.0",
     "@reduxjs/toolkit": "^2.6.1",
     "i18next": "^25.7.3",
-    "i18next-chained-backend": "^4.6.2",
+    "i18next-chained-backend": "^4.6.3",
     "i18next-http-backend": "^3.0.2",
     "joi": "^17.13.3",
     "matrix-widget-api": "^1.13.1",
