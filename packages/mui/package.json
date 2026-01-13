@@ -48,7 +48,7 @@
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-    "@fontsource/inter": "^5.1.1",
+    "@fontsource/inter": "^5.2.8",
     "@matrix-widget-toolkit/api": "^5.0.3",
     "@matrix-widget-toolkit/react": "^2.1.1",
     "@mui/icons-material": "^6.5.0",
