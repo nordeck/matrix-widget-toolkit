@@ -4810,10 +4810,10 @@ react-dom@^18.3.1:
     loose-envify "^1.1.0"
     scheduler "^0.23.2"
 
-react-error-boundary@^6.0.0:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/react-error-boundary/-/react-error-boundary-6.0.1.tgz#4f6c05ef27a05401b7b4f1422f36022f295085a2"
-  integrity sha512-zArgQpjJUN1ZLMEKWtifxQweW3yfvwL5j2nh3Pesze1qG6r5oCDMy/TA97bUF01wy4xCeeL4/pd8GHmvEsP3Bg==
+react-error-boundary@^6.0.1:
+  version "6.0.3"
+  resolved "https://registry.yarnpkg.com/react-error-boundary/-/react-error-boundary-6.0.3.tgz#e84bb9e67e692f83d3ea0fc35612db68d7d804c6"
+  integrity sha512-5guqn2UYpCFjE8UDMA8J7Kke+YSGBFrKQRJb3XdcaGZXYINZfQXgBt3ifY6MvjkN7QROc5A8zclyoSCwrcRUKw==
 
 react-i18next@^15.7.4:
   version "15.7.4"
