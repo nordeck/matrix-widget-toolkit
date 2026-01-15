@@ -1646,7 +1646,7 @@
     "@typescript-eslint/types" "8.51.0"
     "@typescript-eslint/visitor-keys" "8.51.0"
 
-"@typescript-eslint/scope-manager@8.53.0", "@typescript-eslint/scope-manager@^8.51.0":
+"@typescript-eslint/scope-manager@8.53.0", "@typescript-eslint/scope-manager@^8.46.1", "@typescript-eslint/scope-manager@^8.51.0":
   version "8.53.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/scope-manager/-/scope-manager-8.53.0.tgz#f922fcbf0d42e72f065297af31779ccf19de9a97"
   integrity sha512-kWNj3l01eOGSdVBnfAF2K1BTh06WS0Yet6JUgb9Cmkqaz3Jlu0fdVUjj9UI8gPidBWSMqDIglmEXifSgDT/D0g==
@@ -1725,7 +1725,7 @@
     "@typescript-eslint/types" "8.51.0"
     "@typescript-eslint/typescript-estree" "8.51.0"
 
-"@typescript-eslint/utils@^8.24.1", "@typescript-eslint/utils@^8.51.0":
+"@typescript-eslint/utils@^8.46.1", "@typescript-eslint/utils@^8.51.0":
   version "8.53.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/utils/-/utils-8.53.0.tgz#bf0a4e2edaf1afc9abce209fc02f8cab0b74af13"
   integrity sha512-XDY4mXTez3Z1iRDI5mbRhH4DFSt46oaIFsLg+Zn97+sYrXACziXSQcSelMybnVZ5pa1P6xYkPr5cMJyunM1ZDA==
@@ -1781,12 +1781,13 @@
     std-env "^3.10.0"
     tinyrainbow "^3.0.3"
 
-"@vitest/eslint-plugin@1.2.7":
-  version "1.2.7"
-  resolved "https://registry.yarnpkg.com/@vitest/eslint-plugin/-/eslint-plugin-1.2.7.tgz#c09191ba0bf8eb6c66ac4de05bc645a06ed454c9"
-  integrity sha512-7WHcGZo6uXsE4SsSnpGDqKyGrd6NfOMM52WKoHSpTRZLbjMuDyHfA5P7m8yrr73tpqYjsiAdSjSerOnx8uEhpA==
+"@vitest/eslint-plugin@1.6.4":
+  version "1.6.4"
+  resolved "https://registry.yarnpkg.com/@vitest/eslint-plugin/-/eslint-plugin-1.6.4.tgz#683fbf358ab32f0d4a471fa36dacec75d44c9a0a"
+  integrity sha512-+qw32ux8HMVNrJnQOYgdjrMYmCn9vsiKnJUv5MoOg40e18WOvhWurzHdbRB3vXLfUrP7+jYyQbd6TuRhL23AkQ==
   dependencies:
-    "@typescript-eslint/utils" "^8.24.1"
+    "@typescript-eslint/scope-manager" "^8.46.1"
+    "@typescript-eslint/utils" "^8.46.1"
 
 "@vitest/expect@4.0.16":
   version "4.0.16"

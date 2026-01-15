@@ -170,11 +170,46 @@ describe('<DicePage />', () => {
     );
   });
 
-  it.each([
-    UpdateDelayedEventAction.Cancel,
-    UpdateDelayedEventAction.Restart,
-    UpdateDelayedEventAction.Send,
-  ])('should update (%s) a throw dice delayed', async (action) => {
+  it.each([UpdateDelayedEventAction.Cancel, UpdateDelayedEventAction.Send])(
+    'should %s a throw dice delayed',
+    async (action) => {
+      render(<DicePage />, { wrapper });
+
+      const button = await screen.findByRole('button', {
+        name: /throw dice 10 seconds delayed/i,
+      });
+      await userEvent.click(button);
+
+      await expect(
+        screen.findByText(/your last throw: ./i),
+      ).resolves.toBeInTheDocument();
+      await expect(
+        screen.findByText(/Your last delay id: ./i),
+      ).resolves.toBeInTheDocument();
+
+      expect(widgetApi.sendDelayedRoomEvent).toHaveBeenCalledWith(
+        'net.nordeck.throw_dice',
+        {
+          pips: expect.any(Number),
+        },
+        expect.any(Number),
+      );
+
+      const updateButton = await screen.findByRole('button', {
+        name: new RegExp(action, 'i'),
+      });
+      await userEvent.click(updateButton);
+
+      expect(widgetApi.updateDelayedEvent).toHaveBeenCalledWith(
+        'syd_wlGAStYmBRRdjnWiHSDA',
+        action,
+      );
+
+      expect(updateButton).not.toBeInTheDocument();
+    },
+  );
+
+  it('should restart a throw dice delayed', async () => {
     render(<DicePage />, { wrapper });
 
     const button = await screen.findByRole('button', {
@@ -198,19 +233,15 @@ describe('<DicePage />', () => {
     );
 
     const updateButton = await screen.findByRole('button', {
-      name: new RegExp(action, 'i'),
+      name: new RegExp(UpdateDelayedEventAction.Restart, 'i'),
     });
     await userEvent.click(updateButton);
 
     expect(widgetApi.updateDelayedEvent).toHaveBeenCalledWith(
       'syd_wlGAStYmBRRdjnWiHSDA',
-      action,
+      UpdateDelayedEventAction.Restart,
     );
 
-    if (action === UpdateDelayedEventAction.Restart) {
-      expect(updateButton).toBeInTheDocument();
-    } else {
-      expect(updateButton).not.toBeInTheDocument();
-    }
+    expect(updateButton).toBeInTheDocument();
   });
 });
