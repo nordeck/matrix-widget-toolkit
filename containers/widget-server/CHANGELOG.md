@@ -1,5 +1,12 @@
 # `@matrix-widget-toolkit/widget-server`
 
+## 1.2.1
+
+### Patch Changes
+
+- 70f2955: Update nginx:1.29.4-alpine-perl docker digest to 1948e0c
+- 1d93822: Bump nginx base image to nginx:1.29.4-alpine-perl
+
 ## 1.2.0
 
 ### Minor Changes

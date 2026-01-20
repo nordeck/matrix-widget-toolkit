@@ -1,6 +1,6 @@
 {
   "name": "@matrix-widget-toolkit/widget-server",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": true,
   "description": "A webserver to host a Matrix widget in a container",
   "author": "Nordeck IT + Consulting GmbH",
