@@ -3538,10 +3538,10 @@ i18next-chained-backend@^4.6.3:
   dependencies:
     "@babel/runtime" "^7.23.2"
 
-i18next-cli@1.33.5:
-  version "1.33.5"
-  resolved "https://registry.yarnpkg.com/i18next-cli/-/i18next-cli-1.33.5.tgz#4319082eb95c547c4c7169f47e2566059b35f9f4"
-  integrity sha512-4ldFXp3mozfRjHf0pOUpujq3oLj2hyQ6Rmow5WdYywnyRlDFY3uSawrQIIuYV7uYBXlbTm0gQ7rnZndSssHVng==
+i18next-cli@1.36.1:
+  version "1.36.1"
+  resolved "https://registry.yarnpkg.com/i18next-cli/-/i18next-cli-1.36.1.tgz#2b4626bf69c177bbb1c80073e25f1ed48387c6bf"
+  integrity sha512-q4lRuqVPTNI6Ip5YFCRNNGiTh/s/5nfl18coOnjDu7Cb1BiJeRXShFGL5Tcka4ii0k5ndOMjxIAkoNN6EXCwyQ==
   dependencies:
     "@croct/json5-parser" "0.2.2"
     "@swc/core" "1.15.4"
@@ -3556,6 +3556,8 @@ i18next-cli@1.33.5:
     jsonc-parser "3.3.1"
     minimatch "10.1.1"
     ora "9.0.0"
+    react "^19.2.3"
+    react-i18next "^16.5.1"
     swc-walk "1.0.1"
 
 i18next-http-backend@^3.0.2:
@@ -4860,6 +4862,15 @@ react-i18next@^15.7.4:
     "@babel/runtime" "^7.27.6"
     html-parse-stringify "^3.0.1"
 
+react-i18next@^16.5.1:
+  version "16.5.4"
+  resolved "https://registry.yarnpkg.com/react-i18next/-/react-i18next-16.5.4.tgz#4f458b1baab274dca439ab67629c854203bf97c6"
+  integrity sha512-6yj+dcfMncEC21QPhOTsW8mOSO+pzFmT6uvU7XXdvM/Cp38zJkmTeMeKmTrmCMD5ToT79FmiE/mRWiYWcJYW4g==
+  dependencies:
+    "@babel/runtime" "^7.28.4"
+    html-parse-stringify "^3.0.1"
+    use-sync-external-store "^1.6.0"
+
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -4939,6 +4950,11 @@ react@^18.3.1:
   integrity sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==
   dependencies:
     loose-envify "^1.1.0"
+
+react@^19.2.3:
+  version "19.2.4"
+  resolved "https://registry.yarnpkg.com/react/-/react-19.2.4.tgz#438e57baa19b77cb23aab516cf635cd0579ee09a"
+  integrity sha512-9nfp2hYpCwOjAN+8TZFGhtWEwgvWHXqESH8qT89AT/lWklpLON22Lc8pEtnpsZz7VmawabSU0gCjnj8aC0euHQ==
 
 read-yaml-file@^1.1.0:
   version "1.1.0"
@@ -5862,7 +5878,7 @@ uri-js@^4.2.2, uri-js@^4.4.1:
   dependencies:
     punycode "^2.1.0"
 
-use-sync-external-store@^1.4.0:
+use-sync-external-store@^1.4.0, use-sync-external-store@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.6.0.tgz#b174bfa65cb2b526732d9f2ac0a408027876f32d"
   integrity sha512-Pp6GSwGP/NrPIrxVFAIkOQeyw8lFenOHijQWkUTrDvrF4ALqylP2C/KCkeS9dpUM3KvYRQhna5vt7IL95+ZQ9w==
