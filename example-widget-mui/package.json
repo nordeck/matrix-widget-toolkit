@@ -61,7 +61,7 @@
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.2",
     "@testing-library/user-event": "14.6.1",
-    "@types/node": "22.19.5",
+    "@types/node": "22.19.7",
     "@types/react": "18.3.27",
     "@types/react-dom": "18.3.7",
     "@vitejs/plugin-basic-ssl": "2.1.0",
