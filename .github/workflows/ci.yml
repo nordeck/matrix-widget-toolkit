@@ -88,7 +88,7 @@ jobs:
             type=sha,prefix=
 
       - name: Build and push (example-widget-mui)
-        uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
         id: dockerBuild
         with:
           push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'pull_request' && secrets.GH_APP_OS_APP_ID != '' }}
@@ -206,7 +206,7 @@ jobs:
             type=semver,pattern={{major}},value=${{ steps.vars.outputs.version }}
 
       - name: Build
-        uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
         with:
           context: containers/widget-server
           platforms: ${{ env.DOCKER_PLATFORMS }}
@@ -214,7 +214,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Load
-        uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
         id: dockerLoad
         with:
           load: true
@@ -272,7 +272,7 @@ jobs:
 
       - name: Build and push
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.tag-exists.outputs.result == 'false' }}
-        uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
         with:
           push: true
           context: containers/widget-server
