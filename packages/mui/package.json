@@ -16,7 +16,7 @@
     "@testing-library/react": "16.3.2",
     "@testing-library/user-event": "14.6.1",
     "@types/node": "22.19.7",
-    "@types/react": "18.3.27",
+    "@types/react": "19.2.13",
     "@vitest/coverage-v8": "4.0.16",
     "axe-core": "4.11.1",
     "copyfiles": "2.4.1",
@@ -26,7 +26,7 @@
     "vitest": "4.0.16"
   },
   "peerDependencies": {
-    "react": "^18.3.1"
+    "react": "^18.3.1 || ^19.0.0"
   },
   "scripts": {
     "build": "tsc && rollup --config ../../rollup.config.mjs",
