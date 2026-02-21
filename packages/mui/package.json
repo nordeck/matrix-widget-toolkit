@@ -20,7 +20,7 @@
     "@vitest/coverage-v8": "4.0.16",
     "axe-core": "4.11.1",
     "copyfiles": "2.4.1",
-    "i18next-cli": "1.33.5",
+    "i18next-cli": "1.42.3",
     "typescript": "5.9.3",
     "vite": "7.3.0",
     "vitest": "4.0.16"
@@ -54,7 +54,7 @@
     "@mui/icons-material": "^6.5.0",
     "@mui/material": "^6.5.0",
     "@mui/utils": "^6.4.9",
-    "i18next": "^25.7.3",
+    "i18next": "^25.8.4",
     "i18next-browser-languagedetector": "^8.2.0",
     "i18next-resources-to-backend": "^1.2.1",
     "matrix-widget-api": "^1.13.1",
