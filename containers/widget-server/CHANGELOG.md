@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/widget-server`
 
+## 1.2.2
+
+### Patch Changes
+
+- 4a44da2: Update nginx docker tag to v1.29.5
+
 ## 1.2.1
 
 ### Patch Changes
