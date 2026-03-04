@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- 4a44da2: Update nginx docker tag to v1.29.5
+- d5ac292: Bump `nginx:alpine-perl` image to 1.29.5
 
 ## 1.2.1
 
