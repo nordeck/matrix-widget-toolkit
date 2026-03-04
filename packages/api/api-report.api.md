@@ -332,9 +332,9 @@ export class WidgetApiImpl implements WidgetApi {
     constructor(
     matrixWidgetApi: WidgetApi_2,
     widgetId: string,
-    widgetParameters: WidgetParameters, { capabilities, supportStandalone }?: WidgetApiOptions);
+    widgetParameters: WidgetParameters, input?: WidgetApiOptions);
     closeModal<T extends IModalWidgetReturnData>(data?: T): Promise<void>;
-    static create({ capabilities, supportStandalone, }?: WidgetApiOptions): Promise<WidgetApi>;
+    static create(input?: WidgetApiOptions): Promise<WidgetApi>;
     downloadFile(contentUrl: string): Promise<IDownloadFileActionFromWidgetResponseData>;
     getMediaConfig(): Promise<IGetMediaConfigActionFromWidgetResponseData>;
     getWidgetConfig<T extends IWidgetApiRequestData>(): Readonly<WidgetConfig<T> | undefined>;
@@ -344,11 +344,11 @@ export class WidgetApiImpl implements WidgetApi {
     readonly matrixWidgetApi: WidgetApi_2;
     navigateTo(uri: string): Promise<void>;
     observeModalButtons(): Observable<ModalButtonID>;
-    observeRoomEvents<T>(eventType: string, { messageType, roomIds, }?: {
+    observeRoomEvents<T>(eventType: string, input?: {
         messageType?: string;
         roomIds?: string[] | Symbols.AnyRoom;
     }): Observable<RoomEvent<T>>;
-    observeStateEvents<T>(eventType: string, { stateKey, roomIds, }?: {
+    observeStateEvents<T>(eventType: string, input?: {
         stateKey?: string;
         roomIds?: string[] | Symbols.AnyRoom;
     }): Observable<StateEvent<T>>;
@@ -369,12 +369,12 @@ export class WidgetApiImpl implements WidgetApi {
         chunk: Array<RoomEvent | StateEvent>;
         nextToken?: string;
     }>;
-    receiveRoomEvents<T>(eventType: string, { messageType, roomIds, }?: {
+    receiveRoomEvents<T>(eventType: string, input?: {
         messageType?: string;
         roomIds?: string[] | Symbols.AnyRoom;
     }): Promise<Array<RoomEvent<T>>>;
     receiveSingleStateEvent<T>(eventType: string, stateKey?: string): Promise<StateEvent<T> | undefined>;
-    receiveStateEvents<T>(eventType: string, { stateKey, roomIds, }?: {
+    receiveStateEvents<T>(eventType: string, input?: {
         stateKey?: string;
         roomIds?: string[] | Symbols.AnyRoom;
     }): Promise<StateEvent<T>[]>;
@@ -390,21 +390,21 @@ export class WidgetApiImpl implements WidgetApi {
             avatarUrl?: string;
         }>;
     }>;
-    sendDelayedRoomEvent<T>(eventType: string, content: T, delay: number, { roomId }?: {
+    sendDelayedRoomEvent<T>(eventType: string, content: T, delay: number, input?: {
         roomId?: string;
     }): Promise<{
         delay_id: string;
     }>;
-    sendDelayedStateEvent<T>(eventType: string, content: T, delay: number, { roomId, stateKey }?: {
+    sendDelayedStateEvent<T>(eventType: string, content: T, delay: number, input?: {
         roomId?: string;
         stateKey?: string;
     }): Promise<{
         delay_id: string;
     }>;
-    sendRoomEvent<T>(eventType: string, content: T, { roomId }?: {
+    sendRoomEvent<T>(eventType: string, content: T, input?: {
         roomId?: string;
     }): Promise<RoomEvent<T>>;
-    sendStateEvent<T>(eventType: string, content: T, { roomId, stateKey }?: {
+    sendStateEvent<T>(eventType: string, content: T, input?: {
         roomId?: string;
         stateKey?: string;
     }): Promise<ISendEventFromWidgetResponseData>;

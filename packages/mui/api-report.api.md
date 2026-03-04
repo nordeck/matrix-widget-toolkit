@@ -36,7 +36,7 @@ export function getEnvironment(name: string, defaultValue: string): string;
 export function getNonce(): string | undefined;
 
 // @public
-export function MuiCapabilitiesGuard({ capabilities, children, }: MuiCapabilitiesGuardProps): ReactElement;
+export function MuiCapabilitiesGuard(input: MuiCapabilitiesGuardProps): ReactElement;
 
 // @public
 export type MuiCapabilitiesGuardProps = PropsWithChildren<{
@@ -44,13 +44,13 @@ export type MuiCapabilitiesGuardProps = PropsWithChildren<{
 }>;
 
 // @public
-export function MuiThemeProvider({ children, }: MuiThemeProviderProps): ReactElement;
+export function MuiThemeProvider(input: MuiThemeProviderProps): ReactElement;
 
 // @public
 export type MuiThemeProviderProps = PropsWithChildren;
 
 // @public
-export function MuiWidgetApiProvider({ widgetRegistration, widgetApiPromise, children, }: MuiWidgetApiProviderProps): ReactElement;
+export function MuiWidgetApiProvider(input: MuiWidgetApiProviderProps): ReactElement;
 
 // @public
 export type MuiWidgetApiProviderProps = PropsWithChildren<{
