@@ -16,7 +16,7 @@ import { WidgetEventCapability } from 'matrix-widget-api';
 import { WidgetRegistration } from '@matrix-widget-toolkit/api';
 
 // @public
-export function CapabilitiesGuard({ capabilities, children, missingCapabilitiesComponent: MissingCapabilitiesComponent, loadingComponent: LoadingComponent, }: CapabilitiesGuardProps): ReactElement;
+export function CapabilitiesGuard(input: CapabilitiesGuardProps): ReactElement;
 
 // @public
 export type CapabilitiesGuardProps = PropsWithChildren<{
@@ -38,7 +38,7 @@ export type ThemeSelectionContextType = {
 };
 
 // @public
-export function ThemeSelectionProvider({ children, }: ThemeSelectionProviderProps): ReactElement;
+export function ThemeSelectionProvider(input: ThemeSelectionProviderProps): ReactElement;
 
 // @public
 export type ThemeSelectionProviderProps = PropsWithChildren;
@@ -53,7 +53,7 @@ export const useWidgetApi: () => WidgetApi;
 export const WidgetApiMockProvider: Provider<WidgetApi | undefined>;
 
 // @public
-export function WidgetApiProvider({ children, widgetApiPromise, widgetRegistration, loadingViewComponent: LoadingViewComponent, mobileClientErrorComponent: MobileClientErrorComponent, outsideClientErrorComponent: OutsideClientErrorComponent, childErrorComponent: ChildErrorComponent, missingCapabilitiesComponent: MissingCapabilitiesComponent, missingParametersErrorComponent: MissingParametersErrorComponent, }: WidgetApiProviderProps): ReactElement;
+export function WidgetApiProvider(input: WidgetApiProviderProps): ReactElement;
 
 // @public
 export type WidgetApiProviderProps = PropsWithChildren<{
