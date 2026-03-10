@@ -3459,10 +3459,10 @@ graphql@^16.12.0:
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-16.12.0.tgz#28cc2462435b1ac3fdc6976d030cef83a0c13ac7"
   integrity sha512-DKKrynuQRne0PNpEbzuEdHlYOMksHSUI8Zc9Unei5gTsMNA2/vMpoMz/yKba50pejK56qj98qM0SjYxAKi13gQ==
 
-happy-dom@20.6.2:
-  version "20.6.2"
-  resolved "https://registry.yarnpkg.com/happy-dom/-/happy-dom-20.6.2.tgz#83bbeb353c8d3813462ce1eb742e72b56066a480"
-  integrity sha512-Xk/Y0cuq9ngN/my8uvK4gKoyDl6sBKkIl8A/hJ0IabZVH7E5SJLHNE7uKRPVmSrQbhJaLIHTEcvTct4GgNtsRA==
+happy-dom@20.6.5:
+  version "20.6.5"
+  resolved "https://registry.yarnpkg.com/happy-dom/-/happy-dom-20.6.5.tgz#1b6fe7af84224a1425b43cf39e5d282cee7fa74f"
+  integrity sha512-lWBNUpDREPQb7DBuEwmozI+lbgO8l6iqmeZmEifE6xDCeic8dTH/h7MvN0jAMIdIFKwfgk0Ibom5t2DH5PFYMg==
   dependencies:
     "@types/node" ">=20.0.0"
     "@types/whatwg-mimetype" "^3.0.2"
