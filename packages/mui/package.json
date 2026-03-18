@@ -20,7 +20,7 @@
     "@vitest/coverage-v8": "4.0.18",
     "axe-core": "4.11.1",
     "copyfiles": "2.4.1",
-    "i18next-cli": "1.42.9",
+    "i18next-cli": "1.47.11",
     "typescript": "5.9.3",
     "vite": "7.3.1",
     "vitest": "4.0.18"
