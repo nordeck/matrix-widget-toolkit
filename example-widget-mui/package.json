@@ -68,7 +68,7 @@
     "@vitejs/plugin-react-swc": "4.2.3",
     "@vitest/coverage-v8": "4.0.18",
     "axe-core": "4.11.1",
-    "happy-dom": "20.6.5",
+    "happy-dom": "20.8.3",
     "i18next-cli": "1.47.11",
     "msw": "2.12.10",
     "typescript": "5.9.3",
