@@ -1,4 +1,4 @@
-FROM nginx:1.29.5-alpine-perl@sha256:9daf5f652a915e2fca0fbb555498d8457878a656b9391e23334473eb78ac8813
+FROM nginx:1.29.6-alpine-perl@sha256:bda8aad848e2b8a13fcbb887bf1bb3aba9d1a6c4f87731ee97df1a85ade999e1
 
 # Install envsubst
 RUN apk add --no-cache gettext
