@@ -67,10 +67,10 @@
     "@vitejs/plugin-basic-ssl": "2.1.4",
     "@vitejs/plugin-react-swc": "4.2.3",
     "@vitest/coverage-v8": "4.0.18",
-    "axe-core": "4.11.1",
+    "axe-core": "4.11.2",
     "happy-dom": "20.8.9",
     "i18next-cli": "1.47.12",
-    "msw": "2.12.13",
+    "msw": "2.12.14",
     "typescript": "5.9.3",
     "vite": "7.3.2",
     "vitest": "4.0.18"
