@@ -35,7 +35,7 @@
     "@eslint/compat": "1.4.1",
     "@eslint/js": "9.39.4",
     "@microsoft/api-extractor": "7.57.8",
-    "@rollup/plugin-commonjs": "28.0.9",
+    "@rollup/plugin-commonjs": "29.0.2",
     "cross-env": "7.0.3",
     "depcheck": "1.4.7",
     "dree": "5.1.5",
