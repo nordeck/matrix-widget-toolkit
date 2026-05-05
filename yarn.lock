@@ -1914,10 +1914,10 @@
     std-env "^3.10.0"
     tinyrainbow "^3.0.3"
 
-"@vitest/eslint-plugin@1.6.15":
-  version "1.6.15"
-  resolved "https://registry.yarnpkg.com/@vitest/eslint-plugin/-/eslint-plugin-1.6.15.tgz#f13b2405bda1b32afdd9cfdc2f89edbd9b774c90"
-  integrity sha512-dTMjrdngmcB+DxomlKQ+SUubCTvd0m2hQQFpv5sx+GRodmeoxr2PVbphk57SVp250vpxphk9Ccwyv6fQ6+2gkA==
+"@vitest/eslint-plugin@1.6.16":
+  version "1.6.16"
+  resolved "https://registry.yarnpkg.com/@vitest/eslint-plugin/-/eslint-plugin-1.6.16.tgz#55017c65cdceffd9a3efdb4062177bf0c74cf819"
+  integrity sha512-2pBN1F1JXq6zTSaYC58CMJa7pGxXIRsLfOioeZM4cPE3pRdSh1ySTSoHPQlOTEF5WgoVzWZQxhGQ3ygT78hOVg==
   dependencies:
     "@typescript-eslint/scope-manager" "^8.58.0"
     "@typescript-eslint/utils" "^8.58.0"
