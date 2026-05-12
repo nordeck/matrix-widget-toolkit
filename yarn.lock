@@ -3720,7 +3720,7 @@ i18next-cli@1.47.12:
     react-i18next "^16.5.4"
     yaml "2.8.2"
 
-i18next-http-backend@^3.0.2:
+i18next-http-backend@^3.0.6:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/i18next-http-backend/-/i18next-http-backend-3.0.6.tgz#653f298ebdea94bb70d30f46cf03dd2ec71167e4"
   integrity sha512-mBOqy8993jtqAoj6XaI1XeC/8/9v6EPS+681ziegrPvTB0DoaCY7PpTS0SpY56qLMoS4OI1TZEM2Zf59zNh05w==
@@ -3744,10 +3744,10 @@ i18next-resources-to-backend@^1.2.1:
   dependencies:
     "@babel/runtime" "^7.23.2"
 
-i18next@^25.8.18:
-  version "25.10.9"
-  resolved "https://registry.yarnpkg.com/i18next/-/i18next-25.10.9.tgz#ecc1397a05cd69a479ac672348b9c2df153f984f"
-  integrity sha512-hQY9/bFoQKGlSKMlaCuLR8w1h5JjieqrsnZvEmj1Ja6Ec7fbyc4cTrCsY9mb9Sd8YQ/swsrKz1S9M8AcvVI70w==
+i18next@^25.8.20:
+  version "25.10.10"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-25.10.10.tgz#d610511c87150e7a98c58fa780e93f90603fe187"
+  integrity sha512-cqUW2Z3EkRx7NqSyywjkgCLK7KLCL6IFVFcONG7nVYIJ3ekZ1/N5jUsihHV6Bq37NfhgtczxJcxduELtjTwkuQ==
   dependencies:
     "@babel/runtime" "^7.29.2"
 
