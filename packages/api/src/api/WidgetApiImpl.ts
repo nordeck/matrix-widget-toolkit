@@ -51,6 +51,7 @@ import {
   mergeAll,
   share,
   throwError,
+  timeout,
 } from 'rxjs';
 import {
   isValidRoomEvent,
@@ -256,7 +257,9 @@ export class WidgetApiImpl implements WidgetApi {
             },
           );
 
-          this.widgetConfig = await firstValueFrom(widgetConfig$);
+          this.widgetConfig = await firstValueFrom(
+            widgetConfig$.pipe(timeout(10_000)),
+          );
         })()
       : undefined;
 
@@ -551,7 +554,9 @@ export class WidgetApiImpl implements WidgetApi {
     content: T,
     { roomId }: { roomId?: string } = {},
   ): Promise<RoomEvent<T>> {
-    const subject = new ReplaySubject<CustomEvent<IWidgetApiRequest>>();
+    // Buffer size of 100 prevents unbounded growth while still covering any
+    // events that arrive between subscription creation and firstValueFrom.
+    const subject = new ReplaySubject<CustomEvent<IWidgetApiRequest>>(100);
     const subscription = this.events$.subscribe((e) => subject.next(e));
 
     try {
@@ -573,6 +578,7 @@ export class WidgetApiImpl implements WidgetApi {
             );
           }),
           map((event) => event.detail.data as RoomEvent<T>),
+          timeout(30_000),
         ),
       );
       return event;
@@ -709,7 +715,7 @@ export class WidgetApiImpl implements WidgetApi {
       },
     );
 
-    return firstValueFrom(closeModalWidget$);
+    return firstValueFrom(closeModalWidget$.pipe(timeout(10 * 60_000)));
   }
 
   /** {@inheritDoc WidgetApi.setModalButtonEnabled} */
