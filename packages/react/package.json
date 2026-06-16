@@ -20,7 +20,7 @@
     "@vitest/coverage-v8": "4.0.18",
     "typescript": "5.9.3",
     "vite": "7.3.2",
-    "vitest": "4.0.18"
+    "vitest": "4.1.0"
   },
   "scripts": {
     "build": "tsc && rollup --config ../../rollup.config.mjs",
