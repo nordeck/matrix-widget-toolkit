@@ -16,7 +16,7 @@
     "@testing-library/react": "16.3.2",
     "@testing-library/user-event": "14.6.1",
     "@types/node": "22.19.21",
-    "@types/react": "18.3.27",
+    "@types/react": "18.3.31",
     "@vitest/coverage-v8": "4.0.18",
     "typescript": "5.9.3",
     "vite": "7.3.5",
@@ -40,8 +40,8 @@
   "dependencies": {
     "@matrix-widget-toolkit/api": "^5.0.3",
     "matrix-widget-api": "^1.13.1",
-    "react-error-boundary": "^6.0.1",
-    "react-use": "^17.6.0"
+    "react-error-boundary": "^6.0.3",
+    "react-use": "^17.6.1"
   },
   "peerDependencies": {
     "react": "18.3.1"
