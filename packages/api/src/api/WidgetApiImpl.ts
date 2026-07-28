@@ -39,8 +39,6 @@ import {
   WidgetEventCapability,
 } from 'matrix-widget-api';
 import {
-  Observable,
-  ReplaySubject,
   concat,
   filter,
   first,
@@ -49,6 +47,8 @@ import {
   fromEvent,
   map,
   mergeAll,
+  Observable,
+  ReplaySubject,
   share,
   throwError,
 } from 'rxjs';
@@ -607,7 +607,19 @@ export class WidgetApiImpl implements WidgetApi {
     delayId: string,
     action: UpdateDelayedEventAction,
   ): Promise<void> {
-    await this.matrixWidgetApi.updateDelayedEvent(delayId, action);
+    switch (action) {
+      case UpdateDelayedEventAction.Cancel:
+        await this.matrixWidgetApi.cancelScheduledDelayedEvent(delayId);
+        break;
+
+      case UpdateDelayedEventAction.Restart:
+        await this.matrixWidgetApi.restartScheduledDelayedEvent(delayId);
+        break;
+
+      case UpdateDelayedEventAction.Send:
+        await this.matrixWidgetApi.sendScheduledDelayedEvent(delayId);
+        break;
+    }
   }
 
   /** {@inheritDoc WidgetApi.readEventRelations} */
