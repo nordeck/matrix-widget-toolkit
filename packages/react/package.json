@@ -1,6 +1,6 @@
 {
   "name": "@matrix-widget-toolkit/react",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "A simplified layer on top of @matrix-widget-toolkit/api to use it in a React based widget.",
   "author": "Nordeck IT + Consulting GmbH",
   "license": "Apache-2.0",
@@ -38,7 +38,7 @@
     "clean:cache": "echo 'script not implemented package'"
   },
   "dependencies": {
-    "@matrix-widget-toolkit/api": "^5.0.3",
+    "@matrix-widget-toolkit/api": "^5.0.4",
     "matrix-widget-api": "^1.18.0",
     "react-error-boundary": "^6.0.1",
     "react-use": "^17.6.0"

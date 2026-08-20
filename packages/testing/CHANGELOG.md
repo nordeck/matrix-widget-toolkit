@@ -1,5 +1,13 @@
 # `@matrix-widget-toolkit/testing`
 
+## 4.0.2
+
+### Patch Changes
+
+- 3e6c8e9: Update `@reduxjs/toolkit` to 2.12.0, `matrix-widget-api` to 1.18.0
+- Updated dependencies [3e6c8e9]
+  - @matrix-widget-toolkit/api@5.0.4
+
 ## 4.0.1
 
 ### Patch Changes
