@@ -83,6 +83,9 @@ export function hasWidgetParameters(widgetApi: WidgetApi): boolean;
 export function isRoomEvent(event: RoomEvent | StateEvent): event is RoomEvent;
 
 // @public
+export function isRoomEventCurrentlySticky(event: RoomEvent): boolean;
+
+// @public
 export function isStateEvent(event: RoomEvent | StateEvent): event is StateEvent;
 
 // @public
@@ -181,7 +184,7 @@ export const ROOM_EVENT_REDACTION = "m.room.redaction";
 export const ROOM_VERSION_12_CREATOR = "ROOM_VERSION_12_CREATOR";
 
 // @public
-export type RoomEvent<T = unknown> = Omit<IRoomEvent, 'content' | 'state_key' | 'unsigned'> & {
+export type RoomEvent<T = unknown> = Omit<IRoomEvent, 'content' | 'state_key' | 'unsigned' | 'sticky'> & {
     content: T;
 };
 
@@ -208,7 +211,7 @@ export const STATE_EVENT_POWER_LEVELS = "m.room.power_levels";
 export const STATE_EVENT_ROOM_MEMBER = "m.room.member";
 
 // @public
-export type StateEvent<T = unknown> = Omit<IRoomEvent, 'content' | 'unsigned' | 'state_key'> & {
+export type StateEvent<T = unknown> = Omit<IRoomEvent, 'content' | 'unsigned' | 'state_key' | 'sticky'> & {
     state_key: string;
     content: T;
 };
@@ -280,9 +283,11 @@ export type WidgetApi = {
     }): Observable<RoomEvent<T>>;
     sendRoomEvent<T>(eventType: string, content: T, options?: {
         roomId?: string;
+        stickyDurationMs?: number;
     }): Promise<RoomEvent<T>>;
     sendDelayedRoomEvent<T>(eventType: string, content: T, delay: number, options?: {
         roomId?: string;
+        stickyDurationMs?: number;
     }): Promise<{
         delay_id: string;
     }>;
@@ -395,6 +400,7 @@ export class WidgetApiImpl implements WidgetApi {
     }>;
     sendDelayedRoomEvent<T>(eventType: string, content: T, delay: number, input?: {
         roomId?: string;
+        stickyDurationMs?: number;
     }): Promise<{
         delay_id: string;
     }>;
@@ -406,6 +412,7 @@ export class WidgetApiImpl implements WidgetApi {
     }>;
     sendRoomEvent<T>(eventType: string, content: T, input?: {
         roomId?: string;
+        stickyDurationMs?: number;
     }): Promise<RoomEvent<T>>;
     sendStateEvent<T>(eventType: string, content: T, input?: {
         roomId?: string;

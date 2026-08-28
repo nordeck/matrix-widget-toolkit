@@ -399,6 +399,12 @@ export function mockWidgetApi(opts?: {
       room_id: options?.roomId ?? roomId,
     };
 
+    if (options?.stickyDurationMs) {
+      ev.msc4354_sticky = {
+        duration_ms: options.stickyDurationMs,
+      };
+    }
+
     if (ev.type === ROOM_EVENT_REDACTION) {
       const redactionEv = ev as RedactionRoomEvent;
       redactionEv.redacts = redactionEv.content['redacts'];

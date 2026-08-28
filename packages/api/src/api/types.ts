@@ -113,7 +113,7 @@ export type WidgetParameters = {
  */
 export type StateEvent<T = unknown> = Omit<
   IRoomEvent,
-  'content' | 'unsigned' | 'state_key'
+  'content' | 'unsigned' | 'state_key' | 'sticky'
 > & {
   state_key: string;
   content: T;
@@ -124,7 +124,7 @@ export type StateEvent<T = unknown> = Omit<
  */
 export type RoomEvent<T = unknown> = Omit<
   IRoomEvent,
-  'content' | 'state_key' | 'unsigned'
+  'content' | 'state_key' | 'unsigned' | 'sticky'
 > & {
   content: T;
 };
@@ -407,11 +407,12 @@ export type WidgetApi = {
    * @param content - The content of the event.
    * @param options - Options for sending the room event.
    *                  Use `roomId` to send the room event to another room.
+   *                  Use `stickyDurationMs` to send a sticky room event.
    */
   sendRoomEvent<T>(
     eventType: string,
     content: T,
-    options?: { roomId?: string },
+    options?: { roomId?: string; stickyDurationMs?: number },
   ): Promise<RoomEvent<T>>;
 
   /**
@@ -419,17 +420,16 @@ export type WidgetApi = {
    * @param eventType - The type of the event to send.
    * @param content - The content of the event.
    * @param delay - The delay of the event in milliseconds.
-   * @param options - Options for sending the state event.
+   * @param options - Options for sending the room event.
    *                  Use `roomId` to send the state event to another room.
-   *                  Use `stateKey` to send a state event with a custom state
-   *                  key.
+   *                  Use `stickyDurationMs` to send a sticky room event.
    * @returns The result data of delayed event with delay_id.
    */
   sendDelayedRoomEvent<T>(
     eventType: string,
     content: T,
     delay: number,
-    options?: { roomId?: string },
+    options?: { roomId?: string; stickyDurationMs?: number },
   ): Promise<{ delay_id: string }>;
 
   /**

@@ -140,6 +140,34 @@ describe('<DicePage />', () => {
       {
         pips: expect.any(Number),
       },
+      undefined,
+    );
+  });
+
+  it('should throw a dice sticky', async () => {
+    render(<DicePage />, { wrapper });
+
+    await userEvent.click(
+      await screen.findByRole('checkbox', {
+        name: 'Send as sticky event',
+      }),
+    );
+
+    const button = await screen.findByRole('button', { name: /throw dice$/i });
+    await userEvent.click(button);
+
+    await expect(
+      screen.findByText(/your last throw: ./i),
+    ).resolves.toBeInTheDocument();
+
+    expect(widgetApi.sendRoomEvent).toHaveBeenCalledWith(
+      'net.nordeck.throw_dice',
+      {
+        pips: expect.any(Number),
+      },
+      {
+        stickyDurationMs: 1000,
+      },
     );
   });
 
@@ -167,6 +195,43 @@ describe('<DicePage />', () => {
         pips: expect.any(Number),
       },
       expect.any(Number),
+      undefined,
+    );
+  });
+
+  it('should throw a dice delayed and sticky', async () => {
+    render(<DicePage />, { wrapper });
+
+    await userEvent.click(
+      await screen.findByRole('checkbox', {
+        name: 'Send as sticky event',
+      }),
+    );
+
+    const button = await screen.findByRole('button', {
+      name: /throw dice 10 seconds delayed/i,
+    });
+    await userEvent.click(button);
+
+    await expect(
+      screen.findByText(/your last throw: ./i),
+    ).resolves.toBeInTheDocument();
+    await expect(
+      screen.findByText(/your last delay id: ./i),
+    ).resolves.toBeInTheDocument();
+    await expect(
+      screen.findByText(/throw dice delayed event actions:/i),
+    ).resolves.toBeInTheDocument();
+
+    expect(widgetApi.sendDelayedRoomEvent).toHaveBeenCalledWith(
+      'net.nordeck.throw_dice',
+      {
+        pips: expect.any(Number),
+      },
+      expect.any(Number),
+      {
+        stickyDurationMs: 1000,
+      },
     );
   });
 
@@ -193,6 +258,7 @@ describe('<DicePage />', () => {
           pips: expect.any(Number),
         },
         expect.any(Number),
+        undefined,
       );
 
       const updateButton = await screen.findByRole('button', {
@@ -230,6 +296,7 @@ describe('<DicePage />', () => {
         pips: expect.any(Number),
       },
       expect.any(Number),
+      undefined,
     );
 
     const updateButton = await screen.findByRole('button', {
