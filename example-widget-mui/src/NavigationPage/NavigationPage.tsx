@@ -109,10 +109,17 @@ export const NavigationPage = (): ReactElement => {
           description="Example on how to build UIs using Mui that match the
           design of Element"
         />
+
         <NavigationItem
           to="/image"
           title="Up- and download image"
           description="Example for up- and downloading an image file"
+        />
+
+        <NavigationItem
+          to="/rtcTransports"
+          title="RTC Transports"
+          description="Example on how to discover RTC transports"
         />
       </List>
     </Box>

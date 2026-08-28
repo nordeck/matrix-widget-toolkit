@@ -23,6 +23,7 @@ import {
   IModalWidgetReturnData,
   IOpenIDCredentials,
   IRoomEvent,
+  IRtcTransport,
   ISendEventFromWidgetResponseData,
   IUploadFileActionFromWidgetResponseData,
   IWidget,
@@ -643,6 +644,11 @@ export type WidgetApi = {
   downloadFile(
     contentUrl: string,
   ): Promise<IDownloadFileActionFromWidgetResponseData>;
+
+  /**
+   * Gets RTC transports
+   */
+  getRtcTransports(): Promise<IRtcTransport[]>;
 
   // TODO: sendSticker, setAlwaysOnScreen
 };

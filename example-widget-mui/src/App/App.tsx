@@ -31,6 +31,7 @@ import { NavigationPage } from '../NavigationPage';
 import { PowerLevelsPage } from '../PowerLevelsPage';
 import { RelationsPage } from '../RelationsPage';
 import { RoomPage } from '../RoomPage';
+import { RtcTransportsPage } from '../RtcTransportsPage';
 import { ThemePage } from '../ThemePage';
 import { WelcomePage } from '../WelcomePage';
 
@@ -68,6 +69,7 @@ export function App({
               <Route path="/invitations" element={<InvitationsPage />} />
               <Route path="/theme" element={<ThemePage />} />
               <Route path="/image" element={<ImagePage />} />
+              <Route path="/rtcTransports" element={<RtcTransportsPage />} />
             </Routes>
           </MuiWidgetApiProvider>
         </Suspense>

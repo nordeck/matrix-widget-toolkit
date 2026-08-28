@@ -254,6 +254,7 @@ export function mockWidgetApi(opts?: {
     downloadFile: vi.fn().mockResolvedValue({
       file: new Blob(['image content'], { type: 'image/png' }),
     }),
+    getRtcTransports: vi.fn().mockResolvedValue([]),
   };
 
   widgetApi.receiveRoomEvents.mockImplementation(async (type, options) => {
