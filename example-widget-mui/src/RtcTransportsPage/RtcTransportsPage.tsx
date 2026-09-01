@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { MuiCapabilitiesGuard } from '@matrix-widget-toolkit/mui';
 import { useWidgetApi } from '@matrix-widget-toolkit/react';
 import { Alert, AlertTitle, Box, Skeleton } from '@mui/material';
 import { MatrixCapabilities } from 'matrix-widget-api';
@@ -27,7 +28,11 @@ export const RtcTransportsPage = (): ReactElement => {
       <NavigationBar title="RTC Transports" />
 
       <Box m={1}>
-        <RtcTransportsView />
+        <MuiCapabilitiesGuard
+          capabilities={[MatrixCapabilities.MSC4515RtcTransports]}
+        >
+          <RtcTransportsView />
+        </MuiCapabilitiesGuard>
       </Box>
     </>
   );
@@ -36,20 +41,17 @@ export const RtcTransportsPage = (): ReactElement => {
 const RtcTransportsView = (): ReactElement => {
   const widgetApi = useWidgetApi();
 
-  const { value, error, loading } = useAsync(async () => {
-    await widgetApi.requestCapabilities([
-      MatrixCapabilities.MSC4515RtcTransports,
-    ]);
-
-    return await widgetApi.getRtcTransports();
-  }, [widgetApi]);
+  const { value, error, loading } = useAsync(
+    async () => widgetApi.getRtcTransports(),
+    [widgetApi],
+  );
 
   if (loading) {
     return <Skeleton variant="rectangular" height={100} />;
   } else if (value) {
     return (
       <Alert severity="success">
-        <AlertTitle>RTC Transports</AlertTitle>
+        <AlertTitle>RTC Transports discovered</AlertTitle>
 
         <code>
           <pre>{JSON.stringify(value, undefined, '  ')}</pre>
