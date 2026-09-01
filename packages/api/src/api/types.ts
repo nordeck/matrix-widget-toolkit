@@ -646,7 +646,12 @@ export type WidgetApi = {
   ): Promise<IDownloadFileActionFromWidgetResponseData>;
 
   /**
-   * Gets RTC transports
+   * Gets the registered RTC transports.
+   *
+   * @returns The available transports, each identified by its `type`. The
+   *          remaining properties depend on that type, for example
+   *          `livekit_service_url` for the `livekit` transport. Resolves to an
+   *          empty array if no transport is available to the user.
    */
   getRtcTransports(): Promise<IRtcTransport[]>;
 
