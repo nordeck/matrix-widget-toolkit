@@ -15,8 +15,8 @@
     "@types/node": "22.19.21",
     "@vitest/coverage-v8": "4.0.18",
     "typescript": "5.9.3",
-    "vite": "7.3.5",
-    "vitest": "4.1.0"
+    "vite": "7.3.6",
+    "vitest": "4.1.11"
   },
   "scripts": {
     "build": "tsc && rollup --config ../../rollup.config.mjs",
