@@ -17,8 +17,8 @@
     "@types/qs": "6.14.0",
     "@vitest/coverage-v8": "4.0.18",
     "typescript": "5.9.3",
-    "vite": "7.3.5",
-    "vitest": "4.1.0"
+    "vite": "7.3.6",
+    "vitest": "4.1.11"
   },
   "scripts": {
     "build": "tsc && rollup --config ../../rollup.config.mjs",
@@ -36,9 +36,9 @@
     "clean:cache": "echo 'script not implemented package'"
   },
   "dependencies": {
-    "joi": "^17.13.3",
+    "joi": "^17.13.4",
     "matrix-widget-api": "^1.18.0",
-    "qs": "^6.15.1",
+    "qs": "^6.15.3",
     "rxjs": "^7.8.2"
   },
   "repository": {
