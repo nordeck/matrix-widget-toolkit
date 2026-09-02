@@ -12,6 +12,7 @@ import { IModalWidgetOpenRequestDataButton } from 'matrix-widget-api';
 import { IModalWidgetReturnData } from 'matrix-widget-api';
 import { IOpenIDCredentials } from 'matrix-widget-api';
 import { IRoomEvent } from 'matrix-widget-api';
+import { IRtcTransport } from 'matrix-widget-api';
 import { ISendEventFromWidgetResponseData } from 'matrix-widget-api';
 import { IUploadFileActionFromWidgetResponseData } from 'matrix-widget-api';
 import { IWidget } from 'matrix-widget-api';
@@ -325,6 +326,7 @@ export type WidgetApi = {
     getMediaConfig(): Promise<IGetMediaConfigActionFromWidgetResponseData>;
     uploadFile(file: XMLHttpRequestBodyInit): Promise<IUploadFileActionFromWidgetResponseData>;
     downloadFile(contentUrl: string): Promise<IDownloadFileActionFromWidgetResponseData>;
+    getRtcTransports(): Promise<IRtcTransport[]>;
 };
 
 // @public
@@ -337,6 +339,7 @@ export class WidgetApiImpl implements WidgetApi {
     static create(input?: WidgetApiOptions): Promise<WidgetApi>;
     downloadFile(contentUrl: string): Promise<IDownloadFileActionFromWidgetResponseData>;
     getMediaConfig(): Promise<IGetMediaConfigActionFromWidgetResponseData>;
+    getRtcTransports(): Promise<IRtcTransport[]>;
     getWidgetConfig<T extends IWidgetApiRequestData>(): Readonly<WidgetConfig<T> | undefined>;
     hasCapabilities(capabilities: Array<WidgetEventCapability | Capability>): boolean;
     hasInitialCapabilities(): boolean;

@@ -23,6 +23,7 @@ import {
   IModalWidgetReturnData,
   IOpenIDCredentials,
   IRoomEvent,
+  IRtcTransport,
   ISendEventFromWidgetResponseData,
   IUploadFileActionFromWidgetResponseData,
   IWidget,
@@ -643,6 +644,16 @@ export type WidgetApi = {
   downloadFile(
     contentUrl: string,
   ): Promise<IDownloadFileActionFromWidgetResponseData>;
+
+  /**
+   * Gets the registered RTC transports.
+   *
+   * @returns The available transports, each identified by its `type`. The
+   *          remaining properties depend on that type, for example
+   *          `livekit_service_url` for the `livekit` transport. Resolves to an
+   *          empty array if no transport is available to the user.
+   */
+  getRtcTransports(): Promise<IRtcTransport[]>;
 
   // TODO: sendSticker, setAlwaysOnScreen
 };

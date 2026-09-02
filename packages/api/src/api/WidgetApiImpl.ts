@@ -25,6 +25,7 @@ import {
   INotifyCapabilitiesActionRequest,
   IOpenIDCredentials,
   IRoomEvent,
+  IRtcTransport,
   ISendEventFromWidgetResponseData,
   IUploadFileActionFromWidgetResponseData,
   IWidgetApiRequest,
@@ -881,5 +882,10 @@ export class WidgetApiImpl implements WidgetApi {
     contentUrl: string,
   ): Promise<IDownloadFileActionFromWidgetResponseData> {
     return await this.matrixWidgetApi.downloadFile(contentUrl);
+  }
+
+  /** {@inheritdoc WidgetApi.getRtcTransports}  */
+  async getRtcTransports(): Promise<IRtcTransport[]> {
+    return (await this.matrixWidgetApi.getRtcTransports()).rtc_transports;
   }
 }
