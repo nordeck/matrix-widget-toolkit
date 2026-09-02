@@ -486,6 +486,18 @@ describe('isRoomEventCurrentlySticky', () => {
     ).toBe(true);
   });
 
+  it('should return true if sticky room event is currently sticky using stable name', () => {
+    expect(
+      isRoomEventCurrentlySticky({
+        ...roomEventData,
+        origin_server_ts: Date.now(),
+        sticky: {
+          duration_ms: 3600000,
+        },
+      }),
+    ).toBe(true);
+  });
+
   it('should return false if sticky room event is currently not sticky', () => {
     vi.setSystemTime(3600000);
     expect(

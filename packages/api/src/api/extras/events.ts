@@ -110,13 +110,19 @@ export function isValidToDeviceMessageEvent(
  * @returns true if event is a sticky event and is not expired according to sticky duration, otherwise false
  */
 export function isRoomEventCurrentlySticky(event: RoomEvent): boolean {
-  if (!event.msc4354_sticky) {
+  let eventSticky: {
+    duration_ms: number;
+  };
+  if (event.sticky) {
+    eventSticky = event.sticky;
+  } else if (event.msc4354_sticky) {
+    eventSticky = event.msc4354_sticky;
+  } else {
     return false;
   }
   const now = Date.now();
   const startTime = Math.min(event.origin_server_ts, now);
-  const endTime =
-    startTime + Math.min(event.msc4354_sticky.duration_ms, 3600000);
+  const endTime = startTime + Math.min(eventSticky.duration_ms, 3600000);
   return endTime > now;
 }
 
