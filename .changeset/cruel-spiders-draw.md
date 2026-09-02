@@ -3,4 +3,4 @@
 '@matrix-widget-toolkit/api': minor
 ---
 
-Add support for RTC transports discovery
+Add support for RTC transports discovery (MSC4515)
