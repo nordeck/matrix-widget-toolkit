@@ -550,7 +550,10 @@ export class WidgetApiImpl implements WidgetApi {
   async sendRoomEvent<T>(
     eventType: string,
     content: T,
-    { roomId }: { roomId?: string } = {},
+    {
+      roomId,
+      stickyDurationMs,
+    }: { roomId?: string; stickyDurationMs?: number } = {},
   ): Promise<RoomEvent<T>> {
     const subject = new ReplaySubject<CustomEvent<IWidgetApiRequest>>();
     const subscription = this.events$.subscribe((e) => subject.next(e));
@@ -560,6 +563,8 @@ export class WidgetApiImpl implements WidgetApi {
         eventType,
         content,
         roomId,
+        undefined,
+        stickyDurationMs,
       );
       // TODO: Why do we even return the event, not just the event id, we never
       // need it.
@@ -587,13 +592,17 @@ export class WidgetApiImpl implements WidgetApi {
     eventType: string,
     content: T,
     delay: number,
-    { roomId }: { roomId?: string } = {},
+    {
+      roomId,
+      stickyDurationMs,
+    }: { roomId?: string; stickyDurationMs?: number } = {},
   ): Promise<{ delay_id: string }> {
     const { delay_id } = await this.matrixWidgetApi.sendRoomEvent(
       eventType,
       content,
       roomId,
       delay,
+      stickyDurationMs,
     );
 
     if (!delay_id) {

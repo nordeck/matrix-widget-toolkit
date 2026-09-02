@@ -129,6 +129,39 @@ describe('sendRoomEvent', () => {
     ).resolves.toEqual([expectedEvent]);
   });
 
+  it('should send sticky event to current room', async () => {
+    widgetApi.clearRoomEvents();
+
+    const expectedEvent = {
+      content: {
+        key: 'value',
+      },
+      event_id: expect.any(String),
+      origin_server_ts: expect.any(Number),
+      room_id: '!room-id:example.com',
+      sender: '@user-id:example.com',
+      type: 'com.example.test3',
+      msc4354_sticky: {
+        duration_ms: 3600000,
+      },
+    };
+
+    await expect(
+      widgetApi.sendRoomEvent(
+        'com.example.test3',
+        {
+          key: 'value',
+        },
+        {
+          stickyDurationMs: 3600000,
+        },
+      ),
+    ).resolves.toEqual(expectedEvent);
+    await expect(
+      widgetApi.receiveRoomEvents('com.example.test3'),
+    ).resolves.toEqual([expectedEvent]);
+  });
+
   it('should send redaction event to the current room', async () => {
     widgetApi.clearRoomEvents();
 

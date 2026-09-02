@@ -24,9 +24,13 @@ import {
   ButtonGroup,
   Card,
   CardContent,
+  FormControl,
+  FormControlLabel,
+  Switch,
   Typography,
 } from '@mui/material';
 import {
+  Capability,
   EventDirection,
   MatrixCapabilities,
   UpdateDelayedEventAction,
@@ -71,10 +75,11 @@ const eventDelayMs = 10000;
 
 export const DiceView = (): ReactElement => {
   const widgetApi = useWidgetApi();
+  const [sendAsStickyEvent, setSendAsStickyEvent] = useState<boolean>(false);
   const [lastOwnDice, setLastOwnDice] = useState<number | undefined>();
   const [lastDelayId, setLastDelayId] = useState<string | undefined>();
   const [lastDelayIdExpired, setLastDelayIdExpired] = useState<boolean>(false);
-  const [lastDelayError, setLastDelayError] = useState<string | undefined>();
+  const [lastError, setLastError] = useState<string | undefined>();
   const [dices, setDices] = useState<number[]>([]);
 
   const lastDelayIdTimeoutRef = useRef<Timeout>();
@@ -104,29 +109,49 @@ export const DiceView = (): ReactElement => {
   }, []);
 
   async function handleThrowDice() {
-    await widgetApi.requestCapabilities([
+    const capabilities: (WidgetEventCapability | Capability)[] = [
       WidgetEventCapability.forRoomEvent(
         EventDirection.Send,
         STATE_EVENT_THROW_DICE,
       ),
-    ]);
+    ];
+    if (sendAsStickyEvent) {
+      capabilities.push(MatrixCapabilities.MSC4407SendStickyEvent);
+    }
+    await widgetApi.requestCapabilities(capabilities);
 
     const pips = Math.floor(Math.random() * 6) + 1;
-    const result = await widgetApi.sendRoomEvent<ThrowDiceEvent>(
-      STATE_EVENT_THROW_DICE,
-      { pips },
-    );
-    setLastOwnDice(result.content.pips);
+    try {
+      const result = await widgetApi.sendRoomEvent<ThrowDiceEvent>(
+        STATE_EVENT_THROW_DICE,
+        { pips },
+        sendAsStickyEvent
+          ? {
+              stickyDurationMs: 1000,
+            }
+          : undefined,
+      );
+      setLastOwnDice(result.content.pips);
+      setLastError(undefined);
+    } catch (e) {
+      if (isError(e)) {
+        setLastError(e.message);
+      }
+    }
   }
 
   async function handleThrowDiceDelayed() {
-    await widgetApi.requestCapabilities([
+    const capabilities: (WidgetEventCapability | Capability)[] = [
       MatrixCapabilities.MSC4157SendDelayedEvent,
       WidgetEventCapability.forRoomEvent(
         EventDirection.Send,
         STATE_EVENT_THROW_DICE,
       ),
-    ]);
+    ];
+    if (sendAsStickyEvent) {
+      capabilities.push(MatrixCapabilities.MSC4407SendStickyEvent);
+    }
+    await widgetApi.requestCapabilities(capabilities);
 
     const pips = Math.floor(Math.random() * 6) + 1;
     try {
@@ -134,20 +159,25 @@ export const DiceView = (): ReactElement => {
         STATE_EVENT_THROW_DICE,
         { pips },
         eventDelayMs,
+        sendAsStickyEvent
+          ? {
+              stickyDurationMs: 1000,
+            }
+          : undefined,
       );
       setLastOwnDice(pips);
       setLastDelayId(delay_id);
       setLastDelayIdExpired(false);
-      setLastDelayError(undefined);
+      setLastError(undefined);
 
       clearTimeout(lastDelayIdTimeoutRef.current);
       lastDelayIdTimeoutRef.current = setTimeout(() => {
         setLastDelayIdExpired(true);
       }, eventDelayMs);
-    } catch {
-      setLastDelayError(
-        'Could not send a delayed event. Please check if homeserver supports delayed events.',
-      );
+    } catch (e) {
+      if (isError(e)) {
+        setLastError(e.message);
+      }
     }
   }
 
@@ -172,9 +202,9 @@ export const DiceView = (): ReactElement => {
       } else {
         setLastDelayIdExpired(true);
       }
-      setLastDelayError(undefined);
+      setLastError(undefined);
     } catch (e) {
-      setLastDelayError(isError(e) ? e.message : JSON.stringify(e));
+      setLastError(isError(e) ? e.message : JSON.stringify(e));
     }
   }
 
@@ -193,6 +223,23 @@ export const DiceView = (): ReactElement => {
           </Typography>
         </CardContent>
       </Card>
+
+      <Box mt={2}>
+        <FormControl>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={sendAsStickyEvent}
+                onChange={(_event, checked) => {
+                  setSendAsStickyEvent(checked);
+                }}
+                sx={{ ml: 2, mr: 1 }}
+              />
+            }
+            label="Send as sticky event"
+          />
+        </FormControl>
+      </Box>
 
       <Button
         sx={{ mt: 2 }}
@@ -218,10 +265,10 @@ export const DiceView = (): ReactElement => {
         </Alert>
       )}
 
-      {lastDelayError && (
+      {lastError && (
         <Alert severity="error" sx={{ mt: 2 }}>
           <AlertTitle>Error</AlertTitle>
-          {lastDelayError}
+          {lastError}
         </Alert>
       )}
 

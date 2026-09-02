@@ -104,6 +104,28 @@ export function isValidToDeviceMessageEvent(
   return true;
 }
 
+/**
+ * Check if the given event is a sticky event and is not expired according to sticky duration.
+ * @param event - The room event to check
+ * @returns true if event is a sticky event and is not expired according to sticky duration, otherwise false
+ */
+export function isRoomEventCurrentlySticky(event: RoomEvent): boolean {
+  let eventSticky: {
+    duration_ms: number;
+  };
+  if (event.sticky) {
+    eventSticky = event.sticky;
+  } else if (event.msc4354_sticky) {
+    eventSticky = event.msc4354_sticky;
+  } else {
+    return false;
+  }
+  const now = Date.now();
+  const startTime = Math.min(event.origin_server_ts, now);
+  const endTime = startTime + Math.min(eventSticky.duration_ms, 3600000);
+  return endTime > now;
+}
+
 const eventSchemaBasicProps = {
   // Do roughly check against the format
   // https://spec.matrix.org/v1.13/appendices/#common-identifier-format
@@ -125,6 +147,9 @@ export const roomEventSchema = Joi.object<RoomEvent>({
   ...eventSchemaProps,
   event_id: Joi.string().pattern(new RegExp('^\\$.*')).required(),
   origin_server_ts: Joi.date().timestamp('javascript').required(),
+  msc4354_sticky: Joi.object({
+    duration_ms: Joi.number().required(),
+  }).unknown(),
 }).unknown();
 
 export const stateEventSchema = Joi.object<StateEvent>({

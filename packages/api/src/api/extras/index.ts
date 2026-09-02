@@ -19,6 +19,7 @@ export { getRoomMemberDisplayName } from './displayName';
 export {
   STATE_EVENT_CREATE,
   isRoomEvent,
+  isRoomEventCurrentlySticky,
   isStateEvent,
   isValidCreateEventSchema,
   isValidRoomEvent,

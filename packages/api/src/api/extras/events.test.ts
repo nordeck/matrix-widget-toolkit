@@ -18,6 +18,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { RoomEvent, StateEvent, ToDeviceMessageEvent } from '../types';
 import {
   isRoomEvent,
+  isRoomEventCurrentlySticky,
   isStateEvent,
   isValidCreateEventSchema,
   isValidPowerLevelStateEvent,
@@ -87,6 +88,17 @@ describe('isValidRoomEvent', () => {
     expect(isValidRoomEvent(roomEventData)).toBe(true);
   });
 
+  it('should accept sticky event', () => {
+    expect(
+      isValidRoomEvent({
+        ...roomEventData,
+        msc4354_sticky: {
+          duration_ms: 3600000,
+        },
+      }),
+    ).toBe(true);
+  });
+
   it.each<object>([
     { type: undefined },
     { sender: undefined },
@@ -98,6 +110,14 @@ describe('isValidRoomEvent', () => {
     { event_id: 23 },
     { origin_server_ts: 'string' },
     { content: 23 },
+    {
+      msc4354_sticky: {},
+    },
+    {
+      msc4354_sticky: {
+        duration_ms: 'string',
+      },
+    },
   ])('should reject room event with patch %p', (patch: object) => {
     expect(
       isValidRoomEvent({
@@ -446,5 +466,65 @@ describe('isValidCreateEventSchema', () => {
     };
 
     expect(isValidCreateEventSchema(event)).toEqual(false);
+  });
+});
+
+describe('isRoomEventCurrentlySticky', () => {
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it('should return true if sticky room event is currently sticky', () => {
+    expect(
+      isRoomEventCurrentlySticky({
+        ...roomEventData,
+        origin_server_ts: Date.now(),
+        msc4354_sticky: {
+          duration_ms: 3600000,
+        },
+      }),
+    ).toBe(true);
+  });
+
+  it('should return true if sticky room event is currently sticky using stable name', () => {
+    expect(
+      isRoomEventCurrentlySticky({
+        ...roomEventData,
+        origin_server_ts: Date.now(),
+        sticky: {
+          duration_ms: 3600000,
+        },
+      }),
+    ).toBe(true);
+  });
+
+  it('should return false if sticky room event is currently not sticky', () => {
+    vi.setSystemTime(3600000);
+    expect(
+      isRoomEventCurrentlySticky({
+        ...roomEventData,
+        origin_server_ts: 0,
+        msc4354_sticky: {
+          duration_ms: 3600000,
+        },
+      }),
+    ).toBe(false);
+  });
+
+  it('should return false if sticky room event is currently not sticky, duration_ms is greater 3600000', () => {
+    vi.setSystemTime(3600000);
+    expect(
+      isRoomEventCurrentlySticky({
+        ...roomEventData,
+        origin_server_ts: 0,
+        msc4354_sticky: {
+          duration_ms: 3600001,
+        },
+      }),
+    ).toBe(false);
+  });
+
+  it('should return false if event is not a sticky event', () => {
+    expect(isRoomEventCurrentlySticky(roomEventData)).toBe(false);
   });
 });
