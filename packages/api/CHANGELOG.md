@@ -1,5 +1,17 @@
 # `@matrix-widget-toolkit/api`
 
+## 5.1.0
+
+### Minor Changes
+
+- c246174: Add support for RTC transports discovery (MSC4515)
+- 5f2f76a: Add support for sticky events (MSC4407)
+
+### Patch Changes
+
+- 2b536aa: Update dependency @rollup/plugin-commonjs to v29
+- 3e6c8e9: Update `@reduxjs/toolkit` to 2.12.0, `matrix-widget-api` to 1.18.0
+
 ## 5.0.3
 
 ### Patch Changes

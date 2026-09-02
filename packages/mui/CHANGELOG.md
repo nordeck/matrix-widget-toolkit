@@ -1,5 +1,17 @@
 # `@matrix-widget-toolkit/mui`
 
+## 2.2.2
+
+### Patch Changes
+
+- 3e6c8e9: Update `@reduxjs/toolkit` to 2.12.0, `matrix-widget-api` to 1.18.0
+- Updated dependencies [c246174]
+- Updated dependencies [5f2f76a]
+- Updated dependencies [2b536aa]
+- Updated dependencies [3e6c8e9]
+  - @matrix-widget-toolkit/api@5.1.0
+  - @matrix-widget-toolkit/react@2.1.2
+
 ## 2.2.1
 
 ### Patch Changes
