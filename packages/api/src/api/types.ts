@@ -113,7 +113,7 @@ export type WidgetParameters = {
  */
 export type StateEvent<T = unknown> = Omit<
   IRoomEvent,
-  'content' | 'unsigned' | 'state_key' | 'sticky'
+  'content' | 'unsigned' | 'state_key' | 'sticky' | 'msc4354_sticky'
 > & {
   state_key: string;
   content: T;
@@ -124,7 +124,7 @@ export type StateEvent<T = unknown> = Omit<
  */
 export type RoomEvent<T = unknown> = Omit<
   IRoomEvent,
-  'content' | 'state_key' | 'unsigned' | 'sticky'
+  'content' | 'state_key' | 'unsigned'
 > & {
   content: T;
 };

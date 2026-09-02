@@ -184,7 +184,7 @@ export const ROOM_EVENT_REDACTION = "m.room.redaction";
 export const ROOM_VERSION_12_CREATOR = "ROOM_VERSION_12_CREATOR";
 
 // @public
-export type RoomEvent<T = unknown> = Omit<IRoomEvent, 'content' | 'state_key' | 'unsigned' | 'sticky'> & {
+export type RoomEvent<T = unknown> = Omit<IRoomEvent, 'content' | 'state_key' | 'unsigned'> & {
     content: T;
 };
 
@@ -211,7 +211,7 @@ export const STATE_EVENT_POWER_LEVELS = "m.room.power_levels";
 export const STATE_EVENT_ROOM_MEMBER = "m.room.member";
 
 // @public
-export type StateEvent<T = unknown> = Omit<IRoomEvent, 'content' | 'unsigned' | 'state_key' | 'sticky'> & {
+export type StateEvent<T = unknown> = Omit<IRoomEvent, 'content' | 'unsigned' | 'state_key' | 'sticky' | 'msc4354_sticky'> & {
     state_key: string;
     content: T;
 };
