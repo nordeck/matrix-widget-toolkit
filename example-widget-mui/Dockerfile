@@ -1,4 +1,4 @@
-FROM ghcr.io/nordeck/matrix-widget-toolkit/widget-server:1@sha256:55aa10d9adfb5ff8f72de7017d18a7230843bd8b056573c08a2429ad463c5564
+FROM ghcr.io/nordeck/matrix-widget-toolkit/widget-server:1@sha256:1cb5845a60176e8146a2fe8acde028a5a726f13bc3d4963feccfa581cc9ba62f
 
 # Allow loading images from all HTTP(s) URLs and blobs
 ENV CSP_IMG_SRC="http: https: blob:"
