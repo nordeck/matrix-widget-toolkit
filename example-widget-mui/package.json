@@ -16,7 +16,7 @@
     "i18next": "^25.10.10",
     "i18next-chained-backend": "^4.6.3",
     "i18next-http-backend": "^3.0.6",
-    "joi": "^17.13.6",
+    "joi": "^18.2.5",
     "matrix-widget-api": "^1.18.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -71,7 +71,7 @@
     "happy-dom": "20.8.9",
     "i18next-cli": "1.47.12",
     "msw": "2.12.14",
-    "typescript": "5.9.3",
+    "typescript": "7.0.2",
     "vite": "7.3.6",
     "vitest": "4.1.11"
   }
