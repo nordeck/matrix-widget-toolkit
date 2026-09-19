@@ -13,8 +13,8 @@
   "type": "module",
   "devDependencies": {
     "@rollup/plugin-commonjs": "29.0.3",
-    "@types/node": "22.19.21",
-    "@types/qs": "6.14.0",
+    "@types/node": "22.20.1",
+    "@types/qs": "6.15.1",
     "@vitest/coverage-v8": "4.0.18",
     "typescript": "5.9.3",
     "vite": "7.3.6",
