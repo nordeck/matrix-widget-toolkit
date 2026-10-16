@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Nordeck IT + Consulting GmbH
+ * Copyright 2022-2026 Nordeck IT + Consulting GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,6 @@
  */
 
 import { describe, expect, it } from 'vitest';
-import { StateEvent } from '../types';
-import { StateEventCreateContent } from './events';
 import {
   calculateActionPowerLevel,
   calculateRoomEventPowerLevel,
@@ -26,44 +24,29 @@ import {
   hasRoomEventPower,
   hasStateEventPower,
   ROOM_VERSION_12_CREATOR,
+  RoomCreateEvent,
 } from './powerLevel';
 
-const room_version_11_create_event: StateEvent<StateEventCreateContent> = {
+const room_version_11_create_event: RoomCreateEvent = {
   content: {
     room_version: '11',
   },
-  event_id: 'event-id',
-  origin_server_ts: 0,
-  room_id: '!room-id:example.com',
   sender: '@user-id:example.com',
-  state_key: '',
-  type: 'm.room.create',
 };
 
-const room_version_12_create_event: StateEvent<StateEventCreateContent> = {
+const room_version_12_create_event: RoomCreateEvent = {
   content: {
     room_version: '12',
   },
-  event_id: 'event-id',
-  origin_server_ts: 0,
-  room_id: '!room-id:example.com',
   sender: '@user-id:example.com',
-  state_key: '',
-  type: 'm.room.create',
 };
-const room_version_12_create_event_with_additional_creators: StateEvent<StateEventCreateContent> =
-  {
-    content: {
-      room_version: '12',
-      additional_creators: ['@other-creator:example.com'],
-    },
-    event_id: 'event-id',
-    origin_server_ts: 0,
-    room_id: '!room-id:example.com',
-    sender: '@user-id:example.com',
-    state_key: '',
-    type: 'm.room.create',
-  };
+const room_version_12_create_event_with_additional_creators: RoomCreateEvent = {
+  content: {
+    room_version: '12',
+    additional_creators: ['@other-creator:example.com'],
+  },
+  sender: '@user-id:example.com',
+};
 
 describe('hasRoomEventPower', () => {
   it('should permit if event is missing', () => {
@@ -453,12 +436,7 @@ describe('Creator is detected correctly in room versions 1-10 vs 11+', () => {
             content: {
               room_version: version,
             },
-            event_id: 'event-id',
-            origin_server_ts: 0,
-            room_id: '!room-id:example.com',
             sender: '@user-id:example.com',
-            state_key: '',
-            type: 'm.room.create',
           },
           '@user-id:example.com',
           'm.room.create',
@@ -477,12 +455,7 @@ describe('Creator is detected correctly in room versions 1-10 vs 11+', () => {
               room_version: version,
               creator: '@user-id:example.com',
             },
-            event_id: 'event-id',
-            origin_server_ts: 0,
-            room_id: '!room-id:example.com',
             sender: '@user-id:example.com',
-            state_key: '',
-            type: 'm.room.create',
           },
           '@user-id:example.com',
           'm.room.create',
