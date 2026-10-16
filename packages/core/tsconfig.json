@@ -1,0 +1,11 @@
+// Package specific tsconfig that extends the root one.
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "lib",
+    "rootDir": ".",
+    // No DOM types, so the package can be used outside of the browser
+    "lib": ["esnext"]
+  },
+  "include": ["src"]
+}

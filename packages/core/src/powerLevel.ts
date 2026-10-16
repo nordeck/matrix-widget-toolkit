@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Nordeck IT + Consulting GmbH
+ * Copyright 2022-2026 Nordeck IT + Consulting GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,44 @@
  * limitations under the License.
  */
 
-import { StateEvent } from '../types';
-import type {
-  PowerLevelsActions,
-  PowerLevelsStateEvent,
-  StateEventCreateContent,
-} from './events';
-export {
-  isValidPowerLevelStateEvent,
-  STATE_EVENT_POWER_LEVELS,
-} from './events';
+/**
+ * The types of actions.
+ */
+export type PowerLevelsActions = 'invite' | 'kick' | 'ban' | 'redact';
+
+/**
+ * The content of an `m.room.power_levels` event.
+ */
+export type PowerLevelsStateEvent = {
+  events?: { [key: string]: number };
+  state_default?: number;
+  events_default?: number;
+  users?: { [key: string]: number };
+  users_default?: number;
+  ban?: number;
+  invite?: number;
+  kick?: number;
+  redact?: number;
+};
+
+/**
+ * The content of an `m.room.create` event.
+ */
+export type StateEventCreateContent = {
+  room_version?: string; // Room version 1 does not have a room version, so we allow it to be undefined.
+  creator?: string; // The user ID of the creator of the room.
+  additional_creators?: string[]; // The user IDs of additional creators of the room.
+  type?: string; // Optional room type to denote a room’s intended function outside of traditional conversation.
+};
+
+/**
+ * The parts of an `m.room.create` event that are needed to calculate power
+ * levels.
+ */
+export type RoomCreateEvent = {
+  sender: string;
+  content: StateEventCreateContent;
+};
 
 /**
  * Room version 12 requires us to have something larger than Max integer for room creators.
@@ -66,7 +94,7 @@ export function compareUserPowerLevelToNormalPowerLevel(
  */
 export function hasRoomEventPower(
   powerLevelStateEvent: PowerLevelsStateEvent | undefined,
-  createRoomStateEvent: StateEvent<StateEventCreateContent> | undefined,
+  createRoomStateEvent: RoomCreateEvent | undefined,
   userId: string | undefined,
   eventType: string,
 ): boolean {
@@ -99,7 +127,7 @@ export function hasRoomEventPower(
  */
 export function hasStateEventPower(
   powerLevelStateEvent: PowerLevelsStateEvent | undefined,
-  createRoomStateEvent: StateEvent<StateEventCreateContent> | undefined,
+  createRoomStateEvent: RoomCreateEvent | undefined,
   userId: string | undefined,
   eventType: string,
 ): boolean {
@@ -139,7 +167,7 @@ export function hasStateEventPower(
  */
 export function hasActionPower(
   powerLevelStateEvent: PowerLevelsStateEvent | undefined,
-  createRoomStateEvent: StateEvent<StateEventCreateContent> | undefined,
+  createRoomStateEvent: RoomCreateEvent | undefined,
   userId: string | undefined,
   action: PowerLevelsActions,
 ): boolean {
@@ -172,7 +200,7 @@ export function hasActionPower(
  */
 export function calculateUserPowerLevel(
   powerLevelStateEvent: PowerLevelsStateEvent | undefined,
-  createRoomStateEvent: StateEvent<StateEventCreateContent> | undefined,
+  createRoomStateEvent: RoomCreateEvent | undefined,
   userId: string,
 ): UserPowerLevelType {
   // This is practically not allowed and therefor not covered by the spec. However a js consumer could still pass an undefined userId so we handle it gracefully.
@@ -250,7 +278,7 @@ export function calculateRoomEventPowerLevel(
  */
 export function calculateStateEventPowerLevel(
   powerLevelStateEvent: PowerLevelsStateEvent | undefined,
-  createRoomStateEvent: StateEvent<StateEventCreateContent> | undefined,
+  createRoomStateEvent: RoomCreateEvent | undefined,
   eventType: string,
 ): number {
   // In room version 12 (and the beta org.matrix.hydra.11 version) we need 150 for m.room.tombstone events and it cant be changed by the user.

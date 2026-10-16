@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Nordeck IT + Consulting GmbH
+ * Copyright 2022-2026 Nordeck IT + Consulting GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,25 @@
  * limitations under the License.
  */
 
+export {
+  ROOM_VERSION_12_CREATOR,
+  calculateUserPowerLevel,
+  compareUserPowerLevelToNormalPowerLevel,
+  hasActionPower,
+  hasRoomEventPower,
+  hasStateEventPower,
+} from '@matrix-widget-toolkit/core';
+export type { UserPowerLevelType } from '@matrix-widget-toolkit/core';
 export { generateRoomTimelineCapabilities } from './capabilities';
 export { getRoomMemberDisplayName } from './displayName';
 export {
   STATE_EVENT_CREATE,
+  STATE_EVENT_POWER_LEVELS,
   isRoomEvent,
   isRoomEventCurrentlySticky,
   isStateEvent,
   isValidCreateEventSchema,
+  isValidPowerLevelStateEvent,
   isValidRoomEvent,
   isValidStateEvent as isValidStateEVent,
   isValidToDeviceMessageEvent,
@@ -34,17 +45,6 @@ export type {
 export { WIDGET_CAPABILITY_NAVIGATE, navigateToRoom } from './navigateTo';
 export type { NavigateToRoomOptions } from './navigateTo';
 export { compareOriginServerTS } from './originServerTs';
-export {
-  ROOM_VERSION_12_CREATOR,
-  STATE_EVENT_POWER_LEVELS,
-  calculateUserPowerLevel,
-  compareUserPowerLevelToNormalPowerLevel,
-  hasActionPower,
-  hasRoomEventPower,
-  hasStateEventPower,
-  isValidPowerLevelStateEvent,
-} from './powerLevel';
-export type { UserPowerLevelType } from './powerLevel';
 export {
   ROOM_EVENT_REDACTION,
   isValidRedactionEvent,

@@ -4,7 +4,12 @@
 
 ```ts
 
+import { calculateUserPowerLevel } from '@matrix-widget-toolkit/core';
 import { Capability } from 'matrix-widget-api';
+import { compareUserPowerLevelToNormalPowerLevel } from '@matrix-widget-toolkit/core';
+import { hasActionPower } from '@matrix-widget-toolkit/core';
+import { hasRoomEventPower } from '@matrix-widget-toolkit/core';
+import { hasStateEventPower } from '@matrix-widget-toolkit/core';
 import { IDownloadFileActionFromWidgetResponseData } from 'matrix-widget-api';
 import { IGetMediaConfigActionFromWidgetResponseData } from 'matrix-widget-api';
 import { IModalWidgetCreateData } from 'matrix-widget-api';
@@ -20,19 +25,22 @@ import { IWidgetApiRequest } from 'matrix-widget-api';
 import { IWidgetApiRequestData } from 'matrix-widget-api';
 import { ModalButtonID } from 'matrix-widget-api';
 import { Observable } from 'rxjs';
+import { PowerLevelsActions } from '@matrix-widget-toolkit/core';
+import { PowerLevelsStateEvent } from '@matrix-widget-toolkit/core';
+import { ROOM_VERSION_12_CREATOR } from '@matrix-widget-toolkit/core';
+import { StateEventCreateContent } from '@matrix-widget-toolkit/core';
 import { Symbols } from 'matrix-widget-api';
 import { UpdateDelayedEventAction } from 'matrix-widget-api';
+import { UserPowerLevelType } from '@matrix-widget-toolkit/core';
 import { WidgetApi as WidgetApi_2 } from 'matrix-widget-api';
 import { WidgetEventCapability } from 'matrix-widget-api';
 
-// @public
-export function calculateUserPowerLevel(powerLevelStateEvent: PowerLevelsStateEvent | undefined, createRoomStateEvent: StateEvent<StateEventCreateContent> | undefined, userId: string): UserPowerLevelType;
+export { calculateUserPowerLevel }
 
 // @public
 export function compareOriginServerTS<T>(a: RoomEvent<T>, b: RoomEvent<T>): number;
 
-// @public
-export function compareUserPowerLevelToNormalPowerLevel(userPowerLevel: UserPowerLevelType, normalPowerLevel: number): boolean;
+export { compareUserPowerLevelToNormalPowerLevel }
 
 // @public
 export type EventWithRelatesTo<RelationType extends string> = RoomEvent<{
@@ -67,14 +75,11 @@ export function getOriginalEventId<T>(event: RoomEventOrNewContent<T>): string;
 // @public
 export function getRoomMemberDisplayName(member: StateEvent<RoomMemberStateEventContent>, allRoomMembers?: StateEvent<RoomMemberStateEventContent>[]): string;
 
-// @public
-export function hasActionPower(powerLevelStateEvent: PowerLevelsStateEvent | undefined, createRoomStateEvent: StateEvent<StateEventCreateContent> | undefined, userId: string | undefined, action: PowerLevelsActions): boolean;
+export { hasActionPower }
 
-// @public
-export function hasRoomEventPower(powerLevelStateEvent: PowerLevelsStateEvent | undefined, createRoomStateEvent: StateEvent<StateEventCreateContent> | undefined, userId: string | undefined, eventType: string): boolean;
+export { hasRoomEventPower }
 
-// @public
-export function hasStateEventPower(powerLevelStateEvent: PowerLevelsStateEvent | undefined, createRoomStateEvent: StateEvent<StateEventCreateContent> | undefined, userId: string | undefined, eventType: string): boolean;
+export { hasStateEventPower }
 
 // @public
 export function hasWidgetParameters(widgetApi: WidgetApi): boolean;
@@ -137,25 +142,9 @@ export function observeRedactionEvents(widgetApi: WidgetApi): Observable<Redacti
 // @public
 export function parseWidgetId(widgetId: string): WidgetId;
 
-// @public
-export type PowerLevelsActions = 'invite' | 'kick' | 'ban' | 'redact';
+export { PowerLevelsActions }
 
-// @public
-export type PowerLevelsStateEvent = {
-    events?: {
-        [key: string]: number;
-    };
-    state_default?: number;
-    events_default?: number;
-    users?: {
-        [key: string]: number;
-    };
-    users_default?: number;
-    ban?: number;
-    invite?: number;
-    kick?: number;
-    redact?: number;
-};
+export { PowerLevelsStateEvent }
 
 // @public
 export function redactEvent(widgetApi: WidgetApi, eventId: string): Promise<RedactionRoomEvent>;
@@ -180,8 +169,7 @@ export function repairWidgetRegistration(widgetApi: WidgetApi, registration?: Wi
 // @public
 export const ROOM_EVENT_REDACTION = "m.room.redaction";
 
-// @public
-export const ROOM_VERSION_12_CREATOR = "ROOM_VERSION_12_CREATOR";
+export { ROOM_VERSION_12_CREATOR }
 
 // @public
 export type RoomEvent<T = unknown> = Omit<IRoomEvent, 'content' | 'state_key' | 'unsigned'> & {
@@ -216,13 +204,7 @@ export type StateEvent<T = unknown> = Omit<IRoomEvent, 'content' | 'unsigned' | 
     content: T;
 };
 
-// @public (undocumented)
-export type StateEventCreateContent = {
-    room_version?: string;
-    creator?: string;
-    additional_creators?: string[];
-    type?: string;
-};
+export { StateEventCreateContent }
 
 // @public
 export type ToDeviceMessageEvent<T = unknown> = {
@@ -239,8 +221,7 @@ export type TurnServer = {
     credential: string;
 };
 
-// @public (undocumented)
-export type UserPowerLevelType = number | typeof ROOM_VERSION_12_CREATOR;
+export { UserPowerLevelType }
 
 // @public
 export const WIDGET_CAPABILITY_NAVIGATE = "org.matrix.msc2931.navigate";
