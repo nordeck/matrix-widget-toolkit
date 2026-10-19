@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import type { IRoomEvent } from '@matrix-widget-toolkit/utils';
 import {
   EventDirection,
   IOpenIDCredentials,
+  IRoomEvent,
   ITransport,
   WidgetApi as MatrixWidgetApi,
   Symbols,

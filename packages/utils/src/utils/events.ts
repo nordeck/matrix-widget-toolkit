@@ -15,33 +15,14 @@
  */
 
 /**
- * Copied from matrix-widget-api, so `StateEvent` and `RoomEvent` can be used
- * without depending on it.
+ * Generic type for state events.
  */
-export interface IRoomEvent {
+export type StateEvent<T = unknown> = {
   type: string;
   sender: string;
   event_id: string;
   room_id: string;
-  state_key?: string;
   origin_server_ts: number;
-  content: Record<string, unknown>;
-  unsigned: Record<string, unknown>;
-  sticky?: {
-    duration_ms: number;
-  };
-  msc4354_sticky?: {
-    duration_ms: number;
-  };
-}
-
-/**
- * Generic type for state events.
- */
-export type StateEvent<T = unknown> = Omit<
-  IRoomEvent,
-  'content' | 'unsigned' | 'state_key' | 'sticky' | 'msc4354_sticky'
-> & {
   state_key: string;
   content: T;
 };
@@ -49,11 +30,19 @@ export type StateEvent<T = unknown> = Omit<
 /**
  * Generic type for room events.
  */
-export type RoomEvent<T = unknown> = Omit<
-  IRoomEvent,
-  'content' | 'state_key' | 'unsigned'
-> & {
+export type RoomEvent<T = unknown> = {
+  type: string;
+  sender: string;
+  event_id: string;
+  room_id: string;
+  origin_server_ts: number;
   content: T;
+  sticky?: {
+    duration_ms: number;
+  };
+  msc4354_sticky?: {
+    duration_ms: number;
+  };
 };
 
 /**

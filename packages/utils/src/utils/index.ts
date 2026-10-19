@@ -15,7 +15,6 @@
  */
 
 export type {
-  IRoomEvent,
   PowerLevelsActions,
   PowerLevelsStateEvent,
   RoomEvent,

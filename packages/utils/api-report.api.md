@@ -20,34 +20,6 @@ export function hasRoomEventPower(powerLevelStateEvent: PowerLevelsStateEvent | 
 export function hasStateEventPower(powerLevelStateEvent: PowerLevelsStateEvent | undefined, createRoomStateEvent: StateEvent<StateEventCreateContent> | undefined, userId: string | undefined, eventType: string): boolean;
 
 // @public
-export interface IRoomEvent {
-    // (undocumented)
-    content: Record<string, unknown>;
-    // (undocumented)
-    event_id: string;
-    // (undocumented)
-    msc4354_sticky?: {
-        duration_ms: number;
-    };
-    // (undocumented)
-    origin_server_ts: number;
-    // (undocumented)
-    room_id: string;
-    // (undocumented)
-    sender: string;
-    // (undocumented)
-    state_key?: string;
-    // (undocumented)
-    sticky?: {
-        duration_ms: number;
-    };
-    // (undocumented)
-    type: string;
-    // (undocumented)
-    unsigned: Record<string, unknown>;
-}
-
-// @public
 export type PowerLevelsActions = 'invite' | 'kick' | 'ban' | 'redact';
 
 // @public
@@ -71,12 +43,28 @@ export type PowerLevelsStateEvent = {
 export const ROOM_VERSION_12_CREATOR = "ROOM_VERSION_12_CREATOR";
 
 // @public
-export type RoomEvent<T = unknown> = Omit<IRoomEvent, 'content' | 'state_key' | 'unsigned'> & {
+export type RoomEvent<T = unknown> = {
+    type: string;
+    sender: string;
+    event_id: string;
+    room_id: string;
+    origin_server_ts: number;
     content: T;
+    sticky?: {
+        duration_ms: number;
+    };
+    msc4354_sticky?: {
+        duration_ms: number;
+    };
 };
 
 // @public
-export type StateEvent<T = unknown> = Omit<IRoomEvent, 'content' | 'unsigned' | 'state_key' | 'sticky' | 'msc4354_sticky'> & {
+export type StateEvent<T = unknown> = {
+    type: string;
+    sender: string;
+    event_id: string;
+    room_id: string;
+    origin_server_ts: number;
     state_key: string;
     content: T;
 };

@@ -130,6 +130,10 @@ export default ts.config(
     },
     rules: {
       ...vitest.configs.recommended.rules,
+      'vitest/expect-expect': [
+        'error',
+        { assertFunctionNames: ['expect', 'assert', 'expectTypeOf'] },
+      ],
       ...testingLibrary.configs['flat/react'].rules,
       'react/display-name': 'off',
     },

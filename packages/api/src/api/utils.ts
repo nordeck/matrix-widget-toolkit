@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import type { IRoomEvent } from '@matrix-widget-toolkit/utils';
 import {
   Capability,
+  IRoomEvent,
   ISendEventFromWidgetResponseData,
   Symbols,
   WidgetEventCapability,

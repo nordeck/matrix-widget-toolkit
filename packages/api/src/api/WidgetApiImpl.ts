@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import type { IRoomEvent } from '@matrix-widget-toolkit/utils';
 import {
   Capability,
   CurrentApiVersions,
@@ -25,6 +24,7 @@ import {
   IModalWidgetReturnData,
   INotifyCapabilitiesActionRequest,
   IOpenIDCredentials,
+  IRoomEvent,
   IRtcTransport,
   ISendEventFromWidgetResponseData,
   IUploadFileActionFromWidgetResponseData,
