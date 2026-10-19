@@ -1,5 +1,5 @@
 {
-  "name": "@matrix-widget-toolkit/core",
+  "name": "@matrix-widget-toolkit/utils",
   "version": "0.0.0",
   "description": "Matrix helpers without widget dependencies",
   "author": "Nordeck IT + Consulting GmbH",
@@ -36,7 +36,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/nordeck/matrix-widget-toolkit.git",
-    "directory": "packages/core"
+    "directory": "packages/utils"
   },
   "publishConfig": {
     "module": "./build/esm/index.js",

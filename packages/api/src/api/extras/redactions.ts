@@ -33,7 +33,7 @@ export type Redaction = {
 };
 
 /**
- * Types a {@link RoomEvent} to include the properties of a redaction.
+ * Types a {@link @matrix-widget-toolkit/utils#RoomEvent} to include the properties of a redaction.
  *
  * @remarks The redaction event is a special snowflake. The actual data is
  *          outside the content to make it readable without having to decrypt

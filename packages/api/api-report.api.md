@@ -4,19 +4,18 @@
 
 ```ts
 
-import { calculateUserPowerLevel } from '@matrix-widget-toolkit/core';
+import { calculateUserPowerLevel } from '@matrix-widget-toolkit/utils';
 import { Capability } from 'matrix-widget-api';
-import { compareUserPowerLevelToNormalPowerLevel } from '@matrix-widget-toolkit/core';
-import { hasActionPower } from '@matrix-widget-toolkit/core';
-import { hasRoomEventPower } from '@matrix-widget-toolkit/core';
-import { hasStateEventPower } from '@matrix-widget-toolkit/core';
+import { compareUserPowerLevelToNormalPowerLevel } from '@matrix-widget-toolkit/utils';
+import { hasActionPower } from '@matrix-widget-toolkit/utils';
+import { hasRoomEventPower } from '@matrix-widget-toolkit/utils';
+import { hasStateEventPower } from '@matrix-widget-toolkit/utils';
 import { IDownloadFileActionFromWidgetResponseData } from 'matrix-widget-api';
 import { IGetMediaConfigActionFromWidgetResponseData } from 'matrix-widget-api';
 import { IModalWidgetCreateData } from 'matrix-widget-api';
 import { IModalWidgetOpenRequestDataButton } from 'matrix-widget-api';
 import { IModalWidgetReturnData } from 'matrix-widget-api';
 import { IOpenIDCredentials } from 'matrix-widget-api';
-import { IRoomEvent } from 'matrix-widget-api';
 import { IRtcTransport } from 'matrix-widget-api';
 import { ISendEventFromWidgetResponseData } from 'matrix-widget-api';
 import { IUploadFileActionFromWidgetResponseData } from 'matrix-widget-api';
@@ -25,13 +24,16 @@ import { IWidgetApiRequest } from 'matrix-widget-api';
 import { IWidgetApiRequestData } from 'matrix-widget-api';
 import { ModalButtonID } from 'matrix-widget-api';
 import { Observable } from 'rxjs';
-import { PowerLevelsActions } from '@matrix-widget-toolkit/core';
-import { PowerLevelsStateEvent } from '@matrix-widget-toolkit/core';
-import { ROOM_VERSION_12_CREATOR } from '@matrix-widget-toolkit/core';
-import { StateEventCreateContent } from '@matrix-widget-toolkit/core';
+import { PowerLevelsActions } from '@matrix-widget-toolkit/utils';
+import { PowerLevelsStateEvent } from '@matrix-widget-toolkit/utils';
+import { ROOM_VERSION_12_CREATOR } from '@matrix-widget-toolkit/utils';
+import { RoomEvent } from '@matrix-widget-toolkit/utils';
+import { StateEvent } from '@matrix-widget-toolkit/utils';
+import { StateEventCreateContent } from '@matrix-widget-toolkit/utils';
 import { Symbols } from 'matrix-widget-api';
+import { ToDeviceMessageEvent } from '@matrix-widget-toolkit/utils';
 import { UpdateDelayedEventAction } from 'matrix-widget-api';
-import { UserPowerLevelType } from '@matrix-widget-toolkit/core';
+import { UserPowerLevelType } from '@matrix-widget-toolkit/utils';
 import { WidgetApi as WidgetApi_2 } from 'matrix-widget-api';
 import { WidgetEventCapability } from 'matrix-widget-api';
 
@@ -171,10 +173,7 @@ export const ROOM_EVENT_REDACTION = "m.room.redaction";
 
 export { ROOM_VERSION_12_CREATOR }
 
-// @public
-export type RoomEvent<T = unknown> = Omit<IRoomEvent, 'content' | 'state_key' | 'unsigned'> & {
-    content: T;
-};
+export { RoomEvent }
 
 // @public
 export type RoomEventOrNewContent<T = unknown> = RoomEvent<T | NewContentRelatesTo<T>>;
@@ -198,21 +197,11 @@ export const STATE_EVENT_POWER_LEVELS = "m.room.power_levels";
 // @public
 export const STATE_EVENT_ROOM_MEMBER = "m.room.member";
 
-// @public
-export type StateEvent<T = unknown> = Omit<IRoomEvent, 'content' | 'unsigned' | 'state_key' | 'sticky' | 'msc4354_sticky'> & {
-    state_key: string;
-    content: T;
-};
+export { StateEvent }
 
 export { StateEventCreateContent }
 
-// @public
-export type ToDeviceMessageEvent<T = unknown> = {
-    type: string;
-    sender: string;
-    encrypted: boolean;
-    content: T;
-};
+export { ToDeviceMessageEvent }
 
 // @public
 export type TurnServer = {

@@ -14,6 +14,11 @@
  * limitations under the License.
  */
 
+import type {
+  RoomEvent,
+  StateEvent,
+  ToDeviceMessageEvent,
+} from '@matrix-widget-toolkit/utils';
 import {
   Capability,
   IDownloadFileActionFromWidgetResponseData,
@@ -22,7 +27,6 @@ import {
   IModalWidgetOpenRequestDataButton,
   IModalWidgetReturnData,
   IOpenIDCredentials,
-  IRoomEvent,
   IRtcTransport,
   ISendEventFromWidgetResponseData,
   IUploadFileActionFromWidgetResponseData,
@@ -108,36 +112,11 @@ export type WidgetParameters = {
   isOpenedByClient: boolean;
 };
 
-/**
- * Generic type for state events.
- */
-export type StateEvent<T = unknown> = Omit<
-  IRoomEvent,
-  'content' | 'unsigned' | 'state_key' | 'sticky' | 'msc4354_sticky'
-> & {
-  state_key: string;
-  content: T;
-};
-
-/**
- * Generic type for room events.
- */
-export type RoomEvent<T = unknown> = Omit<
-  IRoomEvent,
-  'content' | 'state_key' | 'unsigned'
-> & {
-  content: T;
-};
-
-/**
- * Generic type for to device message events.
- */
-export type ToDeviceMessageEvent<T = unknown> = {
-  type: string;
-  sender: string;
-  encrypted: boolean;
-  content: T;
-};
+export type {
+  RoomEvent,
+  StateEvent,
+  ToDeviceMessageEvent,
+} from '@matrix-widget-toolkit/utils';
 
 /**
  * Configuration of a widget, including data passed to it.

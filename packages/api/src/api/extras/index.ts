@@ -21,8 +21,8 @@ export {
   hasActionPower,
   hasRoomEventPower,
   hasStateEventPower,
-} from '@matrix-widget-toolkit/core';
-export type { UserPowerLevelType } from '@matrix-widget-toolkit/core';
+} from '@matrix-widget-toolkit/utils';
+export type { UserPowerLevelType } from '@matrix-widget-toolkit/utils';
 export { generateRoomTimelineCapabilities } from './capabilities';
 export { getRoomMemberDisplayName } from './displayName';
 export {

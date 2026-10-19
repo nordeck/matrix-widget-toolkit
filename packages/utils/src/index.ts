@@ -20,18 +20,4 @@
  *                       other projects, like bots.
  */
 
-export {
-  ROOM_VERSION_12_CREATOR,
-  calculateUserPowerLevel,
-  compareUserPowerLevelToNormalPowerLevel,
-  hasActionPower,
-  hasRoomEventPower,
-  hasStateEventPower,
-} from './powerLevel';
-export type {
-  PowerLevelsActions,
-  PowerLevelsStateEvent,
-  RoomCreateEvent,
-  StateEventCreateContent,
-  UserPowerLevelType,
-} from './powerLevel';
+export * from './utils';

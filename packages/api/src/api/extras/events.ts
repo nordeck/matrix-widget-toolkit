@@ -17,7 +17,7 @@
 import type {
   PowerLevelsStateEvent,
   StateEventCreateContent,
-} from '@matrix-widget-toolkit/core';
+} from '@matrix-widget-toolkit/utils';
 import Joi from 'joi';
 import { RoomEvent, StateEvent, ToDeviceMessageEvent } from '../types';
 
@@ -32,10 +32,10 @@ export const STATE_EVENT_POWER_LEVELS = 'm.room.power_levels';
 export const STATE_EVENT_CREATE = 'm.room.create';
 
 /**
- * Check if the given event is a {@link StateEvent}.
+ * Check if the given event is a {@link @matrix-widget-toolkit/utils#StateEvent}.
  *
- * @param event - An event that is either a {@link RoomEvent} or a {@link StateEvent}.
- * @returns True, if the event is a {@link StateEvent}.
+ * @param event - An event that is either a {@link @matrix-widget-toolkit/utils#RoomEvent} or a {@link @matrix-widget-toolkit/utils#StateEvent}.
+ * @returns True, if the event is a {@link @matrix-widget-toolkit/utils#StateEvent}.
  */
 export function isStateEvent(
   event: RoomEvent | StateEvent,
@@ -44,17 +44,17 @@ export function isStateEvent(
 }
 
 /**
- * Check if the given event is a {@link RoomEvent}.
+ * Check if the given event is a {@link @matrix-widget-toolkit/utils#RoomEvent}.
  *
- * @param event - An event that is either a {@link RoomEvent} or a {@link StateEvent}.
- * @returns True, if the event is a {@link RoomEvent}.
+ * @param event - An event that is either a {@link @matrix-widget-toolkit/utils#RoomEvent} or a {@link @matrix-widget-toolkit/utils#StateEvent}.
+ * @returns True, if the event is a {@link @matrix-widget-toolkit/utils#RoomEvent}.
  */
 export function isRoomEvent(event: RoomEvent | StateEvent): event is RoomEvent {
   return !('state_key' in event);
 }
 
 /**
- * Check if the given value is a valid {@link RoomEvent}.
+ * Check if the given value is a valid {@link @matrix-widget-toolkit/utils#RoomEvent}.
  *
  * @param event - The value to check
  * @returns true if value is a valid room event, else false.
@@ -71,7 +71,7 @@ export function isValidRoomEvent(event: unknown): event is RoomEvent<any> {
 }
 
 /**
- * Check if the given value is a valid {@link StateEvent}.
+ * Check if the given value is a valid {@link @matrix-widget-toolkit/utils#StateEvent}.
  *
  * @param event - The value to check
  * @returns true if value is a valid state event, else false.
@@ -88,7 +88,7 @@ export function isValidStateEvent(event: unknown): event is StateEvent<any> {
 }
 
 /**
- * Check if the given value is a valid {@link ToDeviceMessageEvent}.
+ * Check if the given value is a valid {@link @matrix-widget-toolkit/utils#ToDeviceMessageEvent}.
  *
  * @param event - The value to check
  * @returns true if value is a valid to device message, else false.
@@ -174,7 +174,7 @@ export type {
   PowerLevelsActions,
   PowerLevelsStateEvent,
   StateEventCreateContent,
-} from '@matrix-widget-toolkit/core';
+} from '@matrix-widget-toolkit/utils';
 
 export const createEventSchema = Joi.object<
   StateEvent<StateEventCreateContent>
@@ -197,7 +197,7 @@ export const createEventSchema = Joi.object<
 
 /**
  * Validates that `event` is has a valid structure for a
- * {@link @matrix-widget-toolkit/core#StateEventCreateContent}.
+ * {@link @matrix-widget-toolkit/utils#StateEventCreateContent}.
  * @param event - The event to validate.
  * @returns True, if the event is valid.
  */
@@ -245,7 +245,7 @@ export const powerLevelsEventSchema = Joi.object<
 
 /**
  * Validates that `event` is has a valid structure for a
- * {@link @matrix-widget-toolkit/core#PowerLevelsStateEvent}.
+ * {@link @matrix-widget-toolkit/utils#PowerLevelsStateEvent}.
  * @param event - The event to validate.
  * @returns True, if the event is valid.
  */
