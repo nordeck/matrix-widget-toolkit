@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/widget-server`
 
+## 1.2.4
+
+### Patch Changes
+
+- 9b2c76a: Bump widget server to nginx 1.37.1
+
 ## 1.2.3
 
 ### Patch Changes
