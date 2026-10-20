@@ -1,6 +1,6 @@
 {
   "name": "@matrix-widget-toolkit/events",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Matrix event types and helpers without widget dependencies",
   "author": "Nordeck IT + Consulting GmbH",
   "license": "Apache-2.0",

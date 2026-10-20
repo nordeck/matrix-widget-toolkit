@@ -1,5 +1,13 @@
 # `@matrix-widget-toolkit/api`
 
+## 5.1.1
+
+### Patch Changes
+
+- 3d417f9: Use the event types, validators, and power level helpers from `@matrix-widget-toolkit/events`.
+- Updated dependencies [3d417f9]
+  - @matrix-widget-toolkit/events@1.0.0
+
 ## 5.1.0
 
 ### Minor Changes
