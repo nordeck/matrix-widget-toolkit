@@ -18,7 +18,7 @@ import type {
   RoomEvent,
   StateEvent,
   ToDeviceMessageEvent,
-} from '@matrix-widget-toolkit/utils';
+} from '@matrix-widget-toolkit/events';
 import {
   Capability,
   IDownloadFileActionFromWidgetResponseData,
@@ -116,7 +116,7 @@ export type {
   RoomEvent,
   StateEvent,
   ToDeviceMessageEvent,
-} from '@matrix-widget-toolkit/utils';
+} from '@matrix-widget-toolkit/events';
 
 /**
  * Configuration of a widget, including data passed to it.

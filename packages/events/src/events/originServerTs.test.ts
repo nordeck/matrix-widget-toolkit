@@ -15,8 +15,8 @@
  */
 
 import { describe, expect, it } from 'vitest';
-import { RoomEvent } from '../types';
 import { compareOriginServerTS } from './originServerTs';
+import { RoomEvent } from './types';
 
 describe('compareOriginServerTS', () => {
   function createEvent(originServerTs: number): RoomEvent {

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { StateEvent } from '../types';
+import { StateEvent } from './types';
 
 /**
  * The name of the room member state event.

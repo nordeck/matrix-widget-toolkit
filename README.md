@@ -7,7 +7,7 @@ Reusable framework for creating Matrix widgets.
 
 This repository contains multiple [packages](./packages) that provide reusable components that can be used to write Matrix/Element widgets.
 
-- [`@matrix-widget-toolkit/utils`](./packages/utils): A package that provides Matrix helpers without the widget dependencies.
+- [`@matrix-widget-toolkit/events`](./packages/events): A package that provides Matrix event types and helpers without the widget dependencies.
 - [`@matrix-widget-toolkit/api`](./packages/api): A package that wraps [`matrix-widget-api`](https://github.com/matrix-org/matrix-widget-api) to provide a more convenient API.
 - [`@matrix-widget-toolkit/react`](./packages/react): A package that provides a Widget API integration for React apps.
 - [`@matrix-widget-toolkit/mui`](./packages/mui): A package that provides a matching Mui theme for Element.

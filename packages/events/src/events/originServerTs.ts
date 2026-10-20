@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { RoomEvent } from '../types';
+import { RoomEvent } from './types';
 
 /**
  * Compares two room events by their origin server timestamp.

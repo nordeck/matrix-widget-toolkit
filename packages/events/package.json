@@ -1,7 +1,7 @@
 {
-  "name": "@matrix-widget-toolkit/utils",
+  "name": "@matrix-widget-toolkit/events",
   "version": "0.0.0",
-  "description": "Matrix helpers without widget dependencies",
+  "description": "Matrix event types and helpers without widget dependencies",
   "author": "Nordeck IT + Consulting GmbH",
   "license": "Apache-2.0",
   "source": "./src/index.ts",
@@ -11,6 +11,9 @@
     "require": "./src/index.ts"
   },
   "type": "module",
+  "dependencies": {
+    "joi": "^17.13.6"
+  },
   "devDependencies": {
     "@types/node": "22.19.21",
     "@vitest/coverage-v8": "4.0.18",
@@ -36,7 +39,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/nordeck/matrix-widget-toolkit.git",
-    "directory": "packages/utils"
+    "directory": "packages/events"
   },
   "publishConfig": {
     "module": "./build/esm/index.js",

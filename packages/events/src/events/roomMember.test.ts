@@ -15,8 +15,8 @@
  */
 
 import { describe, expect, it } from 'vitest';
-import { StateEvent } from '../types';
 import { isValidRoomMemberStateEvent } from './roomMember';
+import { StateEvent } from './types';
 
 describe('isValidRoomMemberStateEvent', () => {
   it('should permit valid event', () => {

@@ -14,22 +14,10 @@
  * limitations under the License.
  */
 
-export type {
-  PowerLevelsActions,
-  PowerLevelsStateEvent,
-  RoomEvent,
-  StateEvent,
-  StateEventCreateContent,
-  ToDeviceMessageEvent,
-  UserPowerLevelType,
-} from './events';
+/**
+ * @packageDocumentation This package provides Matrix helpers without
+ *                       dependencies, that can be used in widgets and in
+ *                       other projects, like bots.
+ */
 
-export { ROOM_VERSION_12_CREATOR } from './events';
-
-export {
-  calculateUserPowerLevel,
-  compareUserPowerLevelToNormalPowerLevel,
-  hasActionPower,
-  hasRoomEventPower,
-  hasStateEventPower,
-} from './powerLevel';
+export * from './events';

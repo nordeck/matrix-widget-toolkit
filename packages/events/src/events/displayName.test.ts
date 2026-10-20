@@ -15,9 +15,9 @@
  */
 
 import { describe, expect, it } from 'vitest';
-import { StateEvent } from '../types';
 import { getRoomMemberDisplayName } from './displayName';
 import { MembershipState, RoomMemberStateEventContent } from './roomMember';
+import { StateEvent } from './types';
 
 function createRoomMember(
   state_key: string,

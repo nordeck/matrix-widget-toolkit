@@ -14,50 +14,14 @@
  * limitations under the License.
  */
 
+import {
+  isValidRedactionEvent,
+  Redaction,
+  RedactionRoomEvent,
+  ROOM_EVENT_REDACTION,
+} from '@matrix-widget-toolkit/events';
 import { filter, Observable } from 'rxjs';
-import { RoomEvent, WidgetApi } from '../types';
-
-/**
- * The name of the redaction room event.
- */
-export const ROOM_EVENT_REDACTION = 'm.room.redaction';
-
-/**
- * The content of an `m.room.redaction` event.
- */
-export type Redaction = {
-  /**
-   * The id of the event that is redacted.
-   */
-  redacts: string;
-};
-
-/**
- * Types a {@link @matrix-widget-toolkit/utils#RoomEvent} to include the properties of a redaction.
- *
- * @remarks The redaction event is a special snowflake. The actual data is
- *          outside the content to make it readable without having to decrypt
- *          it.
- */
-export type RedactionRoomEvent = RoomEvent<Record<string, never>> & Redaction;
-
-/**
- * Check whether the format of a redaction event is valid.
- * @param event - The event to check.
- * @returns True if the event format is valid, otherwise false.
- */
-export function isValidRedactionEvent(
-  event: RoomEvent<unknown>,
-): event is RedactionRoomEvent {
-  if (
-    event.type === ROOM_EVENT_REDACTION &&
-    typeof (event as Partial<RedactionRoomEvent>).redacts === 'string'
-  ) {
-    return true;
-  }
-
-  return false;
-}
+import { WidgetApi } from '../types';
 
 /**
  * Redacts an event in the current room.

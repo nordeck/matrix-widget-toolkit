@@ -21,7 +21,7 @@ import {
   StateEvent,
   StateEventCreateContent,
   UserPowerLevelType,
-} from './events';
+} from './types';
 
 /**
  * Compare a user's power level to a normal power level.

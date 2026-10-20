@@ -17,31 +17,7 @@
 import { from, lastValueFrom } from 'rxjs';
 import { describe, expect, it, Mocked, vi } from 'vitest';
 import { RoomEvent, WidgetApi } from '../types';
-import {
-  isValidRedactionEvent,
-  observeRedactionEvents,
-  redactEvent,
-  RedactionRoomEvent,
-} from './redactions';
-
-describe('isValidRedactionEvent', () => {
-  it('should succeed for non redaction events', () => {
-    const redactionEvent = {
-      type: 'm.room.redaction',
-      redacts: 'event-1234',
-    } as Partial<RedactionRoomEvent> as RedactionRoomEvent;
-
-    expect(isValidRedactionEvent(redactionEvent)).toEqual(true);
-  });
-
-  it('should fail for non redaction events', () => {
-    const otherEvent = {
-      type: 'm.room.power_levels',
-    } as Partial<RedactionRoomEvent> as RedactionRoomEvent;
-
-    expect(isValidRedactionEvent(otherEvent)).toEqual(false);
-  });
-});
+import { observeRedactionEvents, redactEvent } from './redactions';
 
 describe('redactEvent', () => {
   it('should send a redaction event', async () => {

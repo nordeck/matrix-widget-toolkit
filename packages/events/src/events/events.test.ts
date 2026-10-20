@@ -15,7 +15,6 @@
  */
 
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { RoomEvent, StateEvent, ToDeviceMessageEvent } from '../types';
 import {
   isRoomEvent,
   isRoomEventCurrentlySticky,
@@ -25,8 +24,13 @@ import {
   isValidRoomEvent,
   isValidStateEvent,
   isValidToDeviceMessageEvent,
-  StateEventCreateContent,
 } from './events';
+import {
+  RoomEvent,
+  StateEvent,
+  StateEventCreateContent,
+  ToDeviceMessageEvent,
+} from './types';
 
 // Mock console.warn for tests
 const originalConsoleWarn = console.warn;

@@ -16,11 +16,6 @@
 
 import { describe, expect, it } from 'vitest';
 import {
-  ROOM_VERSION_12_CREATOR,
-  StateEvent,
-  StateEventCreateContent,
-} from './events';
-import {
   calculateActionPowerLevel,
   calculateRoomEventPowerLevel,
   calculateStateEventPowerLevel,
@@ -29,6 +24,11 @@ import {
   hasRoomEventPower,
   hasStateEventPower,
 } from './powerLevel';
+import {
+  ROOM_VERSION_12_CREATOR,
+  StateEvent,
+  StateEventCreateContent,
+} from './types';
 
 const room_version_11_create_event: StateEvent<StateEventCreateContent> = {
   content: {

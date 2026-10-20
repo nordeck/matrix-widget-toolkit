@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { RoomEvent } from '../types';
+import { RoomEvent } from './types';
 
 /**
  * Defines a relation to another event.

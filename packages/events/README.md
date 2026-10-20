@@ -1,6 +1,6 @@
-# `@matrix-widget-toolkit/utils`
+# `@matrix-widget-toolkit/events`
 
-[![@matrix-widget-toolkit/utils](https://img.shields.io/npm/v/@matrix-widget-toolkit/utils)](https://www.npmjs.com/package/@matrix-widget-toolkit/utils)
+[![@matrix-widget-toolkit/events](https://img.shields.io/npm/v/@matrix-widget-toolkit/events)](https://www.npmjs.com/package/@matrix-widget-toolkit/events)
 
 This package provides Matrix helpers without widget dependencies.
 
@@ -9,6 +9,11 @@ backend services. For now, the package includes:
 
 - Helper functions to calculate power levels, including the room creator rules
   of room version 12 ([MSC4289](https://github.com/matrix-org/matrix-spec-proposals/pull/4289)).
+- Types and validators for common Matrix events (`m.room.create`,
+  `m.room.power_levels`, `m.room.member`, `m.room.redaction`).
+- Helpers for event relations and edits (`m.relates_to`, `m.new_content`).
+- Helpers to compute room member display names and to sort events by
+  `origin_server_ts`.
 
 The helpers are also re-exported by `@matrix-widget-toolkit/api`, so widgets
 don't need to depend on this package directly.
@@ -18,7 +23,7 @@ don't need to depend on this package directly.
 Install it with:
 
 ```bash
-yarn add @matrix-widget-toolkit/utils
+yarn add @matrix-widget-toolkit/events
 ```
 
 ### Check power levels
@@ -33,7 +38,7 @@ import type {
   PowerLevelsStateEvent,
   StateEvent,
   StateEventCreateContent,
-} from '@matrix-widget-toolkit/utils';
+} from '@matrix-widget-toolkit/events';
 
 const alice = '@alice:example.com';
 const bob = '@bob:example.com';
@@ -65,7 +70,7 @@ Checks if a user can send a state event. It uses the level from `events`, or
 `state_default` (`50` if missing).
 
 ```typescript
-import { hasStateEventPower } from '@matrix-widget-toolkit/utils';
+import { hasStateEventPower } from '@matrix-widget-toolkit/events';
 
 hasStateEventPower(powerLevels, createEvent, bob, 'm.room.topic'); // true
 hasStateEventPower(powerLevels, createEvent, carol, 'm.room.topic'); // false
@@ -77,7 +82,7 @@ Checks if a user can send a room event. It uses the level from `events`, or
 `events_default` (`0` if missing).
 
 ```typescript
-import { hasRoomEventPower } from '@matrix-widget-toolkit/utils';
+import { hasRoomEventPower } from '@matrix-widget-toolkit/events';
 
 hasRoomEventPower(powerLevels, createEvent, carol, 'm.room.message'); // true
 hasRoomEventPower(powerLevels, createEvent, carol, 'm.reaction'); // false
@@ -90,7 +95,7 @@ Checks if a user can perform one of the actions `invite`, `kick`, `ban`, or
 `redact`.
 
 ```typescript
-import { hasActionPower } from '@matrix-widget-toolkit/utils';
+import { hasActionPower } from '@matrix-widget-toolkit/events';
 
 hasActionPower(powerLevels, createEvent, bob, 'kick'); // true
 hasActionPower(powerLevels, createEvent, carol, 'kick'); // false
@@ -106,7 +111,7 @@ higher power level than any number, so the function returns the
 import {
   ROOM_VERSION_12_CREATOR,
   calculateUserPowerLevel,
-} from '@matrix-widget-toolkit/utils';
+} from '@matrix-widget-toolkit/events';
 
 calculateUserPowerLevel(powerLevels, createEvent, alice); // ROOM_VERSION_12_CREATOR
 calculateUserPowerLevel(powerLevels, createEvent, bob); // 100
@@ -128,7 +133,7 @@ power level. Use it instead of `>=`, because it also handles
 import {
   ROOM_VERSION_12_CREATOR,
   compareUserPowerLevelToNormalPowerLevel,
-} from '@matrix-widget-toolkit/utils';
+} from '@matrix-widget-toolkit/events';
 
 compareUserPowerLevelToNormalPowerLevel(100, 150); // false
 compareUserPowerLevelToNormalPowerLevel(ROOM_VERSION_12_CREATOR, 150); // true

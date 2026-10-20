@@ -1,0 +1,79 @@
+/*
+ * Copyright 2026 Nordeck IT + Consulting GmbH
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+export type {
+  PowerLevelsActions,
+  PowerLevelsStateEvent,
+  RoomEvent,
+  StateEvent,
+  StateEventCreateContent,
+  ToDeviceMessageEvent,
+  UserPowerLevelType,
+} from './types';
+
+export { ROOM_VERSION_12_CREATOR } from './types';
+
+export {
+  STATE_EVENT_CREATE,
+  STATE_EVENT_POWER_LEVELS,
+  createEventSchema,
+  isRoomEvent,
+  isRoomEventCurrentlySticky,
+  isStateEvent,
+  isValidCreateEventSchema,
+  isValidPowerLevelStateEvent,
+  isValidRoomEvent,
+  isValidStateEvent,
+  isValidToDeviceMessageEvent,
+  powerLevelsEventSchema,
+  roomEventSchema,
+  stateEventSchema,
+  toDeviceMessageSchema,
+} from './events';
+
+export {
+  calculateUserPowerLevel,
+  compareUserPowerLevelToNormalPowerLevel,
+  hasActionPower,
+  hasRoomEventPower,
+  hasStateEventPower,
+} from './powerLevel';
+
+export { equalsSet, isDefined, subtractSet, unique } from './utils';
+
+export { getRoomMemberDisplayName } from './displayName';
+export { compareOriginServerTS } from './originServerTs';
+export { ROOM_EVENT_REDACTION, isValidRedactionEvent } from './redactions';
+export type { Redaction, RedactionRoomEvent } from './redactions';
+export {
+  getContent,
+  getOriginalEventId,
+  isValidEventWithRelatesTo,
+} from './relatesTo';
+export type {
+  EventWithRelatesTo,
+  NewContentRelatesTo,
+  RelatesTo,
+  RoomEventOrNewContent,
+} from './relatesTo';
+export {
+  STATE_EVENT_ROOM_MEMBER,
+  isValidRoomMemberStateEvent,
+} from './roomMember';
+export type {
+  MembershipState,
+  RoomMemberStateEventContent,
+} from './roomMember';

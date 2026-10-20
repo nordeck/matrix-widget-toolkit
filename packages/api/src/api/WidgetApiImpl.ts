@@ -15,6 +15,14 @@
  */
 
 import {
+  isDefined,
+  isValidRoomEvent,
+  isValidStateEvent,
+  isValidToDeviceMessageEvent,
+  subtractSet,
+  unique,
+} from '@matrix-widget-toolkit/events';
+import {
   Capability,
   CurrentApiVersions,
   IDownloadFileActionFromWidgetResponseData,
@@ -54,11 +62,6 @@ import {
   throwError,
 } from 'rxjs';
 import {
-  isValidRoomEvent,
-  isValidStateEvent,
-  isValidToDeviceMessageEvent,
-} from './extras/events';
-import {
   extractWidgetApiParameters,
   extractWidgetParameters,
   parseWidgetId,
@@ -73,13 +76,7 @@ import {
   WidgetConfig,
   WidgetParameters,
 } from './types';
-import {
-  convertToRawCapabilities,
-  isDefined,
-  isInRoom,
-  subtractSet,
-  unique,
-} from './utils';
+import { convertToRawCapabilities, isInRoom } from './utils';
 
 /**
  * Options for the {@link WidgetApiImpl.create} function.

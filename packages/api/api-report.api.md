@@ -4,12 +4,17 @@
 
 ```ts
 
-import { calculateUserPowerLevel } from '@matrix-widget-toolkit/utils';
+import { calculateUserPowerLevel } from '@matrix-widget-toolkit/events';
 import { Capability } from 'matrix-widget-api';
-import { compareUserPowerLevelToNormalPowerLevel } from '@matrix-widget-toolkit/utils';
-import { hasActionPower } from '@matrix-widget-toolkit/utils';
-import { hasRoomEventPower } from '@matrix-widget-toolkit/utils';
-import { hasStateEventPower } from '@matrix-widget-toolkit/utils';
+import { compareOriginServerTS } from '@matrix-widget-toolkit/events';
+import { compareUserPowerLevelToNormalPowerLevel } from '@matrix-widget-toolkit/events';
+import { EventWithRelatesTo } from '@matrix-widget-toolkit/events';
+import { getContent } from '@matrix-widget-toolkit/events';
+import { getOriginalEventId } from '@matrix-widget-toolkit/events';
+import { getRoomMemberDisplayName } from '@matrix-widget-toolkit/events';
+import { hasActionPower } from '@matrix-widget-toolkit/events';
+import { hasRoomEventPower } from '@matrix-widget-toolkit/events';
+import { hasStateEventPower } from '@matrix-widget-toolkit/events';
 import { IDownloadFileActionFromWidgetResponseData } from 'matrix-widget-api';
 import { IGetMediaConfigActionFromWidgetResponseData } from 'matrix-widget-api';
 import { IModalWidgetCreateData } from 'matrix-widget-api';
@@ -18,36 +23,54 @@ import { IModalWidgetReturnData } from 'matrix-widget-api';
 import { IOpenIDCredentials } from 'matrix-widget-api';
 import { IRtcTransport } from 'matrix-widget-api';
 import { ISendEventFromWidgetResponseData } from 'matrix-widget-api';
+import { isRoomEvent } from '@matrix-widget-toolkit/events';
+import { isRoomEventCurrentlySticky } from '@matrix-widget-toolkit/events';
+import { isStateEvent } from '@matrix-widget-toolkit/events';
+import { isValidCreateEventSchema } from '@matrix-widget-toolkit/events';
+import { isValidEventWithRelatesTo } from '@matrix-widget-toolkit/events';
+import { isValidPowerLevelStateEvent } from '@matrix-widget-toolkit/events';
+import { isValidRedactionEvent } from '@matrix-widget-toolkit/events';
+import { isValidRoomEvent } from '@matrix-widget-toolkit/events';
+import { isValidRoomMemberStateEvent } from '@matrix-widget-toolkit/events';
+import { isValidStateEvent as isValidStateEVent } from '@matrix-widget-toolkit/events';
+import { isValidToDeviceMessageEvent } from '@matrix-widget-toolkit/events';
 import { IUploadFileActionFromWidgetResponseData } from 'matrix-widget-api';
 import { IWidget } from 'matrix-widget-api';
 import { IWidgetApiRequest } from 'matrix-widget-api';
 import { IWidgetApiRequestData } from 'matrix-widget-api';
+import { MembershipState } from '@matrix-widget-toolkit/events';
 import { ModalButtonID } from 'matrix-widget-api';
+import { NewContentRelatesTo } from '@matrix-widget-toolkit/events';
 import { Observable } from 'rxjs';
-import { PowerLevelsActions } from '@matrix-widget-toolkit/utils';
-import { PowerLevelsStateEvent } from '@matrix-widget-toolkit/utils';
-import { ROOM_VERSION_12_CREATOR } from '@matrix-widget-toolkit/utils';
-import { RoomEvent } from '@matrix-widget-toolkit/utils';
-import { StateEvent } from '@matrix-widget-toolkit/utils';
-import { StateEventCreateContent } from '@matrix-widget-toolkit/utils';
+import { PowerLevelsActions } from '@matrix-widget-toolkit/events';
+import { PowerLevelsStateEvent } from '@matrix-widget-toolkit/events';
+import { Redaction } from '@matrix-widget-toolkit/events';
+import { RedactionRoomEvent } from '@matrix-widget-toolkit/events';
+import { RelatesTo } from '@matrix-widget-toolkit/events';
+import { ROOM_EVENT_REDACTION } from '@matrix-widget-toolkit/events';
+import { ROOM_VERSION_12_CREATOR } from '@matrix-widget-toolkit/events';
+import { RoomEvent } from '@matrix-widget-toolkit/events';
+import { RoomEventOrNewContent } from '@matrix-widget-toolkit/events';
+import { RoomMemberStateEventContent } from '@matrix-widget-toolkit/events';
+import { STATE_EVENT_CREATE } from '@matrix-widget-toolkit/events';
+import { STATE_EVENT_POWER_LEVELS } from '@matrix-widget-toolkit/events';
+import { STATE_EVENT_ROOM_MEMBER } from '@matrix-widget-toolkit/events';
+import { StateEvent } from '@matrix-widget-toolkit/events';
+import { StateEventCreateContent } from '@matrix-widget-toolkit/events';
 import { Symbols } from 'matrix-widget-api';
-import { ToDeviceMessageEvent } from '@matrix-widget-toolkit/utils';
+import { ToDeviceMessageEvent } from '@matrix-widget-toolkit/events';
 import { UpdateDelayedEventAction } from 'matrix-widget-api';
-import { UserPowerLevelType } from '@matrix-widget-toolkit/utils';
+import { UserPowerLevelType } from '@matrix-widget-toolkit/events';
 import { WidgetApi as WidgetApi_2 } from 'matrix-widget-api';
 import { WidgetEventCapability } from 'matrix-widget-api';
 
 export { calculateUserPowerLevel }
 
-// @public
-export function compareOriginServerTS<T>(a: RoomEvent<T>, b: RoomEvent<T>): number;
+export { compareOriginServerTS }
 
 export { compareUserPowerLevelToNormalPowerLevel }
 
-// @public
-export type EventWithRelatesTo<RelationType extends string> = RoomEvent<{
-    'm.relates_to': RelatesTo<RelationType>;
-}>;
+export { EventWithRelatesTo }
 
 // @public
 export function extractRawWidgetParameters(): Record<string, string>;
@@ -68,14 +91,11 @@ export function generateWidgetRegistrationUrl(options?: {
     widgetParameters?: Partial<WidgetParameters>;
 }): string;
 
-// @public
-export function getContent<T>(event: RoomEventOrNewContent<T>): T;
+export { getContent }
 
-// @public
-export function getOriginalEventId<T>(event: RoomEventOrNewContent<T>): string;
+export { getOriginalEventId }
 
-// @public
-export function getRoomMemberDisplayName(member: StateEvent<RoomMemberStateEventContent>, allRoomMembers?: StateEvent<RoomMemberStateEventContent>[]): string;
+export { getRoomMemberDisplayName }
 
 export { hasActionPower }
 
@@ -86,44 +106,32 @@ export { hasStateEventPower }
 // @public
 export function hasWidgetParameters(widgetApi: WidgetApi): boolean;
 
-// @public
-export function isRoomEvent(event: RoomEvent | StateEvent): event is RoomEvent;
+export { isRoomEvent }
 
-// @public
-export function isRoomEventCurrentlySticky(event: RoomEvent): boolean;
+export { isRoomEventCurrentlySticky }
 
-// @public
-export function isStateEvent(event: RoomEvent | StateEvent): event is StateEvent;
+export { isStateEvent }
 
-// @public
-export function isValidCreateEventSchema(event: StateEvent<unknown> | undefined): event is StateEvent<StateEventCreateContent>;
+export { isValidCreateEventSchema }
 
-// @public
-export function isValidEventWithRelatesTo(event: RoomEvent): event is EventWithRelatesTo<string>;
+export { isValidEventWithRelatesTo }
 
-// @public
-export function isValidPowerLevelStateEvent(event: StateEvent<unknown>): event is StateEvent<PowerLevelsStateEvent>;
+export { isValidPowerLevelStateEvent }
 
-// @public
-export function isValidRedactionEvent(event: RoomEvent<unknown>): event is RedactionRoomEvent;
+export { isValidRedactionEvent }
 
-// @public
-export function isValidRoomEvent(event: unknown): event is RoomEvent<any>;
+export { isValidRoomEvent }
 
-// @public
-export function isValidRoomMemberStateEvent(event: StateEvent<unknown>): event is StateEvent<RoomMemberStateEventContent>;
+export { isValidRoomMemberStateEvent }
 
-// @public
-export function isValidStateEVent(event: unknown): event is StateEvent<any>;
+export { isValidStateEVent }
 
-// @public
-export function isValidToDeviceMessageEvent(event: unknown): event is ToDeviceMessageEvent<any>;
+export { isValidToDeviceMessageEvent }
 
 // @public
 export function makeEventFromSendStateEventResult<T>(type: string, stateKey: string, content: T, sender: string, sendResult: ISendEventFromWidgetResponseData): StateEvent<T>;
 
-// @public
-export type MembershipState = 'join' | 'invite' | 'leave' | 'ban' | 'knock';
+export { MembershipState }
 
 // @public
 export function navigateToRoom(widgetApi: WidgetApi, roomId: string, opts?: NavigateToRoomOptions): Promise<void>;
@@ -133,10 +141,7 @@ export type NavigateToRoomOptions = {
     via?: string[];
 };
 
-// @public
-export type NewContentRelatesTo<T> = EventWithRelatesTo<'m.replace'>['content'] & {
-    'm.new_content': T;
-};
+export { NewContentRelatesTo }
 
 // @public
 export function observeRedactionEvents(widgetApi: WidgetApi): Observable<RedactionRoomEvent>;
@@ -151,51 +156,33 @@ export { PowerLevelsStateEvent }
 // @public
 export function redactEvent(widgetApi: WidgetApi, eventId: string): Promise<RedactionRoomEvent>;
 
-// @public
-export type Redaction = {
-    redacts: string;
-};
+export { Redaction }
 
-// @public
-export type RedactionRoomEvent = RoomEvent<Record<string, never>> & Redaction;
+export { RedactionRoomEvent }
 
-// @public
-export type RelatesTo<RelationType extends string> = {
-    event_id: string;
-    rel_type: RelationType;
-};
+export { RelatesTo }
 
 // @public
 export function repairWidgetRegistration(widgetApi: WidgetApi, registration?: WidgetRegistration): Promise<void>;
 
-// @public
-export const ROOM_EVENT_REDACTION = "m.room.redaction";
+export { ROOM_EVENT_REDACTION }
 
 export { ROOM_VERSION_12_CREATOR }
 
 export { RoomEvent }
 
-// @public
-export type RoomEventOrNewContent<T = unknown> = RoomEvent<T | NewContentRelatesTo<T>>;
+export { RoomEventOrNewContent }
 
-// @public
-export type RoomMemberStateEventContent = {
-    membership: MembershipState;
-    displayname?: string | null;
-    avatar_url?: string | null;
-};
+export { RoomMemberStateEventContent }
 
 // @public
 export function sendStateEventWithEventResult<T>(widgetApi: WidgetApi, type: string, stateKey: string, content: T): Promise<StateEvent<T>>;
 
-// @public
-export const STATE_EVENT_CREATE = "m.room.create";
+export { STATE_EVENT_CREATE }
 
-// @public
-export const STATE_EVENT_POWER_LEVELS = "m.room.power_levels";
+export { STATE_EVENT_POWER_LEVELS }
 
-// @public
-export const STATE_EVENT_ROOM_MEMBER = "m.room.member";
+export { STATE_EVENT_ROOM_MEMBER }
 
 export { StateEvent }
 

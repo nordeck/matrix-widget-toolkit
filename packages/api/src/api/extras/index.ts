@@ -15,59 +15,47 @@
  */
 
 export {
+  ROOM_EVENT_REDACTION,
   ROOM_VERSION_12_CREATOR,
+  STATE_EVENT_CREATE,
+  STATE_EVENT_POWER_LEVELS,
+  STATE_EVENT_ROOM_MEMBER,
   calculateUserPowerLevel,
+  compareOriginServerTS,
   compareUserPowerLevelToNormalPowerLevel,
+  getContent,
+  getOriginalEventId,
+  getRoomMemberDisplayName,
   hasActionPower,
   hasRoomEventPower,
   hasStateEventPower,
-} from '@matrix-widget-toolkit/utils';
-export type { UserPowerLevelType } from '@matrix-widget-toolkit/utils';
-export { generateRoomTimelineCapabilities } from './capabilities';
-export { getRoomMemberDisplayName } from './displayName';
-export {
-  STATE_EVENT_CREATE,
-  STATE_EVENT_POWER_LEVELS,
   isRoomEvent,
   isRoomEventCurrentlySticky,
   isStateEvent,
   isValidCreateEventSchema,
+  isValidEventWithRelatesTo,
   isValidPowerLevelStateEvent,
+  isValidRedactionEvent,
   isValidRoomEvent,
+  isValidRoomMemberStateEvent,
   isValidStateEvent as isValidStateEVent,
   isValidToDeviceMessageEvent,
-} from './events';
-export type {
-  PowerLevelsActions,
-  PowerLevelsStateEvent,
-  StateEventCreateContent,
-} from './events';
-export { WIDGET_CAPABILITY_NAVIGATE, navigateToRoom } from './navigateTo';
-export type { NavigateToRoomOptions } from './navigateTo';
-export { compareOriginServerTS } from './originServerTs';
-export {
-  ROOM_EVENT_REDACTION,
-  isValidRedactionEvent,
-  observeRedactionEvents,
-  redactEvent,
-} from './redactions';
-export type { Redaction, RedactionRoomEvent } from './redactions';
-export {
-  getContent,
-  getOriginalEventId,
-  isValidEventWithRelatesTo,
-} from './relatesTo';
+} from '@matrix-widget-toolkit/events';
 export type {
   EventWithRelatesTo,
+  MembershipState,
   NewContentRelatesTo,
+  PowerLevelsActions,
+  PowerLevelsStateEvent,
+  Redaction,
+  RedactionRoomEvent,
   RelatesTo,
   RoomEventOrNewContent,
-} from './relatesTo';
-export {
-  STATE_EVENT_ROOM_MEMBER,
-  isValidRoomMemberStateEvent,
-} from './roomMember';
-export type {
-  MembershipState,
   RoomMemberStateEventContent,
-} from './roomMember';
+  StateEventCreateContent,
+  UserPowerLevelType,
+} from '@matrix-widget-toolkit/events';
+export { generateRoomTimelineCapabilities } from './capabilities';
+export { WIDGET_CAPABILITY_NAVIGATE, navigateToRoom } from './navigateTo';
+export type { NavigateToRoomOptions } from './navigateTo';
+export { observeRedactionEvents, redactEvent } from './redactions';

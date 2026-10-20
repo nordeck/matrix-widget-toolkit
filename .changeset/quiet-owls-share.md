@@ -1,5 +1,5 @@
 ---
-'@matrix-widget-toolkit/utils': major
+'@matrix-widget-toolkit/events': major
 ---
 
-Add package with power level helpers so they can be used without widget dependencies.
+Add package with Matrix event types, validators, and power level helpers so they can be used without widget dependencies.
