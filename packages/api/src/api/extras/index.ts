@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Nordeck IT + Consulting GmbH
+ * Copyright 2022-2026 Nordeck IT + Consulting GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,60 +14,48 @@
  * limitations under the License.
  */
 
-export { generateRoomTimelineCapabilities } from './capabilities';
-export { getRoomMemberDisplayName } from './displayName';
 export {
+  ROOM_EVENT_REDACTION,
+  ROOM_VERSION_12_CREATOR,
   STATE_EVENT_CREATE,
+  STATE_EVENT_POWER_LEVELS,
+  STATE_EVENT_ROOM_MEMBER,
+  calculateUserPowerLevel,
+  compareOriginServerTS,
+  compareUserPowerLevelToNormalPowerLevel,
+  getContent,
+  getOriginalEventId,
+  getRoomMemberDisplayName,
+  hasActionPower,
+  hasRoomEventPower,
+  hasStateEventPower,
   isRoomEvent,
   isRoomEventCurrentlySticky,
   isStateEvent,
   isValidCreateEventSchema,
+  isValidEventWithRelatesTo,
+  isValidPowerLevelStateEvent,
+  isValidRedactionEvent,
   isValidRoomEvent,
+  isValidRoomMemberStateEvent,
   isValidStateEvent as isValidStateEVent,
   isValidToDeviceMessageEvent,
-} from './events';
-export type {
-  PowerLevelsActions,
-  PowerLevelsStateEvent,
-  StateEventCreateContent,
-} from './events';
-export { WIDGET_CAPABILITY_NAVIGATE, navigateToRoom } from './navigateTo';
-export type { NavigateToRoomOptions } from './navigateTo';
-export { compareOriginServerTS } from './originServerTs';
-export {
-  ROOM_VERSION_12_CREATOR,
-  STATE_EVENT_POWER_LEVELS,
-  calculateUserPowerLevel,
-  compareUserPowerLevelToNormalPowerLevel,
-  hasActionPower,
-  hasRoomEventPower,
-  hasStateEventPower,
-  isValidPowerLevelStateEvent,
-} from './powerLevel';
-export type { UserPowerLevelType } from './powerLevel';
-export {
-  ROOM_EVENT_REDACTION,
-  isValidRedactionEvent,
-  observeRedactionEvents,
-  redactEvent,
-} from './redactions';
-export type { Redaction, RedactionRoomEvent } from './redactions';
-export {
-  getContent,
-  getOriginalEventId,
-  isValidEventWithRelatesTo,
-} from './relatesTo';
+} from '@matrix-widget-toolkit/events';
 export type {
   EventWithRelatesTo,
+  MembershipState,
   NewContentRelatesTo,
+  PowerLevelsActions,
+  PowerLevelsStateEvent,
+  Redaction,
+  RedactionRoomEvent,
   RelatesTo,
   RoomEventOrNewContent,
-} from './relatesTo';
-export {
-  STATE_EVENT_ROOM_MEMBER,
-  isValidRoomMemberStateEvent,
-} from './roomMember';
-export type {
-  MembershipState,
   RoomMemberStateEventContent,
-} from './roomMember';
+  StateEventCreateContent,
+  UserPowerLevelType,
+} from '@matrix-widget-toolkit/events';
+export { generateRoomTimelineCapabilities } from './capabilities';
+export { WIDGET_CAPABILITY_NAVIGATE, navigateToRoom } from './navigateTo';
+export type { NavigateToRoomOptions } from './navigateTo';
+export { observeRedactionEvents, redactEvent } from './redactions';

@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import { StateEvent } from '../types';
 import { RoomMemberStateEventContent } from './roomMember';
+import { StateEvent } from './types';
 
 /**
  * Generate a unique displayname of a user that is consistent across Matrix clients.

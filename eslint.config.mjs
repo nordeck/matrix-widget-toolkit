@@ -62,7 +62,10 @@ export default ts.config(
           templateFile: path.resolve(__dirname, './scripts/license-header.txt'),
           onNonMatchingHeader: 'replace',
           templateVars: { NAME: 'Nordeck IT + Consulting GmbH' },
-          varRegexps: { NAME: /.+/ },
+          varRegexps: {
+            NAME: /.+/,
+            YEAR: /\d{4}(\s?-\s?\d{4})?/,
+          },
         },
       ],
       // Disable for the migration to prevent a lot of errors.
@@ -127,6 +130,10 @@ export default ts.config(
     },
     rules: {
       ...vitest.configs.recommended.rules,
+      'vitest/expect-expect': [
+        'error',
+        { assertFunctionNames: ['expect', 'assert', 'expectTypeOf'] },
+      ],
       ...testingLibrary.configs['flat/react'].rules,
       'react/display-name': 'off',
     },

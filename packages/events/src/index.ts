@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Nordeck IT + Consulting GmbH
+ * Copyright 2026 Nordeck IT + Consulting GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,10 @@
  * limitations under the License.
  */
 
-import { RoomEvent } from '../types';
-
 /**
- * Compares two room events by their origin server timestamp.
- *
- * @param a - A room event
- * @param b - A room event
- * @returns Either zero if the timestamp is equal, \>0 if a is newer, or \<0 if
- *          b is newer.
+ * @packageDocumentation This package provides Matrix helpers without
+ *                       dependencies, that can be used in widgets and in
+ *                       other projects, like bots.
  */
-export function compareOriginServerTS<T>(
-  a: RoomEvent<T>,
-  b: RoomEvent<T>,
-): number {
-  return a.origin_server_ts - b.origin_server_ts;
-}
+
+export * from './events';

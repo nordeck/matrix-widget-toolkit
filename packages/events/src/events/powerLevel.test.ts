@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Nordeck IT + Consulting GmbH
+ * Copyright 2022-2026 Nordeck IT + Consulting GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,6 @@
  */
 
 import { describe, expect, it } from 'vitest';
-import { StateEvent } from '../types';
-import { StateEventCreateContent } from './events';
 import {
   calculateActionPowerLevel,
   calculateRoomEventPowerLevel,
@@ -25,8 +23,12 @@ import {
   hasActionPower,
   hasRoomEventPower,
   hasStateEventPower,
-  ROOM_VERSION_12_CREATOR,
 } from './powerLevel';
+import {
+  ROOM_VERSION_12_CREATOR,
+  StateEvent,
+  StateEventCreateContent,
+} from './types';
 
 const room_version_11_create_event: StateEvent<StateEventCreateContent> = {
   content: {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Nordeck IT + Consulting GmbH
+ * Copyright 2022-2026 Nordeck IT + Consulting GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,24 +14,14 @@
  * limitations under the License.
  */
 
-import { StateEvent } from '../types';
-import type {
+import {
   PowerLevelsActions,
   PowerLevelsStateEvent,
+  ROOM_VERSION_12_CREATOR,
+  StateEvent,
   StateEventCreateContent,
-} from './events';
-export {
-  isValidPowerLevelStateEvent,
-  STATE_EVENT_POWER_LEVELS,
-} from './events';
-
-/**
- * Room version 12 requires us to have something larger than Max integer for room creators.
- * This is a workaround to allow the room creator to always have the highest power level.
- */
-export const ROOM_VERSION_12_CREATOR = 'ROOM_VERSION_12_CREATOR';
-
-export type UserPowerLevelType = number | typeof ROOM_VERSION_12_CREATOR;
+  UserPowerLevelType,
+} from './types';
 
 /**
  * Compare a user's power level to a normal power level.

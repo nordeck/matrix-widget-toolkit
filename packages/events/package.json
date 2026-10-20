@@ -1,0 +1,69 @@
+{
+  "name": "@matrix-widget-toolkit/events",
+  "version": "0.0.0",
+  "description": "Matrix event types and helpers without widget dependencies",
+  "author": "Nordeck IT + Consulting GmbH",
+  "license": "Apache-2.0",
+  "source": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    "import": "./src/index.ts",
+    "require": "./src/index.ts"
+  },
+  "type": "module",
+  "dependencies": {
+    "joi": "^17.13.6"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.21",
+    "@vitest/coverage-v8": "4.0.18",
+    "typescript": "5.9.3",
+    "vite": "7.3.6",
+    "vitest": "4.1.11"
+  },
+  "scripts": {
+    "build": "tsc && rollup --config ../../rollup.config.mjs",
+    "tsc": "tsc",
+    "lint": "eslint .",
+    "test": "echo \"Tests have to run from root project\"",
+    "depcheck": "depcheck --ignores=@types/node,@vitest/coverage-v8 --ignore-dirs=lib",
+    "prepack": "node ../../scripts/prepack.js",
+    "postpack": "node ../../scripts/postpack.js",
+    "translate": "echo \"Nothing to translate\"",
+    "check-api-report": "api-extractor run --verbose",
+    "generate-api-report": "tsc && api-extractor run --verbose --local",
+    "clean": "yarn run clean:build",
+    "clean:build": "rm -rf lib",
+    "clean:cache": "echo 'script not implemented package'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nordeck/matrix-widget-toolkit.git",
+    "directory": "packages/events"
+  },
+  "publishConfig": {
+    "module": "./build/esm/index.js",
+    "main": "./build/cjs/index.cjs",
+    "types": "./build/esm/index.d.ts",
+    "exports": {
+      ".": {
+        "module": "./build/esm/index.js",
+        "import": {
+          "types": "./build/esm/index.d.ts",
+          "default": "./build/esm/index.js"
+        },
+        "require": {
+          "types": "./build/cjs/index.d.cts",
+          "default": "./build/cjs/index.cjs"
+        }
+      },
+      "./package.json": "./package.json"
+    }
+  },
+  "files": [
+    "build"
+  ],
+  "keywords": [
+    "matrix"
+  ]
+}

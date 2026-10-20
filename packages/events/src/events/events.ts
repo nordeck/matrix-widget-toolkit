@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Nordeck IT + Consulting GmbH
+ * Copyright 2022-2026 Nordeck IT + Consulting GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,13 @@
  */
 
 import Joi from 'joi';
-import { RoomEvent, StateEvent, ToDeviceMessageEvent } from '../types';
+import {
+  PowerLevelsStateEvent,
+  RoomEvent,
+  StateEvent,
+  StateEventCreateContent,
+  ToDeviceMessageEvent,
+} from './types';
 
 /**
  * The type of the power levels state event.
@@ -28,10 +34,10 @@ export const STATE_EVENT_POWER_LEVELS = 'm.room.power_levels';
 export const STATE_EVENT_CREATE = 'm.room.create';
 
 /**
- * Check if the given event is a {@link StateEvent}.
+ * Check if the given event is a {@link @matrix-widget-toolkit/events#StateEvent}.
  *
- * @param event - An event that is either a {@link RoomEvent} or a {@link StateEvent}.
- * @returns True, if the event is a {@link StateEvent}.
+ * @param event - An event that is either a {@link @matrix-widget-toolkit/events#RoomEvent} or a {@link @matrix-widget-toolkit/events#StateEvent}.
+ * @returns True, if the event is a {@link @matrix-widget-toolkit/events#StateEvent}.
  */
 export function isStateEvent(
   event: RoomEvent | StateEvent,
@@ -40,17 +46,17 @@ export function isStateEvent(
 }
 
 /**
- * Check if the given event is a {@link RoomEvent}.
+ * Check if the given event is a {@link @matrix-widget-toolkit/events#RoomEvent}.
  *
- * @param event - An event that is either a {@link RoomEvent} or a {@link StateEvent}.
- * @returns True, if the event is a {@link RoomEvent}.
+ * @param event - An event that is either a {@link @matrix-widget-toolkit/events#RoomEvent} or a {@link @matrix-widget-toolkit/events#StateEvent}.
+ * @returns True, if the event is a {@link @matrix-widget-toolkit/events#RoomEvent}.
  */
 export function isRoomEvent(event: RoomEvent | StateEvent): event is RoomEvent {
   return !('state_key' in event);
 }
 
 /**
- * Check if the given value is a valid {@link RoomEvent}.
+ * Check if the given value is a valid {@link @matrix-widget-toolkit/events#RoomEvent}.
  *
  * @param event - The value to check
  * @returns true if value is a valid room event, else false.
@@ -67,7 +73,7 @@ export function isValidRoomEvent(event: unknown): event is RoomEvent<any> {
 }
 
 /**
- * Check if the given value is a valid {@link StateEvent}.
+ * Check if the given value is a valid {@link @matrix-widget-toolkit/events#StateEvent}.
  *
  * @param event - The value to check
  * @returns true if value is a valid state event, else false.
@@ -84,7 +90,7 @@ export function isValidStateEvent(event: unknown): event is StateEvent<any> {
 }
 
 /**
- * Check if the given value is a valid {@link ToDeviceMessageEvent}.
+ * Check if the given value is a valid {@link @matrix-widget-toolkit/events#ToDeviceMessageEvent}.
  *
  * @param event - The value to check
  * @returns true if value is a valid to device message, else false.
@@ -166,13 +172,6 @@ export const toDeviceMessageSchema = Joi.object<ToDeviceMessageEvent>({
   content: Joi.object().required(),
 }).unknown();
 
-export type StateEventCreateContent = {
-  room_version?: string; // Room version 1 does not have a room version, so we allow it to be undefined.
-  creator?: string; // The user ID of the creator of the room.
-  additional_creators?: string[]; // The user IDs of additional creators of the room.
-  type?: string; // Optional room type to denote a room’s intended function outside of traditional conversation.
-};
-
 export const createEventSchema = Joi.object<
   StateEvent<StateEventCreateContent>
 >({
@@ -194,7 +193,7 @@ export const createEventSchema = Joi.object<
 
 /**
  * Validates that `event` is has a valid structure for a
- * {@link StateEventCreateContent}.
+ * {@link @matrix-widget-toolkit/events#StateEventCreateContent}.
  * @param event - The event to validate.
  * @returns True, if the event is valid.
  */
@@ -213,26 +212,6 @@ export function isValidCreateEventSchema(
   }
   return true;
 }
-
-/**
- * The types of actions.
- */
-export type PowerLevelsActions = 'invite' | 'kick' | 'ban' | 'redact';
-
-/**
- * The content of an `m.room.power_levels` event.
- */
-export type PowerLevelsStateEvent = {
-  events?: { [key: string]: number };
-  state_default?: number;
-  events_default?: number;
-  users?: { [key: string]: number };
-  users_default?: number;
-  ban?: number;
-  invite?: number;
-  kick?: number;
-  redact?: number;
-};
 
 export const powerLevelsEventSchema = Joi.object<
   StateEvent<PowerLevelsStateEvent>
@@ -262,7 +241,7 @@ export const powerLevelsEventSchema = Joi.object<
 
 /**
  * Validates that `event` is has a valid structure for a
- * {@link PowerLevelsStateEvent}.
+ * {@link @matrix-widget-toolkit/events#PowerLevelsStateEvent}.
  * @param event - The event to validate.
  * @returns True, if the event is valid.
  */

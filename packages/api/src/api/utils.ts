@@ -29,52 +29,6 @@ export function convertToRawCapabilities(
   return rawCapabilities.map((c) => (typeof c === 'string' ? c : c.raw));
 }
 
-export function isDefined<T>(arg: T | null | undefined): arg is T {
-  return arg !== null && arg !== undefined;
-}
-
-export function unique<T>(items: Iterable<T>): T[] {
-  return Array.from(new Set<T>(items));
-}
-
-export function equalsSet<T>(as: Set<T>, bs: Set<T>): boolean {
-  if (as.size !== bs.size) {
-    return false;
-  }
-  for (const a of Array.from(as)) {
-    if (!bs.has(a)) {
-      return false;
-    }
-  }
-  return true;
-}
-
-export function subtractSet<T>(as: Set<T>, bs: Set<T>): Set<T> {
-  const result = new Set(as);
-  bs.forEach((v) => result.delete(v));
-  return result;
-}
-
-export function isInRoom(
-  matrixEvent: IRoomEvent,
-  currentRoomId: string,
-  roomIds?: string[] | Symbols.AnyRoom,
-): boolean {
-  if (!roomIds) {
-    return matrixEvent.room_id === currentRoomId;
-  }
-
-  if (typeof roomIds === 'string') {
-    if (roomIds !== Symbols.AnyRoom) {
-      throw Error(`Unknown room id symbol: ${roomIds}`);
-    }
-
-    return true;
-  }
-
-  return roomIds.includes(matrixEvent.room_id);
-}
-
 /**
  * Create a state event from the arguments.
  *
@@ -126,4 +80,24 @@ export async function sendStateEventWithEventResult<T>(
     widgetApi.widgetParameters.userId,
     response,
   );
+}
+
+export function isInRoom(
+  matrixEvent: IRoomEvent,
+  currentRoomId: string,
+  roomIds?: string[] | Symbols.AnyRoom,
+): boolean {
+  if (!roomIds) {
+    return matrixEvent.room_id === currentRoomId;
+  }
+
+  if (typeof roomIds === 'string') {
+    if (roomIds !== Symbols.AnyRoom) {
+      throw Error(`Unknown room id symbol: ${roomIds}`);
+    }
+
+    return true;
+  }
+
+  return roomIds.includes(matrixEvent.room_id);
 }

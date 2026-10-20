@@ -21,14 +21,7 @@ import {
   WidgetEventCapability,
 } from 'matrix-widget-api';
 import { beforeEach, describe, expect, it } from 'vitest';
-import {
-  convertToRawCapabilities,
-  equalsSet,
-  isDefined,
-  isInRoom,
-  subtractSet,
-  unique,
-} from './utils';
+import { convertToRawCapabilities, isInRoom } from './utils';
 
 describe('convertToRawCapabilities', () => {
   it('should convert capabilities object to raw strings', () => {
@@ -45,48 +38,6 @@ describe('convertToRawCapabilities', () => {
       'my.capability',
       'org.matrix.msc2762.receive.state_event:m.room.name',
     ]);
-  });
-});
-
-describe('isDefined', () => {
-  it('should be defined for non null/undefined values', () => {
-    expect(isDefined(true)).toBe(true);
-    expect(isDefined(0)).toBe(true);
-    expect(isDefined('test')).toBe(true);
-    expect(isDefined({})).toBe(true);
-  });
-
-  it('should not be defined for non null values', () => {
-    expect(isDefined(null)).toBe(false);
-  });
-
-  it('should not be defined for non undefined values', () => {
-    expect(isDefined(undefined)).toBe(false);
-  });
-});
-
-describe('unique', () => {
-  it('should filter out duplicate values', () => {
-    const items = ['a', 'b', 'a', 'c', 'd', 'd'];
-    expect(unique(items)).toEqual(['a', 'b', 'c', 'd']);
-  });
-});
-
-describe('equalsSet', () => {
-  it('should return true if sets as equal', () => {
-    expect(equalsSet(new Set(['a', 'b']), new Set(['a', 'b']))).toEqual(true);
-  });
-
-  it('should return false if set are different', () => {
-    expect(equalsSet(new Set(['a', 'b']), new Set(['b']))).toEqual(false);
-  });
-});
-
-describe('subtractSet', () => {
-  it('should subtract one set from the other', () => {
-    expect(
-      subtractSet(new Set(['a', 'b', 'c']), new Set(['a', 'b', 'd', 'e'])),
-    ).toEqual(new Set(['c']));
   });
 });
 
