@@ -12,12 +12,12 @@
   },
   "type": "module",
   "dependencies": {
-    "joi": "^17.13.6"
+    "joi": "^18.2.9"
   },
   "devDependencies": {
-    "@types/node": "22.19.21",
+    "@types/node": "24.19.2",
     "@vitest/coverage-v8": "4.0.18",
-    "typescript": "5.9.3",
+    "typescript": "7.0.2",
     "vite": "7.3.6",
     "vitest": "4.1.11"
   },
