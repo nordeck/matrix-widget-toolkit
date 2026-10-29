@@ -1086,12 +1086,7 @@
   resolved "https://registry.yarnpkg.com/@rolldown/binding-win32-x64-msvc/-/binding-win32-x64-msvc-1.2.6.tgz#1162903e264ed10db4be8af40ba8cf13cd4a0b4a"
   integrity sha512-np8iZSLfXlAD4kWhiyq/u0Yt8oZDtRQ8lGhQaCXo2rl37KNjeU0GjJuwr4P3oeZ++ROfofsKNBqR5LTO8aXyWQ==
 
-"@rolldown/pluginutils@1.0.0-rc.2":
-  version "1.0.0-rc.2"
-  resolved "https://registry.yarnpkg.com/@rolldown/pluginutils/-/pluginutils-1.0.0-rc.2.tgz#10324e74cb3396cb7b616042ea7e9e6aa7d8d458"
-  integrity sha512-izyXV/v+cHiRfozX62W9htOAvwMo4/bXKDrQ+vom1L1qRuexPock/7VZDAhnpHCLNejd3NJ6hiab+tO0D44Rgw==
-
-"@rolldown/pluginutils@^1.0.0":
+"@rolldown/pluginutils@^1.0.0", "@rolldown/pluginutils@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@rolldown/pluginutils/-/pluginutils-1.0.1.tgz#e3fcee093fbb5ce765e1ad088ff4de2889f6f9be"
   integrity sha512-2j9bGt5Jh8hj+vPtgzPtl72j0yRxHAyumoo6TNfAjsLB04UtpSvPbPcDcBMxz7n+9CYB0c1GxQFxYRg2jimqGw==
@@ -1386,7 +1381,7 @@
   resolved "https://registry.yarnpkg.com/@swc/core-win32-x64-msvc/-/core-win32-x64-msvc-1.16.20.tgz#e539f998839be3b6fe7af4295c28cd0eba640c63"
   integrity sha512-Lf5oMaSdJBImtGhDecasxcIa7Z5LeJ4aGmBOY7TScroO+A/MxxB9PslIpgV0rtG/FcxtipN7hveBg9ZTeboaaw==
 
-"@swc/core@^1.15.11", "@swc/core@^1.15.18", "@swc/core@^1.16.2":
+"@swc/core@^1.15.18", "@swc/core@^1.15.46", "@swc/core@^1.16.2":
   version "1.16.20"
   resolved "https://registry.yarnpkg.com/@swc/core/-/core-1.16.20.tgz#015a12e0f465a651606902596441a05aecdf9b53"
   integrity sha512-zcdfS7k28OJIMuLhqRRyGja9PxrC2GXhFXkbQ1X15y6uZEMsTrqyej55V1DiJtlXaDOmwSLn5222YPT9ZoFxPA==
@@ -1674,18 +1669,18 @@
     "@typescript-eslint/types" "8.61.1"
     eslint-visitor-keys "^5.0.0"
 
-"@vitejs/plugin-basic-ssl@2.1.4":
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/@vitejs/plugin-basic-ssl/-/plugin-basic-ssl-2.1.4.tgz#c45abecc7f373343132870eb23b7fe84dfc018a1"
-  integrity sha512-HXciTXN/sDBYWgeAD4V4s0DN0g72x5mlxQhHxtYu3Tt8BLa6MzcJZUyDVFCdtjNs3bfENVHVzOsmooTVuNgAAw==
+"@vitejs/plugin-basic-ssl@2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@vitejs/plugin-basic-ssl/-/plugin-basic-ssl-2.3.0.tgz#f505b1c197d8cb4fd6e213a78847574ecc51e2f9"
+  integrity sha512-bdyo8rB3NnQbikdMpHaML9Z1OZPBu6fFOBo+OtxsBlvMJtysWskmBcnbIDhUqgC8tcxNv/a+BcV5U+2nQMm1OQ==
 
-"@vitejs/plugin-react-swc@4.2.3":
-  version "4.2.3"
-  resolved "https://registry.yarnpkg.com/@vitejs/plugin-react-swc/-/plugin-react-swc-4.2.3.tgz#ab92c8a00aab280951a04c06d99731cb7768c964"
-  integrity sha512-QIluDil2prhY1gdA3GGwxZzTAmLdi8cQ2CcuMW4PB/Wu4e/1pzqrwhYWVd09LInCRlDUidQjd0B70QWbjWtLxA==
+"@vitejs/plugin-react-swc@4.3.3":
+  version "4.3.3"
+  resolved "https://registry.yarnpkg.com/@vitejs/plugin-react-swc/-/plugin-react-swc-4.3.3.tgz#babf99c9a3d49ae4fffbb2d64f4f2c8f54abc9d1"
+  integrity sha512-bti8ZAcvz4Lh6/e4Uk2k3aa1TiUXbbMsahuqOHvd3MveFTkKDZOA6wQVkpj7J/+tepX/wGfe+lsGh/t24HTXMQ==
   dependencies:
-    "@rolldown/pluginutils" "1.0.0-rc.2"
-    "@swc/core" "^1.15.11"
+    "@rolldown/pluginutils" "^1.0.1"
+    "@swc/core" "^1.15.46"
 
 "@vitest/coverage-v8@4.0.18":
   version "4.0.18"
