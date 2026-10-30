@@ -28,14 +28,8 @@ if (process.env.VITE_DEV_SSL === 'true') {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  esbuild: {
-    target: 'es2020',
-  },
   build: {
     outDir: 'build',
-    commonjsOptions: {
-      strictRequires: true,
-    },
   },
   resolve: {
     dedupe: [
