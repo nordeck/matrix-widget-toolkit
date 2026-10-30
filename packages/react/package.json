@@ -19,7 +19,7 @@
     "@types/react": "18.3.31",
     "@vitest/coverage-v8": "5.0.5",
     "typescript": "5.9.3",
-    "vite": "8.2.4",
+    "vite": "8.3.5",
     "vitest": "5.0.5"
   },
   "scripts": {
