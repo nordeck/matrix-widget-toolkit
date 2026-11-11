@@ -20,8 +20,10 @@ import { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CopyableCode } from './CopyableCode';
 
-export function ChildError({ error }: { error: Error }): ReactElement {
+export function ChildError({ error }: { error: unknown }): ReactElement {
   const { t } = useTranslation('widget-toolkit');
+
+  const code: string = (error instanceof Error && error.stack) || String(error);
 
   return (
     <Box my={2}>
@@ -36,7 +38,7 @@ export function ChildError({ error }: { error: Error }): ReactElement {
         </Typography>
 
         <Box mt={1}>
-          <CopyableCode code={`${error.stack ?? error}`} />
+          <CopyableCode code={code} />
         </Box>
       </Alert>
     </Box>

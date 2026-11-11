@@ -21,7 +21,7 @@ import axe from 'axe-core';
 import { HttpResponse, http } from 'msw';
 import { setupServer } from 'msw/node';
 import { ComponentType, PropsWithChildren } from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router';
 import {
   afterAll,
   afterEach,

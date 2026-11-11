@@ -21,7 +21,7 @@ import userEvent from '@testing-library/user-event';
 import axe from 'axe-core';
 import { EventDirection, WidgetEventCapability } from 'matrix-widget-api';
 import { ComponentType, PropsWithChildren, act } from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { StoreProvider } from '../store';
 import { PowerLevelsPage } from './PowerLevelsPage';

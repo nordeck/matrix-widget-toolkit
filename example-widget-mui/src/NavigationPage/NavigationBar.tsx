@@ -16,7 +16,7 @@
 
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 
 export function NavigationBar({ title }: { title: string }) {
   return (
