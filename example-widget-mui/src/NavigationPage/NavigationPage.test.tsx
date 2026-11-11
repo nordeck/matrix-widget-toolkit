@@ -17,7 +17,7 @@
 import { render, screen, within } from '@testing-library/react';
 import axe from 'axe-core';
 import { ComponentType, PropsWithChildren } from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { NavigationPage } from './NavigationPage';
 

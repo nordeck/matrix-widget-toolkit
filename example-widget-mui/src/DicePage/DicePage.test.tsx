@@ -25,7 +25,7 @@ import {
   WidgetEventCapability,
 } from 'matrix-widget-api';
 import { ComponentType, PropsWithChildren } from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { DicePage } from './DicePage';
 
