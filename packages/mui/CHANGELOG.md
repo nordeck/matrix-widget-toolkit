@@ -1,5 +1,13 @@
 # `@matrix-widget-toolkit/mui`
 
+## 2.2.3
+
+### Patch Changes
+
+- 79daac5: `ChildError` is updated to accept `error: unknown`.
+- Updated dependencies [79daac5]
+  - @matrix-widget-toolkit/react@2.1.3
+
 ## 2.2.2
 
 ### Patch Changes

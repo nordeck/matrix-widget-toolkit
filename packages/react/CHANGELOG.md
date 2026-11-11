@@ -1,5 +1,11 @@
 # `@matrix-widget-toolkit/react`
 
+## 2.1.3
+
+### Patch Changes
+
+- 79daac5: Update `react-error-boundary` to 6.1.6. `FallbackProps.error` is now typed as `unknown` instead of `Error`.
+
 ## 2.1.2
 
 ### Patch Changes
