@@ -12,7 +12,7 @@
   },
   "type": "module",
   "dependencies": {
-    "joi": "^17.13.8"
+    "joi": "^18.3.2"
   },
   "devDependencies": {
     "@types/node": "22.20.5",
