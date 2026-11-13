@@ -24,7 +24,7 @@ import {
   WidgetEventCapability,
 } from 'matrix-widget-api';
 import { ComponentType, PropsWithChildren, act } from 'react';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ROOM_EVENT_UPLOADED_IMAGE } from '../events';
 import { StoreProvider } from '../store';

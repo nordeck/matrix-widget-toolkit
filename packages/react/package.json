@@ -40,7 +40,7 @@
   "dependencies": {
     "@matrix-widget-toolkit/api": "^5.1.0",
     "matrix-widget-api": "^1.18.0",
-    "react-error-boundary": "^6.0.3",
+    "react-error-boundary": "^6.1.6",
     "react-use": "^17.6.1"
   },
   "peerDependencies": {

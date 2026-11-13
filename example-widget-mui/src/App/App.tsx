@@ -20,7 +20,7 @@ import {
   MuiWidgetApiProvider,
 } from '@matrix-widget-toolkit/mui';
 import { ReactElement, Suspense } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router';
 import { AllRoomsPage } from '../AllRoomsPage';
 import { DicePage } from '../DicePage';
 import { IdentityPage } from '../IdentityPage';
