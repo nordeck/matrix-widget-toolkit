@@ -4,8 +4,6 @@
 
 ```ts
 
-import Joi from 'joi';
-
 // @public
 export function calculateUserPowerLevel(powerLevelStateEvent: PowerLevelsStateEvent | undefined, createRoomStateEvent: StateEvent<StateEventCreateContent> | undefined, userId: string): UserPowerLevelType;
 
@@ -14,9 +12,6 @@ export function compareOriginServerTS<T>(a: RoomEvent<T>, b: RoomEvent<T>): numb
 
 // @public
 export function compareUserPowerLevelToNormalPowerLevel(userPowerLevel: UserPowerLevelType, normalPowerLevel: number): boolean;
-
-// @public (undocumented)
-export const createEventSchema: Joi.ObjectSchema<StateEvent<StateEventCreateContent>>;
 
 // @public (undocumented)
 export function equalsSet<T>(as: Set<T>, bs: Set<T>): boolean;
@@ -91,9 +86,6 @@ export type NewContentRelatesTo<T> = EventWithRelatesTo<'m.replace'>['content'] 
 // @public
 export type PowerLevelsActions = 'invite' | 'kick' | 'ban' | 'redact';
 
-// @public (undocumented)
-export const powerLevelsEventSchema: Joi.ObjectSchema<StateEvent<PowerLevelsStateEvent>>;
-
 // @public
 export type PowerLevelsStateEvent = {
     events?: {
@@ -150,9 +142,6 @@ export type RoomEvent<T = unknown> = {
 // @public
 export type RoomEventOrNewContent<T = unknown> = RoomEvent<T | NewContentRelatesTo<T>>;
 
-// @public (undocumented)
-export const roomEventSchema: Joi.ObjectSchema<RoomEvent>;
-
 // @public
 export type RoomMemberStateEventContent = {
     membership: MembershipState;
@@ -189,9 +178,6 @@ export type StateEventCreateContent = {
 };
 
 // @public (undocumented)
-export const stateEventSchema: Joi.ObjectSchema<StateEvent>;
-
-// @public (undocumented)
 export function subtractSet<T>(as: Set<T>, bs: Set<T>): Set<T>;
 
 // @public
@@ -201,9 +187,6 @@ export type ToDeviceMessageEvent<T = unknown> = {
     encrypted: boolean;
     content: T;
 };
-
-// @public (undocumented)
-export const toDeviceMessageSchema: Joi.ObjectSchema<ToDeviceMessageEvent>;
 
 // @public (undocumented)
 export function unique<T>(items: Iterable<T>): T[];

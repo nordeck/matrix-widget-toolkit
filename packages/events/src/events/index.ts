@@ -29,7 +29,6 @@ export { ROOM_VERSION_12_CREATOR } from './types';
 export {
   STATE_EVENT_CREATE,
   STATE_EVENT_POWER_LEVELS,
-  createEventSchema,
   isRoomEvent,
   isRoomEventCurrentlySticky,
   isStateEvent,
@@ -38,10 +37,6 @@ export {
   isValidRoomEvent,
   isValidStateEvent,
   isValidToDeviceMessageEvent,
-  powerLevelsEventSchema,
-  roomEventSchema,
-  stateEventSchema,
-  toDeviceMessageSchema,
 } from './events';
 
 export {
