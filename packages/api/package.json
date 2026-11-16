@@ -38,7 +38,7 @@
   "dependencies": {
     "@matrix-widget-toolkit/events": "^1.0.0",
     "matrix-widget-api": "^1.18.0",
-    "qs": "^6.16.0",
+    "qs": "^6.17.1",
     "rxjs": "^7.8.2"
   },
   "repository": {
