@@ -54,7 +54,7 @@ const config: PlaywrightTestConfig = {
       process.env.IMAGE_ID ?? 'matrix-widget-toolkit/widget-server'
     }`,
     url: 'http://localhost:3000',
-    timeout: 5 * 1000,
+    timeout: 15 * 1000,
     reuseExistingServer: !process.env.CI,
   },
 
