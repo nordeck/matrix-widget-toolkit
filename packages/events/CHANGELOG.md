@@ -1,5 +1,11 @@
 # @matrix-widget-toolkit/events
 
+## 1.0.1
+
+### Patch Changes
+
+- 3864484: Update `joi` to v18 and remove the export of the `createEvent`, `powerLevelsEvent`, `roomEvent,stateEvent` and `toDeviceMessage` schemas
+
 ## 1.0.0
 
 ### Major Changes
