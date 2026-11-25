@@ -17,7 +17,7 @@
     "@types/qs": "6.15.1",
     "@vitest/coverage-v8": "5.0.5",
     "typescript": "5.9.3",
-    "vite": "8.3.5",
+    "vite": "8.3.8",
     "vitest": "5.0.5"
   },
   "scripts": {
