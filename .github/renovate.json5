@@ -1,162 +1,139 @@
 {
-  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
-  // We default to using the normal recommended config. Everything else is layered on top of this.
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
   extends: [
-    'group:allNonMajor',
-    'config:recommended',
-    // https://docs.renovatebot.com/presets-default/#automergepatch - Automerge lockfile maintenance, path, pin and separate minor and patch
-    ':automergePatch',
-    // this is missing from the automergePatch preset
-    ':automergeDigest',
-    // Pin docker
-    'docker:pinDigests',
-    // Pin Github Actions
-    'helpers:pinGitHubActionDigests',
-    // Pin dev dependencies (See https://docs.renovatebot.com/upgrade-best-practices/#extends-pindevdependencies why this is a good idea for us)
-    ':pinDevDependencies',
-    // https://docs.renovatebot.com/presets-schedule/#scheduleautomergeweekdays - Run automerge on a weekdays (so it doesnt break on the weekend)
-    'schedule:automergeWeekdays',
+    "group:allNonMajor",
+    "config:recommended",
+    ":automergePatch",
+    ":automergeDigest",
+    "docker:pinDigests",
+    "helpers:pinGitHubActionDigests",
+    ":pinDevDependencies",
+    "schedule:automergeWeekdays",
   ],
-  dependencyDashboard: true,
-  // https://docs.renovatebot.com/configuration-options/#vulnerabilityalerts - enabled by default, but does not set a label by default
+  dependencyDashboard: {
+    enabled: true,
+  },
   vulnerabilityAlerts: {
-    labels: ['Security'],
+    labels: ["Security"],
   },
-  // https://docs.renovatebot.com/configuration-options/#osvvulnerabilityalerts - we use osv.dev here to not rely entirely on Github
   osvVulnerabilityAlerts: true,
-  // https://docs.renovatebot.com/configuration-options/#automergetype - We use branch to not get raced by commits to main
-  automergeType: 'branch',
+  automergeType: "branch",
   npm: {
-    // https://docs.renovatebot.com/presets-npm/#npmunpublishsafe - This effectively waits 14 days before making a PR. This is somewhat of a safety measure and recommended by renovate at https://docs.renovatebot.com/upgrade-best-practices/#wait-two-weeks-before-automerging-third-party-dependencies
-    minimumReleaseAge: '14 days',
+    minimumReleaseAge: "14 days",
   },
-  // https://docs.renovatebot.com/configuration-options/#lockfilemaintenance - Ensure the lockfile is maintained properly
   lockFileMaintenance: {
     enabled: true,
-    // override the broken default "before 4am on monday" schedule (see the global `schedule` below)
-    schedule: ['* 0-5 * * 1'],
+    schedule: ["* 0-5 * * 1"],
   },
-  // there is no preset for this
   pinDigest: {
     automerge: true,
   },
-  // https://docs.renovatebot.com/presets-schedule/#scheduleweekly - Run renovate on early mondays instead of running it too often
-  // Clock giver is: https://docs.renovatebot.com/mend-hosted/overview/#resources-and-scheduling
-  // This means it gets scheduled to run every 4h on average, however our experience is that the schedule queue is not steady enough to guarantee actually being scheduled within this period to use 'schedule:weekly'.
-  // We therefore define our own more lenient schedule on that basis.
-  schedule: ['* 0-5 * * 1'],
-  // Set the timezone for schedules
-  timezone: 'Europe/Berlin',
-  // Increase the number of concurrent PRs to 10 since we only run once a week
+  schedule: ["* 0-5 * * 1"],
+  timezone: "Europe/Berlin",
   prHourlyLimit: 10,
-  // Ensures that appVersion in the helm chart is tracked/updated too
   customManagers: [
     {
-      customType: 'regex',
-      datasourceTemplate: 'docker',
-      managerFilePatterns: ['/(^|/)Chart\\.yaml$/'],
+      customType: "regex",
+      datasourceTemplate: "docker",
+      managerFilePatterns: ["/(^|/)Chart\\.yaml$/"],
       matchStrings: [
-        '#\\s?renovate: image=(?<depName>.*?)\\s?appVersion:\\s?("|\')?(?<currentValue>[\\w+\\.\\-]*)("|\')',
+        "#\\s?renovate: image=(?<depName>.*?)\\s?appVersion:\\s?(\"|')?(?<currentValue>[\\w+\\.\\-]*)(\"|')",
       ],
     },
   ],
-  // https://docs.renovatebot.com/configuration-options/#packagerules - Note that later overrides earlier rules
   packageRules: [
     {
-      matchDepTypes: ['dependencies'],
-      rangeStrategy: 'bump',
+      matchDepTypes: ["dependencies"],
+      rangeStrategy: "bump",
     },
     {
-      groupName: 'patch updates',
-      matchUpdateTypes: ['patch'],
-      addLabels: ['Patch'],
+      groupName: "patch updates",
+      matchUpdateTypes: ["patch"],
+      addLabels: ["Patch"],
     },
     {
-      groupName: 'lockFileMaintenance updates',
-      matchUpdateTypes: ['lockFileMaintenance'],
-      addLabels: ['Lockfile'],
+      groupName: "lockFileMaintenance updates",
+      matchUpdateTypes: ["lockFileMaintenance"],
+      addLabels: ["Lockfile"],
     },
     {
-      groupName: 'development-dependencies',
-      matchDepTypes: ['devDependencies'],
-      addLabels: ['Dev'],
+      groupName: "development-dependencies",
+      matchDepTypes: ["devDependencies"],
+      addLabels: ["Dev"],
     },
     {
-      groupName: 'production-dependencies',
-      matchDepTypes: ['dependencies'],
-      addLabels: ['Prod'],
+      groupName: "production-dependencies",
+      matchDepTypes: ["dependencies"],
+      addLabels: ["Prod"],
     },
     {
-      groupName: 'major updates',
-      matchUpdateTypes: ['major'],
-      addLabels: ['Major'],
+      groupName: "major updates",
+      matchUpdateTypes: ["major"],
+      addLabels: ["Major"],
     },
-    // Do not automerge matrix-widget-api updates as they dont follow semver
     {
-      matchPackageNames: ['matrix-widget-api'],
+      matchPackageNames: ["matrix-widget-api"],
       automerge: false,
-      addLabels: ['matrix-widget-api'],
-    },
-    // https://docs.renovatebot.com/node/#configuring-which-version-of-npm-renovate-uses - Update engines (for example npm) in the package.json
-    {
-      groupName: 'engines',
-      matchDepTypes: ['engines'],
-      labels: ['Engines'],
-      rangeStrategy: 'replace',
+      addLabels: ["matrix-widget-api"],
     },
     {
-      groupName: 'react monorepo',
-      matchPackageNames: ['@types/react', '@types/react-*', 'react', 'react-*'],
-      addLabels: ['React'],
+      groupName: "engines",
+      matchDepTypes: ["engines"],
+      labels: ["Engines"],
+      rangeStrategy: "replace",
     },
     {
-      groupName: 'i18next dependencies',
-      matchPackageNames: ['i18next', 'i18next-*', 'react-i18next'],
-      addLabels: ['i18next'],
+      groupName: "react monorepo",
+      matchPackageNames: ["@types/react", "@types/react-*", "react", "react-*"],
+      addLabels: ["React"],
     },
     {
-      groupName: 'linter dependencies',
-      extends: ['packages:linters'],
+      groupName: "i18next dependencies",
+      matchPackageNames: ["i18next", "i18next-*", "react-i18next"],
+      addLabels: ["i18next"],
+    },
+    {
+      groupName: "linter dependencies",
+      extends: ["packages:linters"],
       matchPackageNames: [
-        '@eslint/*',
-        'eslint',
-        'eslint-*',
-        'typescript-eslint',
-        'prettier',
-        'prettier-*',
-        '@typescript-eslint/*',
+        "@eslint/*",
+        "eslint",
+        "eslint-*",
+        "typescript-eslint",
+        "prettier",
+        "prettier-*",
+        "@typescript-eslint/*",
       ],
-      addLabels: ['Linters'],
+      addLabels: ["Linters"],
     },
     {
-      groupName: 'mui dependencies',
-      matchPackageNames: ['@emotion/*', '@mui/*'],
-      addLabels: ['MUI'],
+      groupName: "mui dependencies",
+      matchPackageNames: ["@emotion/*", "@mui/*"],
+      addLabels: ["MUI"],
     },
     {
-      groupName: 'testing-library dependencies',
-      matchPackageNames: ['@testing-library/*'],
-      addLabels: ['testing-library'],
+      groupName: "testing-library dependencies",
+      matchPackageNames: ["@testing-library/*"],
+      addLabels: ["testing-library"],
     },
     {
-      groupName: 'vite dependencies',
-      matchPackageNames: ['vite', '@vitejs/*', 'vitest', '@vitest/*'],
-      addLabels: ['Vite'],
+      groupName: "vite dependencies",
+      matchPackageNames: ["vite", "@vitejs/*", "vitest", "@vitest/*"],
+      addLabels: ["Vite"],
     },
     {
-      groupName: 'rollup dependencies',
-      matchPackageNames: ['@rollup/*'],
-      addLabels: ['Rollup'],
+      groupName: "rollup dependencies",
+      matchPackageNames: ["@rollup/*"],
+      addLabels: ["Rollup"],
     },
     {
-      groupName: 'matrix-widget-toolkit monorepo',
-      matchPackageNames: ['@matrix-widget-toolkit/*'],
-      addLabels: ['matrix-widget-toolkit'],
+      groupName: "matrix-widget-toolkit monorepo",
+      matchPackageNames: ["@matrix-widget-toolkit/*"],
+      addLabels: ["matrix-widget-toolkit"],
     },
-    // override for pins in the end so they're all nicely grouped
     {
-      groupName: 'pin dependencies',
-      matchUpdateTypes: ['pin', 'pinDigest'],
+      groupName: "pin dependencies",
+      matchUpdateTypes: ["pin", "pinDigest"],
     },
   ],
 }
